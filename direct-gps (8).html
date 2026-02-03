@@ -845,6 +845,9 @@
             </div>
             
             <div class="header-actions">
+                <button class="btn btn-secondary" onclick="app.refreshFromGitHub()" title="Sync from cloud">
+                    <span>🔄</span> Sync
+                </button>
                 <div style="position: relative;">
                     <button class="btn btn-secondary" id="exportBtn" onclick="app.toggleExportMenu()">
                         <span>📥</span> Export
@@ -858,6 +861,13 @@
                         </button>
                         <button class="export-menu-item" onclick="app.printView()">
                             <span>🖨️</span> Print View
+                        </button>
+                        <div style="border-top: 1px solid var(--border-color); margin: 0.25rem 0;"></div>
+                        <button class="export-menu-item" onclick="app.exportData()">
+                            <span>💾</span> Export Data (JSON)
+                        </button>
+                        <button class="export-menu-item" onclick="app.importData()">
+                            <span>📂</span> Import Data (JSON)
                         </button>
                     </div>
                 </div>
@@ -964,16 +974,30 @@
             mapTilerKey: 'u9TdeBJu4j9tNG1lZiu5',
             propertyCenter: [-81.89786783155066, 41.148623908332276],
             defaultZoom: 17.5,
-            localStorageKey: 'trailerVizGPSData_v2'
+            localStorageKey: 'trailerVizGPSData_v2',
+            
+            // =====================================================
+            // GITHUB CONFIGURATION - UPDATE THESE VALUES
+            // =====================================================
+            github: {
+                enabled: true,                      // Set to true after configuring
+                owner: 'glancy-metrotrailer',       // Your GitHub username
+                repo: 'yardviz',                     // Your repository name
+                path: 'data/trailers.json',          // Path to data file
+                token: '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'  // GitHub Personal Access Token
+            }
+            // =====================================================
         },
         
         state: {
             map: null,
             trailers: [],
             filteredTrailers: [],
-            previousTrailerIds: new Set(),  // Track previously known trailers
+            previousTrailerIds: new Set(),
             selectedTrailerId: null,
-            currentPopup: null
+            currentPopup: null,
+            githubSha: null,
+            isSyncing: false
         },
         
         mapStyles: {
@@ -988,7 +1012,13 @@
             this.initTheme();
             this.initDragDrop();
             this.initMap();
-            this.loadFromLocalStorage();
+            
+            // Load data - GitHub first if enabled, then localStorage as fallback
+            if (this.config.github.enabled) {
+                this.loadFromGitHub();
+            } else {
+                this.loadFromLocalStorage();
+            }
             
             document.addEventListener('click', (e) => {
                 const exportBtn = document.getElementById('exportBtn');
@@ -1514,9 +1544,150 @@
                 };
                 localStorage.setItem(this.config.localStorageKey, JSON.stringify(data));
                 console.log('💾 Data saved to localStorage');
+                
+                // Also sync to GitHub if enabled
+                if (this.config.github.enabled) {
+                    this.saveToGitHub();
+                }
             } catch (error) {
                 console.warn('Could not save to localStorage:', error);
             }
+        },
+        
+        async loadFromGitHub() {
+            const { owner, repo, path, token } = this.config.github;
+            const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+            
+            try {
+                console.log('☁️ Loading data from GitHub...');
+                
+                const response = await fetch(url, {
+                    headers: {
+                        'Authorization': `token ${token}`,
+                        'Accept': 'application/vnd.github.v3+json'
+                    }
+                });
+                
+                if (response.status === 404) {
+                    console.log('📄 No existing data file on GitHub, starting fresh');
+                    this.loadFromLocalStorage();
+                    return;
+                }
+                
+                if (!response.ok) {
+                    throw new Error(`GitHub API error: ${response.status}`);
+                }
+                
+                const fileData = await response.json();
+                this.state.githubSha = fileData.sha;
+                
+                const content = atob(fileData.content);
+                const data = JSON.parse(content);
+                
+                if (data.trailers && data.trailers.length > 0) {
+                    this.state.trailers = data.trailers;
+                    this.state.filteredTrailers = [...data.trailers];
+                    this.state.previousTrailerIds = new Set(data.previousTrailerIds || data.trailers.map(t => t.id));
+                    
+                    // Also save to localStorage as cache
+                    localStorage.setItem(this.config.localStorageKey, JSON.stringify(data));
+                    
+                    this.renderTrailerList();
+                    if (this.state.map && this.state.map.loaded()) {
+                        this.renderTrailersOnMap();
+                    }
+                    
+                    console.log(`☁️ Loaded ${data.trailers.length} trailers from GitHub`);
+                    this.showToast(`Synced ${data.trailers.length} trailers from cloud`, 'success');
+                }
+            } catch (error) {
+                console.error('GitHub load error:', error);
+                console.log('📂 Falling back to localStorage');
+                this.loadFromLocalStorage();
+                this.showToast('Could not sync from cloud, using local data', 'warning');
+            }
+        },
+        
+        async saveToGitHub() {
+            if (this.state.isSyncing) return;
+            
+            const { owner, repo, path, token } = this.config.github;
+            const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+            
+            this.state.isSyncing = true;
+            
+            try {
+                console.log('☁️ Saving data to GitHub...');
+                
+                const data = {
+                    trailers: this.state.trailers,
+                    previousTrailerIds: Array.from(this.state.previousTrailerIds),
+                    timestamp: Date.now(),
+                    lastModified: new Date().toISOString()
+                };
+                
+                const content = btoa(JSON.stringify(data, null, 2));
+                
+                // Get current SHA if we don't have it
+                if (!this.state.githubSha) {
+                    try {
+                        const getResponse = await fetch(url, {
+                            headers: {
+                                'Authorization': `token ${token}`,
+                                'Accept': 'application/vnd.github.v3+json'
+                            }
+                        });
+                        if (getResponse.ok) {
+                            const fileData = await getResponse.json();
+                            this.state.githubSha = fileData.sha;
+                        }
+                    } catch (e) {
+                        // File doesn't exist yet, that's OK
+                    }
+                }
+                
+                const body = {
+                    message: `Update trailer data - ${new Date().toLocaleString()}`,
+                    content: content
+                };
+                
+                if (this.state.githubSha) {
+                    body.sha = this.state.githubSha;
+                }
+                
+                const response = await fetch(url, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `token ${token}`,
+                        'Accept': 'application/vnd.github.v3+json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(body)
+                });
+                
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.message || `GitHub API error: ${response.status}`);
+                }
+                
+                const result = await response.json();
+                this.state.githubSha = result.content.sha;
+                
+                console.log('☁️ Data saved to GitHub');
+            } catch (error) {
+                console.error('GitHub save error:', error);
+                this.showToast('Could not sync to cloud', 'error');
+            } finally {
+                this.state.isSyncing = false;
+            }
+        },
+        
+        async refreshFromGitHub() {
+            if (!this.config.github.enabled) {
+                this.showToast('GitHub sync not configured', 'warning');
+                return;
+            }
+            await this.loadFromGitHub();
         },
         
         loadFromLocalStorage() {
@@ -1749,6 +1920,65 @@
         printView() {
             this.toggleExportMenu();
             window.print();
+        },
+        
+        exportData() {
+            this.toggleExportMenu();
+            
+            const data = {
+                trailers: this.state.trailers,
+                exportDate: new Date().toISOString(),
+                version: '2.0'
+            };
+            
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const link = document.createElement('a');
+            link.download = `yardviz-data-${new Date().toISOString().split('T')[0]}.json`;
+            link.href = URL.createObjectURL(blob);
+            link.click();
+            URL.revokeObjectURL(link.href);
+            
+            this.showToast('Data exported successfully', 'success');
+        },
+        
+        importData() {
+            this.toggleExportMenu();
+            
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            
+            input.onchange = (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+                
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    try {
+                        const data = JSON.parse(event.target.result);
+                        
+                        if (data.trailers && Array.isArray(data.trailers)) {
+                            this.state.trailers = data.trailers;
+                            this.state.filteredTrailers = [...data.trailers];
+                            this.state.previousTrailerIds = new Set(data.trailers.map(t => t.id));
+                            
+                            this.saveToLocalStorage();
+                            this.renderTrailerList();
+                            this.renderTrailersOnMap();
+                            
+                            this.showToast(`Imported ${data.trailers.length} trailers`, 'success');
+                        } else {
+                            this.showToast('Invalid data file format', 'error');
+                        }
+                    } catch (error) {
+                        console.error('Import error:', error);
+                        this.showToast('Error reading data file', 'error');
+                    }
+                };
+                reader.readAsText(file);
+            };
+            
+            input.click();
         },
         
         showLoading(show) {
