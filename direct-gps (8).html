@@ -1,0 +1,1783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YardViz - Trailer GPS Visualizer</title>
+    
+    <!-- MapLibre GL JS -->
+    <link href="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.css" rel="stylesheet" />
+    <script src="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.js"></script>
+    
+    <!-- XLSX for Excel parsing -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    
+    <!-- Papa Parse for CSV -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+    
+    <!-- html2canvas for export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    
+    <!-- jsPDF for PDF export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-primary: #f8f9fa;
+            --bg-secondary: #ffffff;
+            --bg-tertiary: #e9ecef;
+            --text-primary: #1a1a2e;
+            --text-secondary: #495057;
+            --text-muted: #868e96;
+            --border-color: #dee2e6;
+            --accent-primary: #002B5C;
+            --accent-secondary: #0056b3;
+            --accent-light: #e8f4fd;
+            --accent-warning: #ff9500;
+            --accent-danger: #ef4444;
+            --accent-success: #22c55e;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+            --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
+            --glass-bg: rgba(255,255,255,0.85);
+            --glass-border: rgba(255,255,255,0.3);
+        }
+        
+        [data-theme="dark"] {
+            --bg-primary: #0d0d12;
+            --bg-secondary: #16161d;
+            --bg-tertiary: #1e1e28;
+            --text-primary: #f0f0f5;
+            --text-secondary: #a0a0b0;
+            --text-muted: #6c6c7c;
+            --border-color: #2a2a3a;
+            --accent-primary: #4d8fcc;
+            --accent-secondary: #6ba3d6;
+            --accent-light: #1a2a3a;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+            --shadow-lg: 0 8px 24px rgba(0,0,0,0.5);
+            --glass-bg: rgba(22,22,29,0.9);
+            --glass-border: rgba(255,255,255,0.08);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+        
+        .app-container {
+            display: grid;
+            grid-template-columns: 340px 1fr;
+            grid-template-rows: auto 1fr;
+            height: 100vh;
+            gap: 0;
+        }
+        
+        @media (max-width: 900px) {
+            .app-container {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto 50vh auto;
+            }
+        }
+        
+        .header {
+            grid-column: 1 / -1;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            padding: 0.75rem 1.5rem;
+            display: grid;
+            grid-template-columns: 340px 1fr;
+            align-items: center;
+            z-index: 100;
+        }
+        
+        @media (max-width: 900px) {
+            .header {
+                grid-template-columns: 1fr;
+                gap: 0.75rem;
+            }
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .logo-icon {
+            height: 60px;
+            width: auto;
+        }
+        
+        .logo-icon img {
+            height: 100%;
+            width: auto;
+            border: 5px solid #ffffff;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .header-actions {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 0.5rem;
+        }
+        
+        .theme-toggle {
+            position: relative;
+            width: 52px;
+            height: 28px;
+            background: var(--bg-tertiary);
+            border-radius: 14px;
+            cursor: pointer;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+        
+        .theme-toggle::before {
+            content: '☀️';
+            position: absolute;
+            left: 4px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.75rem;
+            transition: opacity 0.3s ease;
+        }
+        
+        .theme-toggle::after {
+            content: '🌙';
+            position: absolute;
+            right: 4px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.75rem;
+            opacity: 0.4;
+            transition: opacity 0.3s ease;
+        }
+        
+        [data-theme="dark"] .theme-toggle::before { opacity: 0.4; }
+        [data-theme="dark"] .theme-toggle::after { opacity: 1; }
+        
+        .theme-toggle-knob {
+            position: absolute;
+            width: 22px;
+            height: 22px;
+            background: var(--bg-secondary);
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.3s ease;
+        }
+        
+        [data-theme="dark"] .theme-toggle-knob {
+            transform: translateX(24px);
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+        }
+        
+        .btn-primary {
+            background: var(--accent-primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            filter: brightness(1.1);
+            transform: translateY(-1px);
+        }
+        
+        .btn-secondary {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border-color: var(--border-color);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--border-color);
+        }
+        
+        .sidebar {
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        @media (max-width: 900px) {
+            .sidebar {
+                border-right: none;
+                border-top: 1px solid var(--border-color);
+                order: 3;
+            }
+        }
+        
+        .sidebar-section {
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .sidebar-section:last-child {
+            border-bottom: none;
+            flex: 1;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .section-title {
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+        
+        .upload-zone {
+            border: 2px dashed var(--border-color);
+            border-radius: 8px;
+            padding: 0.75rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: var(--bg-primary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .upload-zone:hover, .upload-zone.drag-over {
+            border-color: var(--accent-primary);
+            background: var(--accent-light);
+        }
+        
+        .upload-zone input { 
+            display: none; 
+        }
+        
+        .upload-icon { 
+            font-size: 1.5rem; 
+            margin-bottom: 0.25rem;
+            line-height: 1;
+        }
+        
+        .upload-text {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            line-height: 1.3;
+        }
+        
+        .upload-text strong { 
+            color: var(--accent-primary); 
+        }
+        
+        .upload-formats {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+        }
+        
+        .stat-card {
+            background: var(--bg-primary);
+            border-radius: 6px;
+            padding: 0.5rem;
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 1.1rem;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--text-primary);
+            line-height: 1;
+        }
+        
+        .stat-label {
+            font-size: 0.55rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            margin-top: 0.15rem;
+        }
+        
+        .stat-card.success {
+            background: var(--accent-light);
+            border-color: var(--accent-success);
+        }
+        
+        .stat-card.success .stat-value {
+            color: var(--accent-success);
+        }
+        
+        .stat-card.danger {
+            background: #fef2f2;
+            border-color: var(--accent-danger);
+        }
+        
+        [data-theme="dark"] .stat-card.danger {
+            background: #2a1a1a;
+        }
+        
+        .stat-card.danger .stat-value {
+            color: var(--accent-danger);
+        }
+        
+        .search-container { position: relative; }
+        
+        .search-input {
+            width: 100%;
+            padding: 0.625rem 0.875rem 0.625rem 2.25rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.875rem;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            transition: all 0.2s ease;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 3px rgba(0, 43, 92, 0.15);
+        }
+        
+        [data-theme="dark"] .search-input:focus {
+            box-shadow: 0 0 0 3px rgba(77, 143, 204, 0.2);
+        }
+        
+        .search-input::placeholder { color: var(--text-muted); }
+        
+        .search-icon {
+            position: absolute;
+            left: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+        
+        .trailer-list-container {
+            flex: 1;
+            overflow-y: auto;
+            margin-top: 0.5rem;
+        }
+        
+        .trailer-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+        
+        .trailer-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            background: var(--bg-primary);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+        }
+        
+        .trailer-item:hover {
+            background: var(--bg-tertiary);
+            border-color: var(--border-color);
+        }
+        
+        .trailer-item.active {
+            border-color: var(--accent-primary);
+            background: var(--accent-light);
+        }
+        
+        .trailer-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+        
+        .trailer-icon.status-checkedin {
+            background: #dcfce7;
+            color: var(--accent-success);
+        }
+        
+        [data-theme="dark"] .trailer-icon.status-checkedin {
+            background: #1a2e1a;
+        }
+        
+        .trailer-icon.status-notcheckedin {
+            background: #fef2f2;
+            color: var(--accent-danger);
+        }
+        
+        [data-theme="dark"] .trailer-icon.status-notcheckedin {
+            background: #2e1a1a;
+        }
+        
+        .trailer-info { flex: 1; min-width: 0; }
+        
+        .trailer-id {
+            font-weight: 600;
+            font-size: 0.8rem;
+            font-family: 'JetBrains Mono', monospace;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .trailer-meta {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+        
+        /* Check-in Toggle Switch */
+        .checkin-toggle {
+            position: relative;
+            width: 36px;
+            height: 20px;
+            flex-shrink: 0;
+        }
+        
+        .checkin-toggle input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .checkin-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--accent-danger);
+            transition: 0.3s;
+            border-radius: 20px;
+        }
+        
+        .checkin-slider:before {
+            position: absolute;
+            content: "";
+            height: 14px;
+            width: 14px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: 0.3s;
+            border-radius: 50%;
+        }
+        
+        .checkin-toggle input:checked + .checkin-slider {
+            background-color: var(--accent-success);
+        }
+        
+        .checkin-toggle input:checked + .checkin-slider:before {
+            transform: translateX(16px);
+        }
+        
+        .map-container {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .map-controls {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            z-index: 10;
+        }
+        
+        .map-control-group {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border-radius: 10px;
+            padding: 0.5rem;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow-md);
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+        
+        .map-control-btn {
+            width: 36px;
+            height: 36px;
+            border: none;
+            background: transparent;
+            color: var(--text-primary);
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+        }
+        
+        .map-control-btn:hover { background: var(--bg-tertiary); }
+        .map-control-btn.active { background: var(--accent-primary); color: white; }
+        
+        .style-selector {
+            position: absolute;
+            bottom: 1rem;
+            right: 1rem;
+            z-index: 10;
+        }
+        
+        .style-select {
+            padding: 0.5rem 2rem 0.5rem 0.75rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.8rem;
+            color: var(--text-primary);
+            cursor: pointer;
+            box-shadow: var(--shadow-md);
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.5rem center;
+        }
+        
+        .maplibregl-popup-content {
+            background: var(--bg-secondary) !important;
+            color: var(--text-primary) !important;
+            padding: 0.875rem !important;
+            border-radius: 10px !important;
+            box-shadow: var(--shadow-lg) !important;
+            border: 1px solid var(--border-color) !important;
+            font-family: 'Outfit', sans-serif !important;
+            min-width: 220px;
+        }
+        
+        .maplibregl-popup-close-button {
+            color: var(--text-muted) !important;
+            font-size: 1.25rem !important;
+            padding: 0.25rem 0.5rem !important;
+        }
+        
+        .maplibregl-popup-anchor-bottom .maplibregl-popup-tip {
+            border-top-color: var(--bg-secondary) !important;
+        }
+        
+        .popup-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .popup-icon { font-size: 1.5rem; }
+        
+        .popup-title {
+            font-weight: 600;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .popup-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.25rem 0;
+            font-size: 0.8rem;
+        }
+        
+        .popup-label { color: var(--text-muted); }
+        
+        .popup-value {
+            font-weight: 500;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .toast-container {
+            position: fixed;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .toast {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            padding: 0.875rem 1.25rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            animation: toastIn 0.3s ease;
+            min-width: 280px;
+        }
+        
+        .toast.success { border-left: 3px solid var(--accent-success); }
+        .toast.error { border-left: 3px solid var(--accent-danger); }
+        .toast.warning { border-left: 3px solid var(--accent-warning); }
+        
+        @keyframes toastIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .toast-icon { font-size: 1.25rem; }
+        .toast-message { font-size: 0.875rem; }
+        
+        .empty-state {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: var(--text-muted);
+        }
+        
+        .empty-state-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.75rem;
+            opacity: 0.5;
+        }
+        
+        .empty-state-text { font-size: 0.875rem; }
+        
+        .loading-overlay {
+            position: absolute;
+            inset: 0;
+            background: var(--glass-bg);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        
+        .loading-overlay.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--border-color);
+            border-top-color: var(--accent-primary);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        
+        @keyframes spin { to { transform: rotate(360deg); } }
+        
+        .export-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 0.5rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            box-shadow: var(--shadow-lg);
+            min-width: 160px;
+            overflow: hidden;
+            display: none;
+            z-index: 100;
+        }
+        
+        .export-menu.visible {
+            display: block;
+            animation: fadeIn 0.2s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .export-menu-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            font-size: 0.875rem;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: background 0.2s ease;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            font-family: inherit;
+        }
+        
+        .export-menu-item:hover { background: var(--bg-tertiary); }
+        .export-menu-item span { font-size: 1rem; }
+        
+        .validation-errors {
+            margin-top: 0.75rem;
+            padding: 0.75rem;
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            border-radius: 8px;
+            display: none;
+        }
+        
+        [data-theme="dark"] .validation-errors {
+            background: #2a1a1a;
+            border-color: #5c2a2a;
+        }
+        
+        .validation-errors.visible { display: block; }
+        
+        .validation-errors-title {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--accent-danger);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .validation-errors-list {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            max-height: 100px;
+            overflow-y: auto;
+        }
+        
+        .validation-error-item {
+            padding: 0.25rem 0;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .bulk-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+            padding-top: 0.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .bulk-actions .btn {
+            flex: 1;
+            justify-content: center;
+            padding: 0.35rem 0.5rem;
+            font-size: 0.7rem;
+        }
+        
+        @media print {
+            .header, .sidebar, .map-controls, .style-selector { display: none !important; }
+            .app-container { display: block; }
+            .map-container { width: 100%; height: 100vh; }
+        }
+        
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <header class="header">
+            <div class="logo">
+                <div class="logo-icon">
+                    <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzODUuODk4IiBoZWlnaHQ9IjIxMCIgdmlld0JveD0iMCAwIDM4NS44OTggMjEwIj4KICA8IS0tIEJsdWUgYmFja2dyb3VuZCAtLT4KICA8cmVjdCB3aWR0aD0iMzg1Ljg5OCIgaGVpZ2h0PSIyMTAiIGZpbGw9IiMwMDJCNUMiLz4KICAKICA8IS0tIFdoaXRlIHJlY3RhbmdsZSBmb3IgTWV0cm8gVHJhaWxlciBsb2dvIGFyZWEgLS0+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjM4NS44OTgiIGhlaWdodD0iMTU1IiBmaWxsPSIjZmZmZmZmIi8+CiAgCiAgPCEtLSBPcmlnaW5hbCBNZXRybyBUcmFpbGVyIExvZ28gLS0+CiAgPGcgaWQ9Ikdyb3VwXzYzMyIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNC4xNzkgODcuNzUpIj4KICAgIDxwYXRoIGlkPSJQYXRoXzYyNiIgZD0iTTc3LjM2MiwzMTkuMjQxaDUzbC0yLjY3NiwxNS4xNzlIMTEwLjY2M2wtNy41MTksNDIuNjQzSDg0LjE5Mmw3LjUxOS00Mi42NDNINzQuNjg2WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTc0LjY4NiAtMzE5LjI0MSkiIGZpbGw9IiMwMDJCNUMiLz4KICAgIDxwYXRoIGlkPSJQYXRoXzYyNyIgZD0iTTE4NC41MzMsMzU2LjkwNmwtMy41NTQsMjAuMTU3SDE2Mi4wMjVsMTAuMi01Ny44MjFoMjcuM2MxOS4yNzQsMCwyNC43LDUuMjIsMjIuNzE1LDE2LjQ2My0xLjE3NSw2LjY2Ni01LjEzOCwxMi4yODctMTIuMjA5LDE0LjEzNSw1LjcwNywyLjI0OCw5LjE0NiwzLjY5NCw3LjA5MiwxNS4zMzktMS4zMzEsNy41NDgtMi4wMjUsMTAuMTE5LjIyMywxMC4xMTlsLS4zMTIsMS43NjZIMTk3Ljg0M2MtLjI1NS0xLjI4NS0uMDg2LTQuOTc5LjgyMS0xMC4xMTksMS4zMzEtNy41NDkuNDg1LTEwLjAzOC04LjM0OS0xMC4wMzhabTIuMjM3LTEyLjY4OWg3LjQ2OWM1Ljg2MiwwLDkuMjUtMS40NDUsOS45NTctNS40NjEuNzIyLTQuMS0yLjE1LTYuMDI0LTYuNTY3LTYuMDI0aC04LjgzNFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xMDkuMTUzIC0zMTkuMjQxKSIgZmlsbD0iIzAwMkI1QyIvPgogICAgPHBhdGggaWQ9IlBhdGhfNjI4IiBkPSJNMjU4LjYsMzc3LjA2M2wzMC45MTUtNTcuODIxaDE5LjI3NGwxMC41MjQsNTcuODIxSDMwMC40NDVsLS45LTcuNjI5SDI4MC42NjlsLTMuNTE0LDcuNjI5Wm0zNy4zMTktNDAuMzk1LTkuNTE2LDIwLjcyaDExLjk2NloiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xNDcuMjY2IC0zMTkuMjQxKSIgZmlsbD0iIzAwMkI1QyIvPgogICAgPHBhdGggaWQ9IlBhdGhfNjI5IiBkPSJNMzcwLjQzOSwzNzcuMDYzbDEwLjItNTcuODIxaDE4Ljk1M2wtMTAuMiw1Ny44MjFaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTkxLjQgLTMxOS4yNDEpIiBmaWxsPSIjMDAyQjVDIi8+CiAgICA8cGF0aCBpZD0iUGF0aF82MzAiIGQ9Ik00MjIuMDQ1LDM3Ny4wNjNsMTAuMi01Ny44MjFoMTguOTUzbC03LjgxNyw0NC4zMjlINDY5LjRsLTIuMzc5LDEzLjQ5MloiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0yMTEuNzY1IC0zMTkuMjQxKSIgZmlsbD0iIzAwMkI1QyIvPgogICAgPHBhdGggaWQ9IlBhdGhfNjMxIiBkPSJNNTEwLjUzLDM3Ny4wNjNsMTAuMi01Ny44MjFoNDcuMTQxbC0yLjM3OSwxMy40OTFINTM3LjNMNTM1Ljg0MSwzNDFoMjMuODUyTDU1Ny4zMTQsMzU0LjVINTMzLjQ2MmwtMS42LDkuMDc1aDI5LjMxMkw1NTguOCwzNzcuMDYzWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTI0Ni42ODQgLTMxOS4yNDEpIiBmaWxsPSIjMDAyQjVDIi8+CiAgICA8cGF0aCBpZD0iUGF0aF82MzIiIGQ9Ik02MjYuODI4LDM1Ni45MDZsLTMuNTU0LDIwLjE1N0g2MDQuMzJsMTAuMi01Ny44MjFoMjcuM2MxOS4yNzQsMCwyNC43LDUuMjIsMjIuNzE1LDE2LjQ2My0xLjE3NSw2LjY2Ni01LjEzOCwxMi4yODctMTIuMjA5LDE0LjEzNSw1LjcwNywyLjI0OCw5LjE0NiwzLjY5NCw3LjA5MiwxNS4zMzktMS4zMzEsNy41NDgtMi4wMjUsMTAuMTE5LjIyMywxMC4xMTlsLS4zMTIsMS43NjZINjQwLjEzOGMtLjI1NS0xLjI4NS0uMDg2LTQuOTc5LjgyLTEwLjExOSwxLjMzMS03LjU0OS40ODUtMTAuMDM4LTguMzQ5LTEwLjAzOFptMi4yMzctMTIuNjg5aDcuNDY5YzUuODYyLDAsOS4yNS0xLjQ0NSw5Ljk1Ny01LjQ2MS43MjItNC4xLTIuMTUtNi4wMjQtNi41NjctNi4wMjRINjMxLjA5WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTI4My42OTcgLTMxOS4yNDEpIiBmaWxsPSIjMDAyQjVDIi8+CiAgPC9nPgogIDxnIGlkPSJHcm91cF82MzQiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAgMCkiPgogICAgPHBhdGggaWQ9IlBhdGhfNjMzIiBkPSJNNjcuNzgyLDI0Ny4zMTEsODAuMTIsMTc3LjMzOGgyNy43bDQuNjQ4LDQzLjYzNUwxMzIuNSwxNzcuMzM4aDI3LjdsLTEyLjMzNyw2OS45NzNoLTIwLjZsMy43Ny0yMS4zODEsMi4yMS0xMC44ODQsMy4zOTQtMTIuNjM0aC0uMTk1bC0yMC42NDcsNDQuOUg5OS44NTNsLTQuODE1LTQ0LjloLS4xOTRMOTQsMjEyLjcxMyw5Mi41NjYsMjIzLjZsLTQuMTgxLDIzLjcxM1oiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC02Ny43ODIgLTE3NS40OTEpIiBmaWxsPSIjMDAyQjVDIi8+CiAgICA8cGF0aCBpZD0iUGF0aF82MzQiIGQ9Ik0yMjEuODkxLDI0Ny4zMTFsMTIuMzM3LTY5Ljk3M2g1Ny4wNDhMMjg4LjQsMTkzLjY2NUgyNTQuMjg0bC0xLjc2NSwxMC4wMWgyOC44NjRMMjc4LjUsMjIwSDI0OS42NDFMMjQ3LjcsMjMwLjk4M2gzNS40NzNMMjgwLjMsMjQ3LjMxSDIyMS44OTFaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTI4LjU5OSAtMTc1LjQ5MSkiIGZpbGw9IiMwMDJCNUMiLz4KICAgIDxwYXRoIGlkPSJQYXRoXzYzNSIgZD0iTTM0OC44MzYsMTc3LjMzOGg2NC4xNDJsLTMuMjM4LDE4LjM2OGgtMjAuNmwtOS4xLDUxLjZIMzU3LjFsOS4xLTUxLjZIMzQ1LjZaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTc3LjQxOCAtMTc1LjQ5MSkiIGZpbGw9IiMwMDJCNUMiLz4KICAgIDxwYXRoIGlkPSJQYXRoXzYzNiIgZD0iTTQ3OC41MiwyMjIuOTE3bC00LjMsMjQuMzkzSDQ1MS4yODRsMTIuMzM3LTY5Ljk3M2gzMy4wNDJjMjMuMzI0LDAsMjkuODg4LDYuMzE3LDI3LjQ4OSwxOS45MjMtMS40MjIsOC4wNjYtNi4yMTcsMTQuODY5LTE0Ljc3NSwxNy4xLDYuOTA2LDIuNzIxLDExLjA2OCw0LjQ3MSw4LjU4MywxOC41NjItMS42MSw5LjEzNi0yLjQ1LDEyLjI0NS4yNzEsMTIuMjQ1bC0uMzc3LDIuMTM4SDQ5NC42MjhjLS4zMDktMS41NTUtLjEtNi4wMjUuOTkzLTEyLjI0NSwxLjYxMS05LjEzNi41ODctMTIuMTQ4LTEwLjEtMTIuMTQ4aC03Wm0yLjcwOC0xNS4zNTVoOS4wMzhjNy4wOTQsMCwxMS4xOTMtMS43NDksMTIuMDUtNi42MDkuODc0LTQuOTU2LTIuNi03LjI4OS03Ljk0OC03LjI4OWgtMTAuNjlaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMjE5LjEyNSAtMTc1LjQ5MSkiIGZpbGw9IiMwMDJCNUMiLz4KICAgIDxwYXRoIGlkPSJQYXRoXzYzNyIgZD0iTTY1NS44MTIsMjEwLjczMWMtNC4yLDIzLjgxLTIyLjYsMzcuMjIxLTQzLjMsMzcuMjIxLTIxLjk2MywwLTM0LjI0LTEzLjYwNi0zMC4wNDEtMzcuNDE2LDMuODcyLTIxLjk2MywyMS4yNi0zNi4yNSw0My4wMy0zNi4yNUM2NTAuNDc5LDE3NC4yODgsNjU5LjA2OCwxOTIuMjY3LDY1NS44MTIsMjEwLjczMVptLTUwLjQzOCwwYy0xLjU3Nyw4Ljk0MS0uODI2LDIwLjExNywxMC4xNTYsMjAuMTE3LDkuOTEzLDAsMTUuMzA4LTguNTUyLDE3LjM0Ny0yMC4xMTcsMS42OC05LjUyNC0uNDI2LTE5LjYzMS0xMC41ODUtMTkuMzRDNjExLjg5MywxOTEuMzkyLDYwNi45MzMsMjAxLjg4OCw2MDUuMzc0LDIxMC43MzFaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMjcwLjU3NCAtMTc0LjI4NykiIGZpbGw9IiMwMDJCNUMiLz4KICA8L2c+CiAgCiAgPCEtLSBZYXJkVml6IHRleHQgaW4gd2hpdGUgb24gYmx1ZSBiYWNrZ3JvdW5kIC0gaXRhbGljaXplZCB3aXRoIGxhcmdlciBZIGFuZCBWIC0tPgogIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDE5Mi45NDkgMTkwKSI+CiAgICA8dGV4dCB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwgQmxhY2ssIEFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXdlaWdodD0iOTAwIiBmb250LXN0eWxlPSJpdGFsaWMiIGZpbGw9IiNmZmZmZmYiIGxldHRlci1zcGFjaW5nPSIyIj4KICAgICAgPHRzcGFuIGZvbnQtc2l6ZT0iMzQiPlk8L3RzcGFuPjx0c3BhbiBmb250LXNpemU9IjI2Ij5BUkQ8L3RzcGFuPjx0c3BhbiBmb250LXNpemU9IjM0Ij5WPC90c3Bhbj48dHNwYW4gZm9udC1zaXplPSIyNiI+SVo8L3RzcGFuPgogICAgPC90ZXh0PgogIDwvZz4KPC9zdmc+Cg==" alt="Metro Trailer YardViz Logo">
+                </div>
+            </div>
+            
+            <div class="header-actions">
+                <div style="position: relative;">
+                    <button class="btn btn-secondary" id="exportBtn" onclick="app.toggleExportMenu()">
+                        <span>📥</span> Export
+                    </button>
+                    <div class="export-menu" id="exportMenu">
+                        <button class="export-menu-item" onclick="app.exportAsPNG()">
+                            <span>🖼️</span> Export as PNG
+                        </button>
+                        <button class="export-menu-item" onclick="app.exportAsPDF()">
+                            <span>📄</span> Export as PDF
+                        </button>
+                        <button class="export-menu-item" onclick="app.printView()">
+                            <span>🖨️</span> Print View
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="theme-toggle" onclick="app.toggleTheme()" title="Toggle dark mode">
+                    <div class="theme-toggle-knob"></div>
+                </div>
+            </div>
+        </header>
+        
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <div class="section-title">Data Import</div>
+                <label class="upload-zone" id="uploadZone">
+                    <input type="file" id="fileInput" accept=".xlsx,.xls,.csv,.tsv" onchange="app.handleFileUpload(event)">
+                    <div class="upload-icon">📁</div>
+                    <div class="upload-text"><strong>Click to upload</strong> or drag & drop</div>
+                    <div class="upload-formats">.xlsx, .xls, .csv, .tsv</div>
+                </label>
+                <div class="validation-errors" id="validationErrors">
+                    <div class="validation-errors-title">
+                        <span>⚠️</span> Data Validation Issues
+                    </div>
+                    <div class="validation-errors-list" id="validationErrorsList"></div>
+                </div>
+            </div>
+            
+            <div class="sidebar-section">
+                <div class="section-title">Statistics</div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" id="statTrailers">0</div>
+                        <div class="stat-label">Total Trailers</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="statNew">0</div>
+                        <div class="stat-label">New Today</div>
+                    </div>
+                    <div class="stat-card success">
+                        <div class="stat-value" id="statCheckedIn">0</div>
+                        <div class="stat-label">Checked In</div>
+                    </div>
+                    <div class="stat-card danger">
+                        <div class="stat-value" id="statNotCheckedIn">0</div>
+                        <div class="stat-label">Not Checked In</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sidebar-section">
+                <div class="section-title">Trailers</div>
+                <div class="search-container">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" class="search-input" id="searchInput" placeholder="Search by Asset ID..." oninput="app.filterTrailers(event)">
+                </div>
+                <div class="bulk-actions">
+                    <button class="btn btn-secondary" onclick="app.checkInAll()">✓ Check In All</button>
+                    <button class="btn btn-secondary" onclick="app.uncheckAll()">✗ Uncheck All</button>
+                </div>
+                <div class="trailer-list-container" id="trailerListContainer">
+                    <div class="empty-state" id="emptyState">
+                        <div class="empty-state-icon">📋</div>
+                        <div class="empty-state-text">Upload a file to see trailers</div>
+                    </div>
+                    <div class="trailer-list" id="trailerList"></div>
+                </div>
+            </div>
+        </aside>
+        
+        <main class="map-container">
+            <div id="map"></div>
+            
+            <div class="loading-overlay" id="loadingOverlay">
+                <div class="loading-spinner"></div>
+            </div>
+            
+            <div class="map-controls">
+                <div class="map-control-group">
+                    <button class="map-control-btn" onclick="app.zoomIn()" title="Zoom In">➕</button>
+                    <button class="map-control-btn" onclick="app.zoomOut()" title="Zoom Out">➖</button>
+                    <button class="map-control-btn" onclick="app.resetView()" title="Reset View">🏠</button>
+                </div>
+                <div class="map-control-group">
+                    <button class="map-control-btn" onclick="app.fitToTrailers()" title="Fit to Trailers">📍</button>
+                </div>
+            </div>
+            
+            <div class="style-selector">
+                <select class="style-select" id="mapStyle" onchange="app.changeMapStyle(event)">
+                    <option value="satellite">🛰️ Satellite</option>
+                    <option value="streets">🗺️ Streets</option>
+                    <option value="outdoor">🏔️ Outdoor</option>
+                    <option value="basic">📍 Basic</option>
+                </select>
+            </div>
+        </main>
+    </div>
+    
+    <div class="toast-container" id="toastContainer"></div>
+    
+    <script>
+    const app = {
+        config: {
+            mapTilerKey: 'u9TdeBJu4j9tNG1lZiu5',
+            propertyCenter: [-81.89786783155066, 41.148623908332276],
+            defaultZoom: 17.5,
+            localStorageKey: 'trailerVizGPSData_v2'
+        },
+        
+        state: {
+            map: null,
+            trailers: [],
+            filteredTrailers: [],
+            previousTrailerIds: new Set(),  // Track previously known trailers
+            selectedTrailerId: null,
+            currentPopup: null
+        },
+        
+        mapStyles: {
+            satellite: 'https://api.maptiler.com/maps/hybrid/style.json',
+            streets: 'https://api.maptiler.com/maps/streets-v2/style.json',
+            outdoor: 'https://api.maptiler.com/maps/outdoor-v2/style.json',
+            basic: 'https://api.maptiler.com/maps/basic-v2/style.json'
+        },
+        
+        init() {
+            console.log('🚛 YardViz initializing...');
+            this.initTheme();
+            this.initDragDrop();
+            this.initMap();
+            this.loadFromLocalStorage();
+            
+            document.addEventListener('click', (e) => {
+                const exportBtn = document.getElementById('exportBtn');
+                const exportMenu = document.getElementById('exportMenu');
+                if (!exportBtn.contains(e.target) && !exportMenu.contains(e.target)) {
+                    exportMenu.classList.remove('visible');
+                }
+            });
+            
+            console.log('✅ YardViz initialized');
+        },
+        
+        initTheme() {
+            const savedTheme = localStorage.getItem('trailerVizTheme');
+            if (savedTheme) {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+            } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        },
+        
+        toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('trailerVizTheme', newTheme);
+            if (this.state.map) this.state.map.resize();
+        },
+        
+        initDragDrop() {
+            const uploadZone = document.getElementById('uploadZone');
+            
+            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                uploadZone.addEventListener(eventName, (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                });
+            });
+            
+            ['dragenter', 'dragover'].forEach(eventName => {
+                uploadZone.addEventListener(eventName, () => uploadZone.classList.add('drag-over'));
+            });
+            
+            ['dragleave', 'drop'].forEach(eventName => {
+                uploadZone.addEventListener(eventName, () => uploadZone.classList.remove('drag-over'));
+            });
+            
+            uploadZone.addEventListener('drop', (e) => {
+                const files = e.dataTransfer.files;
+                if (files.length > 0) this.processFile(files[0]);
+            });
+        },
+        
+        initMap() {
+            console.log('🗺️ Initializing map...');
+            
+            const styleUrl = `${this.mapStyles.satellite}?key=${this.config.mapTilerKey}`;
+            
+            this.state.map = new maplibregl.Map({
+                container: 'map',
+                style: styleUrl,
+                center: this.config.propertyCenter,
+                zoom: this.config.defaultZoom,
+                pitch: 0,
+                bearing: 0
+            });
+            
+            this.state.map.on('load', () => {
+                console.log('✅ Map loaded');
+                this.createTrailerImages();
+                
+                if (this.state.trailers.length > 0) {
+                    setTimeout(() => this.renderTrailersOnMap(), 500);
+                }
+            });
+            
+            this.state.map.addControl(new maplibregl.NavigationControl({
+                showCompass: true,
+                showZoom: false
+            }), 'bottom-right');
+        },
+        
+        createTrailerImages() {
+            const colors = {
+                checkedin: '#22c55e',      // green - Checked In
+                notcheckedin: '#ef4444'    // red - Not Checked In
+            };
+            
+            Object.entries(colors).forEach(([status, color]) => {
+                const width = 40;
+                const height = 16;
+                const canvas = document.createElement('canvas');
+                canvas.width = width;
+                canvas.height = height;
+                const ctx = canvas.getContext('2d');
+                
+                // Draw trailer body
+                ctx.fillStyle = color;
+                ctx.strokeStyle = '#ffffff';
+                ctx.lineWidth = 2;
+                
+                ctx.beginPath();
+                ctx.roundRect(2, 2, width - 4, height - 4, 2);
+                ctx.fill();
+                ctx.stroke();
+                
+                // Hitch indicator
+                ctx.fillStyle = '#ffffff';
+                ctx.fillRect(width - 8, 5, 3, height - 10);
+                
+                const imageData = ctx.getImageData(0, 0, width, height);
+                
+                if (!this.state.map.hasImage(`trailer-${status}`)) {
+                    this.state.map.addImage(`trailer-${status}`, imageData, { pixelRatio: 1 });
+                }
+            });
+            
+            console.log('✅ Trailer images created');
+        },
+        
+        handleFileUpload(event) {
+            const file = event.target.files[0];
+            if (file) this.processFile(file);
+        },
+        
+        processFile(file) {
+            console.log(`📁 Processing file: ${file.name}`);
+            this.showLoading(true);
+            this.clearValidationErrors();
+            
+            const extension = file.name.split('.').pop().toLowerCase();
+            
+            if (['xlsx', 'xls'].includes(extension)) {
+                this.parseExcel(file);
+            } else if (['csv', 'tsv'].includes(extension)) {
+                this.parseCSV(file, extension === 'tsv' ? '\t' : ',');
+            } else {
+                this.showToast('Unsupported file format', 'error');
+                this.showLoading(false);
+            }
+        },
+        
+        parseExcel(file) {
+            const reader = new FileReader();
+            
+            reader.onload = (e) => {
+                try {
+                    const data = new Uint8Array(e.target.result);
+                    const workbook = XLSX.read(data, { type: 'array' });
+                    const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
+                    const jsonData = XLSX.utils.sheet_to_json(firstSheet, { header: 1 });
+                    this.processRawData(jsonData);
+                } catch (error) {
+                    console.error('Excel parsing error:', error);
+                    this.showToast('Error parsing Excel file', 'error');
+                    this.showLoading(false);
+                }
+            };
+            
+            reader.onerror = () => {
+                this.showToast('Error reading file', 'error');
+                this.showLoading(false);
+            };
+            
+            reader.readAsArrayBuffer(file);
+        },
+        
+        parseCSV(file, delimiter) {
+            Papa.parse(file, {
+                delimiter: delimiter,
+                complete: (results) => this.processRawData(results.data),
+                error: (error) => {
+                    console.error('CSV parsing error:', error);
+                    this.showToast('Error parsing CSV file', 'error');
+                    this.showLoading(false);
+                }
+            });
+        },
+        
+        processRawData(data) {
+            console.log('📊 Processing raw data...', data);
+            
+            if (!data || data.length < 2) {
+                this.showToast('File appears to be empty', 'error');
+                this.showLoading(false);
+                return;
+            }
+            
+            const headers = data[0].map(h => String(h).toLowerCase().trim());
+            console.log('Headers found:', headers);
+            
+            // Find Asset ID column - prioritize "asset" over other "id" columns
+            let assetIdCol = headers.findIndex(h => h.includes('asset'));
+            if (assetIdCol === -1) {
+                assetIdCol = headers.findIndex(h => h === 'trailer id' || h === 'trailerid');
+            }
+            if (assetIdCol === -1) {
+                assetIdCol = headers.findIndex(h => (h === 'id' || h.includes('trailer')) && !h.includes('map'));
+            }
+            
+            const latCol = headers.findIndex(h => h.includes('lat'));
+            const lngCol = headers.findIndex(h => h.includes('lon') || h.includes('lng'));
+            
+            // Enhanced heading detection - check for various column names
+            let headingCol = headers.findIndex(h => h === 'heading' || h === 'head');
+            if (headingCol === -1) {
+                headingCol = headers.findIndex(h => h.includes('heading') || h.includes('bearing') || h.includes('direction') || h.includes('angle') || h.includes('orient'));
+            }
+            
+            console.log('Column mapping:', { assetIdCol, latCol, lngCol, headingCol });
+            
+            if (assetIdCol === -1 || latCol === -1 || lngCol === -1) {
+                this.showToast('Missing required columns (Asset ID, Latitude, Longitude)', 'error');
+                this.showLoading(false);
+                return;
+            }
+            
+            // Get existing check-in status from current trailers
+            const existingStatus = {};
+            this.state.trailers.forEach(t => {
+                existingStatus[t.id] = t.checkedIn;
+            });
+            
+            // Build set of previously known trailer IDs
+            const previousIds = new Set(this.state.trailers.map(t => t.id));
+            
+            const trailers = [];
+            const errors = [];
+            let newTrailerCount = 0;
+            
+            for (let i = 1; i < data.length; i++) {
+                const row = data[i];
+                if (!row || row.length === 0 || !row[assetIdCol]) continue;
+                
+                const assetId = String(row[assetIdCol]).trim();
+                const latRaw = String(row[latCol] || '').replace(/[−–]/g, '-');
+                const lngRaw = String(row[lngCol] || '').replace(/[−–]/g, '-');
+                const lat = parseFloat(latRaw);
+                const lng = parseFloat(lngRaw);
+                
+                // Parse heading - handle compass directions and numeric values
+                let heading = 0;
+                let headingDisplay = '0°';
+                if (headingCol !== -1 && row[headingCol] !== undefined && row[headingCol] !== null && row[headingCol] !== '') {
+                    const headingRaw = row[headingCol];
+                    
+                    // Handle both number and string types
+                    if (typeof headingRaw === 'number') {
+                        heading = headingRaw;
+                        headingDisplay = `${headingRaw}°`;
+                    } else {
+                        const headingStr = String(headingRaw).toUpperCase().trim();
+                        
+                        // Convert compass directions to degrees
+                        const compassToDegrees = {
+                            'N': 0,
+                            'NNE': 22.5,
+                            'NE': 45,
+                            'ENE': 67.5,
+                            'E': 90,
+                            'ESE': 112.5,
+                            'SE': 135,
+                            'SSE': 157.5,
+                            'S': 180,
+                            'SSW': 202.5,
+                            'SW': 225,
+                            'WSW': 247.5,
+                            'W': 270,
+                            'WNW': 292.5,
+                            'NW': 315,
+                            'NNW': 337.5
+                        };
+                        
+                        if (compassToDegrees.hasOwnProperty(headingStr)) {
+                            heading = compassToDegrees[headingStr];
+                            headingDisplay = headingStr;
+                        } else {
+                            // Try parsing as number (might have degree symbol)
+                            const numericHeading = parseFloat(headingStr.replace(/[°'"]/g, ''));
+                            heading = isNaN(numericHeading) ? 0 : numericHeading;
+                            headingDisplay = `${heading}°`;
+                        }
+                    }
+                    if (isNaN(heading)) {
+                        heading = 0;
+                        headingDisplay = '0°';
+                    }
+                }
+                
+                // Validate coordinates
+                if (isNaN(lat) || isNaN(lng)) {
+                    errors.push(`Row ${i + 1}: Invalid coordinates for "${assetId}"`);
+                    continue;
+                }
+                
+                if (lat < -90 || lat > 90 || lng < -180 || lng > 180) {
+                    errors.push(`Row ${i + 1}: Coordinates out of range for "${assetId}"`);
+                    continue;
+                }
+                
+                // Determine check-in status
+                // If trailer existed before, keep its status; if new, set to NOT checked in
+                let checkedIn;
+                if (existingStatus.hasOwnProperty(assetId)) {
+                    checkedIn = existingStatus[assetId];
+                } else if (previousIds.size > 0) {
+                    // New trailer (not in previous data) - mark as NOT checked in
+                    checkedIn = false;
+                    newTrailerCount++;
+                } else {
+                    // First load - default to checked in
+                    checkedIn = true;
+                }
+                
+                trailers.push({
+                    id: assetId,
+                    lat: lat,
+                    lng: lng,
+                    heading: heading,
+                    headingDisplay: headingDisplay,
+                    checkedIn: checkedIn,
+                    isNew: !previousIds.has(assetId) && previousIds.size > 0
+                });
+            }
+            
+            if (errors.length > 0) {
+                this.showValidationErrors(errors);
+            }
+            
+            if (trailers.length === 0) {
+                this.showToast('No valid trailer data found', 'error');
+                this.showLoading(false);
+                return;
+            }
+            
+            console.log(`✅ Parsed ${trailers.length} trailers (${newTrailerCount} new)`);
+            
+            // Update previous IDs for next upload
+            this.state.previousTrailerIds = new Set(trailers.map(t => t.id));
+            
+            this.state.trailers = trailers;
+            this.state.filteredTrailers = [...trailers];
+            
+            this.saveToLocalStorage();
+            this.renderTrailerList();
+            this.renderTrailersOnMap();
+            
+            if (newTrailerCount > 0) {
+                this.showToast(`Loaded ${trailers.length} trailers (${newTrailerCount} new - marked as Not Checked In)`, 'warning');
+            } else {
+                this.showToast(`Loaded ${trailers.length} trailers`, 'success');
+            }
+        },
+        
+        renderTrailersOnMap() {
+            console.log('📍 Rendering trailers at GPS coordinates...');
+            
+            if (!this.state.map || this.state.trailers.length === 0) {
+                this.showLoading(false);
+                return;
+            }
+            
+            // Remove existing layers
+            if (this.state.map.getLayer('trailers')) {
+                this.state.map.removeLayer('trailers');
+            }
+            if (this.state.map.getLayer('trailers-labels')) {
+                this.state.map.removeLayer('trailers-labels');
+            }
+            if (this.state.map.getSource('trailers')) {
+                this.state.map.removeSource('trailers');
+            }
+            
+            // Create features
+            const features = this.state.trailers.map(trailer => ({
+                type: 'Feature',
+                properties: {
+                    id: trailer.id,
+                    status: trailer.checkedIn ? 'checkedin' : 'notcheckedin',
+                    lat: trailer.lat,
+                    lng: trailer.lng,
+                    checkedIn: trailer.checkedIn
+                },
+                geometry: {
+                    type: 'Point',
+                    coordinates: [trailer.lng, trailer.lat]
+                }
+            }));
+            
+            // Add source
+            this.state.map.addSource('trailers', {
+                type: 'geojson',
+                data: {
+                    type: 'FeatureCollection',
+                    features: features
+                }
+            });
+            
+            // Add trailer symbols layer
+            this.state.map.addLayer({
+                id: 'trailers',
+                type: 'symbol',
+                source: 'trailers',
+                layout: {
+                    'icon-image': ['concat', 'trailer-', ['get', 'status']],
+                    'icon-size': 1.2,
+                    'icon-rotation-alignment': 'map',
+                    'icon-allow-overlap': true,
+                    'icon-ignore-placement': true
+                }
+            });
+            
+            // Add labels layer
+            this.state.map.addLayer({
+                id: 'trailers-labels',
+                type: 'symbol',
+                source: 'trailers',
+                layout: {
+                    'text-field': ['get', 'id'],
+                    'text-font': ['Open Sans Bold', 'Arial Unicode MS Bold'],
+                    'text-size': 10,
+                    'text-offset': [0, 1.5],
+                    'text-allow-overlap': false
+                },
+                paint: {
+                    'text-color': '#ffffff',
+                    'text-halo-color': '#000000',
+                    'text-halo-width': 1.5
+                }
+            });
+            
+            // Click handler
+            this.state.map.on('click', 'trailers', (e) => {
+                if (e.features && e.features.length > 0) {
+                    const trailerId = e.features[0].properties.id;
+                    this.selectTrailer(trailerId);
+                }
+            });
+            
+            // Hover cursor
+            this.state.map.on('mouseenter', 'trailers', () => {
+                this.state.map.getCanvas().style.cursor = 'pointer';
+            });
+            
+            this.state.map.on('mouseleave', 'trailers', () => {
+                this.state.map.getCanvas().style.cursor = '';
+            });
+            
+            this.updateStats();
+            this.showLoading(false);
+            
+            console.log(`✅ Rendered ${features.length} trailers`);
+        },
+        
+        toggleCheckedIn(trailerId, event) {
+            event.stopPropagation();
+            
+            const trailer = this.state.trailers.find(t => t.id === trailerId);
+            if (trailer) {
+                trailer.checkedIn = !trailer.checkedIn;
+                trailer.isNew = false;  // Clear new flag when manually toggled
+                
+                this.saveToLocalStorage();
+                this.renderTrailerList();
+                this.renderTrailersOnMap();
+            }
+        },
+        
+        toggleCheckedInFromPopup(trailerId, isChecked) {
+            const trailer = this.state.trailers.find(t => t.id === trailerId);
+            if (trailer) {
+                trailer.checkedIn = isChecked;
+                trailer.isNew = false;
+                
+                this.saveToLocalStorage();
+                this.renderTrailerList();
+                this.renderTrailersOnMap();
+                
+                // Re-show the popup with updated status
+                this.showTrailerPopup(trailer);
+            }
+        },
+        
+        checkInAll() {
+            this.state.trailers.forEach(t => {
+                t.checkedIn = true;
+                t.isNew = false;
+            });
+            this.saveToLocalStorage();
+            this.renderTrailerList();
+            this.renderTrailersOnMap();
+            this.showToast('All trailers checked in', 'success');
+        },
+        
+        uncheckAll() {
+            this.state.trailers.forEach(t => {
+                t.checkedIn = false;
+                t.isNew = false;
+            });
+            this.saveToLocalStorage();
+            this.renderTrailerList();
+            this.renderTrailersOnMap();
+            this.showToast('All trailers unchecked', 'success');
+        },
+        
+        showValidationErrors(errors) {
+            const container = document.getElementById('validationErrors');
+            const list = document.getElementById('validationErrorsList');
+            list.innerHTML = errors.map(e => `<div class="validation-error-item">${e}</div>`).join('');
+            container.classList.add('visible');
+        },
+        
+        clearValidationErrors() {
+            document.getElementById('validationErrors').classList.remove('visible');
+        },
+        
+        saveToLocalStorage() {
+            try {
+                const data = {
+                    trailers: this.state.trailers,
+                    previousTrailerIds: Array.from(this.state.previousTrailerIds),
+                    timestamp: Date.now()
+                };
+                localStorage.setItem(this.config.localStorageKey, JSON.stringify(data));
+                console.log('💾 Data saved to localStorage');
+            } catch (error) {
+                console.warn('Could not save to localStorage:', error);
+            }
+        },
+        
+        loadFromLocalStorage() {
+            try {
+                const saved = localStorage.getItem(this.config.localStorageKey);
+                if (saved) {
+                    const data = JSON.parse(saved);
+                    if (data.trailers && data.trailers.length > 0) {
+                        this.state.trailers = data.trailers;
+                        this.state.filteredTrailers = [...data.trailers];
+                        this.state.previousTrailerIds = new Set(data.previousTrailerIds || []);
+                        this.renderTrailerList();
+                        console.log(`📂 Loaded ${data.trailers.length} trailers from localStorage`);
+                    }
+                }
+            } catch (error) {
+                console.warn('Could not load from localStorage:', error);
+            }
+        },
+        
+        renderTrailerList() {
+            const container = document.getElementById('trailerList');
+            const emptyState = document.getElementById('emptyState');
+            const trailers = this.state.filteredTrailers;
+            
+            if (trailers.length === 0) {
+                container.innerHTML = '';
+                emptyState.style.display = 'block';
+                return;
+            }
+            
+            emptyState.style.display = 'none';
+            
+            container.innerHTML = trailers.map(trailer => `
+                <div class="trailer-item ${this.state.selectedTrailerId === trailer.id ? 'active' : ''}" 
+                     onclick="app.selectTrailer('${trailer.id}')">
+                    <div class="trailer-icon status-${trailer.checkedIn ? 'checkedin' : 'notcheckedin'}">🚛</div>
+                    <div class="trailer-info">
+                        <div class="trailer-id">${trailer.id}${trailer.isNew ? ' 🆕' : ''}</div>
+                    </div>
+                    <label class="checkin-toggle" onclick="event.stopPropagation()">
+                        <input type="checkbox" ${trailer.checkedIn ? 'checked' : ''} 
+                               onchange="app.toggleCheckedIn('${trailer.id}', event)">
+                        <span class="checkin-slider"></span>
+                    </label>
+                </div>
+            `).join('');
+            
+            this.updateStats();
+        },
+        
+        filterTrailers(event) {
+            const query = event.target.value.toLowerCase().trim();
+            
+            if (!query) {
+                this.state.filteredTrailers = [...this.state.trailers];
+            } else {
+                this.state.filteredTrailers = this.state.trailers.filter(t => 
+                    t.id.toLowerCase().includes(query)
+                );
+            }
+            
+            this.renderTrailerList();
+        },
+        
+        selectTrailer(trailerId) {
+            const trailer = this.state.trailers.find(t => t.id === trailerId);
+            if (!trailer) return;
+            
+            this.state.selectedTrailerId = trailerId;
+            this.renderTrailerList();
+            
+            this.state.map.flyTo({
+                center: [trailer.lng, trailer.lat],
+                zoom: 19,
+                duration: 1000
+            });
+            
+            this.showTrailerPopup(trailer);
+        },
+        
+        showTrailerPopup(trailer) {
+            if (this.state.currentPopup) {
+                this.state.currentPopup.remove();
+            }
+            
+            const statusColor = trailer.checkedIn ? '#22c55e' : '#ef4444';
+            const statusText = trailer.checkedIn ? 'CHECKED IN' : 'NOT CHECKED IN';
+            
+            const popupContent = `
+                <div class="popup-header">
+                    <span class="popup-icon">🚛</span>
+                    <span class="popup-title">${trailer.id}</span>
+                </div>
+                <div class="popup-row">
+                    <span class="popup-label">Status</span>
+                    <span class="popup-value" style="color: ${statusColor}">${statusText}</span>
+                </div>
+                <div class="popup-row">
+                    <span class="popup-label">Check In</span>
+                    <label class="checkin-toggle">
+                        <input type="checkbox" ${trailer.checkedIn ? 'checked' : ''} 
+                               onchange="app.toggleCheckedInFromPopup('${trailer.id}', this.checked)">
+                        <span class="checkin-slider"></span>
+                    </label>
+                </div>
+                <div class="popup-row">
+                    <span class="popup-label">Latitude</span>
+                    <span class="popup-value">${trailer.lat.toFixed(6)}</span>
+                </div>
+                <div class="popup-row">
+                    <span class="popup-label">Longitude</span>
+                    <span class="popup-value">${trailer.lng.toFixed(6)}</span>
+                </div>
+            `;
+            
+            this.state.currentPopup = new maplibregl.Popup({
+                closeButton: true,
+                closeOnClick: false,
+                offset: 25
+            })
+            .setLngLat([trailer.lng, trailer.lat])
+            .setHTML(popupContent)
+            .addTo(this.state.map);
+        },
+        
+        updateStats() {
+            const trailers = this.state.trailers;
+            const checkedIn = trailers.filter(t => t.checkedIn).length;
+            const notCheckedIn = trailers.filter(t => !t.checkedIn).length;
+            const newToday = trailers.filter(t => t.isNew).length;
+            
+            document.getElementById('statTrailers').textContent = trailers.length;
+            document.getElementById('statNew').textContent = newToday;
+            document.getElementById('statCheckedIn').textContent = checkedIn;
+            document.getElementById('statNotCheckedIn').textContent = notCheckedIn;
+        },
+        
+        zoomIn() { this.state.map.zoomIn(); },
+        zoomOut() { this.state.map.zoomOut(); },
+        
+        resetView() {
+            this.state.map.flyTo({
+                center: this.config.propertyCenter,
+                zoom: this.config.defaultZoom,
+                pitch: 0,
+                bearing: 0,
+                duration: 1000
+            });
+        },
+        
+        fitToTrailers() {
+            if (this.state.trailers.length === 0) return;
+            
+            const bounds = new maplibregl.LngLatBounds();
+            this.state.trailers.forEach(t => bounds.extend([t.lng, t.lat]));
+            
+            this.state.map.fitBounds(bounds, {
+                padding: 50,
+                duration: 1000
+            });
+        },
+        
+        changeMapStyle(event) {
+            const style = event.target.value;
+            const styleUrl = `${this.mapStyles[style]}?key=${this.config.mapTilerKey}`;
+            
+            this.state.map.setStyle(styleUrl);
+            
+            this.state.map.once('styledata', () => {
+                setTimeout(() => {
+                    this.createTrailerImages();
+                    if (this.state.trailers.length > 0) {
+                        this.renderTrailersOnMap();
+                    }
+                }, 100);
+            });
+        },
+        
+        toggleExportMenu() {
+            document.getElementById('exportMenu').classList.toggle('visible');
+        },
+        
+        exportAsPNG() {
+            this.toggleExportMenu();
+            this.showLoading(true);
+            
+            html2canvas(document.getElementById('map'), {
+                useCORS: true,
+                allowTaint: true,
+                backgroundColor: null
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = `trailer-gps-${new Date().toISOString().split('T')[0]}.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+                this.showLoading(false);
+                this.showToast('PNG exported successfully', 'success');
+            }).catch(error => {
+                console.error('Export error:', error);
+                this.showLoading(false);
+                this.showToast('Export failed', 'error');
+            });
+        },
+        
+        exportAsPDF() {
+            this.toggleExportMenu();
+            this.showLoading(true);
+            
+            html2canvas(document.getElementById('map'), {
+                useCORS: true,
+                allowTaint: true,
+                backgroundColor: null
+            }).then(canvas => {
+                const { jsPDF } = window.jspdf;
+                const pdf = new jsPDF('landscape', 'mm', 'a4');
+                const imgWidth = 297;
+                const imgHeight = (canvas.height * imgWidth) / canvas.width;
+                pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, imgWidth, imgHeight);
+                pdf.save(`trailer-gps-${new Date().toISOString().split('T')[0]}.pdf`);
+                this.showLoading(false);
+                this.showToast('PDF exported successfully', 'success');
+            }).catch(error => {
+                console.error('Export error:', error);
+                this.showLoading(false);
+                this.showToast('Export failed', 'error');
+            });
+        },
+        
+        printView() {
+            this.toggleExportMenu();
+            window.print();
+        },
+        
+        showLoading(show) {
+            const overlay = document.getElementById('loadingOverlay');
+            if (show) overlay.classList.add('visible');
+            else overlay.classList.remove('visible');
+        },
+        
+        showToast(message, type = 'success') {
+            const container = document.getElementById('toastContainer');
+            const icons = { success: '✅', error: '❌', warning: '⚠️' };
+            
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.innerHTML = `
+                <span class="toast-icon">${icons[type]}</span>
+                <span class="toast-message">${message}</span>
+            `;
+            
+            container.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.style.animation = 'toastIn 0.3s ease reverse';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+    };
+    
+    document.addEventListener('DOMContentLoaded', () => app.init());
+    </script>
+</body>
+</html>
