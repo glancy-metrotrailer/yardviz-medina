@@ -869,6 +869,10 @@
                         <button class="export-menu-item" onclick="app.importData()">
                             <span>📂</span> Import Data (JSON)
                         </button>
+                        <div style="border-top: 1px solid var(--border-color); margin: 0.25rem 0;"></div>
+                        <button class="export-menu-item" onclick="app.clearGitHubToken()">
+                            <span>🔑</span> Reset GitHub Token
+                        </button>
                     </div>
                 </div>
                 
@@ -980,11 +984,11 @@
             // GITHUB CONFIGURATION - UPDATE THESE VALUES
             // =====================================================
             github: {
-                enabled: true,                      // Set to true after configuring
-                owner: 'glancy-metrotrailer',       // Your GitHub username
-                repo: 'yardviz-medina',                     // Your repository name
-                path: 'data/trailers.json',          // Path to data file
-                token: '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'  // GitHub Personal Access Token
+                enabled: true,
+                owner: 'glancy-metrotrailer',
+                repo: 'yardviz-medina',
+                path: 'data/trailers.json',
+                token: null  // Token entered by user at runtime (stored in localStorage)
             }
             // =====================================================
         },
@@ -998,6 +1002,23 @@
             currentPopup: null,
             githubSha: null,
             isSyncing: false
+        },
+        
+        // Get GitHub token from localStorage or prompt user
+        getGitHubToken() {
+            let token = localStorage.getItem('yardviz_github_token');
+            if (!token) {
+                token = prompt('Enter your GitHub Personal Access Token:\n\n(This will be stored locally in your browser and never uploaded to GitHub)');
+                if (token) {
+                    localStorage.setItem('yardviz_github_token', token.trim());
+                }
+            }
+            return token;
+        },
+        
+        clearGitHubToken() {
+            localStorage.removeItem('yardviz_github_token');
+            this.showToast('GitHub token cleared', 'success');
         },
         
         mapStyles: {
@@ -1555,7 +1576,15 @@
         },
         
         async loadFromGitHub() {
-            const { owner, repo, path, token } = this.config.github;
+            const { owner, repo, path } = this.config.github;
+            const token = this.getGitHubToken();
+            
+            if (!token) {
+                console.log('No GitHub token provided, using localStorage');
+                this.loadFromLocalStorage();
+                return;
+            }
+            
             const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
             
             try {
@@ -1567,6 +1596,13 @@
                         'Accept': 'application/vnd.github.v3+json'
                     }
                 });
+                
+                if (response.status === 401) {
+                    this.showToast('Invalid GitHub token. Click Sync to re-enter.', 'error');
+                    localStorage.removeItem('yardviz_github_token');
+                    this.loadFromLocalStorage();
+                    return;
+                }
                 
                 if (response.status === 404) {
                     console.log('📄 No existing data file on GitHub, starting fresh');
@@ -1611,7 +1647,14 @@
         async saveToGitHub() {
             if (this.state.isSyncing) return;
             
-            const { owner, repo, path, token } = this.config.github;
+            const { owner, repo, path } = this.config.github;
+            const token = localStorage.getItem('yardviz_github_token');
+            
+            if (!token) {
+                console.log('No GitHub token, skipping cloud sync');
+                return;
+            }
+            
             const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
             
             this.state.isSyncing = true;
@@ -1626,7 +1669,7 @@
                     lastModified: new Date().toISOString()
                 };
                 
-                const content = btoa(JSON.stringify(data, null, 2));
+                const content = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
                 
                 // Get current SHA if we don't have it
                 if (!this.state.githubSha) {
@@ -1664,6 +1707,12 @@
                     },
                     body: JSON.stringify(body)
                 });
+                
+                if (response.status === 401) {
+                    this.showToast('Invalid GitHub token', 'error');
+                    localStorage.removeItem('yardviz_github_token');
+                    return;
+                }
                 
                 if (!response.ok) {
                     const errorData = await response.json();
