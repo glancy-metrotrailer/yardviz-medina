@@ -1,5 +1,6 @@
 {
-  "trailers": [
+  "trailers": [],
+  "previousTrailerIds": [
     {
       "id": "33FB53",
       "lat": 41.14821,
@@ -955,6 +956,5 @@
       "isNew": false
     }
   ],
-  "exportDate": "2026-02-03T16:04:37.306Z",
-  "version": "2.0"
+  "timestamp": 0
 }
