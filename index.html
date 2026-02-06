@@ -1037,6 +1037,12 @@
             // Load data - GitHub first if enabled, then localStorage as fallback
             if (this.config.github.enabled) {
                 this.loadFromGitHub();
+                
+                // Auto-refresh every 2 minutes
+                setInterval(() => {
+                    console.log('🔄 Auto-refreshing data...');
+                    this.loadFromGitHub(true); // silent refresh
+                }, 2 * 60 * 1000);
             } else {
                 this.loadFromLocalStorage();
             }
@@ -1575,7 +1581,7 @@
             }
         },
         
-        async loadFromGitHub() {
+        async loadFromGitHub(silent = false) {
             const { owner, repo, path } = this.config.github;
             const token = this.getGitHubToken();
             
@@ -1588,7 +1594,7 @@
             const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
             
             try {
-                console.log('☁️ Loading data from GitHub...');
+                if (!silent) console.log('☁️ Loading data from GitHub...');
                 
                 const response = await fetch(url, {
                     headers: {
@@ -1605,7 +1611,7 @@
                 }
                 
                 if (response.status === 404) {
-                    console.log('📄 No existing data file on GitHub, starting fresh');
+                    if (!silent) console.log('📄 No existing data file on GitHub, starting fresh');
                     this.loadFromLocalStorage();
                     return;
                 }
@@ -1615,14 +1621,31 @@
                 }
                 
                 const fileData = await response.json();
+                
+                // Check if data has changed (compare SHA)
+                if (silent && this.state.githubSha === fileData.sha) {
+                    console.log('☁️ No changes detected');
+                    return;
+                }
+                
                 this.state.githubSha = fileData.sha;
                 
                 const content = atob(fileData.content);
                 const data = JSON.parse(content);
                 
                 if (data.trailers && data.trailers.length > 0) {
-                    this.state.trailers = data.trailers;
-                    this.state.filteredTrailers = [...data.trailers];
+                    // Preserve local check-in changes that haven't been synced
+                    const localCheckins = new Map();
+                    for (const t of this.state.trailers) {
+                        localCheckins.set(t.id, t.checkedIn);
+                    }
+                    
+                    this.state.trailers = data.trailers.map(t => ({
+                        ...t,
+                        // Keep local check-in status if we had it
+                        checkedIn: localCheckins.has(t.id) ? localCheckins.get(t.id) : t.checkedIn
+                    }));
+                    this.state.filteredTrailers = [...this.state.trailers];
                     this.state.previousTrailerIds = new Set(data.previousTrailerIds || data.trailers.map(t => t.id));
                     
                     // Also save to localStorage as cache
@@ -1634,13 +1657,17 @@
                     }
                     
                     console.log(`☁️ Loaded ${data.trailers.length} trailers from GitHub`);
-                    this.showToast(`Synced ${data.trailers.length} trailers from cloud`, 'success');
+                    if (!silent) {
+                        this.showToast(`Synced ${data.trailers.length} trailers from cloud`, 'success');
+                    }
                 }
             } catch (error) {
                 console.error('GitHub load error:', error);
-                console.log('📂 Falling back to localStorage');
-                this.loadFromLocalStorage();
-                this.showToast('Could not sync from cloud, using local data', 'warning');
+                if (!silent) {
+                    console.log('📂 Falling back to localStorage');
+                    this.loadFromLocalStorage();
+                    this.showToast('Could not sync from cloud, using local data', 'warning');
+                }
             }
         },
         
