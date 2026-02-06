@@ -68,7 +68,7 @@
       "lat": 41.14816,
       "lng": -81.89751,
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "5307111",
@@ -89,7 +89,7 @@
       "lat": 41.14772,
       "lng": -81.89771,
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "5308274",
@@ -117,7 +117,7 @@
       "lat": 41.14777,
       "lng": -81.89767,
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "5309607",
@@ -159,7 +159,7 @@
       "lat": 41.14727,
       "lng": -81.89672,
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "5321015",
@@ -530,7 +530,7 @@
       "lat": 41.14811,
       "lng": -81.89859,
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "568722",
@@ -593,7 +593,7 @@
       "lat": 41.14853,
       "lng": -81.89838,
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "MTRZ322434",
@@ -614,7 +614,7 @@
       "lat": 41.1481,
       "lng": -81.89755,
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "MTRZ322715",
@@ -642,7 +642,7 @@
       "lat": 41.14739,
       "lng": -81.89684,
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "MTRZ323737",
@@ -670,7 +670,7 @@
       "lat": 41.14777,
       "lng": -81.89841,
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "MTRZ562215",
@@ -684,7 +684,7 @@
       "lat": 41.14734,
       "lng": -81.89794,
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "MTRZ562496",
@@ -705,7 +705,7 @@
       "lat": 41.14777,
       "lng": -81.89772,
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "MTRZ581945",
@@ -719,7 +719,7 @@
       "lat": 41.14708,
       "lng": -81.89691,
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "MTRZ619020",
@@ -754,7 +754,7 @@
       "lat": 41.14708,
       "lng": -81.897,
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "MTRZ622519",
@@ -775,14 +775,14 @@
       "lat": 41.14722,
       "lng": -81.89793,
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "MTRZ622584",
       "lat": 41.1477,
       "lng": -81.89666,
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "MTRZ622601",
@@ -930,7 +930,7 @@
     "MTRZ622562",
     "MTRZ622584"
   ],
-  "timestamp": 1770391531177,
-  "lastModified": "2026-02-06T15:25:31.177Z",
+  "timestamp": 1770391533529,
+  "lastModified": "2026-02-06T15:25:33.529Z",
   "lastUpdateSource": "email"
 }
