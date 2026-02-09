@@ -88,7 +88,7 @@
       "id": "5308274",
       "lat": 41.14772,
       "lng": -81.89771,
-      "checkedIn": false,
+      "checkedIn": true,
       "isNew": false
     },
     {
@@ -930,6 +930,6 @@
     "MTRZ622562",
     "MTRZ622584"
   ],
-  "timestamp": 1770640656278,
-  "lastModified": "2026-02-09T12:37:36.278Z"
+  "timestamp": 1770640869936,
+  "lastModified": "2026-02-09T12:41:09.936Z"
 }
