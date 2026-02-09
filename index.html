@@ -1272,7 +1272,8 @@
             // Build set of previously known trailer IDs
             const previousIds = new Set(this.state.trailers.map(t => t.id));
             
-            const trailers = [];
+            // Use Map to deduplicate trailers by Asset ID (last entry wins)
+            const trailerMap = new Map();
             const errors = [];
             let newTrailerCount = 0;
             
@@ -1354,13 +1355,16 @@
                 } else if (previousIds.size > 0) {
                     // New trailer (not in previous data) - mark as NOT checked in
                     checkedIn = false;
-                    newTrailerCount++;
+                    if (!trailerMap.has(assetId)) {
+                        newTrailerCount++;
+                    }
                 } else {
                     // First load - default to checked in
                     checkedIn = true;
                 }
                 
-                trailers.push({
+                // Use Map to deduplicate - last entry for each ID wins
+                trailerMap.set(assetId, {
                     id: assetId,
                     lat: lat,
                     lng: lng,
@@ -1370,6 +1374,9 @@
                     isNew: !previousIds.has(assetId) && previousIds.size > 0
                 });
             }
+            
+            // Convert Map to array
+            const trailers = Array.from(trailerMap.values());
             
             if (errors.length > 0) {
                 this.showValidationErrors(errors);
