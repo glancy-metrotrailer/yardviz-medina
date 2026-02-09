@@ -87,7 +87,7 @@
       "lng": -81.8968,
       "heading": 0,
       "headingDisplay": "N",
-      "checkedIn": true,
+      "checkedIn": false,
       "isNew": false
     },
     {
@@ -1264,6 +1264,6 @@
     "MTRZ581945",
     "MTRZ582192"
   ],
-  "timestamp": 1770644674044,
-  "lastModified": "2026-02-09T13:44:34.044Z"
+  "timestamp": 1770644680229,
+  "lastModified": "2026-02-09T13:44:40.229Z"
 }
