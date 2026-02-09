@@ -641,7 +641,7 @@
       "id": "MTRZ323230",
       "lat": 41.14739,
       "lng": -81.89684,
-      "checkedIn": false,
+      "checkedIn": true,
       "isNew": false
     },
     {
@@ -930,6 +930,6 @@
     "MTRZ622562",
     "MTRZ622584"
   ],
-  "timestamp": 1770640884601,
-  "lastModified": "2026-02-09T12:41:24.601Z"
+  "timestamp": 1770641000357,
+  "lastModified": "2026-02-09T12:43:20.357Z"
 }
