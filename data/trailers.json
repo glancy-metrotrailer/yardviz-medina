@@ -87,7 +87,7 @@
       "lng": -81.8968,
       "heading": 0,
       "headingDisplay": "N",
-      "checkedIn": true,
+      "checkedIn": false,
       "isNew": false
     },
     {
@@ -97,7 +97,7 @@
       "heading": 0,
       "headingDisplay": "N",
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "5306246",
@@ -106,15 +106,6 @@
       "heading": 0,
       "headingDisplay": "N",
       "checkedIn": false,
-      "isNew": true
-    },
-    {
-      "id": "5307114",
-      "lat": 41.14736,
-      "lng": -81.89706,
-      "heading": 0,
-      "headingDisplay": "N",
-      "checkedIn": true,
       "isNew": false
     },
     {
@@ -124,7 +115,7 @@
       "heading": 0,
       "headingDisplay": "N",
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "5307114",
@@ -133,15 +124,15 @@
       "heading": 0,
       "headingDisplay": "N",
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
-      "id": "5307116",
-      "lat": 41.14798,
-      "lng": -81.89745,
+      "id": "5307114",
+      "lat": 41.14736,
+      "lng": -81.89706,
       "heading": 0,
       "headingDisplay": "N",
-      "checkedIn": true,
+      "checkedIn": false,
       "isNew": false
     },
     {
@@ -151,7 +142,7 @@
       "heading": 0,
       "headingDisplay": "N",
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "5307116",
@@ -160,15 +151,15 @@
       "heading": 0,
       "headingDisplay": "N",
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
-      "id": "5307117",
-      "lat": 41.1475,
-      "lng": -81.89677,
+      "id": "5307116",
+      "lat": 41.14798,
+      "lng": -81.89745,
       "heading": 0,
       "headingDisplay": "N",
-      "checkedIn": true,
+      "checkedIn": false,
       "isNew": false
     },
     {
@@ -178,7 +169,7 @@
       "heading": 0,
       "headingDisplay": "N",
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "5307117",
@@ -187,15 +178,15 @@
       "heading": 0,
       "headingDisplay": "N",
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
-      "id": "5308276",
-      "lat": 41.14818,
-      "lng": -81.89828,
+      "id": "5307117",
+      "lat": 41.1475,
+      "lng": -81.89677,
       "heading": 0,
       "headingDisplay": "N",
-      "checkedIn": true,
+      "checkedIn": false,
       "isNew": false
     },
     {
@@ -205,7 +196,7 @@
       "heading": 0,
       "headingDisplay": "N",
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "5308276",
@@ -214,15 +205,15 @@
       "heading": 0,
       "headingDisplay": "N",
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
-      "id": "5308278",
-      "lat": 41.14709,
-      "lng": -81.8969,
+      "id": "5308276",
+      "lat": 41.14818,
+      "lng": -81.89828,
       "heading": 0,
       "headingDisplay": "N",
-      "checkedIn": true,
+      "checkedIn": false,
       "isNew": false
     },
     {
@@ -232,7 +223,7 @@
       "heading": 0,
       "headingDisplay": "N",
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "5308278",
@@ -241,15 +232,15 @@
       "heading": 0,
       "headingDisplay": "N",
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
-      "id": "5308279",
-      "lat": 41.14701,
-      "lng": -81.897,
+      "id": "5308278",
+      "lat": 41.14709,
+      "lng": -81.8969,
       "heading": 0,
       "headingDisplay": "N",
-      "checkedIn": true,
+      "checkedIn": false,
       "isNew": false
     },
     {
@@ -259,7 +250,7 @@
       "heading": 0,
       "headingDisplay": "N",
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "5308279",
@@ -268,15 +259,15 @@
       "heading": 0,
       "headingDisplay": "N",
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
-      "id": "5308280",
-      "lat": 41.14724,
-      "lng": -81.89645,
+      "id": "5308279",
+      "lat": 41.14701,
+      "lng": -81.897,
       "heading": 0,
       "headingDisplay": "N",
-      "checkedIn": true,
+      "checkedIn": false,
       "isNew": false
     },
     {
@@ -286,7 +277,7 @@
       "heading": 0,
       "headingDisplay": "N",
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "5308280",
@@ -295,7 +286,16 @@
       "heading": 0,
       "headingDisplay": "N",
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
+    },
+    {
+      "id": "5308280",
+      "lat": 41.14724,
+      "lng": -81.89645,
+      "heading": 0,
+      "headingDisplay": "N",
+      "checkedIn": false,
+      "isNew": false
     },
     {
       "id": "5309133",
@@ -312,7 +312,7 @@
       "lng": -81.89766,
       "heading": 0,
       "headingDisplay": "N",
-      "checkedIn": true,
+      "checkedIn": false,
       "isNew": false
     },
     {
@@ -394,7 +394,7 @@
       "heading": 225,
       "headingDisplay": "SW",
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "5322123",
@@ -479,8 +479,8 @@
     },
     {
       "id": "5323257",
-      "lat": 41.14798,
-      "lng": -81.89797,
+      "lat": 41.14785,
+      "lng": -81.89816,
       "heading": 0,
       "headingDisplay": "N",
       "checkedIn": true,
@@ -569,10 +569,10 @@
     },
     {
       "id": "535262",
-      "lat": 41.14826,
-      "lng": -81.89787,
-      "heading": 180,
-      "headingDisplay": "S",
+      "lat": 41.14824,
+      "lng": -81.8978,
+      "heading": 45,
+      "headingDisplay": "NE",
       "checkedIn": true,
       "isNew": false
     },
@@ -731,8 +731,8 @@
     },
     {
       "id": "5622328",
-      "lat": 41.14775,
-      "lng": -81.89706,
+      "lat": 41.14785,
+      "lng": -81.89703,
       "heading": 0,
       "headingDisplay": "N",
       "checkedIn": true,
@@ -749,8 +749,8 @@
     },
     {
       "id": "5623816",
-      "lat": 41.14721,
-      "lng": -81.89767,
+      "lat": 41.14723,
+      "lng": -81.89771,
       "heading": 0,
       "headingDisplay": "N",
       "checkedIn": true,
@@ -781,7 +781,7 @@
       "heading": 0,
       "headingDisplay": "N",
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "5624808",
@@ -902,12 +902,12 @@
     },
     {
       "id": "94517",
-      "lat": 41.14693,
-      "lng": -81.89722,
-      "heading": 0,
-      "headingDisplay": "N",
+      "lat": 41.14697,
+      "lng": -81.89715,
+      "heading": 270,
+      "headingDisplay": "W",
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "MTRZ282289",
@@ -929,12 +929,12 @@
     },
     {
       "id": "MTRZ313078",
-      "lat": 41.14707,
-      "lng": -81.89719,
-      "heading": 270,
-      "headingDisplay": "W",
+      "lat": 41.147,
+      "lng": -81.89706,
+      "heading": 0,
+      "headingDisplay": "N",
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "MTRZ321007",
@@ -961,7 +961,7 @@
       "heading": 45,
       "headingDisplay": "NE",
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "MTRZ321295",
@@ -970,7 +970,7 @@
       "heading": 90,
       "headingDisplay": "E",
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "MTRZ322116",
@@ -979,7 +979,7 @@
       "heading": 270,
       "headingDisplay": "W",
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "MTRZ322434",
@@ -1001,17 +1001,17 @@
     },
     {
       "id": "MTRZ322571",
-      "lat": 41.14897,
-      "lng": -81.89803,
+      "lat": 41.14746,
+      "lng": -81.8978,
       "heading": 0,
       "headingDisplay": "N",
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "MTRZ322634",
-      "lat": 41.14809,
-      "lng": -81.89754,
+      "lat": 41.14814,
+      "lng": -81.89747,
       "heading": 0,
       "headingDisplay": "N",
       "checkedIn": false,
@@ -1019,8 +1019,8 @@
     },
     {
       "id": "MTRZ322715",
-      "lat": 41.14731,
-      "lng": -81.89808,
+      "lat": 41.14734,
+      "lng": -81.89812,
       "heading": 0,
       "headingDisplay": "N",
       "checkedIn": true,
@@ -1069,7 +1069,7 @@
       "heading": 0,
       "headingDisplay": "N",
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "MTRZ325002",
@@ -1154,12 +1154,12 @@
     },
     {
       "id": "MTRZ582192",
-      "lat": 41.1489,
-      "lng": -81.89801,
+      "lat": 41.14716,
+      "lng": -81.8978,
       "heading": 0,
       "headingDisplay": "N",
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     }
   ],
   "previousTrailerIds": [
@@ -1264,6 +1264,6 @@
     "MTRZ581945",
     "MTRZ582192"
   ],
-  "timestamp": 1770644822512,
-  "lastModified": "2026-02-09T13:47:02.512Z"
+  "timestamp": 1770645449255,
+  "lastModified": "2026-02-09T13:57:29.255Z"
 }
