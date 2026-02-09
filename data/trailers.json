@@ -16,7 +16,7 @@
       "heading": 135,
       "headingDisplay": "SE",
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "5309607",
@@ -43,7 +43,7 @@
       "heading": 0,
       "headingDisplay": "N",
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "MTRZ581945",
@@ -61,7 +61,7 @@
       "heading": 0,
       "headingDisplay": "N",
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "5626788",
@@ -71,6 +71,15 @@
       "headingDisplay": "W",
       "checkedIn": true,
       "isNew": false
+    },
+    {
+      "id": "5321353",
+      "lat": 41.14785,
+      "lng": -81.8978,
+      "heading": 0,
+      "headingDisplay": "N",
+      "checkedIn": false,
+      "isNew": true
     },
     {
       "id": "5323194",
@@ -169,7 +178,7 @@
       "heading": 0,
       "headingDisplay": "N",
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "MTRZ322571",
@@ -196,7 +205,7 @@
       "heading": 0,
       "headingDisplay": "N",
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "MTRZ585180",
@@ -205,7 +214,7 @@
       "heading": 135,
       "headingDisplay": "SE",
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "562494",
@@ -316,13 +325,22 @@
       "isNew": false
     },
     {
+      "id": "MTRZ321347",
+      "lat": 41.14809,
+      "lng": -81.89799,
+      "heading": 0,
+      "headingDisplay": "N",
+      "checkedIn": false,
+      "isNew": true
+    },
+    {
       "id": "MTRZ622601",
       "lat": 41.14738,
       "lng": -81.89803,
       "heading": 315,
       "headingDisplay": "NW",
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "MTRZ622531",
@@ -331,7 +349,7 @@
       "heading": 0,
       "headingDisplay": "N",
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "5321828",
@@ -403,7 +421,7 @@
       "heading": 0,
       "headingDisplay": "N",
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "53C2415",
@@ -457,7 +475,7 @@
       "heading": 315,
       "headingDisplay": "NW",
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "568722",
@@ -467,6 +485,15 @@
       "headingDisplay": "N",
       "checkedIn": true,
       "isNew": false
+    },
+    {
+      "id": "MTRZ321624",
+      "lat": 41.14748,
+      "lng": -81.89824,
+      "heading": 0,
+      "headingDisplay": "N",
+      "checkedIn": false,
+      "isNew": true
     },
     {
       "id": "MTRZ324225",
@@ -493,7 +520,7 @@
       "heading": 0,
       "headingDisplay": "N",
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "78902",
@@ -529,7 +556,7 @@
       "heading": 45,
       "headingDisplay": "NE",
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "535029",
@@ -556,7 +583,7 @@
       "heading": 90,
       "headingDisplay": "E",
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "MTRZ582192",
@@ -574,7 +601,7 @@
       "heading": 315,
       "headingDisplay": "NW",
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "33FB53",
@@ -610,7 +637,7 @@
       "heading": 315,
       "headingDisplay": "NW",
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "5322475",
@@ -637,7 +664,7 @@
       "heading": 0,
       "headingDisplay": "N",
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "MTRZ323187",
@@ -691,7 +718,7 @@
       "heading": 315,
       "headingDisplay": "NW",
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "5306246",
@@ -709,7 +736,7 @@
       "heading": 0,
       "headingDisplay": "N",
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "5623841",
@@ -719,6 +746,15 @@
       "headingDisplay": "N",
       "checkedIn": true,
       "isNew": false
+    },
+    {
+      "id": "53226745322674",
+      "lat": 41.14705,
+      "lng": -81.89766,
+      "heading": 90,
+      "headingDisplay": "E",
+      "checkedIn": false,
+      "isNew": true
     },
     {
       "id": "5307117",
@@ -748,6 +784,15 @@
       "isNew": false
     },
     {
+      "id": "MTRZ622584",
+      "lat": 41.14765,
+      "lng": -81.89669,
+      "heading": 0,
+      "headingDisplay": "N",
+      "checkedIn": false,
+      "isNew": false
+    },
+    {
       "id": "MTRZ321214",
       "lat": 41.14771,
       "lng": -81.89857,
@@ -764,15 +809,6 @@
       "headingDisplay": "W",
       "checkedIn": true,
       "isNew": false
-    },
-    {
-      "id": "MTRZ622584",
-      "lat": 41.14769,
-      "lng": -81.89667,
-      "heading": 0,
-      "headingDisplay": "N",
-      "checkedIn": false,
-      "isNew": true
     },
     {
       "id": "5624849",
@@ -826,7 +862,7 @@
       "heading": 0,
       "headingDisplay": "N",
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "5622534",
@@ -853,7 +889,7 @@
       "heading": 0,
       "headingDisplay": "N",
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "MTRZ323172",
@@ -982,6 +1018,15 @@
       "isNew": false
     },
     {
+      "id": "MTRZ582110",
+      "lat": 41.14708,
+      "lng": -81.89691,
+      "heading": 0,
+      "headingDisplay": "N",
+      "checkedIn": false,
+      "isNew": true
+    },
+    {
       "id": "5322708",
       "lat": 41.14708,
       "lng": -81.89691,
@@ -1024,7 +1069,7 @@
       "heading": 0,
       "headingDisplay": "N",
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "5520004",
@@ -1042,7 +1087,7 @@
       "heading": 0,
       "headingDisplay": "N",
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "MTRZ622578",
@@ -1051,7 +1096,7 @@
       "heading": 0,
       "headingDisplay": "N",
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "MTRZ622293",
@@ -1060,7 +1105,7 @@
       "heading": 0,
       "headingDisplay": "N",
       "checkedIn": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "5323236",
@@ -1078,6 +1123,15 @@
       "heading": 45,
       "headingDisplay": "NE",
       "checkedIn": false,
+      "isNew": false
+    },
+    {
+      "id": "MTRZ321341",
+      "lat": 41.14853,
+      "lng": -81.89838,
+      "heading": 180,
+      "headingDisplay": "S",
+      "checkedIn": false,
       "isNew": true
     },
     {
@@ -1088,6 +1142,15 @@
       "headingDisplay": "N",
       "checkedIn": true,
       "isNew": false
+    },
+    {
+      "id": "587706",
+      "lat": 41.14677,
+      "lng": -81.89731,
+      "heading": 0,
+      "headingDisplay": "N",
+      "checkedIn": false,
+      "isNew": true
     },
     {
       "id": "5308280",
@@ -1144,6 +1207,7 @@
     "MTRZ581945",
     "MTRZ625077",
     "5626788",
+    "5321353",
     "5323194",
     "5317844",
     "5620450",
@@ -1171,6 +1235,7 @@
     "MTRZ322634",
     "48A2331",
     "MTRZ562475",
+    "MTRZ321347",
     "MTRZ622601",
     "MTRZ622531",
     "5321828",
@@ -1188,6 +1253,7 @@
     "MTRZ325002",
     "MTRZ622519",
     "568722",
+    "MTRZ321624",
     "MTRZ324225",
     "5322123",
     "MTRZ621374",
@@ -1216,12 +1282,13 @@
     "5306246",
     "MTRZ622501",
     "5623841",
+    "53226745322674",
     "5307117",
     "MTRZ562496",
     "MTRZ569511",
+    "MTRZ622584",
     "MTRZ321214",
     "5617853",
-    "MTRZ622584",
     "5624849",
     "48A2203",
     "5322010",
@@ -1245,6 +1312,7 @@
     "5308278",
     "MTRZ323230",
     "94517",
+    "MTRZ582110",
     "5322708",
     "MTRZ313078",
     "5624965",
@@ -1256,13 +1324,15 @@
     "MTRZ622293",
     "5323236",
     "MTRZ624338",
+    "MTRZ321341",
     "5323259",
+    "587706",
     "5308280",
     "MTRZ322434",
     "MTRZ520078",
     "481839LG",
     "48F923"
   ],
-  "timestamp": 1770646717896,
-  "lastModified": "2026-02-09T14:18:37.896Z"
+  "timestamp": 1770647525792,
+  "lastModified": "2026-02-09T14:32:05.792Z"
 }
