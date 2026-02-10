@@ -1276,30 +1276,34 @@
             this.showLoading(true);
             
             try {
-                // Call Power Automate flow using no-cors mode
-                await fetch(this.config.powerAutomate.pickupFlowUrl, {
+                // Call Power Automate flow
+                const response = await fetch(this.config.powerAutomate.pickupFlowUrl, {
                     method: 'POST',
-                    mode: 'no-cors',
                     headers: { 
-                        'Content-Type': 'text/plain'
+                        'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({ assetId: trailerId })
                 });
                 
-                // With no-cors, we can't read the response, so assume success
-                // Update local state
-                trailer.pickedUp = true;
-                
-                this.saveToLocalStorage();
-                this.applyFilters();
-                this.renderTrailersOnMap();
-                
-                // Update popup if open
-                if (this.state.selectedTrailerId === trailerId) {
-                    this.showTrailerPopup(trailer);
+                if (response.ok || response.status === 202) {
+                    // Update local state
+                    trailer.pickedUp = true;
+                    
+                    this.saveToLocalStorage();
+                    this.applyFilters();
+                    this.renderTrailersOnMap();
+                    
+                    // Update popup if open
+                    if (this.state.selectedTrailerId === trailerId) {
+                        this.showTrailerPopup(trailer);
+                    }
+                    
+                    this.showToast(`Trailer ${trailerId} marked as picked up`, 'success');
+                } else {
+                    const errorText = await response.text();
+                    console.error('Flow error response:', errorText);
+                    throw new Error(`Flow returned status ${response.status}`);
                 }
-                
-                this.showToast(`Trailer ${trailerId} marked as picked up`, 'success');
             } catch (error) {
                 console.error('Pickup error:', error);
                 this.showToast('Failed to update Excel. Please try again.', 'error');
@@ -1315,30 +1319,34 @@
             this.showLoading(true);
             
             try {
-                // Call Power Automate flow using no-cors mode
-                await fetch(this.config.powerAutomate.dropoffFlowUrl, {
+                // Call Power Automate flow
+                const response = await fetch(this.config.powerAutomate.dropoffFlowUrl, {
                     method: 'POST',
-                    mode: 'no-cors',
                     headers: { 
-                        'Content-Type': 'text/plain'
+                        'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({ assetId: trailerId })
                 });
                 
-                // With no-cors, we can't read the response, so assume success
-                // Update local state
-                trailer.pickedUp = false;
-                
-                this.saveToLocalStorage();
-                this.applyFilters();
-                this.renderTrailersOnMap();
-                
-                // Update popup if open
-                if (this.state.selectedTrailerId === trailerId) {
-                    this.showTrailerPopup(trailer);
+                if (response.ok || response.status === 202) {
+                    // Update local state
+                    trailer.pickedUp = false;
+                    
+                    this.saveToLocalStorage();
+                    this.applyFilters();
+                    this.renderTrailersOnMap();
+                    
+                    // Update popup if open
+                    if (this.state.selectedTrailerId === trailerId) {
+                        this.showTrailerPopup(trailer);
+                    }
+                    
+                    this.showToast(`Trailer ${trailerId} marked as dropped off`, 'success');
+                } else {
+                    const errorText = await response.text();
+                    console.error('Flow error response:', errorText);
+                    throw new Error(`Flow returned status ${response.status}`);
                 }
-                
-                this.showToast(`Trailer ${trailerId} marked as dropped off`, 'success');
             } catch (error) {
                 console.error('Dropoff error:', error);
                 this.showToast('Failed to update Excel. Please try again.', 'error');
@@ -1923,16 +1931,19 @@
         
         async addToExcel(trailerId) {
             try {
-                await fetch(this.config.powerAutomate.dropoffFlowUrl, {
+                const response = await fetch(this.config.powerAutomate.dropoffFlowUrl, {
                     method: 'POST',
-                    mode: 'no-cors',
                     headers: { 
-                        'Content-Type': 'text/plain'
+                        'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({ assetId: trailerId })
                 });
                 
-                console.log(`Added ${trailerId} to Excel`);
+                if (response.ok || response.status === 202) {
+                    console.log(`Added ${trailerId} to Excel`);
+                } else {
+                    console.error(`Failed to add ${trailerId} to Excel: ${response.status}`);
+                }
             } catch (error) {
                 console.error('Error adding to Excel:', error);
             }
