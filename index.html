@@ -359,6 +359,19 @@
             color: var(--accent-danger);
         }
         
+        .stat-card.warning {
+            background: #fff3e0;
+            border-color: #f57c00;
+        }
+        
+        [data-theme="dark"] .stat-card.warning {
+            background: #2e2518;
+        }
+        
+        .stat-card.warning .stat-value {
+            color: #f57c00;
+        }
+        
         .search-container { position: relative; }
         
         .search-input {
@@ -455,6 +468,147 @@
         
         [data-theme="dark"] .trailer-icon.status-notcheckedin {
             background: #2e1a1a;
+        }
+        
+        .trailer-icon.status-pickedup {
+            background: #fff3e0;
+            color: #f57c00;
+        }
+        
+        [data-theme="dark"] .trailer-icon.status-pickedup {
+            background: #2e2518;
+        }
+        
+        .trailer-item.picked-up {
+            opacity: 0.8;
+            border-left: 3px solid #f57c00;
+        }
+        
+        /* Action buttons */
+        .trailer-actions {
+            display: flex;
+            gap: 0.25rem;
+            margin-left: auto;
+        }
+        
+        .btn-pickup {
+            background: var(--accent-success);
+            color: white;
+            border: none;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.65rem;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .btn-pickup:hover {
+            background: #16a34a;
+        }
+        
+        .btn-dropoff {
+            background: #f59e0b;
+            color: white;
+            border: none;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.65rem;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .btn-dropoff:hover {
+            background: #d97706;
+        }
+        
+        /* Filter dropdown */
+        .filter-section {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .filter-select {
+            flex: 1;
+            padding: 0.4rem 0.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: 0.75rem;
+            font-family: inherit;
+        }
+        
+        /* Confirmation modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-overlay.visible {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 1.5rem;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .modal-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+        
+        .modal-message {
+            color: var(--text-secondary);
+            margin-bottom: 1.25rem;
+            font-size: 0.9rem;
+        }
+        
+        .modal-buttons {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: flex-end;
+        }
+        
+        .modal-btn {
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .modal-btn-cancel {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+        }
+        
+        .modal-btn-confirm {
+            background: var(--accent-primary);
+            color: white;
+        }
+        
+        .modal-btn-confirm.pickup {
+            background: var(--accent-success);
+        }
+        
+        .modal-btn-confirm.dropoff {
+            background: #f59e0b;
         }
         
         .trailer-info { flex: 1; min-width: 0; }
@@ -904,11 +1058,7 @@
                 <div class="stats-grid">
                     <div class="stat-card">
                         <div class="stat-value" id="statTrailers">0</div>
-                        <div class="stat-label">Total Trailers</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value" id="statNew">0</div>
-                        <div class="stat-label">New Today</div>
+                        <div class="stat-label">Total</div>
                     </div>
                     <div class="stat-card success">
                         <div class="stat-value" id="statCheckedIn">0</div>
@@ -916,7 +1066,11 @@
                     </div>
                     <div class="stat-card danger">
                         <div class="stat-value" id="statNotCheckedIn">0</div>
-                        <div class="stat-label">Not Checked In</div>
+                        <div class="stat-label">Not Checked</div>
+                    </div>
+                    <div class="stat-card warning">
+                        <div class="stat-value" id="statPickedUp">0</div>
+                        <div class="stat-label">Picked Up</div>
                     </div>
                 </div>
             </div>
@@ -926,6 +1080,15 @@
                 <div class="search-container">
                     <span class="search-icon">🔍</span>
                     <input type="text" class="search-input" id="searchInput" placeholder="Search by Asset ID..." oninput="app.filterTrailers(event)">
+                </div>
+                <div class="filter-section">
+                    <select class="filter-select" id="filterSelect" onchange="app.setFilterMode(this.value)">
+                        <option value="all">All Trailers</option>
+                        <option value="checkedIn">Checked In</option>
+                        <option value="notCheckedIn">Not Checked In</option>
+                        <option value="pickedUp">Picked Up</option>
+                        <option value="onSite">On-Site (Not Picked Up)</option>
+                    </select>
                 </div>
                 <div class="bulk-actions">
                     <button class="btn btn-secondary" onclick="app.checkInAll()">✓ Check In All</button>
@@ -972,6 +1135,18 @@
     
     <div class="toast-container" id="toastContainer"></div>
     
+    <!-- Confirmation Modal -->
+    <div class="modal-overlay" id="confirmModal">
+        <div class="modal-content">
+            <div class="modal-title" id="modalTitle">Confirm Action</div>
+            <div class="modal-message" id="modalMessage">Are you sure?</div>
+            <div class="modal-buttons">
+                <button class="modal-btn modal-btn-cancel" onclick="app.closeModal()">Cancel</button>
+                <button class="modal-btn modal-btn-confirm" id="modalConfirmBtn" onclick="app.confirmModalAction()">Confirm</button>
+            </div>
+        </div>
+    </div>
+    
     <script>
     const app = {
         config: {
@@ -989,6 +1164,14 @@
                 repo: 'yardviz-medina',
                 path: 'data/trailers.json',
                 token: null  // Token entered by user at runtime (stored in localStorage)
+            },
+            
+            // =====================================================
+            // POWER AUTOMATE FLOW URLs
+            // =====================================================
+            powerAutomate: {
+                pickupFlowUrl: 'https://default8417a2420313412ca062453303f8f4.fd.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/6739188d34af4ab2ac5ab12de31ac0ce/triggers/manual/paths/invoke?api-version=1',
+                dropoffFlowUrl: 'https://default8417a2420313412ca062453303f8f4.fd.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/697aa3ff842048d585932a53ec765d2b/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=5u5sALfQmGdWDY6_eFlRc0zpxIpcm0okL4a-HhIXcYw'
             }
             // =====================================================
         },
@@ -1001,7 +1184,8 @@
             selectedTrailerId: null,
             currentPopup: null,
             githubSha: null,
-            isSyncing: false
+            isSyncing: false,
+            filterMode: 'all'  // all, checkedIn, notCheckedIn, pickedUp, onSite
         },
         
         // Get GitHub token from localStorage or prompt user
@@ -1019,6 +1203,182 @@
         clearGitHubToken() {
             localStorage.removeItem('yardviz_github_token');
             this.showToast('GitHub token cleared', 'success');
+        },
+        
+        // Modal state
+        modalState: {
+            action: null,
+            trailerId: null
+        },
+        
+        showModal(title, message, action, trailerId, buttonClass) {
+            this.modalState.action = action;
+            this.modalState.trailerId = trailerId;
+            
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalMessage').textContent = message;
+            
+            const confirmBtn = document.getElementById('modalConfirmBtn');
+            confirmBtn.className = 'modal-btn modal-btn-confirm ' + (buttonClass || '');
+            confirmBtn.textContent = action === 'pickup' ? 'Picked Up' : 'Dropped Off';
+            
+            document.getElementById('confirmModal').classList.add('visible');
+        },
+        
+        closeModal() {
+            document.getElementById('confirmModal').classList.remove('visible');
+            this.modalState.action = null;
+            this.modalState.trailerId = null;
+        },
+        
+        async confirmModalAction() {
+            const { action, trailerId } = this.modalState;
+            this.closeModal();
+            
+            if (action === 'pickup') {
+                await this.executePickup(trailerId);
+            } else if (action === 'dropoff') {
+                await this.executeDropoff(trailerId);
+            }
+        },
+        
+        // Pickup/Dropoff actions
+        promptPickup(trailerId) {
+            const trailer = this.state.trailers.find(t => t.id === trailerId);
+            if (!trailer) return;
+            
+            this.showModal(
+                'Confirm Pickup',
+                `Mark trailer "${trailerId}" as picked up? This will remove it from the Excel inventory.`,
+                'pickup',
+                trailerId,
+                'pickup'
+            );
+        },
+        
+        promptDropoff(trailerId) {
+            const trailer = this.state.trailers.find(t => t.id === trailerId);
+            if (!trailer) return;
+            
+            this.showModal(
+                'Confirm Drop-off',
+                `Mark trailer "${trailerId}" as dropped off? This will add it back to the Excel inventory.`,
+                'dropoff',
+                trailerId,
+                'dropoff'
+            );
+        },
+        
+        async executePickup(trailerId) {
+            const trailer = this.state.trailers.find(t => t.id === trailerId);
+            if (!trailer) return;
+            
+            this.showLoading(true);
+            
+            try {
+                // Call Power Automate flow
+                const response = await fetch(this.config.powerAutomate.pickupFlowUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ assetId: trailerId })
+                });
+                
+                if (response.ok || response.status === 202) {
+                    // Update local state
+                    trailer.pickedUp = true;
+                    
+                    this.saveToLocalStorage();
+                    this.applyFilters();
+                    this.renderTrailersOnMap();
+                    
+                    // Update popup if open
+                    if (this.state.selectedTrailerId === trailerId) {
+                        this.showTrailerPopup(trailer);
+                    }
+                    
+                    this.showToast(`Trailer ${trailerId} marked as picked up`, 'success');
+                } else {
+                    throw new Error(`Flow returned status ${response.status}`);
+                }
+            } catch (error) {
+                console.error('Pickup error:', error);
+                this.showToast('Failed to update Excel. Please try again.', 'error');
+            } finally {
+                this.showLoading(false);
+            }
+        },
+        
+        async executeDropoff(trailerId) {
+            const trailer = this.state.trailers.find(t => t.id === trailerId);
+            if (!trailer) return;
+            
+            this.showLoading(true);
+            
+            try {
+                // Call Power Automate flow
+                const response = await fetch(this.config.powerAutomate.dropoffFlowUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ assetId: trailerId })
+                });
+                
+                if (response.ok || response.status === 202) {
+                    // Update local state
+                    trailer.pickedUp = false;
+                    
+                    this.saveToLocalStorage();
+                    this.applyFilters();
+                    this.renderTrailersOnMap();
+                    
+                    // Update popup if open
+                    if (this.state.selectedTrailerId === trailerId) {
+                        this.showTrailerPopup(trailer);
+                    }
+                    
+                    this.showToast(`Trailer ${trailerId} marked as dropped off`, 'success');
+                } else {
+                    throw new Error(`Flow returned status ${response.status}`);
+                }
+            } catch (error) {
+                console.error('Dropoff error:', error);
+                this.showToast('Failed to update Excel. Please try again.', 'error');
+            } finally {
+                this.showLoading(false);
+            }
+        },
+        
+        // Filter functions
+        setFilterMode(mode) {
+            this.state.filterMode = mode;
+            this.applyFilters();
+        },
+        
+        applyFilters() {
+            const searchTerm = document.getElementById('searchInput')?.value.toLowerCase() || '';
+            const filterMode = this.state.filterMode;
+            
+            this.state.filteredTrailers = this.state.trailers.filter(trailer => {
+                // Search filter
+                if (searchTerm && !trailer.id.toLowerCase().includes(searchTerm)) {
+                    return false;
+                }
+                
+                // Status filter
+                switch (filterMode) {
+                    case 'checkedIn':
+                        return trailer.checkedIn && !trailer.pickedUp;
+                    case 'notCheckedIn':
+                        return !trailer.checkedIn && !trailer.pickedUp;
+                    case 'pickedUp':
+                        return trailer.pickedUp;
+                    case 'onSite':
+                        return !trailer.pickedUp;
+                    default:
+                        return true;
+                }
+            });
+            
+            this.renderTrailerList();
         },
         
         mapStyles: {
@@ -1131,7 +1491,8 @@
         createTrailerImages() {
             const colors = {
                 checkedin: '#22c55e',      // green - Checked In
-                notcheckedin: '#ef4444'    // red - Not Checked In
+                notcheckedin: '#ef4444',   // red - Not Checked In
+                pickedup: '#f57c00'        // orange - Picked Up
             };
             
             Object.entries(colors).forEach(([status, color]) => {
@@ -1427,20 +1788,32 @@
             }
             
             // Create features
-            const features = this.state.trailers.map(trailer => ({
-                type: 'Feature',
-                properties: {
-                    id: trailer.id,
-                    status: trailer.checkedIn ? 'checkedin' : 'notcheckedin',
-                    lat: trailer.lat,
-                    lng: trailer.lng,
-                    checkedIn: trailer.checkedIn
-                },
-                geometry: {
-                    type: 'Point',
-                    coordinates: [trailer.lng, trailer.lat]
+            const features = this.state.trailers.map(trailer => {
+                let status;
+                if (trailer.pickedUp) {
+                    status = 'pickedup';
+                } else if (trailer.checkedIn) {
+                    status = 'checkedin';
+                } else {
+                    status = 'notcheckedin';
                 }
-            }));
+                
+                return {
+                    type: 'Feature',
+                    properties: {
+                        id: trailer.id,
+                        status: status,
+                        lat: trailer.lat,
+                        lng: trailer.lng,
+                        checkedIn: trailer.checkedIn,
+                        pickedUp: trailer.pickedUp || false
+                    },
+                    geometry: {
+                        type: 'Point',
+                        coordinates: [trailer.lng, trailer.lat]
+                    }
+                };
+            });
             
             // Add source
             this.state.map.addSource('trailers', {
@@ -1512,11 +1885,17 @@
             
             const trailer = this.state.trailers.find(t => t.id === trailerId);
             if (trailer) {
+                const wasCheckedIn = trailer.checkedIn;
                 trailer.checkedIn = !trailer.checkedIn;
                 trailer.isNew = false;  // Clear new flag when manually toggled
                 
+                // If checking in (not already checked in), add to Excel
+                if (!wasCheckedIn && trailer.checkedIn) {
+                    this.addToExcel(trailerId);
+                }
+                
                 this.saveToLocalStorage();
-                this.renderTrailerList();
+                this.applyFilters();
                 this.renderTrailersOnMap();
             }
         },
@@ -1524,15 +1903,39 @@
         toggleCheckedInFromPopup(trailerId, isChecked) {
             const trailer = this.state.trailers.find(t => t.id === trailerId);
             if (trailer) {
+                const wasCheckedIn = trailer.checkedIn;
                 trailer.checkedIn = isChecked;
                 trailer.isNew = false;
                 
+                // If checking in (not already checked in), add to Excel
+                if (!wasCheckedIn && isChecked) {
+                    this.addToExcel(trailerId);
+                }
+                
                 this.saveToLocalStorage();
-                this.renderTrailerList();
+                this.applyFilters();
                 this.renderTrailersOnMap();
                 
                 // Re-show the popup with updated status
                 this.showTrailerPopup(trailer);
+            }
+        },
+        
+        async addToExcel(trailerId) {
+            try {
+                const response = await fetch(this.config.powerAutomate.dropoffFlowUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ assetId: trailerId })
+                });
+                
+                if (response.ok || response.status === 202) {
+                    console.log(`Added ${trailerId} to Excel`);
+                } else {
+                    console.error(`Failed to add ${trailerId} to Excel: ${response.status}`);
+                }
+            } catch (error) {
+                console.error('Error adding to Excel:', error);
             }
         },
         
@@ -1804,36 +2207,36 @@
             
             emptyState.style.display = 'none';
             
-            container.innerHTML = trailers.map(trailer => `
-                <div class="trailer-item ${this.state.selectedTrailerId === trailer.id ? 'active' : ''}" 
+            container.innerHTML = trailers.map(trailer => {
+                const statusClass = trailer.pickedUp ? 'pickedup' : (trailer.checkedIn ? 'checkedin' : 'notcheckedin');
+                const pickedUpClass = trailer.pickedUp ? 'picked-up' : '';
+                
+                return `
+                <div class="trailer-item ${this.state.selectedTrailerId === trailer.id ? 'active' : ''} ${pickedUpClass}" 
                      onclick="app.selectTrailer('${trailer.id}')">
-                    <div class="trailer-icon status-${trailer.checkedIn ? 'checkedin' : 'notcheckedin'}">🚛</div>
+                    <div class="trailer-icon status-${statusClass}">🚛</div>
                     <div class="trailer-info">
-                        <div class="trailer-id">${trailer.id}${trailer.isNew ? ' 🆕' : ''}</div>
+                        <div class="trailer-id">${trailer.id}${trailer.isNew ? ' 🆕' : ''}${trailer.pickedUp ? ' 📤' : ''}</div>
                     </div>
                     <label class="checkin-toggle" onclick="event.stopPropagation()">
                         <input type="checkbox" ${trailer.checkedIn ? 'checked' : ''} 
                                onchange="app.toggleCheckedIn('${trailer.id}', event)">
                         <span class="checkin-slider"></span>
                     </label>
+                    <div class="trailer-actions" onclick="event.stopPropagation()">
+                        ${trailer.pickedUp 
+                            ? `<button class="btn-dropoff" onclick="app.promptDropoff('${trailer.id}')">Drop Off</button>`
+                            : `<button class="btn-pickup" onclick="app.promptPickup('${trailer.id}')">Picked Up</button>`
+                        }
+                    </div>
                 </div>
-            `).join('');
+            `}).join('');
             
             this.updateStats();
         },
         
         filterTrailers(event) {
-            const query = event.target.value.toLowerCase().trim();
-            
-            if (!query) {
-                this.state.filteredTrailers = [...this.state.trailers];
-            } else {
-                this.state.filteredTrailers = this.state.trailers.filter(t => 
-                    t.id.toLowerCase().includes(query)
-                );
-            }
-            
-            this.renderTrailerList();
+            this.applyFilters();
         },
         
         selectTrailer(trailerId) {
@@ -1857,8 +2260,21 @@
                 this.state.currentPopup.remove();
             }
             
-            const statusColor = trailer.checkedIn ? '#22c55e' : '#ef4444';
-            const statusText = trailer.checkedIn ? 'CHECKED IN' : 'NOT CHECKED IN';
+            let statusColor, statusText;
+            if (trailer.pickedUp) {
+                statusColor = '#f57c00';
+                statusText = 'PICKED UP';
+            } else if (trailer.checkedIn) {
+                statusColor = '#22c55e';
+                statusText = 'CHECKED IN';
+            } else {
+                statusColor = '#ef4444';
+                statusText = 'NOT CHECKED IN';
+            }
+            
+            const actionButton = trailer.pickedUp
+                ? `<button class="btn-dropoff" style="width:100%; margin-top:8px;" onclick="app.promptDropoff('${trailer.id}')">🔽 Drop Off</button>`
+                : `<button class="btn-pickup" style="width:100%; margin-top:8px;" onclick="app.promptPickup('${trailer.id}')">📤 Picked Up</button>`;
             
             const popupContent = `
                 <div class="popup-header">
@@ -1885,6 +2301,7 @@
                     <span class="popup-label">Longitude</span>
                     <span class="popup-value">${trailer.lng.toFixed(6)}</span>
                 </div>
+                ${actionButton}
             `;
             
             this.state.currentPopup = new maplibregl.Popup({
@@ -1899,14 +2316,15 @@
         
         updateStats() {
             const trailers = this.state.trailers;
-            const checkedIn = trailers.filter(t => t.checkedIn).length;
-            const notCheckedIn = trailers.filter(t => !t.checkedIn).length;
-            const newToday = trailers.filter(t => t.isNew).length;
+            const pickedUp = trailers.filter(t => t.pickedUp).length;
+            const onSite = trailers.filter(t => !t.pickedUp);
+            const checkedIn = onSite.filter(t => t.checkedIn).length;
+            const notCheckedIn = onSite.filter(t => !t.checkedIn).length;
             
             document.getElementById('statTrailers').textContent = trailers.length;
-            document.getElementById('statNew').textContent = newToday;
             document.getElementById('statCheckedIn').textContent = checkedIn;
             document.getElementById('statNotCheckedIn').textContent = notCheckedIn;
+            document.getElementById('statPickedUp').textContent = pickedUp;
         },
         
         zoomIn() { this.state.map.zoomIn(); },
