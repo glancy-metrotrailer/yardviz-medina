@@ -45,7 +45,7 @@
       "headingDisplay": "E",
       "checkedIn": false,
       "isNew": false,
-      "pickedUp": true
+      "pickedUp": false
     },
     {
       "id": "5317844",
@@ -1007,6 +1007,6 @@
     "562492",
     "5450069"
   ],
-  "timestamp": 1770909907274,
-  "lastModified": "2026-02-12T15:25:07.274Z"
+  "timestamp": 1770909915339,
+  "lastModified": "2026-02-12T15:25:15.339Z"
 }
