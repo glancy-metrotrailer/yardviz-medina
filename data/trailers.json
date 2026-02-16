@@ -294,7 +294,7 @@
       "lng": -81.89751,
       "heading": 0,
       "headingDisplay": "N",
-      "checkedIn": false,
+      "checkedIn": true,
       "isNew": false
     },
     {
@@ -1153,6 +1153,6 @@
     "5321828",
     "48F923"
   ],
-  "timestamp": 1771254323172,
-  "lastModified": "2026-02-16T15:05:23.172Z"
+  "timestamp": 1771254385019,
+  "lastModified": "2026-02-16T15:06:25.019Z"
 }
