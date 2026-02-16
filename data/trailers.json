@@ -7,7 +7,8 @@
       "heading": 0,
       "headingDisplay": "N",
       "checkedIn": true,
-      "isNew": false
+      "isNew": false,
+      "pickedUp": true
     },
     {
       "id": "MTRZ621803",
@@ -1173,6 +1174,6 @@
     "48F923",
     "5321828"
   ],
-  "timestamp": 1771000394700,
-  "lastModified": "2026-02-13T16:33:14.700Z"
+  "timestamp": 1771247466749,
+  "lastModified": "2026-02-16T13:11:06.749Z"
 }
