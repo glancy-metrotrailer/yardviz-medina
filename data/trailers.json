@@ -861,8 +861,8 @@
       "lng": -81.89628,
       "heading": 0,
       "headingDisplay": "N",
-      "checkedIn": false,
-      "isNew": true
+      "checkedIn": true,
+      "isNew": false
     },
     {
       "id": "48C2448",
@@ -1013,6 +1013,6 @@
     "48F923",
     "5321828"
   ],
-  "timestamp": 1771505628094,
-  "lastModified": "2026-02-19T12:53:48.094Z"
+  "timestamp": 1771505661798,
+  "lastModified": "2026-02-19T12:54:21.798Z"
 }
