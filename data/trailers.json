@@ -627,8 +627,8 @@
       "lng": -81.89747,
       "heading": 180,
       "headingDisplay": "S",
-      "checkedIn": false,
-      "isNew": true
+      "checkedIn": true,
+      "isNew": false
     },
     {
       "id": "5617888",
@@ -863,6 +863,6 @@
     "MTRZ621046",
     "48F923"
   ],
-  "timestamp": 1771857616420,
-  "lastModified": "2026-02-23T14:40:16.420Z"
+  "timestamp": 1771857723316,
+  "lastModified": "2026-02-23T14:42:03.316Z"
 }
