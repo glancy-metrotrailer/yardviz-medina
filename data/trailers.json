@@ -95,7 +95,7 @@
       "lat": 41.14797,
       "lng": -81.89719,
       "mtsn": "SHB8AJBL240238265",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
       "isNew": false
     },
@@ -843,6 +843,6 @@
     "T2129",
     "T4352"
   ],
-  "timestamp": 1772214853922,
-  "lastModified": "2026-02-27T17:54:13.922Z"
+  "timestamp": 1772214857396,
+  "lastModified": "2026-02-27T17:54:17.396Z"
 }
