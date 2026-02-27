@@ -320,7 +320,7 @@
       "lat": 41.14676,
       "lng": -81.89723,
       "mtsn": "SVE5BLAG214909852",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
       "isNew": false
     },
@@ -843,6 +843,6 @@
     "T2129",
     "T4352"
   ],
-  "timestamp": 1772215112033,
-  "lastModified": "2026-02-27T17:58:32.033Z"
+  "timestamp": 1772215154895,
+  "lastModified": "2026-02-27T17:59:14.895Z"
 }
