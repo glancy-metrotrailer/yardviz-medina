@@ -2286,6 +2286,13 @@
                 ? `<button class="btn-dropoff" style="width:100%; margin-top:8px;" onclick="app.promptDropoff('${trailer.id}')">🔽 Drop Off</button>`
                 : `<button class="btn-pickup" style="width:100%; margin-top:8px;" onclick="app.promptPickup('${trailer.id}')">📤 Picked Up</button>`;
             
+            const mtsnRow = trailer.mtsn 
+                ? `<div class="popup-row">
+                    <span class="popup-label">MTSN</span>
+                    <span class="popup-value" style="font-size: 0.75rem;">${trailer.mtsn}</span>
+                   </div>`
+                : '';
+            
             const popupContent = `
                 <div class="popup-header">
                     <span class="popup-icon">🚛</span>
@@ -2303,6 +2310,7 @@
                         <span class="checkin-slider"></span>
                     </label>
                 </div>
+                ${mtsnRow}
                 <div class="popup-row">
                     <span class="popup-label">Latitude</span>
                     <span class="popup-value">${trailer.lat.toFixed(6)}</span>
