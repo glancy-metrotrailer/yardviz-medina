@@ -167,7 +167,7 @@
       "lat": 41.14747,
       "lng": -81.89785,
       "mtsn": "GXL5ELAG203617139",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
       "isNew": false
     },
@@ -853,6 +853,6 @@
     "T2129",
     "T4352"
   ],
-  "timestamp": 1772217699122,
-  "lastModified": "2026-02-27T18:41:39.122Z"
+  "timestamp": 1772217721470,
+  "lastModified": "2026-02-27T18:42:01.470Z"
 }
