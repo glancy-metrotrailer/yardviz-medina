@@ -611,6 +611,141 @@
             background: #f59e0b;
         }
         
+        .modal-btn-confirm.checkin {
+            background: var(--accent-success);
+        }
+        
+        .modal-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.875rem;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            resize: vertical;
+            min-height: 80px;
+        }
+        
+        .modal-input:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+        }
+        
+        .modal-success {
+            text-align: center;
+            padding: 1rem 0;
+        }
+        
+        .modal-success-icon {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .modal-success-text {
+            color: var(--accent-success);
+            font-weight: 600;
+        }
+        
+        /* Settings Panel */
+        .settings-panel {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 320px;
+            height: 100vh;
+            background: var(--bg-secondary);
+            border-left: 1px solid var(--border-color);
+            box-shadow: var(--shadow-lg);
+            z-index: 1001;
+            flex-direction: column;
+            animation: slideIn 0.3s ease;
+        }
+        
+        .settings-panel.visible {
+            display: flex;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+        
+        .settings-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .settings-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        .settings-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-muted);
+            padding: 0.25rem;
+        }
+        
+        .settings-close:hover {
+            color: var(--text-primary);
+        }
+        
+        .settings-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem;
+        }
+        
+        .settings-section {
+            margin-bottom: 1.5rem;
+        }
+        
+        .settings-section-title {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+        }
+        
+        .settings-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+        }
+        
+        .settings-label {
+            font-size: 0.875rem;
+            color: var(--text-primary);
+        }
+        
+        .settings-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.3);
+            z-index: 1000;
+        }
+        
+        .settings-overlay.visible {
+            display: block;
+        }
+        
         .trailer-info { flex: 1; min-width: 0; }
         
         .trailer-id {
@@ -1002,57 +1137,14 @@
                 <button class="btn btn-secondary" onclick="app.refreshFromGitHub()" title="Sync from cloud">
                     <span>🔄</span> Sync
                 </button>
-                <div style="position: relative;">
-                    <button class="btn btn-secondary" id="exportBtn" onclick="app.toggleExportMenu()">
-                        <span>📥</span> Export
-                    </button>
-                    <div class="export-menu" id="exportMenu">
-                        <button class="export-menu-item" onclick="app.exportAsPNG()">
-                            <span>🖼️</span> Export as PNG
-                        </button>
-                        <button class="export-menu-item" onclick="app.exportAsPDF()">
-                            <span>📄</span> Export as PDF
-                        </button>
-                        <button class="export-menu-item" onclick="app.printView()">
-                            <span>🖨️</span> Print View
-                        </button>
-                        <div style="border-top: 1px solid var(--border-color); margin: 0.25rem 0;"></div>
-                        <button class="export-menu-item" onclick="app.exportData()">
-                            <span>💾</span> Export Data (JSON)
-                        </button>
-                        <button class="export-menu-item" onclick="app.importData()">
-                            <span>📂</span> Import Data (JSON)
-                        </button>
-                        <div style="border-top: 1px solid var(--border-color); margin: 0.25rem 0;"></div>
-                        <button class="export-menu-item" onclick="app.clearGitHubToken()">
-                            <span>🔑</span> Reset GitHub Token
-                        </button>
-                    </div>
-                </div>
                 
-                <div class="theme-toggle" onclick="app.toggleTheme()" title="Toggle dark mode">
-                    <div class="theme-toggle-knob"></div>
-                </div>
+                <button class="btn btn-secondary" onclick="app.toggleSettings()" title="Settings">
+                    <span>⚙️</span>
+                </button>
             </div>
         </header>
         
         <aside class="sidebar">
-            <div class="sidebar-section">
-                <div class="section-title">Data Import</div>
-                <label class="upload-zone" id="uploadZone">
-                    <input type="file" id="fileInput" accept=".xlsx,.xls,.csv,.tsv" onchange="app.handleFileUpload(event)">
-                    <div class="upload-icon">📁</div>
-                    <div class="upload-text"><strong>Click to upload</strong> or drag & drop</div>
-                    <div class="upload-formats">.xlsx, .xls, .csv, .tsv</div>
-                </label>
-                <div class="validation-errors" id="validationErrors">
-                    <div class="validation-errors-title">
-                        <span>⚠️</span> Data Validation Issues
-                    </div>
-                    <div class="validation-errors-list" id="validationErrorsList"></div>
-                </div>
-            </div>
-            
             <div class="sidebar-section">
                 <div class="section-title">Statistics</div>
                 <div class="stats-grid">
@@ -1143,6 +1235,85 @@
             <div class="modal-buttons">
                 <button class="modal-btn modal-btn-cancel" onclick="app.closeModal()">Cancel</button>
                 <button class="modal-btn modal-btn-confirm" id="modalConfirmBtn" onclick="app.confirmModalAction()">Confirm</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Check-In Notes Modal -->
+    <div class="modal-overlay" id="checkInModal">
+        <div class="modal-content">
+            <div class="modal-title">📋 Check In Trailer</div>
+            <div class="modal-message" id="checkInModalMessage">Add notes for this check-in (optional)</div>
+            <textarea class="modal-input" id="checkInNotes" placeholder="Enter notes here..."></textarea>
+            <div class="modal-buttons">
+                <button class="modal-btn modal-btn-cancel" onclick="app.closeCheckInModal()">Cancel</button>
+                <button class="modal-btn modal-btn-confirm checkin" onclick="app.submitCheckIn()">Submit</button>
+            </div>
+            <div class="modal-success" id="checkInSuccess" style="display: none;">
+                <div class="modal-success-icon">✅</div>
+                <div class="modal-success-text">Trailer checked in successfully!</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Settings Panel Overlay -->
+    <div class="settings-overlay" id="settingsOverlay" onclick="app.toggleSettings()"></div>
+    
+    <!-- Settings Panel -->
+    <div class="settings-panel" id="settingsPanel">
+        <div class="settings-header">
+            <div class="settings-title">⚙️ Settings</div>
+            <button class="settings-close" onclick="app.toggleSettings()">×</button>
+        </div>
+        <div class="settings-content">
+            <div class="settings-section">
+                <div class="settings-section-title">Appearance</div>
+                <div class="settings-row">
+                    <span class="settings-label">Dark Mode</span>
+                    <div class="theme-toggle" onclick="app.toggleTheme()" title="Toggle dark mode">
+                        <div class="theme-toggle-knob"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="settings-section">
+                <div class="settings-section-title">Data Import</div>
+                <input type="file" id="fileInput" accept=".xlsx,.xls,.csv,.tsv" onchange="app.handleFileUpload(event)" style="display: none;">
+                <button class="btn btn-secondary" style="width: 100%;" onclick="document.getElementById('fileInput').click()">
+                    <span>📁</span> Import GPS Data (.xlsx, .csv)
+                </button>
+                <div class="validation-errors" id="validationErrors" style="margin-top: 0.75rem;">
+                    <div class="validation-errors-title">
+                        <span>⚠️</span> Data Validation Issues
+                    </div>
+                    <div class="validation-errors-list" id="validationErrorsList"></div>
+                </div>
+            </div>
+            
+            <div class="settings-section">
+                <div class="settings-section-title">Export</div>
+                <button class="btn btn-secondary" style="width: 100%; margin-bottom: 0.5rem;" onclick="app.exportAsPNG(); app.toggleSettings();">
+                    <span>🖼️</span> Export as PNG
+                </button>
+                <button class="btn btn-secondary" style="width: 100%; margin-bottom: 0.5rem;" onclick="app.exportAsPDF(); app.toggleSettings();">
+                    <span>📄</span> Export as PDF
+                </button>
+                <button class="btn btn-secondary" style="width: 100%;" onclick="app.printView(); app.toggleSettings();">
+                    <span>🖨️</span> Print View
+                </button>
+            </div>
+            
+            <div class="settings-section">
+                <div class="settings-section-title">Data Management</div>
+                <button class="btn btn-secondary" style="width: 100%; margin-bottom: 0.5rem;" onclick="app.exportData(); app.toggleSettings();">
+                    <span>💾</span> Export Data (JSON)
+                </button>
+                <button class="btn btn-secondary" style="width: 100%; margin-bottom: 0.5rem;" onclick="app.importData(); app.toggleSettings();">
+                    <span>📂</span> Import Data (JSON)
+                </button>
+                <button class="btn btn-secondary" style="width: 100%;" onclick="app.clearGitHubToken(); app.toggleSettings();">
+                    <span>🔑</span> Reset GitHub Token
+                </button>
             </div>
         </div>
     </div>
@@ -1888,6 +2059,154 @@
             console.log(`✅ Rendered ${features.length} trailers`);
         },
         
+        // Check-in modal functions
+        promptCheckIn(trailerId, event) {
+            event.stopPropagation();
+            const checkbox = event.target;
+            const trailer = this.state.trailers.find(t => t.id === trailerId);
+            
+            if (!trailer) return;
+            
+            // If unchecking, just toggle directly
+            if (trailer.checkedIn) {
+                trailer.checkedIn = false;
+                trailer.isNew = false;
+                this.saveToLocalStorage();
+                this.applyFilters();
+                this.renderTrailersOnMap();
+                return;
+            }
+            
+            // If checking in, show modal for notes
+            this.state.pendingCheckInTrailerId = trailerId;
+            this.state.pendingCheckInCheckbox = checkbox;
+            
+            document.getElementById('checkInModalMessage').textContent = `Add notes for trailer ${trailerId} (optional)`;
+            document.getElementById('checkInNotes').value = '';
+            document.getElementById('checkInSuccess').style.display = 'none';
+            document.getElementById('checkInModal').classList.add('visible');
+            
+            // Reset checkbox until confirmed
+            checkbox.checked = false;
+        },
+        
+        promptCheckInFromPopup(trailerId, isChecked) {
+            const trailer = this.state.trailers.find(t => t.id === trailerId);
+            
+            if (!trailer) return;
+            
+            // If unchecking, just toggle directly
+            if (!isChecked) {
+                trailer.checkedIn = false;
+                trailer.isNew = false;
+                this.saveToLocalStorage();
+                this.applyFilters();
+                this.renderTrailersOnMap();
+                this.showTrailerPopup(trailer);
+                return;
+            }
+            
+            // If checking in, show modal for notes
+            this.state.pendingCheckInTrailerId = trailerId;
+            this.state.pendingCheckInFromPopup = true;
+            
+            document.getElementById('checkInModalMessage').textContent = `Add notes for trailer ${trailerId} (optional)`;
+            document.getElementById('checkInNotes').value = '';
+            document.getElementById('checkInSuccess').style.display = 'none';
+            document.getElementById('checkInModal').classList.add('visible');
+        },
+        
+        closeCheckInModal() {
+            document.getElementById('checkInModal').classList.remove('visible');
+            this.state.pendingCheckInTrailerId = null;
+            this.state.pendingCheckInCheckbox = null;
+            this.state.pendingCheckInFromPopup = false;
+            
+            // Re-render to reset checkbox state
+            this.renderTrailerList();
+        },
+        
+        async submitCheckIn() {
+            const trailerId = this.state.pendingCheckInTrailerId;
+            const notes = document.getElementById('checkInNotes').value.trim();
+            
+            if (!trailerId) return;
+            
+            const trailer = this.state.trailers.find(t => t.id === trailerId);
+            if (!trailer) return;
+            
+            // Update trailer state
+            trailer.checkedIn = true;
+            trailer.isNew = false;
+            
+            // Call the addToExcel function with notes
+            try {
+                await this.addToExcelWithNotes(trailerId, notes);
+                
+                // Show success message
+                document.getElementById('checkInSuccess').style.display = 'block';
+                document.querySelector('#checkInModal .modal-buttons').style.display = 'none';
+                document.querySelector('#checkInModal .modal-input').style.display = 'none';
+                document.querySelector('#checkInModal .modal-message').style.display = 'none';
+                
+                // Close after delay
+                setTimeout(() => {
+                    document.getElementById('checkInModal').classList.remove('visible');
+                    document.querySelector('#checkInModal .modal-buttons').style.display = 'flex';
+                    document.querySelector('#checkInModal .modal-input').style.display = 'block';
+                    document.querySelector('#checkInModal .modal-message').style.display = 'block';
+                    
+                    this.state.pendingCheckInTrailerId = null;
+                    this.state.pendingCheckInCheckbox = null;
+                    
+                    // Re-render
+                    this.saveToLocalStorage();
+                    this.applyFilters();
+                    this.renderTrailersOnMap();
+                    
+                    if (this.state.pendingCheckInFromPopup) {
+                        this.showTrailerPopup(trailer);
+                    }
+                    this.state.pendingCheckInFromPopup = false;
+                }, 1500);
+                
+            } catch (error) {
+                console.error('Error checking in:', error);
+                this.showToast('Error checking in trailer', 'error');
+                this.closeCheckInModal();
+            }
+        },
+        
+        async addToExcelWithNotes(trailerId, notes) {
+            try {
+                const response = await fetch(this.config.powerAutomate.dropoffFlowUrl, {
+                    method: 'POST',
+                    headers: { 
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ assetId: trailerId, notes: notes || '' })
+                });
+                
+                if (response.ok || response.status === 202) {
+                    console.log(`Added ${trailerId} to Excel with notes`);
+                } else {
+                    console.error(`Failed to add ${trailerId} to Excel: ${response.status}`);
+                }
+            } catch (error) {
+                console.error('Error adding to Excel:', error);
+                throw error;
+            }
+        },
+        
+        // Settings panel functions
+        toggleSettings() {
+            const panel = document.getElementById('settingsPanel');
+            const overlay = document.getElementById('settingsOverlay');
+            
+            panel.classList.toggle('visible');
+            overlay.classList.toggle('visible');
+        },
+        
         toggleCheckedIn(trailerId, event) {
             event.stopPropagation();
             
@@ -2054,31 +2373,57 @@
                 const data = JSON.parse(content);
                 
                 if (data.trailers && data.trailers.length > 0) {
-                    // Preserve local check-in changes that haven't been synced
-                    const localCheckins = new Map();
+                    // Get previously known trailer IDs
+                    const previousIds = this.state.previousTrailerIds || new Set();
+                    const currentIds = new Set(this.state.trailers.map(t => t.id));
+                    
+                    // Preserve local check-in and isNew status
+                    const localStatus = new Map();
                     for (const t of this.state.trailers) {
-                        localCheckins.set(t.id, t.checkedIn);
+                        localStatus.set(t.id, { checkedIn: t.checkedIn, isNew: t.isNew });
                     }
                     
-                    this.state.trailers = data.trailers.map(t => ({
-                        ...t,
-                        // Keep local check-in status if we had it
-                        checkedIn: localCheckins.has(t.id) ? localCheckins.get(t.id) : t.checkedIn
-                    }));
+                    // Count new trailers
+                    let newTrailerCount = 0;
+                    
+                    this.state.trailers = data.trailers.map(t => {
+                        const existingStatus = localStatus.get(t.id);
+                        const isNewTrailer = previousIds.size > 0 && !previousIds.has(t.id) && !currentIds.has(t.id);
+                        
+                        if (isNewTrailer) {
+                            newTrailerCount++;
+                        }
+                        
+                        return {
+                            ...t,
+                            // Keep local check-in status if we had it, otherwise use data value
+                            checkedIn: existingStatus ? existingStatus.checkedIn : (t.checkedIn || false),
+                            // Mark as new if it wasn't in our previous data
+                            isNew: existingStatus ? existingStatus.isNew : isNewTrailer
+                        };
+                    });
+                    
                     this.state.filteredTrailers = [...this.state.trailers];
-                    this.state.previousTrailerIds = new Set(data.previousTrailerIds || data.trailers.map(t => t.id));
+                    this.state.previousTrailerIds = new Set(data.trailers.map(t => t.id));
                     
                     // Also save to localStorage as cache
-                    localStorage.setItem(this.config.localStorageKey, JSON.stringify(data));
+                    localStorage.setItem(this.config.localStorageKey, JSON.stringify({
+                        trailers: this.state.trailers,
+                        previousTrailerIds: Array.from(this.state.previousTrailerIds)
+                    }));
                     
                     this.renderTrailerList();
                     if (this.state.map && this.state.map.loaded()) {
                         this.renderTrailersOnMap();
                     }
                     
-                    console.log(`☁️ Loaded ${data.trailers.length} trailers from GitHub`);
+                    console.log(`☁️ Loaded ${data.trailers.length} trailers from GitHub (${newTrailerCount} new)`);
                     if (!silent) {
-                        this.showToast(`Synced ${data.trailers.length} trailers from cloud`, 'success');
+                        if (newTrailerCount > 0) {
+                            this.showToast(`Synced ${data.trailers.length} trailers (${newTrailerCount} new)`, 'warning');
+                        } else {
+                            this.showToast(`Synced ${data.trailers.length} trailers from cloud`, 'success');
+                        }
                     }
                 }
             } catch (error) {
@@ -2221,6 +2566,14 @@
                 const statusClass = trailer.pickedUp ? 'pickedup' : (trailer.checkedIn ? 'checkedin' : 'notcheckedin');
                 const pickedUpClass = trailer.pickedUp ? 'picked-up' : '';
                 
+                // Only show Check Out button for checked-in trailers that are not already picked up
+                let actionButton = '';
+                if (trailer.pickedUp) {
+                    actionButton = `<button class="btn-dropoff" onclick="app.promptDropoff('${trailer.id}')">Drop Off</button>`;
+                } else if (trailer.checkedIn) {
+                    actionButton = `<button class="btn-pickup" onclick="app.promptPickup('${trailer.id}')">Check Out</button>`;
+                }
+                
                 return `
                 <div class="trailer-item ${this.state.selectedTrailerId === trailer.id ? 'active' : ''} ${pickedUpClass}" 
                      onclick="app.selectTrailer('${trailer.id}')">
@@ -2230,14 +2583,11 @@
                     </div>
                     <label class="checkin-toggle" onclick="event.stopPropagation()">
                         <input type="checkbox" ${trailer.checkedIn ? 'checked' : ''} 
-                               onchange="app.toggleCheckedIn('${trailer.id}', event)">
+                               onchange="app.promptCheckIn('${trailer.id}', event)">
                         <span class="checkin-slider"></span>
                     </label>
                     <div class="trailer-actions" onclick="event.stopPropagation()">
-                        ${trailer.pickedUp 
-                            ? `<button class="btn-dropoff" onclick="app.promptDropoff('${trailer.id}')">Drop Off</button>`
-                            : `<button class="btn-pickup" onclick="app.promptPickup('${trailer.id}')">Picked Up</button>`
-                        }
+                        ${actionButton}
                     </div>
                 </div>
             `}).join('');
@@ -2282,9 +2632,13 @@
                 statusText = 'NOT CHECKED IN';
             }
             
-            const actionButton = trailer.pickedUp
-                ? `<button class="btn-dropoff" style="width:100%; margin-top:8px;" onclick="app.promptDropoff('${trailer.id}')">🔽 Drop Off</button>`
-                : `<button class="btn-pickup" style="width:100%; margin-top:8px;" onclick="app.promptPickup('${trailer.id}')">📤 Picked Up</button>`;
+            // Only show action button for appropriate states
+            let actionButton = '';
+            if (trailer.pickedUp) {
+                actionButton = `<button class="btn-dropoff" style="width:100%; margin-top:8px;" onclick="app.promptDropoff('${trailer.id}')">🔽 Drop Off</button>`;
+            } else if (trailer.checkedIn) {
+                actionButton = `<button class="btn-pickup" style="width:100%; margin-top:8px;" onclick="app.promptPickup('${trailer.id}')">📤 Check Out</button>`;
+            }
             
             const mtsnRow = trailer.mtsn 
                 ? `<div class="popup-row">
@@ -2306,7 +2660,7 @@
                     <span class="popup-label">Check In</span>
                     <label class="checkin-toggle">
                         <input type="checkbox" ${trailer.checkedIn ? 'checked' : ''} 
-                               onchange="app.toggleCheckedInFromPopup('${trailer.id}', this.checked)">
+                               onchange="app.promptCheckInFromPopup('${trailer.id}', this.checked)">
                         <span class="checkin-slider"></span>
                     </label>
                 </div>
@@ -2387,11 +2741,10 @@
         },
         
         toggleExportMenu() {
-            document.getElementById('exportMenu').classList.toggle('visible');
+            // Legacy function - export menu moved to settings panel
         },
         
         exportAsPNG() {
-            this.toggleExportMenu();
             this.showLoading(true);
             
             html2canvas(document.getElementById('map'), {
@@ -2413,7 +2766,6 @@
         },
         
         exportAsPDF() {
-            this.toggleExportMenu();
             this.showLoading(true);
             
             html2canvas(document.getElementById('map'), {
@@ -2437,12 +2789,10 @@
         },
         
         printView() {
-            this.toggleExportMenu();
             window.print();
         },
         
         exportData() {
-            this.toggleExportMenu();
             
             const data = {
                 trailers: this.state.trailers,
@@ -2461,8 +2811,6 @@
         },
         
         importData() {
-            this.toggleExportMenu();
-            
             const input = document.createElement('input');
             input.type = 'file';
             input.accept = '.json';
