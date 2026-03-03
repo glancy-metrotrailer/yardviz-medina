@@ -1617,6 +1617,9 @@
         initDragDrop() {
             const uploadZone = document.getElementById('uploadZone');
             
+            // Skip if uploadZone doesn't exist (moved to settings panel)
+            if (!uploadZone) return;
+            
             ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
                 uploadZone.addEventListener(eventName, (e) => {
                     e.preventDefault();
