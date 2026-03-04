@@ -3,67 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YardViz - Trailer GPS Visualizer</title>
+    <title>YardViz Preview - Metro Trailer Style</title>
     
-    <!-- MapLibre GL JS -->
-    <link href="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.css" rel="stylesheet" />
-    <script src="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.js"></script>
-    
-    <!-- XLSX for Excel parsing -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-    
-    <!-- Papa Parse for CSV -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
-    
-    <!-- html2canvas for export -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    
-    <!-- jsPDF for PDF export -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    
-    <!-- Google Fonts -->
+    <!-- Google Fonts - matching Metro Trailer's clean look -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg-primary: #f8f9fa;
-            --bg-secondary: #ffffff;
-            --bg-tertiary: #e9ecef;
-            --text-primary: #1a1a2e;
-            --text-secondary: #495057;
-            --text-muted: #868e96;
-            --border-color: #dee2e6;
-            --accent-primary: #002B5C;
-            --accent-secondary: #0056b3;
-            --accent-light: #e8f4fd;
-            --accent-warning: #ff9500;
-            --accent-danger: #ef4444;
-            --accent-success: #22c55e;
-            --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
-            --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
-            --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
-            --glass-bg: rgba(255,255,255,0.85);
-            --glass-border: rgba(255,255,255,0.3);
-        }
-        
-        [data-theme="dark"] {
-            --bg-primary: #0d0d12;
-            --bg-secondary: #16161d;
-            --bg-tertiary: #1e1e28;
-            --text-primary: #f0f0f5;
-            --text-secondary: #a0a0b0;
-            --text-muted: #6c6c7c;
-            --border-color: #2a2a3a;
-            --accent-primary: #4d8fcc;
-            --accent-secondary: #6ba3d6;
-            --accent-light: #1a2a3a;
-            --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
-            --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
-            --shadow-lg: 0 8px 24px rgba(0,0,0,0.5);
-            --glass-bg: rgba(22,22,29,0.9);
-            --glass-border: rgba(255,255,255,0.08);
+            /* Metro Trailer Color Palette */
+            --metro-navy: #0c2340;
+            --metro-navy-light: #1a3a5c;
+            --metro-navy-dark: #081828;
+            --metro-blue: #0066cc;
+            --metro-orange: #F7941D;
+            --metro-orange-hover: #e8850f;
+            --metro-white: #FFFFFF;
+            --metro-light-gray: #f5f7fa;
+            --metro-gray: #e8ecf1;
+            --metro-text: #1a1a2e;
+            --metro-text-light: #5a6474;
+            --metro-text-muted: #8b95a5;
+            --metro-success: #10b981;
+            --metro-danger: #ef4444;
+            --metro-warning: #f59e0b;
+            
+            --shadow-sm: 0 1px 3px rgba(0, 43, 92, 0.08);
+            --shadow-md: 0 4px 12px rgba(0, 43, 92, 0.12);
+            --shadow-lg: 0 8px 24px rgba(0, 43, 92, 0.16);
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
         }
         
         * {
@@ -73,120 +44,83 @@
         }
         
         body {
-            font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--metro-light-gray);
+            color: var(--metro-text);
             min-height: 100vh;
-            transition: background 0.3s ease, color 0.3s ease;
         }
         
         .app-container {
             display: grid;
-            grid-template-columns: 340px 1fr;
+            grid-template-columns: 320px 1fr;
             grid-template-rows: auto 1fr;
             height: 100vh;
-            gap: 0;
         }
         
-        @media (max-width: 900px) {
-            .app-container {
-                grid-template-columns: 1fr;
-                grid-template-rows: auto 50vh auto;
-            }
-        }
-        
+        /* Header - Metro Trailer Navy */
         .header {
             grid-column: 1 / -1;
-            background: var(--bg-secondary);
-            border-bottom: 1px solid var(--border-color);
+            background: var(--metro-navy);
             padding: 0.75rem 1.5rem;
-            display: grid;
-            grid-template-columns: 340px 1fr;
+            display: flex;
             align-items: center;
+            justify-content: space-between;
+            box-shadow: var(--shadow-md);
+            position: relative;
             z-index: 100;
-        }
-        
-        @media (max-width: 900px) {
-            .header {
-                grid-template-columns: 1fr;
-                gap: 0.75rem;
-            }
         }
         
         .logo {
             display: flex;
             align-items: center;
-            justify-content: center;
+            gap: 1rem;
         }
         
-        .logo-icon {
-            height: 60px;
-            width: auto;
+        .logo-brand {
+            display: flex;
+            align-items: baseline;
+            gap: 0.35rem;
         }
         
-        .logo-icon img {
-            height: 100%;
-            width: auto;
-            border: 5px solid #ffffff;
-            box-shadow: var(--shadow-md);
+        .logo-metro {
+            color: #FFFFFF;
+            font-size: 1.5rem;
+            font-weight: 700;
+            font-style: italic;
+            letter-spacing: -0.02em;
+        }
+        
+        .logo-trailer {
+            color: #FFFFFF;
+            font-size: 1.5rem;
+            font-weight: 700;
+            font-style: italic;
+            letter-spacing: -0.02em;
+        }
+        
+        .logo-img {
+            height: 40px;
+            filter: brightness(0) invert(1);
+        }
+        
+        .logo-text {
+            color: var(--metro-white);
+            font-size: 1.25rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            padding-left: 1rem;
+            border-left: 2px solid rgba(255,255,255,0.3);
+        }
+        
+        .logo-text span {
+            color: var(--metro-blue);
+            font-weight: 700;
         }
         
         .header-actions {
             display: flex;
             align-items: center;
-            justify-content: flex-end;
-            gap: 0.5rem;
-        }
-        
-        .theme-toggle {
-            position: relative;
-            width: 52px;
-            height: 28px;
-            background: var(--bg-tertiary);
-            border-radius: 14px;
-            cursor: pointer;
-            border: 1px solid var(--border-color);
-            transition: all 0.3s ease;
-        }
-        
-        .theme-toggle::before {
-            content: '☀️';
-            position: absolute;
-            left: 4px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 0.75rem;
-            transition: opacity 0.3s ease;
-        }
-        
-        .theme-toggle::after {
-            content: '🌙';
-            position: absolute;
-            right: 4px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 0.75rem;
-            opacity: 0.4;
-            transition: opacity 0.3s ease;
-        }
-        
-        [data-theme="dark"] .theme-toggle::before { opacity: 0.4; }
-        [data-theme="dark"] .theme-toggle::after { opacity: 1; }
-        
-        .theme-toggle-knob {
-            position: absolute;
-            width: 22px;
-            height: 22px;
-            background: var(--bg-secondary);
-            border-radius: 50%;
-            top: 2px;
-            left: 2px;
-            box-shadow: var(--shadow-sm);
-            transition: transform 0.3s ease;
-        }
-        
-        [data-theme="dark"] .theme-toggle-knob {
-            transform: translateX(24px);
+            gap: 0.75rem;
         }
         
         .btn {
@@ -194,119 +128,77 @@
             align-items: center;
             gap: 0.5rem;
             padding: 0.5rem 1rem;
-            border-radius: 8px;
+            border-radius: var(--radius-sm);
             font-family: inherit;
             font-size: 0.875rem;
             font-weight: 500;
             cursor: pointer;
             transition: all 0.2s ease;
-            border: 1px solid transparent;
+            border: none;
         }
         
         .btn-primary {
-            background: var(--accent-primary);
-            color: white;
+            background: var(--metro-orange);
+            color: var(--metro-white);
         }
         
         .btn-primary:hover {
-            filter: brightness(1.1);
+            background: var(--metro-orange-hover);
             transform: translateY(-1px);
         }
         
         .btn-secondary {
-            background: var(--bg-tertiary);
-            color: var(--text-primary);
-            border-color: var(--border-color);
+            background: rgba(255,255,255,0.1);
+            color: var(--metro-white);
+            border: 1px solid rgba(255,255,255,0.2);
         }
         
         .btn-secondary:hover {
-            background: var(--border-color);
+            background: rgba(255,255,255,0.2);
         }
         
+        .btn-ghost {
+            background: transparent;
+            color: var(--metro-text);
+            border: 1px solid var(--metro-gray);
+        }
+        
+        .btn-ghost:hover {
+            background: var(--metro-gray);
+        }
+        
+        /* Sidebar */
         .sidebar {
-            background: var(--bg-secondary);
-            border-right: 1px solid var(--border-color);
+            background: var(--metro-white);
+            border-right: 1px solid var(--metro-gray);
             display: flex;
             flex-direction: column;
             overflow: hidden;
         }
         
-        @media (max-width: 900px) {
-            .sidebar {
-                border-right: none;
-                border-top: 1px solid var(--border-color);
-                order: 3;
-            }
-        }
-        
         .sidebar-section {
-            padding: 0.75rem;
-            border-bottom: 1px solid var(--border-color);
+            padding: 1rem;
+            border-bottom: 1px solid var(--metro-gray);
         }
         
         .sidebar-section:last-child {
-            border-bottom: none;
             flex: 1;
             overflow: hidden;
             display: flex;
             flex-direction: column;
+            border-bottom: none;
         }
         
         .section-title {
-            font-size: 0.65rem;
+            font-size: 0.7rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.08em;
-            color: var(--text-muted);
-            margin-bottom: 0.5rem;
+            color: var(--metro-text-muted);
+            margin-bottom: 0.75rem;
         }
         
-        .upload-zone {
-            border: 2px dashed var(--border-color);
-            border-radius: 8px;
-            padding: 0.75rem;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            background: var(--bg-primary);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .upload-zone:hover, .upload-zone.drag-over {
-            border-color: var(--accent-primary);
-            background: var(--accent-light);
-        }
-        
-        .upload-zone input { 
-            display: none; 
-        }
-        
-        .upload-icon { 
-            font-size: 1.5rem; 
-            margin-bottom: 0.25rem;
-            line-height: 1;
-        }
-        
-        .upload-text {
-            font-size: 0.75rem;
-            color: var(--text-secondary);
-            line-height: 1.3;
-        }
-        
-        .upload-text strong { 
-            color: var(--accent-primary); 
-        }
-        
-        .upload-formats {
-            font-size: 0.65rem;
-            color: var(--text-muted);
-            margin-top: 0.25rem;
-            font-family: 'JetBrains Mono', monospace;
-        }
-        
+        /* Stats Grid - Metro Style */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -314,103 +206,105 @@
         }
         
         .stat-card {
-            background: var(--bg-primary);
-            border-radius: 6px;
-            padding: 0.5rem;
-            border: 1px solid var(--border-color);
+            background: var(--metro-light-gray);
+            border-radius: var(--radius-sm);
+            padding: 0.75rem 0.5rem;
             text-align: center;
+            border: 1px solid var(--metro-gray);
         }
         
         .stat-value {
-            font-size: 1.1rem;
+            font-size: 1.25rem;
             font-weight: 700;
-            font-family: 'JetBrains Mono', monospace;
-            color: var(--text-primary);
-            line-height: 1;
+            color: var(--metro-navy);
         }
         
         .stat-label {
-            font-size: 0.55rem;
-            color: var(--text-muted);
+            font-size: 0.6rem;
+            color: var(--metro-text-muted);
             text-transform: uppercase;
-            letter-spacing: 0.03em;
+            letter-spacing: 0.05em;
             margin-top: 0.15rem;
         }
         
         .stat-card.success {
-            background: var(--accent-light);
-            border-color: var(--accent-success);
+            background: #d1fae5;
+            border-color: var(--metro-success);
         }
         
         .stat-card.success .stat-value {
-            color: var(--accent-success);
+            color: var(--metro-success);
         }
         
         .stat-card.danger {
-            background: #fef2f2;
-            border-color: var(--accent-danger);
-        }
-        
-        [data-theme="dark"] .stat-card.danger {
-            background: #2a1a1a;
+            background: #fecaca;
+            border-color: var(--metro-danger);
         }
         
         .stat-card.danger .stat-value {
-            color: var(--accent-danger);
+            color: var(--metro-danger);
         }
         
         .stat-card.warning {
-            background: #fff3e0;
-            border-color: #f57c00;
-        }
-        
-        [data-theme="dark"] .stat-card.warning {
-            background: #2e2518;
+            background: #fef3c7;
+            border-color: var(--metro-warning);
         }
         
         .stat-card.warning .stat-value {
-            color: #f57c00;
+            color: var(--metro-warning);
         }
         
-        .search-container { position: relative; }
+        /* Search & Filter */
+        .search-container {
+            position: relative;
+            margin-bottom: 0.75rem;
+        }
         
         .search-input {
             width: 100%;
             padding: 0.625rem 0.875rem 0.625rem 2.25rem;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
+            border: 1px solid var(--metro-gray);
+            border-radius: var(--radius-sm);
             font-family: inherit;
             font-size: 0.875rem;
-            background: var(--bg-primary);
-            color: var(--text-primary);
+            background: var(--metro-light-gray);
+            color: var(--metro-text);
             transition: all 0.2s ease;
         }
         
         .search-input:focus {
             outline: none;
-            border-color: var(--accent-primary);
-            box-shadow: 0 0 0 3px rgba(0, 43, 92, 0.15);
+            border-color: var(--metro-navy);
+            background: var(--metro-white);
+            box-shadow: 0 0 0 3px rgba(0, 43, 92, 0.1);
         }
-        
-        [data-theme="dark"] .search-input:focus {
-            box-shadow: 0 0 0 3px rgba(77, 143, 204, 0.2);
-        }
-        
-        .search-input::placeholder { color: var(--text-muted); }
         
         .search-icon {
             position: absolute;
             left: 0.75rem;
             top: 50%;
             transform: translateY(-50%);
-            color: var(--text-muted);
-            font-size: 0.875rem;
+            color: var(--metro-text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
+        .filter-select {
+            width: 100%;
+            padding: 0.5rem 0.75rem;
+            border: 1px solid var(--metro-gray);
+            border-radius: var(--radius-sm);
+            background: var(--metro-light-gray);
+            color: var(--metro-text);
+            font-size: 0.8rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        /* Trailer List */
         .trailer-list-container {
             flex: 1;
             overflow-y: auto;
-            margin-top: 0.5rem;
         }
         
         .trailer-list {
@@ -422,351 +316,83 @@
         .trailer-item {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem;
-            background: var(--bg-primary);
-            border-radius: 8px;
+            gap: 0.75rem;
+            padding: 0.625rem 0.75rem;
+            background: var(--metro-light-gray);
+            border-radius: var(--radius-sm);
             cursor: pointer;
             transition: all 0.2s ease;
             border: 1px solid transparent;
         }
         
         .trailer-item:hover {
-            background: var(--bg-tertiary);
-            border-color: var(--border-color);
+            background: var(--metro-gray);
+            border-color: var(--metro-navy);
         }
         
         .trailer-item.active {
-            border-color: var(--accent-primary);
-            background: var(--accent-light);
+            border-color: var(--metro-orange);
+            background: linear-gradient(135deg, #fff7ed, #ffedd5);
         }
         
         .trailer-icon {
-            width: 28px;
-            height: 28px;
-            border-radius: 6px;
+            width: 32px;
+            height: 32px;
+            border-radius: var(--radius-sm);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.9rem;
             flex-shrink: 0;
         }
         
-        .trailer-icon.status-checkedin {
-            background: #dcfce7;
-            color: var(--accent-success);
+        .trailer-icon svg {
+            width: 22px;
+            height: 22px;
+            fill: var(--metro-navy);
+            stroke: var(--metro-navy);
         }
         
-        [data-theme="dark"] .trailer-icon.status-checkedin {
-            background: #1a2e1a;
+        .trailer-icon.status-checkedin {
+            background: #d1fae5;
         }
         
         .trailer-icon.status-notcheckedin {
-            background: #fef2f2;
-            color: var(--accent-danger);
-        }
-        
-        [data-theme="dark"] .trailer-icon.status-notcheckedin {
-            background: #2e1a1a;
+            background: #fecaca;
         }
         
         .trailer-icon.status-pickedup {
-            background: #fff3e0;
-            color: #f57c00;
+            background: #fef3c7;
         }
         
-        [data-theme="dark"] .trailer-icon.status-pickedup {
-            background: #2e2518;
-        }
-        
-        .trailer-item.picked-up {
-            opacity: 0.8;
-            border-left: 3px solid #f57c00;
-        }
-        
-        /* Action buttons */
-        .trailer-actions {
-            display: flex;
-            gap: 0.25rem;
-            margin-left: auto;
-        }
-        
-        .btn-pickup {
-            background: var(--accent-success);
-            color: white;
-            border: none;
-            padding: 0.25rem 0.5rem;
-            border-radius: 4px;
-            font-size: 0.65rem;
-            cursor: pointer;
-            white-space: nowrap;
-        }
-        
-        .btn-pickup:hover {
-            background: #16a34a;
-        }
-        
-        .btn-dropoff {
-            background: #f59e0b;
-            color: white;
-            border: none;
-            padding: 0.25rem 0.5rem;
-            border-radius: 4px;
-            font-size: 0.65rem;
-            cursor: pointer;
-            white-space: nowrap;
-        }
-        
-        .btn-dropoff:hover {
-            background: #d97706;
-        }
-        
-        /* Filter dropdown */
-        .filter-section {
-            display: flex;
-            gap: 0.5rem;
-            align-items: center;
-            margin-bottom: 0.5rem;
-        }
-        
-        .filter-select {
+        .trailer-info {
             flex: 1;
-            padding: 0.4rem 0.5rem;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            font-size: 0.75rem;
-            font-family: inherit;
+            min-width: 0;
         }
-        
-        /* Confirmation modal */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.5);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .modal-overlay.visible {
-            display: flex;
-        }
-        
-        .modal-content {
-            background: var(--bg-secondary);
-            border-radius: 12px;
-            padding: 1.5rem;
-            max-width: 400px;
-            width: 90%;
-            box-shadow: var(--shadow-lg);
-        }
-        
-        .modal-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 0.75rem;
-        }
-        
-        .modal-message {
-            color: var(--text-secondary);
-            margin-bottom: 1.25rem;
-            font-size: 0.9rem;
-        }
-        
-        .modal-buttons {
-            display: flex;
-            gap: 0.75rem;
-            justify-content: flex-end;
-        }
-        
-        .modal-btn {
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            font-size: 0.875rem;
-            cursor: pointer;
-            border: none;
-        }
-        
-        .modal-btn-cancel {
-            background: var(--bg-tertiary);
-            color: var(--text-primary);
-        }
-        
-        .modal-btn-confirm {
-            background: var(--accent-primary);
-            color: white;
-        }
-        
-        .modal-btn-confirm.pickup {
-            background: var(--accent-success);
-        }
-        
-        .modal-btn-confirm.dropoff {
-            background: #f59e0b;
-        }
-        
-        .modal-btn-confirm.checkin {
-            background: var(--accent-success);
-        }
-        
-        .modal-input {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            font-family: inherit;
-            font-size: 0.875rem;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            margin-bottom: 1rem;
-            resize: vertical;
-            min-height: 80px;
-        }
-        
-        .modal-input:focus {
-            outline: none;
-            border-color: var(--accent-primary);
-        }
-        
-        .modal-success {
-            text-align: center;
-            padding: 1rem 0;
-        }
-        
-        .modal-success-icon {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .modal-success-text {
-            color: var(--accent-success);
-            font-weight: 600;
-        }
-        
-        /* Settings Panel */
-        .settings-panel {
-            display: none;
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: 320px;
-            height: 100vh;
-            background: var(--bg-secondary);
-            border-left: 1px solid var(--border-color);
-            box-shadow: var(--shadow-lg);
-            z-index: 1001;
-            flex-direction: column;
-            animation: slideIn 0.3s ease;
-        }
-        
-        .settings-panel.visible {
-            display: flex;
-        }
-        
-        @keyframes slideIn {
-            from { transform: translateX(100%); }
-            to { transform: translateX(0); }
-        }
-        
-        .settings-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 1rem;
-            border-bottom: 1px solid var(--border-color);
-        }
-        
-        .settings-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-        }
-        
-        .settings-close {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--text-muted);
-            padding: 0.25rem;
-        }
-        
-        .settings-close:hover {
-            color: var(--text-primary);
-        }
-        
-        .settings-content {
-            flex: 1;
-            overflow-y: auto;
-            padding: 1rem;
-        }
-        
-        .settings-section {
-            margin-bottom: 1.5rem;
-        }
-        
-        .settings-section-title {
-            font-size: 0.7rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--text-muted);
-            margin-bottom: 0.75rem;
-        }
-        
-        .settings-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0.5rem 0;
-        }
-        
-        .settings-label {
-            font-size: 0.875rem;
-            color: var(--text-primary);
-        }
-        
-        .settings-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.3);
-            z-index: 1000;
-        }
-        
-        .settings-overlay.visible {
-            display: block;
-        }
-        
-        .trailer-info { flex: 1; min-width: 0; }
         
         .trailer-id {
             font-weight: 600;
-            font-size: 0.8rem;
-            font-family: 'JetBrains Mono', monospace;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            font-size: 0.85rem;
+            color: var(--metro-navy);
         }
         
-        .trailer-meta {
-            font-size: 0.75rem;
-            color: var(--text-muted);
+        .trailer-id .new-badge {
+            background: var(--metro-orange);
+            color: white;
+            font-size: 0.55rem;
+            padding: 0.1rem 0.35rem;
+            border-radius: 3px;
+            margin-left: 0.5rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
         }
         
-        /* Check-in Toggle Switch */
+        /* Check-in Toggle */
         .checkin-toggle {
             position: relative;
-            width: 36px;
-            height: 20px;
+            width: 38px;
+            height: 22px;
             flex-shrink: 0;
         }
         
@@ -783,41 +409,109 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: var(--accent-danger);
+            background-color: var(--metro-danger);
             transition: 0.3s;
-            border-radius: 20px;
+            border-radius: 22px;
         }
         
         .checkin-slider:before {
             position: absolute;
             content: "";
-            height: 14px;
-            width: 14px;
+            height: 16px;
+            width: 16px;
             left: 3px;
             bottom: 3px;
             background-color: white;
             transition: 0.3s;
             border-radius: 50%;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
         }
         
         .checkin-toggle input:checked + .checkin-slider {
-            background-color: var(--accent-success);
+            background-color: var(--metro-success);
         }
         
         .checkin-toggle input:checked + .checkin-slider:before {
             transform: translateX(16px);
         }
         
+        /* Action Buttons */
+        .btn-checkout {
+            background: var(--metro-orange);
+            color: white;
+            border: none;
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .btn-checkout:hover {
+            background: var(--metro-orange-hover);
+        }
+        
+        .btn-dropoff {
+            background: var(--metro-navy);
+            color: white;
+            border: none;
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        /* Bulk Actions */
+        .bulk-actions {
+            display: flex;
+            gap: 0.5rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid var(--metro-gray);
+            margin-top: 0.75rem;
+        }
+        
+        .bulk-actions .btn {
+            flex: 1;
+            justify-content: center;
+            padding: 0.4rem 0.5rem;
+            font-size: 0.7rem;
+        }
+        
+        /* Map Container */
         .map-container {
             position: relative;
-            overflow: hidden;
+            background: linear-gradient(135deg, #1a365d 0%, #2d4a6f 50%, #1a365d 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
-        #map {
-            width: 100%;
-            height: 100%;
+        .map-placeholder {
+            text-align: center;
+            color: white;
         }
         
+        .map-placeholder-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+        
+        .map-placeholder-text {
+            font-size: 1.25rem;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+        
+        .map-placeholder-subtext {
+            font-size: 0.875rem;
+            opacity: 0.6;
+            margin-top: 0.5rem;
+        }
+        
+        /* Map Controls */
         .map-controls {
             position: absolute;
             top: 1rem;
@@ -825,15 +519,12 @@
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
-            z-index: 10;
         }
         
         .map-control-group {
-            background: var(--glass-bg);
-            backdrop-filter: blur(12px);
-            border-radius: 10px;
-            padding: 0.5rem;
-            border: 1px solid var(--glass-border);
+            background: var(--metro-white);
+            border-radius: var(--radius-md);
+            padding: 0.35rem;
             box-shadow: var(--shadow-md);
             display: flex;
             flex-direction: column;
@@ -845,8 +536,8 @@
             height: 36px;
             border: none;
             background: transparent;
-            color: var(--text-primary);
-            border-radius: 6px;
+            color: var(--metro-navy);
+            border-radius: var(--radius-sm);
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -855,52 +546,139 @@
             transition: all 0.2s ease;
         }
         
-        .map-control-btn:hover { background: var(--bg-tertiary); }
-        .map-control-btn.active { background: var(--accent-primary); color: white; }
+        .map-control-btn:hover {
+            background: var(--metro-light-gray);
+        }
         
+        /* Style Selector */
         .style-selector {
             position: absolute;
             bottom: 1rem;
             right: 1rem;
-            z-index: 10;
         }
         
         .style-select {
             padding: 0.5rem 2rem 0.5rem 0.75rem;
-            background: var(--glass-bg);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--glass-border);
-            border-radius: 8px;
+            background: var(--metro-white);
+            border: none;
+            border-radius: var(--radius-sm);
             font-family: inherit;
             font-size: 0.8rem;
-            color: var(--text-primary);
+            color: var(--metro-navy);
             cursor: pointer;
             box-shadow: var(--shadow-md);
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 0.5rem center;
+            font-weight: 500;
         }
         
-        .maplibregl-popup-content {
-            background: var(--bg-secondary) !important;
-            color: var(--text-primary) !important;
-            padding: 0.875rem !important;
-            border-radius: 10px !important;
-            box-shadow: var(--shadow-lg) !important;
-            border: 1px solid var(--border-color) !important;
-            font-family: 'Outfit', sans-serif !important;
-            min-width: 220px;
+        /* Settings Panel */
+        .settings-panel {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 320px;
+            height: 100vh;
+            background: var(--metro-white);
+            border-left: 1px solid var(--metro-gray);
+            box-shadow: var(--shadow-lg);
+            z-index: 1001;
+            display: flex;
+            flex-direction: column;
         }
         
-        .maplibregl-popup-close-button {
-            color: var(--text-muted) !important;
-            font-size: 1.25rem !important;
-            padding: 0.25rem 0.5rem !important;
+        .settings-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid var(--metro-gray);
+            background: var(--metro-navy);
+            color: var(--metro-white);
         }
         
-        .maplibregl-popup-anchor-bottom .maplibregl-popup-tip {
-            border-top-color: var(--bg-secondary) !important;
+        .settings-title {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        
+        .settings-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--metro-white);
+            opacity: 0.8;
+        }
+        
+        .settings-close:hover {
+            opacity: 1;
+        }
+        
+        .settings-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.25rem;
+        }
+        
+        .settings-section {
+            margin-bottom: 1.5rem;
+        }
+        
+        .settings-section-title {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--metro-text-muted);
+            margin-bottom: 0.75rem;
+        }
+        
+        .settings-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+        }
+        
+        .settings-label {
+            font-size: 0.875rem;
+            color: var(--metro-text);
+        }
+        
+        .settings-btn {
+            width: 100%;
+            padding: 0.625rem 1rem;
+            margin-bottom: 0.5rem;
+            background: var(--metro-light-gray);
+            border: 1px solid var(--metro-gray);
+            border-radius: var(--radius-sm);
+            font-family: inherit;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--metro-text);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s ease;
+        }
+        
+        .settings-btn:hover {
+            background: var(--metro-gray);
+            border-color: var(--metro-navy);
+        }
+        
+        /* Popup Preview */
+        .popup-preview {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--metro-white);
+            border-radius: var(--radius-md);
+            padding: 1rem;
+            box-shadow: var(--shadow-lg);
+            min-width: 240px;
+            border: 1px solid var(--metro-gray);
         }
         
         .popup-header {
@@ -909,237 +687,92 @@
             gap: 0.5rem;
             margin-bottom: 0.75rem;
             padding-bottom: 0.75rem;
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--metro-gray);
         }
         
-        .popup-icon { font-size: 1.5rem; }
+        .popup-icon {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .popup-icon svg {
+            width: 28px;
+            height: 28px;
+            fill: var(--metro-navy);
+            stroke: var(--metro-navy);
+        }
         
         .popup-title {
             font-weight: 600;
-            font-family: 'JetBrains Mono', monospace;
+            color: var(--metro-navy);
         }
         
         .popup-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0.25rem 0;
+            padding: 0.35rem 0;
             font-size: 0.8rem;
         }
         
-        .popup-label { color: var(--text-muted); }
+        .popup-label {
+            color: var(--metro-text-muted);
+        }
         
         .popup-value {
             font-weight: 500;
-            font-family: 'JetBrains Mono', monospace;
+            color: var(--metro-text);
         }
         
-        .toast-container {
-            position: fixed;
-            bottom: 1.5rem;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
+        .popup-value.checked-in {
+            color: var(--metro-success);
         }
         
-        .toast {
-            background: var(--bg-secondary);
-            color: var(--text-primary);
-            padding: 0.875rem 1.25rem;
-            border-radius: 10px;
-            box-shadow: var(--shadow-lg);
-            border: 1px solid var(--border-color);
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            animation: toastIn 0.3s ease;
-            min-width: 280px;
-        }
-        
-        .toast.success { border-left: 3px solid var(--accent-success); }
-        .toast.error { border-left: 3px solid var(--accent-danger); }
-        .toast.warning { border-left: 3px solid var(--accent-warning); }
-        
-        @keyframes toastIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .toast-icon { font-size: 1.25rem; }
-        .toast-message { font-size: 0.875rem; }
-        
-        .empty-state {
-            text-align: center;
-            padding: 2rem 1rem;
-            color: var(--text-muted);
-        }
-        
-        .empty-state-icon {
-            font-size: 2.5rem;
-            margin-bottom: 0.75rem;
-            opacity: 0.5;
-        }
-        
-        .empty-state-text { font-size: 0.875rem; }
-        
-        .loading-overlay {
-            position: absolute;
-            inset: 0;
-            background: var(--glass-bg);
-            backdrop-filter: blur(4px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 100;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-        }
-        
-        .loading-overlay.visible {
-            opacity: 1;
-            pointer-events: auto;
-        }
-        
-        .loading-spinner {
-            width: 40px;
-            height: 40px;
-            border: 3px solid var(--border-color);
-            border-top-color: var(--accent-primary);
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-        
-        @keyframes spin { to { transform: rotate(360deg); } }
-        
-        .export-menu {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            margin-top: 0.5rem;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            box-shadow: var(--shadow-lg);
-            min-width: 160px;
-            overflow: hidden;
-            display: none;
-            z-index: 100;
-        }
-        
-        .export-menu.visible {
-            display: block;
-            animation: fadeIn 0.2s ease;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-5px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .export-menu-item {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.75rem 1rem;
-            font-size: 0.875rem;
-            color: var(--text-primary);
-            cursor: pointer;
-            transition: background 0.2s ease;
-            border: none;
-            background: none;
+        .popup-btn {
             width: 100%;
-            text-align: left;
-            font-family: inherit;
-        }
-        
-        .export-menu-item:hover { background: var(--bg-tertiary); }
-        .export-menu-item span { font-size: 1rem; }
-        
-        .validation-errors {
             margin-top: 0.75rem;
-            padding: 0.75rem;
-            background: #fef2f2;
-            border: 1px solid #fecaca;
-            border-radius: 8px;
-            display: none;
-        }
-        
-        [data-theme="dark"] .validation-errors {
-            background: #2a1a1a;
-            border-color: #5c2a2a;
-        }
-        
-        .validation-errors.visible { display: block; }
-        
-        .validation-errors-title {
-            font-size: 0.8rem;
+            padding: 0.5rem;
+            background: var(--metro-orange);
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
             font-weight: 600;
-            color: var(--accent-danger);
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            font-size: 0.8rem;
+            cursor: pointer;
         }
         
-        .validation-errors-list {
-            font-size: 0.75rem;
-            color: var(--text-secondary);
-            max-height: 100px;
-            overflow-y: auto;
+        .popup-btn:hover {
+            background: var(--metro-orange-hover);
         }
-        
-        .validation-error-item {
-            padding: 0.25rem 0;
-            font-family: 'JetBrains Mono', monospace;
-        }
-        
-        .bulk-actions {
-            display: flex;
-            gap: 0.5rem;
-            margin-top: 0.5rem;
-            padding-top: 0.5rem;
-            border-top: 1px solid var(--border-color);
-        }
-        
-        .bulk-actions .btn {
-            flex: 1;
-            justify-content: center;
-            padding: 0.35rem 0.5rem;
-            font-size: 0.7rem;
-        }
-        
-        @media print {
-            .header, .sidebar, .map-controls, .style-selector { display: none !important; }
-            .app-container { display: block; }
-            .map-container { width: 100%; height: 100vh; }
-        }
-        
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 3px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
     </style>
 </head>
 <body>
     <div class="app-container">
         <header class="header">
             <div class="logo">
-                <div class="logo-icon">
-                    <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzODUuODk4IiBoZWlnaHQ9IjIxMCIgdmlld0JveD0iMCAwIDM4NS44OTggMjEwIj4KICA8IS0tIEJsdWUgYmFja2dyb3VuZCAtLT4KICA8cmVjdCB3aWR0aD0iMzg1Ljg5OCIgaGVpZ2h0PSIyMTAiIGZpbGw9IiMwMDJCNUMiLz4KICAKICA8IS0tIFdoaXRlIHJlY3RhbmdsZSBmb3IgTWV0cm8gVHJhaWxlciBsb2dvIGFyZWEgLS0+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjM4NS44OTgiIGhlaWdodD0iMTU1IiBmaWxsPSIjZmZmZmZmIi8+CiAgCiAgPCEtLSBPcmlnaW5hbCBNZXRybyBUcmFpbGVyIExvZ28gLS0+CiAgPGcgaWQ9Ikdyb3VwXzYzMyIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNC4xNzkgODcuNzUpIj4KICAgIDxwYXRoIGlkPSJQYXRoXzYyNiIgZD0iTTc3LjM2MiwzMTkuMjQxaDUzbC0yLjY3NiwxNS4xNzlIMTEwLjY2M2wtNy41MTksNDIuNjQzSDg0LjE5Mmw3LjUxOS00Mi42NDNINzQuNjg2WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTc0LjY4NiAtMzE5LjI0MSkiIGZpbGw9IiMwMDJCNUMiLz4KICAgIDxwYXRoIGlkPSJQYXRoXzYyNyIgZD0iTTE4NC41MzMsMzU2LjkwNmwtMy41NTQsMjAuMTU3SDE2Mi4wMjVsMTAuMi01Ny44MjFoMjcuM2MxOS4yNzQsMCwyNC43LDUuMjIsMjIuNzE1LDE2LjQ2My0xLjE3NSw2LjY2Ni01LjEzOCwxMi4yODctMTIuMjA5LDE0LjEzNSw1LjcwNywyLjI0OCw5LjE0NiwzLjY5NCw3LjA5MiwxNS4zMzktMS4zMzEsNy41NDgtMi4wMjUsMTAuMTE5LjIyMywxMC4xMTlsLS4zMTIsMS43NjZIMTk3Ljg0M2MtLjI1NS0xLjI4NS0uMDg2LTQuOTc5LjgyMS0xMC4xMTksMS4zMzEtNy41NDkuNDg1LTEwLjAzOC04LjM0OS0xMC4wMzhabTIuMjM3LTEyLjY4OWg3LjQ2OWM1Ljg2MiwwLDkuMjUtMS40NDUsOS45NTctNS40NjEuNzIyLTQuMS0yLjE1LTYuMDI0LTYuNTY3LTYuMDI0aC04LjgzNFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xMDkuMTUzIC0zMTkuMjQxKSIgZmlsbD0iIzAwMkI1QyIvPgogICAgPHBhdGggaWQ9IlBhdGhfNjI4IiBkPSJNMjU4LjYsMzc3LjA2M2wzMC45MTUtNTcuODIxaDE5LjI3NGwxMC41MjQsNTcuODIxSDMwMC40NDVsLS45LTcuNjI5SDI4MC42NjlsLTMuNTE0LDcuNjI5Wm0zNy4zMTktNDAuMzk1LTkuNTE2LDIwLjcyaDExLjk2NloiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xNDcuMjY2IC0zMTkuMjQxKSIgZmlsbD0iIzAwMkI1QyIvPgogICAgPHBhdGggaWQ9IlBhdGhfNjI5IiBkPSJNMzcwLjQzOSwzNzcuMDYzbDEwLjItNTcuODIxaDE4Ljk1M2wtMTAuMiw1Ny44MjFaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTkxLjQgLTMxOS4yNDEpIiBmaWxsPSIjMDAyQjVDIi8+CiAgICA8cGF0aCBpZD0iUGF0aF82MzAiIGQ9Ik00MjIuMDQ1LDM3Ny4wNjNsMTAuMi01Ny44MjFoMTguOTUzbC03LjgxNyw0NC4zMjlINDY5LjRsLTIuMzc5LDEzLjQ5MloiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0yMTEuNzY1IC0zMTkuMjQxKSIgZmlsbD0iIzAwMkI1QyIvPgogICAgPHBhdGggaWQ9IlBhdGhfNjMxIiBkPSJNNTEwLjUzLDM3Ny4wNjNsMTAuMi01Ny44MjFoNDcuMTQxbC0yLjM3OSwxMy40OTFINTM3LjNMNTM1Ljg0MSwzNDFoMjMuODUyTDU1Ny4zMTQsMzU0LjVINTMzLjQ2MmwtMS42LDkuMDc1aDI5LjMxMkw1NTguOCwzNzcuMDYzWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTI0Ni42ODQgLTMxOS4yNDEpIiBmaWxsPSIjMDAyQjVDIi8+CiAgICA8cGF0aCBpZD0iUGF0aF82MzIiIGQ9Ik02MjYuODI4LDM1Ni45MDZsLTMuNTU0LDIwLjE1N0g2MDQuMzJsMTAuMi01Ny44MjFoMjcuM2MxOS4yNzQsMCwyNC43LDUuMjIsMjIuNzE1LDE2LjQ2My0xLjE3NSw2LjY2Ni01LjEzOCwxMi4yODctMTIuMjA5LDE0LjEzNSw1LjcwNywyLjI0OCw5LjE0NiwzLjY5NCw3LjA5MiwxNS4zMzktMS4zMzEsNy41NDgtMi4wMjUsMTAuMTE5LjIyMywxMC4xMTlsLS4zMTIsMS43NjZINjQwLjEzOGMtLjI1NS0xLjI4NS0uMDg2LTQuOTc5LjgyLTEwLjExOSwxLjMzMS03LjU0OS40ODUtMTAuMDM4LTguMzQ5LTEwLjAzOFptMi4yMzctMTIuNjg5aDcuNDY5YzUuODYyLDAsOS4yNS0xLjQ0NSw5Ljk1Ny01LjQ2MS43MjItNC4xLTIuMTUtNi4wMjQtNi41NjctNi4wMjRINjMxLjA5WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTI4My42OTcgLTMxOS4yNDEpIiBmaWxsPSIjMDAyQjVDIi8+CiAgPC9nPgogIDxnIGlkPSJHcm91cF82MzQiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAgMCkiPgogICAgPHBhdGggaWQ9IlBhdGhfNjMzIiBkPSJNNjcuNzgyLDI0Ny4zMTEsODAuMTIsMTc3LjMzOGgyNy43bDQuNjQ4LDQzLjYzNUwxMzIuNSwxNzcuMzM4aDI3LjdsLTEyLjMzNyw2OS45NzNoLTIwLjZsMy43Ny0yMS4zODEsMi4yMS0xMC44ODQsMy4zOTQtMTIuNjM0aC0uMTk1bC0yMC42NDcsNDQuOUg5OS44NTNsLTQuODE1LTQ0LjloLS4xOTRMOTQsMjEyLjcxMyw5Mi41NjYsMjIzLjZsLTQuMTgxLDIzLjcxM1oiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC02Ny43ODIgLTE3NS40OTEpIiBmaWxsPSIjMDAyQjVDIi8+CiAgICA8cGF0aCBpZD0iUGF0aF82MzQiIGQ9Ik0yMjEuODkxLDI0Ny4zMTFsMTIuMzM3LTY5Ljk3M2g1Ny4wNDhMMjg4LjQsMTkzLjY2NUgyNTQuMjg0bC0xLjc2NSwxMC4wMWgyOC44NjRMMjc4LjUsMjIwSDI0OS42NDFMMjQ3LjcsMjMwLjk4M2gzNS40NzNMMjgwLjMsMjQ3LjMxSDIyMS44OTFaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTI4LjU5OSAtMTc1LjQ5MSkiIGZpbGw9IiMwMDJCNUMiLz4KICAgIDxwYXRoIGlkPSJQYXRoXzYzNSIgZD0iTTM0OC44MzYsMTc3LjMzOGg2NC4xNDJsLTMuMjM4LDE4LjM2OGgtMjAuNmwtOS4xLDUxLjZIMzU3LjFsOS4xLTUxLjZIMzQ1LjZaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTc3LjQxOCAtMTc1LjQ5MSkiIGZpbGw9IiMwMDJCNUMiLz4KICAgIDxwYXRoIGlkPSJQYXRoXzYzNiIgZD0iTTQ3OC41MiwyMjIuOTE3bC00LjMsMjQuMzkzSDQ1MS4yODRsMTIuMzM3LTY5Ljk3M2gzMy4wNDJjMjMuMzI0LDAsMjkuODg4LDYuMzE3LDI3LjQ4OSwxOS45MjMtMS40MjIsOC4wNjYtNi4yMTcsMTQuODY5LTE0Ljc3NSwxNy4xLDYuOTA2LDIuNzIxLDExLjA2OCw0LjQ3MSw4LjU4MywxOC41NjItMS42MSw5LjEzNi0yLjQ1LDEyLjI0NS4yNzEsMTIuMjQ1bC0uMzc3LDIuMTM4SDQ5NC42MjhjLS4zMDktMS41NTUtLjEtNi4wMjUuOTkzLTEyLjI0NSwxLjYxMS05LjEzNi41ODctMTIuMTQ4LTEwLjEtMTIuMTQ4aC03Wm0yLjcwOC0xNS4zNTVoOS4wMzhjNy4wOTQsMCwxMS4xOTMtMS43NDksMTIuMDUtNi42MDkuODc0LTQuOTU2LTIuNi03LjI4OS03Ljk0OC03LjI4OWgtMTAuNjlaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMjE5LjEyNSAtMTc1LjQ5MSkiIGZpbGw9IiMwMDJCNUMiLz4KICAgIDxwYXRoIGlkPSJQYXRoXzYzNyIgZD0iTTY1NS44MTIsMjEwLjczMWMtNC4yLDIzLjgxLTIyLjYsMzcuMjIxLTQzLjMsMzcuMjIxLTIxLjk2MywwLTM0LjI0LTEzLjYwNi0zMC4wNDEtMzcuNDE2LDMuODcyLTIxLjk2MywyMS4yNi0zNi4yNSw0My4wMy0zNi4yNUM2NTAuNDc5LDE3NC4yODgsNjU5LjA2OCwxOTIuMjY3LDY1NS44MTIsMjEwLjczMVptLTUwLjQzOCwwYy0xLjU3Nyw4Ljk0MS0uODI2LDIwLjExNywxMC4xNTYsMjAuMTE3LDkuOTEzLDAsMTUuMzA4LTguNTUyLDE3LjM0Ny0yMC4xMTcsMS42OC05LjUyNC0uNDI2LTE5LjYzMS0xMC41ODUtMTkuMzRDNjExLjg5MywxOTEuMzkyLDYwNi45MzMsMjAxLjg4OCw2MDUuMzc0LDIxMC43MzFaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMjcwLjU3NCAtMTc0LjI4NykiIGZpbGw9IiMwMDJCNUMiLz4KICA8L2c+CiAgCiAgPCEtLSBZYXJkVml6IHRleHQgaW4gd2hpdGUgb24gYmx1ZSBiYWNrZ3JvdW5kIC0gaXRhbGljaXplZCB3aXRoIGxhcmdlciBZIGFuZCBWIC0tPgogIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDE5Mi45NDkgMTkwKSI+CiAgICA8dGV4dCB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwgQmxhY2ssIEFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXdlaWdodD0iOTAwIiBmb250LXN0eWxlPSJpdGFsaWMiIGZpbGw9IiNmZmZmZmYiIGxldHRlci1zcGFjaW5nPSIyIj4KICAgICAgPHRzcGFuIGZvbnQtc2l6ZT0iMzQiPlk8L3RzcGFuPjx0c3BhbiBmb250LXNpemU9IjI2Ij5BUkQ8L3RzcGFuPjx0c3BhbiBmb250LXNpemU9IjM0Ij5WPC90c3Bhbj48dHNwYW4gZm9udC1zaXplPSIyNiI+SVo8L3RzcGFuPgogICAgPC90ZXh0PgogIDwvZz4KPC9zdmc+Cg==" alt="Metro Trailer YardViz Logo">
+                <div class="logo-brand">
+                    <span class="logo-metro">METRO</span>
+                    <span class="logo-trailer">TRAILER</span>
                 </div>
+                <div class="logo-text">Yard<span>Viz</span></div>
             </div>
             
             <div class="header-actions">
-                <button class="btn btn-secondary" onclick="app.refreshFromGitHub()" title="Sync from cloud">
-                    <span>🔄</span> Sync
+                <button class="btn btn-secondary">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2">
+                        <path d="M21 12a9 9 0 1 1-9-9"/>
+                        <polyline points="21 3 21 9 15 9"/>
+                    </svg>
+                    Sync
                 </button>
-                
-                <button class="btn btn-secondary" onclick="app.toggleSettings()" title="Settings">
-                    <span>⚙️</span>
+                <button class="btn btn-secondary">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2">
+                        <circle cx="12" cy="12" r="3"/>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                    </svg>
                 </button>
             </div>
         </header>
@@ -1149,19 +782,19 @@
                 <div class="section-title">Statistics</div>
                 <div class="stats-grid">
                     <div class="stat-card">
-                        <div class="stat-value" id="statTrailers">0</div>
+                        <div class="stat-value">77</div>
                         <div class="stat-label">Total</div>
                     </div>
                     <div class="stat-card success">
-                        <div class="stat-value" id="statCheckedIn">0</div>
+                        <div class="stat-value">44</div>
                         <div class="stat-label">Checked In</div>
                     </div>
                     <div class="stat-card danger">
-                        <div class="stat-value" id="statNotCheckedIn">0</div>
+                        <div class="stat-value">33</div>
                         <div class="stat-label">Not Checked</div>
                     </div>
                     <div class="stat-card warning">
-                        <div class="stat-value" id="statPickedUp">0</div>
+                        <div class="stat-value">0</div>
                         <div class="stat-label">Picked Up</div>
                     </div>
                 </div>
@@ -1170,1714 +803,243 @@
             <div class="sidebar-section">
                 <div class="section-title">Trailers</div>
                 <div class="search-container">
-                    <span class="search-icon">🔍</span>
-                    <input type="text" class="search-input" id="searchInput" placeholder="Search by Asset ID..." oninput="app.filterTrailers(event)">
+                    <span class="search-icon">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"/>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                        </svg>
+                    </span>
+                    <input type="text" class="search-input" placeholder="Trailer #...">
                 </div>
-                <div class="filter-section">
-                    <select class="filter-select" id="filterSelect" onchange="app.setFilterMode(this.value)">
-                        <option value="all">All Trailers</option>
-                        <option value="checkedIn">Checked In</option>
-                        <option value="notCheckedIn">Not Checked In</option>
-                        <option value="pickedUp">Picked Up</option>
-                        <option value="onSite">On-Site (Not Picked Up)</option>
-                    </select>
-                </div>
-                <div class="bulk-actions">
-                    <button class="btn btn-secondary" onclick="app.checkInAll()">✓ Check In All</button>
-                    <button class="btn btn-secondary" onclick="app.uncheckAll()">✗ Uncheck All</button>
-                </div>
-                <div class="trailer-list-container" id="trailerListContainer">
-                    <div class="empty-state" id="emptyState">
-                        <div class="empty-state-icon">📋</div>
-                        <div class="empty-state-text">Upload a file to see trailers</div>
+                <select class="filter-select">
+                    <option>All Trailers</option>
+                    <option>Checked In</option>
+                    <option>Not Checked In</option>
+                    <option>Picked Up</option>
+                </select>
+                
+                <div class="trailer-list-container">
+                    <div class="trailer-list">
+                        <div class="trailer-item active">
+                            <div class="trailer-icon status-checkedin">
+                                <svg viewBox="0 0 64 48">
+                                    <!-- Main cargo box - hollow rectangle with consistent stroke -->
+                                    <rect x="2" y="2" width="56" height="26" rx="4" fill="none" stroke-width="5"/>
+                                    <!-- Landing gear with foot -->
+                                    <rect x="10" y="28" width="5" height="14" rx="1"/>
+                                    <rect x="7" y="40" width="11" height="4" rx="1"/>
+                                    <!-- Tandem wheels - solid filled -->
+                                    <circle cx="40" cy="40" r="7"/>
+                                    <circle cx="56" cy="40" r="7"/>
+                                </svg>
+                            </div>
+                            <div class="trailer-info">
+                                <div class="trailer-id">MTRZ325002 <span class="new-badge">NEW</span></div>
+                            </div>
+                            <label class="checkin-toggle">
+                                <input type="checkbox" checked>
+                                <span class="checkin-slider"></span>
+                            </label>
+                            <button class="btn-checkout">Check Out</button>
+                        </div>
+                        
+                        <div class="trailer-item">
+                            <div class="trailer-icon status-checkedin">
+                                <svg viewBox="0 0 64 48">
+                                    <rect x="2" y="2" width="56" height="26" rx="4" fill="none" stroke-width="5"/>
+                                    <rect x="10" y="28" width="5" height="14" rx="1"/>
+                                    <rect x="7" y="40" width="11" height="4" rx="1"/>
+                                    <circle cx="40" cy="40" r="7"/>
+                                    <circle cx="56" cy="40" r="7"/>
+                                </svg>
+                            </div>
+                            <div class="trailer-info">
+                                <div class="trailer-id">281921</div>
+                            </div>
+                            <label class="checkin-toggle">
+                                <input type="checkbox" checked>
+                                <span class="checkin-slider"></span>
+                            </label>
+                            <button class="btn-checkout">Check Out</button>
+                        </div>
+                        
+                        <div class="trailer-item">
+                            <div class="trailer-icon status-notcheckedin">
+                                <svg viewBox="0 0 64 48">
+                                    <rect x="2" y="2" width="56" height="26" rx="4" fill="none" stroke-width="5"/>
+                                    <rect x="10" y="28" width="5" height="14" rx="1"/>
+                                    <rect x="7" y="40" width="11" height="4" rx="1"/>
+                                    <circle cx="40" cy="40" r="7"/>
+                                    <circle cx="56" cy="40" r="7"/>
+                                </svg>
+                            </div>
+                            <div class="trailer-info">
+                                <div class="trailer-id">5620408</div>
+                            </div>
+                            <label class="checkin-toggle">
+                                <input type="checkbox">
+                                <span class="checkin-slider"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="trailer-item">
+                            <div class="trailer-icon status-notcheckedin">
+                                <svg viewBox="0 0 64 48">
+                                    <rect x="2" y="2" width="56" height="26" rx="4" fill="none" stroke-width="5"/>
+                                    <rect x="10" y="28" width="5" height="14" rx="1"/>
+                                    <rect x="7" y="40" width="11" height="4" rx="1"/>
+                                    <circle cx="40" cy="40" r="7"/>
+                                    <circle cx="56" cy="40" r="7"/>
+                                </svg>
+                            </div>
+                            <div class="trailer-info">
+                                <div class="trailer-id">310464</div>
+                            </div>
+                            <label class="checkin-toggle">
+                                <input type="checkbox">
+                                <span class="checkin-slider"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="trailer-item">
+                            <div class="trailer-icon status-pickedup">
+                                <svg viewBox="0 0 64 48">
+                                    <rect x="2" y="2" width="56" height="26" rx="4" fill="none" stroke-width="5"/>
+                                    <rect x="10" y="28" width="5" height="14" rx="1"/>
+                                    <rect x="7" y="40" width="11" height="4" rx="1"/>
+                                    <circle cx="40" cy="40" r="7"/>
+                                    <circle cx="56" cy="40" r="7"/>
+                                </svg>
+                            </div>
+                            <div class="trailer-info">
+                                <div class="trailer-id">27417 📤</div>
+                            </div>
+                            <label class="checkin-toggle">
+                                <input type="checkbox">
+                                <span class="checkin-slider"></span>
+                            </label>
+                            <button class="btn-dropoff">Drop Off</button>
+                        </div>
                     </div>
-                    <div class="trailer-list" id="trailerList"></div>
+                </div>
+                
+                <div class="bulk-actions">
+                    <button class="btn btn-ghost">✓ Check In All</button>
+                    <button class="btn btn-ghost">✗ Uncheck All</button>
                 </div>
             </div>
         </aside>
         
         <main class="map-container">
-            <div id="map"></div>
-            
-            <div class="loading-overlay" id="loadingOverlay">
-                <div class="loading-spinner"></div>
+            <div class="map-placeholder">
+                <div class="map-placeholder-icon">🗺️</div>
+                <div class="map-placeholder-text">Satellite Map View</div>
+                <div class="map-placeholder-subtext">Medina, OH Facility</div>
             </div>
             
             <div class="map-controls">
                 <div class="map-control-group">
-                    <button class="map-control-btn" onclick="app.zoomIn()" title="Zoom In">➕</button>
-                    <button class="map-control-btn" onclick="app.zoomOut()" title="Zoom Out">➖</button>
-                    <button class="map-control-btn" onclick="app.resetView()" title="Reset View">🏠</button>
+                    <button class="map-control-btn">➕</button>
+                    <button class="map-control-btn">➖</button>
+                    <button class="map-control-btn">🏠</button>
                 </div>
                 <div class="map-control-group">
-                    <button class="map-control-btn" onclick="app.fitToTrailers()" title="Fit to Trailers">📍</button>
+                    <button class="map-control-btn">📍</button>
                 </div>
             </div>
             
             <div class="style-selector">
-                <select class="style-select" id="mapStyle" onchange="app.changeMapStyle(event)">
-                    <option value="satellite">🛰️ Satellite</option>
-                    <option value="streets">🗺️ Streets</option>
-                    <option value="outdoor">🏔️ Outdoor</option>
-                    <option value="basic">📍 Basic</option>
+                <select class="style-select">
+                    <option>🛰️ Satellite</option>
+                    <option>🗺️ Streets</option>
                 </select>
+            </div>
+            
+            <!-- Popup Preview -->
+            <div class="popup-preview">
+                <div class="popup-header">
+                    <span class="popup-icon">
+                        <svg viewBox="0 0 64 48">
+                            <rect x="2" y="2" width="56" height="26" rx="4" fill="none" stroke-width="5"/>
+                            <rect x="10" y="28" width="5" height="14" rx="1"/>
+                            <rect x="7" y="40" width="11" height="4" rx="1"/>
+                            <circle cx="40" cy="40" r="7"/>
+                            <circle cx="56" cy="40" r="7"/>
+                        </svg>
+                    </span>
+                    <span class="popup-title">MTRZ325002</span>
+                </div>
+                <div class="popup-row">
+                    <span class="popup-label">Status</span>
+                    <span class="popup-value checked-in">CHECKED IN</span>
+                </div>
+                <div class="popup-row">
+                    <span class="popup-label">Check In</span>
+                    <label class="checkin-toggle">
+                        <input type="checkbox" checked>
+                        <span class="checkin-slider"></span>
+                    </label>
+                </div>
+                <div class="popup-row">
+                    <span class="popup-label">MTSN</span>
+                    <span class="popup-value" style="font-size: 0.7rem;">SHB7BLAG222468483</span>
+                </div>
+                <div class="popup-row">
+                    <span class="popup-label">Latitude</span>
+                    <span class="popup-value">41.147110</span>
+                </div>
+                <div class="popup-row">
+                    <span class="popup-label">Longitude</span>
+                    <span class="popup-value">-81.897520</span>
+                </div>
+                <button class="popup-btn">📤 Check Out</button>
             </div>
         </main>
     </div>
     
-    <div class="toast-container" id="toastContainer"></div>
-    
-    <!-- Confirmation Modal -->
-    <div class="modal-overlay" id="confirmModal">
-        <div class="modal-content">
-            <div class="modal-title" id="modalTitle">Confirm Action</div>
-            <div class="modal-message" id="modalMessage">Are you sure?</div>
-            <div class="modal-buttons">
-                <button class="modal-btn modal-btn-cancel" onclick="app.closeModal()">Cancel</button>
-                <button class="modal-btn modal-btn-confirm" id="modalConfirmBtn" onclick="app.confirmModalAction()">Confirm</button>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Check-In Notes Modal -->
-    <div class="modal-overlay" id="checkInModal">
-        <div class="modal-content">
-            <div class="modal-title">📋 Check In Trailer</div>
-            <div class="modal-message" id="checkInModalMessage">Add notes for this check-in (optional)</div>
-            <textarea class="modal-input" id="checkInNotes" placeholder="Enter notes here..."></textarea>
-            <div class="modal-buttons">
-                <button class="modal-btn modal-btn-cancel" onclick="app.closeCheckInModal()">Cancel</button>
-                <button class="modal-btn modal-btn-confirm checkin" onclick="app.submitCheckIn()">Submit</button>
-            </div>
-            <div class="modal-success" id="checkInSuccess" style="display: none;">
-                <div class="modal-success-icon">✅</div>
-                <div class="modal-success-text">Trailer checked in successfully!</div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Settings Panel Overlay -->
-    <div class="settings-overlay" id="settingsOverlay" onclick="app.toggleSettings()"></div>
-    
-    <!-- Settings Panel -->
-    <div class="settings-panel" id="settingsPanel">
+    <!-- Settings Panel Preview -->
+    <div class="settings-panel" style="display: none;">
         <div class="settings-header">
-            <div class="settings-title">⚙️ Settings</div>
-            <button class="settings-close" onclick="app.toggleSettings()">×</button>
+            <div class="settings-title">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" style="margin-right: 0.5rem;">
+                    <circle cx="12" cy="12" r="3"/>
+                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                </svg>
+                Settings
+            </div>
+            <button class="settings-close">×</button>
         </div>
         <div class="settings-content">
             <div class="settings-section">
                 <div class="settings-section-title">Appearance</div>
                 <div class="settings-row">
                     <span class="settings-label">Dark Mode</span>
-                    <div class="theme-toggle" onclick="app.toggleTheme()" title="Toggle dark mode">
-                        <div class="theme-toggle-knob"></div>
-                    </div>
+                    <label class="checkin-toggle">
+                        <input type="checkbox">
+                        <span class="checkin-slider"></span>
+                    </label>
                 </div>
             </div>
             
             <div class="settings-section">
                 <div class="settings-section-title">Data Import</div>
-                <input type="file" id="fileInput" accept=".xlsx,.xls,.csv,.tsv" onchange="app.handleFileUpload(event)" style="display: none;">
-                <button class="btn btn-secondary" style="width: 100%;" onclick="document.getElementById('fileInput').click()">
-                    <span>📁</span> Import GPS Data (.xlsx, .csv)
-                </button>
-                <div class="validation-errors" id="validationErrors" style="margin-top: 0.75rem;">
-                    <div class="validation-errors-title">
-                        <span>⚠️</span> Data Validation Issues
-                    </div>
-                    <div class="validation-errors-list" id="validationErrorsList"></div>
-                </div>
+                <button class="settings-btn">📁 Import GPS Data (.xlsx, .csv)</button>
             </div>
             
             <div class="settings-section">
                 <div class="settings-section-title">Export</div>
-                <button class="btn btn-secondary" style="width: 100%; margin-bottom: 0.5rem;" onclick="app.exportAsPNG(); app.toggleSettings();">
-                    <span>🖼️</span> Export as PNG
-                </button>
-                <button class="btn btn-secondary" style="width: 100%; margin-bottom: 0.5rem;" onclick="app.exportAsPDF(); app.toggleSettings();">
-                    <span>📄</span> Export as PDF
-                </button>
-                <button class="btn btn-secondary" style="width: 100%;" onclick="app.printView(); app.toggleSettings();">
-                    <span>🖨️</span> Print View
-                </button>
+                <button class="settings-btn">🖼️ Export as PNG</button>
+                <button class="settings-btn">📄 Export as PDF</button>
+                <button class="settings-btn">🖨️ Print View</button>
             </div>
             
             <div class="settings-section">
                 <div class="settings-section-title">Data Management</div>
-                <button class="btn btn-secondary" style="width: 100%; margin-bottom: 0.5rem;" onclick="app.exportData(); app.toggleSettings();">
-                    <span>💾</span> Export Data (JSON)
-                </button>
-                <button class="btn btn-secondary" style="width: 100%; margin-bottom: 0.5rem;" onclick="app.importData(); app.toggleSettings();">
-                    <span>📂</span> Import Data (JSON)
-                </button>
-                <button class="btn btn-secondary" style="width: 100%;" onclick="app.clearGitHubToken(); app.toggleSettings();">
-                    <span>🔑</span> Reset GitHub Token
-                </button>
+                <button class="settings-btn">💾 Export Data (JSON)</button>
+                <button class="settings-btn">📂 Import Data (JSON)</button>
+                <button class="settings-btn">🔑 Reset GitHub Token</button>
             </div>
         </div>
     </div>
-    
-    <script>
-    const app = {
-        config: {
-            mapTilerKey: 'u9TdeBJu4j9tNG1lZiu5',
-            propertyCenter: [-81.89786783155066, 41.148623908332276],
-            defaultZoom: 17.5,
-            localStorageKey: 'trailerVizGPSData_v2',
-            
-            // =====================================================
-            // GITHUB CONFIGURATION - UPDATE THESE VALUES
-            // =====================================================
-            github: {
-                enabled: true,
-                owner: 'glancy-metrotrailer',
-                repo: 'yardviz-medina',
-                path: 'data/trailers.json',
-                token: null  // Token entered by user at runtime (stored in localStorage)
-            },
-            
-            // =====================================================
-            // POWER AUTOMATE FLOW URLs
-            // =====================================================
-            powerAutomate: {
-                pickupFlowUrl: 'https://default8417a2420313412ca062453303f8f4.fd.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/6739188d34af4ab2ac5ab12de31ac0ce/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=AiqbS_TEr8CZeXP2ejeW31gC3IkldEiVp9EbN44Qj1s',
-                dropoffFlowUrl: 'https://default8417a2420313412ca062453303f8f4.fd.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/697aa3ff842048d585932a53ec765d2b/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=5u5sALfQmGdWDY6_eFlRc0zpxIpcm0okL4a-HhIXcYw'
-            }
-            // =====================================================
-        },
-        
-        state: {
-            map: null,
-            trailers: [],
-            filteredTrailers: [],
-            previousTrailerIds: new Set(),
-            selectedTrailerId: null,
-            currentPopup: null,
-            githubSha: null,
-            isSyncing: false,
-            filterMode: 'all'  // all, checkedIn, notCheckedIn, pickedUp, onSite
-        },
-        
-        // Get GitHub token from localStorage or prompt user
-        getGitHubToken() {
-            let token = localStorage.getItem('yardviz_github_token');
-            if (!token) {
-                token = prompt('Enter your GitHub Personal Access Token:\n\n(This will be stored locally in your browser and never uploaded to GitHub)');
-                if (token) {
-                    localStorage.setItem('yardviz_github_token', token.trim());
-                }
-            }
-            return token;
-        },
-        
-        clearGitHubToken() {
-            localStorage.removeItem('yardviz_github_token');
-            this.showToast('GitHub token cleared', 'success');
-        },
-        
-        // Modal state
-        modalState: {
-            action: null,
-            trailerId: null
-        },
-        
-        showModal(title, message, action, trailerId, buttonClass) {
-            this.modalState.action = action;
-            this.modalState.trailerId = trailerId;
-            
-            document.getElementById('modalTitle').textContent = title;
-            document.getElementById('modalMessage').textContent = message;
-            
-            const confirmBtn = document.getElementById('modalConfirmBtn');
-            confirmBtn.className = 'modal-btn modal-btn-confirm ' + (buttonClass || '');
-            confirmBtn.textContent = action === 'pickup' ? 'Picked Up' : 'Dropped Off';
-            
-            document.getElementById('confirmModal').classList.add('visible');
-        },
-        
-        closeModal() {
-            document.getElementById('confirmModal').classList.remove('visible');
-            this.modalState.action = null;
-            this.modalState.trailerId = null;
-        },
-        
-        async confirmModalAction() {
-            const { action, trailerId } = this.modalState;
-            this.closeModal();
-            
-            if (action === 'pickup') {
-                await this.executePickup(trailerId);
-            } else if (action === 'dropoff') {
-                await this.executeDropoff(trailerId);
-            }
-        },
-        
-        // Pickup/Dropoff actions
-        promptPickup(trailerId) {
-            const trailer = this.state.trailers.find(t => t.id === trailerId);
-            if (!trailer) return;
-            
-            this.showModal(
-                'Confirm Pickup',
-                `Mark trailer "${trailerId}" as picked up? This will remove it from the Excel inventory.`,
-                'pickup',
-                trailerId,
-                'pickup'
-            );
-        },
-        
-        promptDropoff(trailerId) {
-            const trailer = this.state.trailers.find(t => t.id === trailerId);
-            if (!trailer) return;
-            
-            this.showModal(
-                'Confirm Drop-off',
-                `Mark trailer "${trailerId}" as dropped off? This will add it back to the Excel inventory.`,
-                'dropoff',
-                trailerId,
-                'dropoff'
-            );
-        },
-        
-        async executePickup(trailerId) {
-            const trailer = this.state.trailers.find(t => t.id === trailerId);
-            if (!trailer) return;
-            
-            this.showLoading(true);
-            
-            try {
-                // Call Power Automate flow
-                const response = await fetch(this.config.powerAutomate.pickupFlowUrl, {
-                    method: 'POST',
-                    headers: { 
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ assetId: trailerId })
-                });
-                
-                if (response.ok || response.status === 202) {
-                    // Update local state
-                    trailer.pickedUp = true;
-                    
-                    this.saveToLocalStorage();
-                    this.applyFilters();
-                    this.renderTrailersOnMap();
-                    
-                    // Update popup if open
-                    if (this.state.selectedTrailerId === trailerId) {
-                        this.showTrailerPopup(trailer);
-                    }
-                    
-                    this.showToast(`Trailer ${trailerId} marked as picked up`, 'success');
-                } else {
-                    const errorText = await response.text();
-                    console.error('Flow error response:', errorText);
-                    throw new Error(`Flow returned status ${response.status}`);
-                }
-            } catch (error) {
-                console.error('Pickup error:', error);
-                this.showToast('Failed to update Excel. Please try again.', 'error');
-            } finally {
-                this.showLoading(false);
-            }
-        },
-        
-        async executeDropoff(trailerId) {
-            const trailer = this.state.trailers.find(t => t.id === trailerId);
-            if (!trailer) return;
-            
-            this.showLoading(true);
-            
-            try {
-                // Call Power Automate flow
-                const response = await fetch(this.config.powerAutomate.dropoffFlowUrl, {
-                    method: 'POST',
-                    headers: { 
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ assetId: trailerId })
-                });
-                
-                if (response.ok || response.status === 202) {
-                    // Update local state
-                    trailer.pickedUp = false;
-                    
-                    this.saveToLocalStorage();
-                    this.applyFilters();
-                    this.renderTrailersOnMap();
-                    
-                    // Update popup if open
-                    if (this.state.selectedTrailerId === trailerId) {
-                        this.showTrailerPopup(trailer);
-                    }
-                    
-                    this.showToast(`Trailer ${trailerId} marked as dropped off`, 'success');
-                } else {
-                    const errorText = await response.text();
-                    console.error('Flow error response:', errorText);
-                    throw new Error(`Flow returned status ${response.status}`);
-                }
-            } catch (error) {
-                console.error('Dropoff error:', error);
-                this.showToast('Failed to update Excel. Please try again.', 'error');
-            } finally {
-                this.showLoading(false);
-            }
-        },
-        
-        // Filter functions
-        setFilterMode(mode) {
-            this.state.filterMode = mode;
-            this.applyFilters();
-        },
-        
-        applyFilters() {
-            const searchTerm = document.getElementById('searchInput')?.value.toLowerCase() || '';
-            const filterMode = this.state.filterMode;
-            
-            this.state.filteredTrailers = this.state.trailers.filter(trailer => {
-                // Search filter
-                if (searchTerm && !trailer.id.toLowerCase().includes(searchTerm)) {
-                    return false;
-                }
-                
-                // Status filter
-                switch (filterMode) {
-                    case 'checkedIn':
-                        return trailer.checkedIn && !trailer.pickedUp;
-                    case 'notCheckedIn':
-                        return !trailer.checkedIn && !trailer.pickedUp;
-                    case 'pickedUp':
-                        return trailer.pickedUp;
-                    case 'onSite':
-                        return !trailer.pickedUp;
-                    default:
-                        return true;
-                }
-            });
-            
-            this.renderTrailerList();
-        },
-        
-        mapStyles: {
-            satellite: 'https://api.maptiler.com/maps/hybrid/style.json',
-            streets: 'https://api.maptiler.com/maps/streets-v2/style.json',
-            outdoor: 'https://api.maptiler.com/maps/outdoor-v2/style.json',
-            basic: 'https://api.maptiler.com/maps/basic-v2/style.json'
-        },
-        
-        init() {
-            console.log('🚛 YardViz initializing...');
-            this.initTheme();
-            this.initDragDrop();
-            this.initMap();
-            
-            // Load data - GitHub first if enabled, then localStorage as fallback
-            if (this.config.github.enabled) {
-                this.loadFromGitHub();
-                
-                // Auto-refresh every 2 minutes
-                setInterval(() => {
-                    console.log('🔄 Auto-refreshing data...');
-                    this.loadFromGitHub(true); // silent refresh
-                }, 2 * 60 * 1000);
-            } else {
-                this.loadFromLocalStorage();
-            }
-            
-            document.addEventListener('click', (e) => {
-                const exportBtn = document.getElementById('exportBtn');
-                const exportMenu = document.getElementById('exportMenu');
-                if (!exportBtn.contains(e.target) && !exportMenu.contains(e.target)) {
-                    exportMenu.classList.remove('visible');
-                }
-            });
-            
-            console.log('✅ YardViz initialized');
-        },
-        
-        initTheme() {
-            const savedTheme = localStorage.getItem('trailerVizTheme');
-            if (savedTheme) {
-                document.documentElement.setAttribute('data-theme', savedTheme);
-            } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                document.documentElement.setAttribute('data-theme', 'dark');
-            }
-        },
-        
-        toggleTheme() {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            document.documentElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('trailerVizTheme', newTheme);
-            if (this.state.map) this.state.map.resize();
-        },
-        
-        initDragDrop() {
-            const uploadZone = document.getElementById('uploadZone');
-            
-            // Skip if uploadZone doesn't exist (moved to settings panel)
-            if (!uploadZone) return;
-            
-            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-                uploadZone.addEventListener(eventName, (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                });
-            });
-            
-            ['dragenter', 'dragover'].forEach(eventName => {
-                uploadZone.addEventListener(eventName, () => uploadZone.classList.add('drag-over'));
-            });
-            
-            ['dragleave', 'drop'].forEach(eventName => {
-                uploadZone.addEventListener(eventName, () => uploadZone.classList.remove('drag-over'));
-            });
-            
-            uploadZone.addEventListener('drop', (e) => {
-                const files = e.dataTransfer.files;
-                if (files.length > 0) this.processFile(files[0]);
-            });
-        },
-        
-        initMap() {
-            console.log('🗺️ Initializing map...');
-            
-            const styleUrl = `${this.mapStyles.satellite}?key=${this.config.mapTilerKey}`;
-            
-            this.state.map = new maplibregl.Map({
-                container: 'map',
-                style: styleUrl,
-                center: this.config.propertyCenter,
-                zoom: this.config.defaultZoom,
-                pitch: 0,
-                bearing: 0
-            });
-            
-            this.state.map.on('load', () => {
-                console.log('✅ Map loaded');
-                this.createTrailerImages();
-                
-                if (this.state.trailers.length > 0) {
-                    setTimeout(() => this.renderTrailersOnMap(), 500);
-                }
-            });
-            
-            this.state.map.addControl(new maplibregl.NavigationControl({
-                showCompass: true,
-                showZoom: false
-            }), 'bottom-right');
-        },
-        
-        createTrailerImages() {
-            const colors = {
-                checkedin: '#22c55e',      // green - Checked In
-                notcheckedin: '#ef4444',   // red - Not Checked In
-                pickedup: '#f57c00'        // orange - Picked Up
-            };
-            
-            Object.entries(colors).forEach(([status, color]) => {
-                const width = 40;
-                const height = 16;
-                const canvas = document.createElement('canvas');
-                canvas.width = width;
-                canvas.height = height;
-                const ctx = canvas.getContext('2d');
-                
-                // Draw trailer body
-                ctx.fillStyle = color;
-                ctx.strokeStyle = '#ffffff';
-                ctx.lineWidth = 2;
-                
-                ctx.beginPath();
-                ctx.roundRect(2, 2, width - 4, height - 4, 2);
-                ctx.fill();
-                ctx.stroke();
-                
-                // Hitch indicator
-                ctx.fillStyle = '#ffffff';
-                ctx.fillRect(width - 8, 5, 3, height - 10);
-                
-                const imageData = ctx.getImageData(0, 0, width, height);
-                
-                if (!this.state.map.hasImage(`trailer-${status}`)) {
-                    this.state.map.addImage(`trailer-${status}`, imageData, { pixelRatio: 1 });
-                }
-            });
-            
-            console.log('✅ Trailer images created');
-        },
-        
-        handleFileUpload(event) {
-            const file = event.target.files[0];
-            if (file) this.processFile(file);
-        },
-        
-        processFile(file) {
-            console.log(`📁 Processing file: ${file.name}`);
-            this.showLoading(true);
-            this.clearValidationErrors();
-            
-            const extension = file.name.split('.').pop().toLowerCase();
-            
-            if (['xlsx', 'xls'].includes(extension)) {
-                this.parseExcel(file);
-            } else if (['csv', 'tsv'].includes(extension)) {
-                this.parseCSV(file, extension === 'tsv' ? '\t' : ',');
-            } else {
-                this.showToast('Unsupported file format', 'error');
-                this.showLoading(false);
-            }
-        },
-        
-        parseExcel(file) {
-            const reader = new FileReader();
-            
-            reader.onload = (e) => {
-                try {
-                    const data = new Uint8Array(e.target.result);
-                    const workbook = XLSX.read(data, { type: 'array' });
-                    const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
-                    const jsonData = XLSX.utils.sheet_to_json(firstSheet, { header: 1 });
-                    this.processRawData(jsonData);
-                } catch (error) {
-                    console.error('Excel parsing error:', error);
-                    this.showToast('Error parsing Excel file', 'error');
-                    this.showLoading(false);
-                }
-            };
-            
-            reader.onerror = () => {
-                this.showToast('Error reading file', 'error');
-                this.showLoading(false);
-            };
-            
-            reader.readAsArrayBuffer(file);
-        },
-        
-        parseCSV(file, delimiter) {
-            Papa.parse(file, {
-                delimiter: delimiter,
-                complete: (results) => this.processRawData(results.data),
-                error: (error) => {
-                    console.error('CSV parsing error:', error);
-                    this.showToast('Error parsing CSV file', 'error');
-                    this.showLoading(false);
-                }
-            });
-        },
-        
-        processRawData(data) {
-            console.log('📊 Processing raw data...', data);
-            
-            if (!data || data.length < 2) {
-                this.showToast('File appears to be empty', 'error');
-                this.showLoading(false);
-                return;
-            }
-            
-            const headers = data[0].map(h => String(h).toLowerCase().trim());
-            console.log('Headers found:', headers);
-            
-            // Find Asset ID column - prioritize "asset" over other "id" columns
-            let assetIdCol = headers.findIndex(h => h.includes('asset'));
-            if (assetIdCol === -1) {
-                assetIdCol = headers.findIndex(h => h === 'trailer id' || h === 'trailerid');
-            }
-            if (assetIdCol === -1) {
-                assetIdCol = headers.findIndex(h => (h === 'id' || h.includes('trailer')) && !h.includes('map'));
-            }
-            
-            const latCol = headers.findIndex(h => h.includes('lat'));
-            const lngCol = headers.findIndex(h => h.includes('lon') || h.includes('lng'));
-            
-            // Enhanced heading detection - check for various column names
-            let headingCol = headers.findIndex(h => h === 'heading' || h === 'head');
-            if (headingCol === -1) {
-                headingCol = headers.findIndex(h => h.includes('heading') || h.includes('bearing') || h.includes('direction') || h.includes('angle') || h.includes('orient'));
-            }
-            
-            console.log('Column mapping:', { assetIdCol, latCol, lngCol, headingCol });
-            
-            if (assetIdCol === -1 || latCol === -1 || lngCol === -1) {
-                this.showToast('Missing required columns (Asset ID, Latitude, Longitude)', 'error');
-                this.showLoading(false);
-                return;
-            }
-            
-            // Get existing check-in status from current trailers
-            const existingStatus = {};
-            this.state.trailers.forEach(t => {
-                existingStatus[t.id] = t.checkedIn;
-            });
-            
-            // Build set of previously known trailer IDs
-            const previousIds = new Set(this.state.trailers.map(t => t.id));
-            
-            // Use Map to deduplicate trailers by Asset ID (last entry wins)
-            const trailerMap = new Map();
-            const errors = [];
-            let newTrailerCount = 0;
-            
-            for (let i = 1; i < data.length; i++) {
-                const row = data[i];
-                if (!row || row.length === 0 || !row[assetIdCol]) continue;
-                
-                const assetId = String(row[assetIdCol]).trim();
-                const latRaw = String(row[latCol] || '').replace(/[−–]/g, '-');
-                const lngRaw = String(row[lngCol] || '').replace(/[−–]/g, '-');
-                const lat = parseFloat(latRaw);
-                const lng = parseFloat(lngRaw);
-                
-                // Parse heading - handle compass directions and numeric values
-                let heading = 0;
-                let headingDisplay = '0°';
-                if (headingCol !== -1 && row[headingCol] !== undefined && row[headingCol] !== null && row[headingCol] !== '') {
-                    const headingRaw = row[headingCol];
-                    
-                    // Handle both number and string types
-                    if (typeof headingRaw === 'number') {
-                        heading = headingRaw;
-                        headingDisplay = `${headingRaw}°`;
-                    } else {
-                        const headingStr = String(headingRaw).toUpperCase().trim();
-                        
-                        // Convert compass directions to degrees
-                        const compassToDegrees = {
-                            'N': 0,
-                            'NNE': 22.5,
-                            'NE': 45,
-                            'ENE': 67.5,
-                            'E': 90,
-                            'ESE': 112.5,
-                            'SE': 135,
-                            'SSE': 157.5,
-                            'S': 180,
-                            'SSW': 202.5,
-                            'SW': 225,
-                            'WSW': 247.5,
-                            'W': 270,
-                            'WNW': 292.5,
-                            'NW': 315,
-                            'NNW': 337.5
-                        };
-                        
-                        if (compassToDegrees.hasOwnProperty(headingStr)) {
-                            heading = compassToDegrees[headingStr];
-                            headingDisplay = headingStr;
-                        } else {
-                            // Try parsing as number (might have degree symbol)
-                            const numericHeading = parseFloat(headingStr.replace(/[°'"]/g, ''));
-                            heading = isNaN(numericHeading) ? 0 : numericHeading;
-                            headingDisplay = `${heading}°`;
-                        }
-                    }
-                    if (isNaN(heading)) {
-                        heading = 0;
-                        headingDisplay = '0°';
-                    }
-                }
-                
-                // Validate coordinates
-                if (isNaN(lat) || isNaN(lng)) {
-                    errors.push(`Row ${i + 1}: Invalid coordinates for "${assetId}"`);
-                    continue;
-                }
-                
-                if (lat < -90 || lat > 90 || lng < -180 || lng > 180) {
-                    errors.push(`Row ${i + 1}: Coordinates out of range for "${assetId}"`);
-                    continue;
-                }
-                
-                // Determine check-in status
-                // If trailer existed before, keep its status; if new, set to NOT checked in
-                let checkedIn;
-                if (existingStatus.hasOwnProperty(assetId)) {
-                    checkedIn = existingStatus[assetId];
-                } else if (previousIds.size > 0) {
-                    // New trailer (not in previous data) - mark as NOT checked in
-                    checkedIn = false;
-                    if (!trailerMap.has(assetId)) {
-                        newTrailerCount++;
-                    }
-                } else {
-                    // First load - default to checked in
-                    checkedIn = true;
-                }
-                
-                // Use Map to deduplicate - last entry for each ID wins
-                trailerMap.set(assetId, {
-                    id: assetId,
-                    lat: lat,
-                    lng: lng,
-                    heading: heading,
-                    headingDisplay: headingDisplay,
-                    checkedIn: checkedIn,
-                    isNew: !previousIds.has(assetId) && previousIds.size > 0
-                });
-            }
-            
-            // Convert Map to array
-            const trailers = Array.from(trailerMap.values());
-            
-            if (errors.length > 0) {
-                this.showValidationErrors(errors);
-            }
-            
-            if (trailers.length === 0) {
-                this.showToast('No valid trailer data found', 'error');
-                this.showLoading(false);
-                return;
-            }
-            
-            console.log(`✅ Parsed ${trailers.length} trailers (${newTrailerCount} new)`);
-            
-            // Update previous IDs for next upload
-            this.state.previousTrailerIds = new Set(trailers.map(t => t.id));
-            
-            this.state.trailers = trailers;
-            this.state.filteredTrailers = [...trailers];
-            
-            this.saveToLocalStorage();
-            this.renderTrailerList();
-            this.renderTrailersOnMap();
-            
-            if (newTrailerCount > 0) {
-                this.showToast(`Loaded ${trailers.length} trailers (${newTrailerCount} new - marked as Not Checked In)`, 'warning');
-            } else {
-                this.showToast(`Loaded ${trailers.length} trailers`, 'success');
-            }
-        },
-        
-        renderTrailersOnMap() {
-            console.log('📍 Rendering trailers at GPS coordinates...');
-            
-            if (!this.state.map || this.state.trailers.length === 0) {
-                this.showLoading(false);
-                return;
-            }
-            
-            // Remove existing layers
-            if (this.state.map.getLayer('trailers')) {
-                this.state.map.removeLayer('trailers');
-            }
-            if (this.state.map.getLayer('trailers-labels')) {
-                this.state.map.removeLayer('trailers-labels');
-            }
-            if (this.state.map.getSource('trailers')) {
-                this.state.map.removeSource('trailers');
-            }
-            
-            // Create features
-            const features = this.state.trailers.map(trailer => {
-                let status;
-                if (trailer.pickedUp) {
-                    status = 'pickedup';
-                } else if (trailer.checkedIn) {
-                    status = 'checkedin';
-                } else {
-                    status = 'notcheckedin';
-                }
-                
-                return {
-                    type: 'Feature',
-                    properties: {
-                        id: trailer.id,
-                        status: status,
-                        lat: trailer.lat,
-                        lng: trailer.lng,
-                        checkedIn: trailer.checkedIn,
-                        pickedUp: trailer.pickedUp || false
-                    },
-                    geometry: {
-                        type: 'Point',
-                        coordinates: [trailer.lng, trailer.lat]
-                    }
-                };
-            });
-            
-            // Add source
-            this.state.map.addSource('trailers', {
-                type: 'geojson',
-                data: {
-                    type: 'FeatureCollection',
-                    features: features
-                }
-            });
-            
-            // Add trailer symbols layer
-            this.state.map.addLayer({
-                id: 'trailers',
-                type: 'symbol',
-                source: 'trailers',
-                layout: {
-                    'icon-image': ['concat', 'trailer-', ['get', 'status']],
-                    'icon-size': 1.2,
-                    'icon-rotation-alignment': 'map',
-                    'icon-allow-overlap': true,
-                    'icon-ignore-placement': true
-                }
-            });
-            
-            // Add labels layer
-            this.state.map.addLayer({
-                id: 'trailers-labels',
-                type: 'symbol',
-                source: 'trailers',
-                layout: {
-                    'text-field': ['get', 'id'],
-                    'text-font': ['Open Sans Bold', 'Arial Unicode MS Bold'],
-                    'text-size': 10,
-                    'text-offset': [0, 1.5],
-                    'text-allow-overlap': false
-                },
-                paint: {
-                    'text-color': '#ffffff',
-                    'text-halo-color': '#000000',
-                    'text-halo-width': 1.5
-                }
-            });
-            
-            // Click handler
-            this.state.map.on('click', 'trailers', (e) => {
-                if (e.features && e.features.length > 0) {
-                    const trailerId = e.features[0].properties.id;
-                    this.selectTrailer(trailerId);
-                }
-            });
-            
-            // Hover cursor
-            this.state.map.on('mouseenter', 'trailers', () => {
-                this.state.map.getCanvas().style.cursor = 'pointer';
-            });
-            
-            this.state.map.on('mouseleave', 'trailers', () => {
-                this.state.map.getCanvas().style.cursor = '';
-            });
-            
-            this.updateStats();
-            this.showLoading(false);
-            
-            console.log(`✅ Rendered ${features.length} trailers`);
-        },
-        
-        // Check-in modal functions
-        promptCheckIn(trailerId, event) {
-            event.stopPropagation();
-            const checkbox = event.target;
-            const trailer = this.state.trailers.find(t => t.id === trailerId);
-            
-            if (!trailer) return;
-            
-            // If unchecking, just toggle directly
-            if (trailer.checkedIn) {
-                trailer.checkedIn = false;
-                trailer.isNew = false;
-                this.saveToLocalStorage();
-                this.applyFilters();
-                this.renderTrailersOnMap();
-                return;
-            }
-            
-            // If checking in, show modal for notes
-            this.state.pendingCheckInTrailerId = trailerId;
-            this.state.pendingCheckInCheckbox = checkbox;
-            
-            document.getElementById('checkInModalMessage').textContent = `Add notes for trailer ${trailerId} (optional)`;
-            document.getElementById('checkInNotes').value = '';
-            document.getElementById('checkInSuccess').style.display = 'none';
-            document.getElementById('checkInModal').classList.add('visible');
-            
-            // Reset checkbox until confirmed
-            checkbox.checked = false;
-        },
-        
-        promptCheckInFromPopup(trailerId, isChecked) {
-            const trailer = this.state.trailers.find(t => t.id === trailerId);
-            
-            if (!trailer) return;
-            
-            // If unchecking, just toggle directly
-            if (!isChecked) {
-                trailer.checkedIn = false;
-                trailer.isNew = false;
-                this.saveToLocalStorage();
-                this.applyFilters();
-                this.renderTrailersOnMap();
-                this.showTrailerPopup(trailer);
-                return;
-            }
-            
-            // If checking in, show modal for notes
-            this.state.pendingCheckInTrailerId = trailerId;
-            this.state.pendingCheckInFromPopup = true;
-            
-            document.getElementById('checkInModalMessage').textContent = `Add notes for trailer ${trailerId} (optional)`;
-            document.getElementById('checkInNotes').value = '';
-            document.getElementById('checkInSuccess').style.display = 'none';
-            document.getElementById('checkInModal').classList.add('visible');
-        },
-        
-        closeCheckInModal() {
-            document.getElementById('checkInModal').classList.remove('visible');
-            this.state.pendingCheckInTrailerId = null;
-            this.state.pendingCheckInCheckbox = null;
-            this.state.pendingCheckInFromPopup = false;
-            
-            // Re-render to reset checkbox state
-            this.renderTrailerList();
-        },
-        
-        async submitCheckIn() {
-            const trailerId = this.state.pendingCheckInTrailerId;
-            const notes = document.getElementById('checkInNotes').value.trim();
-            
-            if (!trailerId) return;
-            
-            const trailer = this.state.trailers.find(t => t.id === trailerId);
-            if (!trailer) return;
-            
-            // Update trailer state
-            trailer.checkedIn = true;
-            trailer.isNew = false;
-            
-            // Call the addToExcel function with notes
-            try {
-                await this.addToExcelWithNotes(trailerId, notes);
-                
-                // Show success message
-                document.getElementById('checkInSuccess').style.display = 'block';
-                document.querySelector('#checkInModal .modal-buttons').style.display = 'none';
-                document.querySelector('#checkInModal .modal-input').style.display = 'none';
-                document.querySelector('#checkInModal .modal-message').style.display = 'none';
-                
-                // Close after delay
-                setTimeout(() => {
-                    document.getElementById('checkInModal').classList.remove('visible');
-                    document.querySelector('#checkInModal .modal-buttons').style.display = 'flex';
-                    document.querySelector('#checkInModal .modal-input').style.display = 'block';
-                    document.querySelector('#checkInModal .modal-message').style.display = 'block';
-                    
-                    this.state.pendingCheckInTrailerId = null;
-                    this.state.pendingCheckInCheckbox = null;
-                    
-                    // Re-render
-                    this.saveToLocalStorage();
-                    this.applyFilters();
-                    this.renderTrailersOnMap();
-                    
-                    if (this.state.pendingCheckInFromPopup) {
-                        this.showTrailerPopup(trailer);
-                    }
-                    this.state.pendingCheckInFromPopup = false;
-                }, 1500);
-                
-            } catch (error) {
-                console.error('Error checking in:', error);
-                this.showToast('Error checking in trailer', 'error');
-                this.closeCheckInModal();
-            }
-        },
-        
-        async addToExcelWithNotes(trailerId, notes) {
-            try {
-                const response = await fetch(this.config.powerAutomate.dropoffFlowUrl, {
-                    method: 'POST',
-                    headers: { 
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ assetId: trailerId, notes: notes || '' })
-                });
-                
-                if (response.ok || response.status === 202) {
-                    console.log(`Added ${trailerId} to Excel with notes`);
-                } else {
-                    console.error(`Failed to add ${trailerId} to Excel: ${response.status}`);
-                }
-            } catch (error) {
-                console.error('Error adding to Excel:', error);
-                throw error;
-            }
-        },
-        
-        // Settings panel functions
-        toggleSettings() {
-            const panel = document.getElementById('settingsPanel');
-            const overlay = document.getElementById('settingsOverlay');
-            
-            panel.classList.toggle('visible');
-            overlay.classList.toggle('visible');
-        },
-        
-        toggleCheckedIn(trailerId, event) {
-            event.stopPropagation();
-            
-            const trailer = this.state.trailers.find(t => t.id === trailerId);
-            if (trailer) {
-                const wasCheckedIn = trailer.checkedIn;
-                trailer.checkedIn = !trailer.checkedIn;
-                trailer.isNew = false;  // Clear new flag when manually toggled
-                
-                // If checking in (not already checked in), add to Excel
-                if (!wasCheckedIn && trailer.checkedIn) {
-                    this.addToExcel(trailerId);
-                }
-                
-                this.saveToLocalStorage();
-                this.applyFilters();
-                this.renderTrailersOnMap();
-            }
-        },
-        
-        toggleCheckedInFromPopup(trailerId, isChecked) {
-            const trailer = this.state.trailers.find(t => t.id === trailerId);
-            if (trailer) {
-                const wasCheckedIn = trailer.checkedIn;
-                trailer.checkedIn = isChecked;
-                trailer.isNew = false;
-                
-                // If checking in (not already checked in), add to Excel
-                if (!wasCheckedIn && isChecked) {
-                    this.addToExcel(trailerId);
-                }
-                
-                this.saveToLocalStorage();
-                this.applyFilters();
-                this.renderTrailersOnMap();
-                
-                // Re-show the popup with updated status
-                this.showTrailerPopup(trailer);
-            }
-        },
-        
-        async addToExcel(trailerId) {
-            try {
-                const response = await fetch(this.config.powerAutomate.dropoffFlowUrl, {
-                    method: 'POST',
-                    headers: { 
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ assetId: trailerId })
-                });
-                
-                if (response.ok || response.status === 202) {
-                    console.log(`Added ${trailerId} to Excel`);
-                } else {
-                    console.error(`Failed to add ${trailerId} to Excel: ${response.status}`);
-                }
-            } catch (error) {
-                console.error('Error adding to Excel:', error);
-            }
-        },
-        
-        checkInAll() {
-            this.state.trailers.forEach(t => {
-                t.checkedIn = true;
-                t.isNew = false;
-            });
-            this.saveToLocalStorage();
-            this.renderTrailerList();
-            this.renderTrailersOnMap();
-            this.showToast('All trailers checked in', 'success');
-        },
-        
-        uncheckAll() {
-            this.state.trailers.forEach(t => {
-                t.checkedIn = false;
-                t.isNew = false;
-            });
-            this.saveToLocalStorage();
-            this.renderTrailerList();
-            this.renderTrailersOnMap();
-            this.showToast('All trailers unchecked', 'success');
-        },
-        
-        showValidationErrors(errors) {
-            const container = document.getElementById('validationErrors');
-            const list = document.getElementById('validationErrorsList');
-            list.innerHTML = errors.map(e => `<div class="validation-error-item">${e}</div>`).join('');
-            container.classList.add('visible');
-        },
-        
-        clearValidationErrors() {
-            document.getElementById('validationErrors').classList.remove('visible');
-        },
-        
-        saveToLocalStorage() {
-            try {
-                const data = {
-                    trailers: this.state.trailers,
-                    previousTrailerIds: Array.from(this.state.previousTrailerIds),
-                    timestamp: Date.now()
-                };
-                localStorage.setItem(this.config.localStorageKey, JSON.stringify(data));
-                console.log('💾 Data saved to localStorage');
-                
-                // Also sync to GitHub if enabled
-                if (this.config.github.enabled) {
-                    this.saveToGitHub();
-                }
-            } catch (error) {
-                console.warn('Could not save to localStorage:', error);
-            }
-        },
-        
-        async loadFromGitHub(silent = false) {
-            const { owner, repo, path } = this.config.github;
-            const token = this.getGitHubToken();
-            
-            if (!token) {
-                console.log('No GitHub token provided, using localStorage');
-                this.loadFromLocalStorage();
-                return;
-            }
-            
-            const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
-            
-            try {
-                if (!silent) console.log('☁️ Loading data from GitHub...');
-                
-                const response = await fetch(url, {
-                    headers: {
-                        'Authorization': `token ${token}`,
-                        'Accept': 'application/vnd.github.v3+json'
-                    }
-                });
-                
-                if (response.status === 401) {
-                    this.showToast('Invalid GitHub token. Click Sync to re-enter.', 'error');
-                    localStorage.removeItem('yardviz_github_token');
-                    this.loadFromLocalStorage();
-                    return;
-                }
-                
-                if (response.status === 404) {
-                    if (!silent) console.log('📄 No existing data file on GitHub, starting fresh');
-                    this.loadFromLocalStorage();
-                    return;
-                }
-                
-                if (!response.ok) {
-                    throw new Error(`GitHub API error: ${response.status}`);
-                }
-                
-                const fileData = await response.json();
-                
-                // Check if data has changed (compare SHA)
-                if (silent && this.state.githubSha === fileData.sha) {
-                    console.log('☁️ No changes detected');
-                    return;
-                }
-                
-                this.state.githubSha = fileData.sha;
-                
-                const content = atob(fileData.content);
-                const data = JSON.parse(content);
-                
-                if (data.trailers && data.trailers.length > 0) {
-                    // Get previously known trailer IDs
-                    const previousIds = this.state.previousTrailerIds || new Set();
-                    const currentIds = new Set(this.state.trailers.map(t => t.id));
-                    
-                    // Preserve local check-in and isNew status
-                    const localStatus = new Map();
-                    for (const t of this.state.trailers) {
-                        localStatus.set(t.id, { checkedIn: t.checkedIn, isNew: t.isNew });
-                    }
-                    
-                    // Count new trailers
-                    let newTrailerCount = 0;
-                    
-                    this.state.trailers = data.trailers.map(t => {
-                        const existingStatus = localStatus.get(t.id);
-                        const isNewTrailer = previousIds.size > 0 && !previousIds.has(t.id) && !currentIds.has(t.id);
-                        
-                        if (isNewTrailer) {
-                            newTrailerCount++;
-                        }
-                        
-                        return {
-                            ...t,
-                            // Keep local check-in status if we had it, otherwise use data value
-                            checkedIn: existingStatus ? existingStatus.checkedIn : (t.checkedIn || false),
-                            // Mark as new if it wasn't in our previous data
-                            isNew: existingStatus ? existingStatus.isNew : isNewTrailer
-                        };
-                    });
-                    
-                    this.state.filteredTrailers = [...this.state.trailers];
-                    this.state.previousTrailerIds = new Set(data.trailers.map(t => t.id));
-                    
-                    // Also save to localStorage as cache
-                    localStorage.setItem(this.config.localStorageKey, JSON.stringify({
-                        trailers: this.state.trailers,
-                        previousTrailerIds: Array.from(this.state.previousTrailerIds)
-                    }));
-                    
-                    this.renderTrailerList();
-                    if (this.state.map && this.state.map.loaded()) {
-                        this.renderTrailersOnMap();
-                    }
-                    
-                    console.log(`☁️ Loaded ${data.trailers.length} trailers from GitHub (${newTrailerCount} new)`);
-                    if (!silent) {
-                        if (newTrailerCount > 0) {
-                            this.showToast(`Synced ${data.trailers.length} trailers (${newTrailerCount} new)`, 'warning');
-                        } else {
-                            this.showToast(`Synced ${data.trailers.length} trailers from cloud`, 'success');
-                        }
-                    }
-                }
-            } catch (error) {
-                console.error('GitHub load error:', error);
-                if (!silent) {
-                    console.log('📂 Falling back to localStorage');
-                    this.loadFromLocalStorage();
-                    this.showToast('Could not sync from cloud, using local data', 'warning');
-                }
-            }
-        },
-        
-        async saveToGitHub() {
-            if (this.state.isSyncing) return;
-            
-            const { owner, repo, path } = this.config.github;
-            const token = localStorage.getItem('yardviz_github_token');
-            
-            if (!token) {
-                console.log('No GitHub token, skipping cloud sync');
-                return;
-            }
-            
-            const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
-            
-            this.state.isSyncing = true;
-            
-            try {
-                console.log('☁️ Saving data to GitHub...');
-                
-                const data = {
-                    trailers: this.state.trailers,
-                    previousTrailerIds: Array.from(this.state.previousTrailerIds),
-                    timestamp: Date.now(),
-                    lastModified: new Date().toISOString()
-                };
-                
-                const content = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
-                
-                // Get current SHA if we don't have it
-                if (!this.state.githubSha) {
-                    try {
-                        const getResponse = await fetch(url, {
-                            headers: {
-                                'Authorization': `token ${token}`,
-                                'Accept': 'application/vnd.github.v3+json'
-                            }
-                        });
-                        if (getResponse.ok) {
-                            const fileData = await getResponse.json();
-                            this.state.githubSha = fileData.sha;
-                        }
-                    } catch (e) {
-                        // File doesn't exist yet, that's OK
-                    }
-                }
-                
-                const body = {
-                    message: `Update trailer data - ${new Date().toLocaleString()}`,
-                    content: content
-                };
-                
-                if (this.state.githubSha) {
-                    body.sha = this.state.githubSha;
-                }
-                
-                const response = await fetch(url, {
-                    method: 'PUT',
-                    headers: {
-                        'Authorization': `token ${token}`,
-                        'Accept': 'application/vnd.github.v3+json',
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(body)
-                });
-                
-                if (response.status === 401) {
-                    this.showToast('Invalid GitHub token', 'error');
-                    localStorage.removeItem('yardviz_github_token');
-                    return;
-                }
-                
-                if (!response.ok) {
-                    const errorData = await response.json();
-                    throw new Error(errorData.message || `GitHub API error: ${response.status}`);
-                }
-                
-                const result = await response.json();
-                this.state.githubSha = result.content.sha;
-                
-                console.log('☁️ Data saved to GitHub');
-            } catch (error) {
-                console.error('GitHub save error:', error);
-                this.showToast('Could not sync to cloud', 'error');
-            } finally {
-                this.state.isSyncing = false;
-            }
-        },
-        
-        async refreshFromGitHub() {
-            if (!this.config.github.enabled) {
-                this.showToast('GitHub sync not configured', 'warning');
-                return;
-            }
-            await this.loadFromGitHub();
-        },
-        
-        loadFromLocalStorage() {
-            try {
-                const saved = localStorage.getItem(this.config.localStorageKey);
-                if (saved) {
-                    const data = JSON.parse(saved);
-                    if (data.trailers && data.trailers.length > 0) {
-                        this.state.trailers = data.trailers;
-                        this.state.filteredTrailers = [...data.trailers];
-                        this.state.previousTrailerIds = new Set(data.previousTrailerIds || []);
-                        this.renderTrailerList();
-                        console.log(`📂 Loaded ${data.trailers.length} trailers from localStorage`);
-                    }
-                }
-            } catch (error) {
-                console.warn('Could not load from localStorage:', error);
-            }
-        },
-        
-        renderTrailerList() {
-            const container = document.getElementById('trailerList');
-            const emptyState = document.getElementById('emptyState');
-            const trailers = this.state.filteredTrailers;
-            
-            if (trailers.length === 0) {
-                container.innerHTML = '';
-                emptyState.style.display = 'block';
-                return;
-            }
-            
-            emptyState.style.display = 'none';
-            
-            container.innerHTML = trailers.map(trailer => {
-                const statusClass = trailer.pickedUp ? 'pickedup' : (trailer.checkedIn ? 'checkedin' : 'notcheckedin');
-                const pickedUpClass = trailer.pickedUp ? 'picked-up' : '';
-                
-                // Only show Check Out button for checked-in trailers that are not already picked up
-                let actionButton = '';
-                if (trailer.pickedUp) {
-                    actionButton = `<button class="btn-dropoff" onclick="app.promptDropoff('${trailer.id}')">Drop Off</button>`;
-                } else if (trailer.checkedIn) {
-                    actionButton = `<button class="btn-pickup" onclick="app.promptPickup('${trailer.id}')">Check Out</button>`;
-                }
-                
-                return `
-                <div class="trailer-item ${this.state.selectedTrailerId === trailer.id ? 'active' : ''} ${pickedUpClass}" 
-                     onclick="app.selectTrailer('${trailer.id}')">
-                    <div class="trailer-icon status-${statusClass}">🚛</div>
-                    <div class="trailer-info">
-                        <div class="trailer-id">${trailer.id}${trailer.isNew ? ' 🆕' : ''}${trailer.pickedUp ? ' 📤' : ''}</div>
-                    </div>
-                    <label class="checkin-toggle" onclick="event.stopPropagation()">
-                        <input type="checkbox" ${trailer.checkedIn ? 'checked' : ''} 
-                               onchange="app.promptCheckIn('${trailer.id}', event)">
-                        <span class="checkin-slider"></span>
-                    </label>
-                    <div class="trailer-actions" onclick="event.stopPropagation()">
-                        ${actionButton}
-                    </div>
-                </div>
-            `}).join('');
-            
-            this.updateStats();
-        },
-        
-        filterTrailers(event) {
-            this.applyFilters();
-        },
-        
-        selectTrailer(trailerId) {
-            const trailer = this.state.trailers.find(t => t.id === trailerId);
-            if (!trailer) return;
-            
-            this.state.selectedTrailerId = trailerId;
-            this.renderTrailerList();
-            
-            this.state.map.flyTo({
-                center: [trailer.lng, trailer.lat],
-                zoom: 19,
-                duration: 1000
-            });
-            
-            this.showTrailerPopup(trailer);
-        },
-        
-        showTrailerPopup(trailer) {
-            if (this.state.currentPopup) {
-                this.state.currentPopup.remove();
-            }
-            
-            let statusColor, statusText;
-            if (trailer.pickedUp) {
-                statusColor = '#f57c00';
-                statusText = 'PICKED UP';
-            } else if (trailer.checkedIn) {
-                statusColor = '#22c55e';
-                statusText = 'CHECKED IN';
-            } else {
-                statusColor = '#ef4444';
-                statusText = 'NOT CHECKED IN';
-            }
-            
-            // Only show action button for appropriate states
-            let actionButton = '';
-            if (trailer.pickedUp) {
-                actionButton = `<button class="btn-dropoff" style="width:100%; margin-top:8px;" onclick="app.promptDropoff('${trailer.id}')">🔽 Drop Off</button>`;
-            } else if (trailer.checkedIn) {
-                actionButton = `<button class="btn-pickup" style="width:100%; margin-top:8px;" onclick="app.promptPickup('${trailer.id}')">📤 Check Out</button>`;
-            }
-            
-            const mtsnRow = trailer.mtsn 
-                ? `<div class="popup-row">
-                    <span class="popup-label">MTSN</span>
-                    <span class="popup-value" style="font-size: 0.75rem;">${trailer.mtsn}</span>
-                   </div>`
-                : '';
-            
-            const popupContent = `
-                <div class="popup-header">
-                    <span class="popup-icon">🚛</span>
-                    <span class="popup-title">${trailer.id}</span>
-                </div>
-                <div class="popup-row">
-                    <span class="popup-label">Status</span>
-                    <span class="popup-value" style="color: ${statusColor}">${statusText}</span>
-                </div>
-                <div class="popup-row">
-                    <span class="popup-label">Check In</span>
-                    <label class="checkin-toggle">
-                        <input type="checkbox" ${trailer.checkedIn ? 'checked' : ''} 
-                               onchange="app.promptCheckInFromPopup('${trailer.id}', this.checked)">
-                        <span class="checkin-slider"></span>
-                    </label>
-                </div>
-                ${mtsnRow}
-                <div class="popup-row">
-                    <span class="popup-label">Latitude</span>
-                    <span class="popup-value">${trailer.lat.toFixed(6)}</span>
-                </div>
-                <div class="popup-row">
-                    <span class="popup-label">Longitude</span>
-                    <span class="popup-value">${trailer.lng.toFixed(6)}</span>
-                </div>
-                ${actionButton}
-            `;
-            
-            this.state.currentPopup = new maplibregl.Popup({
-                closeButton: true,
-                closeOnClick: false,
-                offset: 25
-            })
-            .setLngLat([trailer.lng, trailer.lat])
-            .setHTML(popupContent)
-            .addTo(this.state.map);
-        },
-        
-        updateStats() {
-            const trailers = this.state.trailers;
-            const pickedUp = trailers.filter(t => t.pickedUp).length;
-            const onSite = trailers.filter(t => !t.pickedUp);
-            const checkedIn = onSite.filter(t => t.checkedIn).length;
-            const notCheckedIn = onSite.filter(t => !t.checkedIn).length;
-            
-            document.getElementById('statTrailers').textContent = trailers.length;
-            document.getElementById('statCheckedIn').textContent = checkedIn;
-            document.getElementById('statNotCheckedIn').textContent = notCheckedIn;
-            document.getElementById('statPickedUp').textContent = pickedUp;
-        },
-        
-        zoomIn() { this.state.map.zoomIn(); },
-        zoomOut() { this.state.map.zoomOut(); },
-        
-        resetView() {
-            this.state.map.flyTo({
-                center: this.config.propertyCenter,
-                zoom: this.config.defaultZoom,
-                pitch: 0,
-                bearing: 0,
-                duration: 1000
-            });
-        },
-        
-        fitToTrailers() {
-            if (this.state.trailers.length === 0) return;
-            
-            const bounds = new maplibregl.LngLatBounds();
-            this.state.trailers.forEach(t => bounds.extend([t.lng, t.lat]));
-            
-            this.state.map.fitBounds(bounds, {
-                padding: 50,
-                duration: 1000
-            });
-        },
-        
-        changeMapStyle(event) {
-            const style = event.target.value;
-            const styleUrl = `${this.mapStyles[style]}?key=${this.config.mapTilerKey}`;
-            
-            this.state.map.setStyle(styleUrl);
-            
-            this.state.map.once('styledata', () => {
-                setTimeout(() => {
-                    this.createTrailerImages();
-                    if (this.state.trailers.length > 0) {
-                        this.renderTrailersOnMap();
-                    }
-                }, 100);
-            });
-        },
-        
-        toggleExportMenu() {
-            // Legacy function - export menu moved to settings panel
-        },
-        
-        exportAsPNG() {
-            this.showLoading(true);
-            
-            html2canvas(document.getElementById('map'), {
-                useCORS: true,
-                allowTaint: true,
-                backgroundColor: null
-            }).then(canvas => {
-                const link = document.createElement('a');
-                link.download = `trailer-gps-${new Date().toISOString().split('T')[0]}.png`;
-                link.href = canvas.toDataURL('image/png');
-                link.click();
-                this.showLoading(false);
-                this.showToast('PNG exported successfully', 'success');
-            }).catch(error => {
-                console.error('Export error:', error);
-                this.showLoading(false);
-                this.showToast('Export failed', 'error');
-            });
-        },
-        
-        exportAsPDF() {
-            this.showLoading(true);
-            
-            html2canvas(document.getElementById('map'), {
-                useCORS: true,
-                allowTaint: true,
-                backgroundColor: null
-            }).then(canvas => {
-                const { jsPDF } = window.jspdf;
-                const pdf = new jsPDF('landscape', 'mm', 'a4');
-                const imgWidth = 297;
-                const imgHeight = (canvas.height * imgWidth) / canvas.width;
-                pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, imgWidth, imgHeight);
-                pdf.save(`trailer-gps-${new Date().toISOString().split('T')[0]}.pdf`);
-                this.showLoading(false);
-                this.showToast('PDF exported successfully', 'success');
-            }).catch(error => {
-                console.error('Export error:', error);
-                this.showLoading(false);
-                this.showToast('Export failed', 'error');
-            });
-        },
-        
-        printView() {
-            window.print();
-        },
-        
-        exportData() {
-            
-            const data = {
-                trailers: this.state.trailers,
-                exportDate: new Date().toISOString(),
-                version: '2.0'
-            };
-            
-            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-            const link = document.createElement('a');
-            link.download = `yardviz-data-${new Date().toISOString().split('T')[0]}.json`;
-            link.href = URL.createObjectURL(blob);
-            link.click();
-            URL.revokeObjectURL(link.href);
-            
-            this.showToast('Data exported successfully', 'success');
-        },
-        
-        importData() {
-            const input = document.createElement('input');
-            input.type = 'file';
-            input.accept = '.json';
-            
-            input.onchange = (e) => {
-                const file = e.target.files[0];
-                if (!file) return;
-                
-                const reader = new FileReader();
-                reader.onload = (event) => {
-                    try {
-                        const data = JSON.parse(event.target.result);
-                        
-                        if (data.trailers && Array.isArray(data.trailers)) {
-                            this.state.trailers = data.trailers;
-                            this.state.filteredTrailers = [...data.trailers];
-                            this.state.previousTrailerIds = new Set(data.trailers.map(t => t.id));
-                            
-                            this.saveToLocalStorage();
-                            this.renderTrailerList();
-                            this.renderTrailersOnMap();
-                            
-                            this.showToast(`Imported ${data.trailers.length} trailers`, 'success');
-                        } else {
-                            this.showToast('Invalid data file format', 'error');
-                        }
-                    } catch (error) {
-                        console.error('Import error:', error);
-                        this.showToast('Error reading data file', 'error');
-                    }
-                };
-                reader.readAsText(file);
-            };
-            
-            input.click();
-        },
-        
-        showLoading(show) {
-            const overlay = document.getElementById('loadingOverlay');
-            if (show) overlay.classList.add('visible');
-            else overlay.classList.remove('visible');
-        },
-        
-        showToast(message, type = 'success') {
-            const container = document.getElementById('toastContainer');
-            const icons = { success: '✅', error: '❌', warning: '⚠️' };
-            
-            const toast = document.createElement('div');
-            toast.className = `toast ${type}`;
-            toast.innerHTML = `
-                <span class="toast-icon">${icons[type]}</span>
-                <span class="toast-message">${message}</span>
-            `;
-            
-            container.appendChild(toast);
-            
-            setTimeout(() => {
-                toast.style.animation = 'toastIn 0.3s ease reverse';
-                setTimeout(() => toast.remove(), 300);
-            }, 3000);
-        }
-    };
-    
-    document.addEventListener('DOMContentLoaded', () => app.init());
-    </script>
 </body>
 </html>
