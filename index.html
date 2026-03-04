@@ -24,28 +24,49 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg-primary: #f8f9fa;
-            --bg-secondary: #ffffff;
-            --bg-tertiary: #e9ecef;
-            --text-primary: #1a1a2e;
-            --text-secondary: #495057;
-            --text-muted: #868e96;
-            --border-color: #dee2e6;
-            --accent-primary: #002B5C;
-            --accent-secondary: #0056b3;
+            /* Metro Trailer Color Palette */
+            --metro-navy: #0c2340;
+            --metro-navy-light: #1a3a5c;
+            --metro-navy-dark: #081828;
+            --metro-blue: #0066cc;
+            --metro-orange: #F7941D;
+            --metro-orange-hover: #e8850f;
+            --metro-white: #FFFFFF;
+            --metro-light-gray: #f5f7fa;
+            --metro-gray: #e8ecf1;
+            --metro-text: #1a1a2e;
+            --metro-text-light: #5a6474;
+            --metro-text-muted: #8b95a5;
+            --metro-success: #10b981;
+            --metro-danger: #ef4444;
+            --metro-warning: #f59e0b;
+            
+            /* Legacy variable mappings for compatibility */
+            --bg-primary: var(--metro-light-gray);
+            --bg-secondary: var(--metro-white);
+            --bg-tertiary: var(--metro-gray);
+            --text-primary: var(--metro-text);
+            --text-secondary: var(--metro-text-light);
+            --text-muted: var(--metro-text-muted);
+            --border-color: var(--metro-gray);
+            --accent-primary: var(--metro-navy);
+            --accent-secondary: var(--metro-blue);
             --accent-light: #e8f4fd;
-            --accent-warning: #ff9500;
-            --accent-danger: #ef4444;
-            --accent-success: #22c55e;
-            --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
-            --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
-            --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
+            --accent-warning: var(--metro-warning);
+            --accent-danger: var(--metro-danger);
+            --accent-success: var(--metro-success);
+            --shadow-sm: 0 1px 3px rgba(12, 35, 64, 0.08);
+            --shadow-md: 0 4px 12px rgba(12, 35, 64, 0.12);
+            --shadow-lg: 0 8px 24px rgba(12, 35, 64, 0.16);
             --glass-bg: rgba(255,255,255,0.85);
             --glass-border: rgba(255,255,255,0.3);
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
         }
         
         [data-theme="dark"] {
@@ -73,7 +94,7 @@
         }
         
         body {
-            font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--bg-primary);
             color: var(--text-primary);
             min-height: 100vh;
@@ -97,18 +118,18 @@
         
         .header {
             grid-column: 1 / -1;
-            background: var(--bg-secondary);
-            border-bottom: 1px solid var(--border-color);
+            background: var(--metro-navy);
             padding: 0.75rem 1.5rem;
-            display: grid;
-            grid-template-columns: 340px 1fr;
+            display: flex;
             align-items: center;
+            justify-content: space-between;
             z-index: 100;
+            box-shadow: var(--shadow-md);
         }
         
         @media (max-width: 900px) {
             .header {
-                grid-template-columns: 1fr;
+                flex-wrap: wrap;
                 gap: 0.75rem;
             }
         }
@@ -116,7 +137,43 @@
         .logo {
             display: flex;
             align-items: center;
-            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .logo-brand {
+            display: flex;
+            align-items: baseline;
+            gap: 0.35rem;
+        }
+        
+        .logo-metro {
+            color: #FFFFFF;
+            font-size: 1.5rem;
+            font-weight: 700;
+            font-style: italic;
+            letter-spacing: -0.02em;
+        }
+        
+        .logo-trailer {
+            color: #FFFFFF;
+            font-size: 1.5rem;
+            font-weight: 700;
+            font-style: italic;
+            letter-spacing: -0.02em;
+        }
+        
+        .logo-text {
+            color: var(--metro-white);
+            font-size: 1.25rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            padding-left: 1rem;
+            border-left: 2px solid rgba(255,255,255,0.3);
+        }
+        
+        .logo-text span {
+            color: var(--metro-blue);
+            font-weight: 700;
         }
         
         .logo-icon {
@@ -135,7 +192,51 @@
             display: flex;
             align-items: center;
             justify-content: flex-end;
+            gap: 0.75rem;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
             gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-sm);
+            font-family: inherit;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+        }
+        
+        .btn-primary {
+            background: var(--metro-orange);
+            color: var(--metro-white);
+        }
+        
+        .btn-primary:hover {
+            background: var(--metro-orange-hover);
+            transform: translateY(-1px);
+        }
+        
+        .btn-secondary {
+            background: rgba(255,255,255,0.1);
+            color: var(--metro-white);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .btn-ghost {
+            background: transparent;
+            color: var(--metro-text);
+            border: 1px solid var(--metro-gray);
+        }
+        
+        .btn-ghost:hover {
+            background: var(--metro-gray);
         }
         
         .theme-toggle {
@@ -314,41 +415,40 @@
         }
         
         .stat-card {
-            background: var(--bg-primary);
-            border-radius: 6px;
-            padding: 0.5rem;
-            border: 1px solid var(--border-color);
+            background: var(--metro-light-gray);
+            border-radius: var(--radius-sm);
+            padding: 0.75rem 0.5rem;
+            border: 1px solid var(--metro-gray);
             text-align: center;
         }
         
         .stat-value {
-            font-size: 1.1rem;
+            font-size: 1.25rem;
             font-weight: 700;
-            font-family: 'JetBrains Mono', monospace;
-            color: var(--text-primary);
+            color: var(--metro-navy);
             line-height: 1;
         }
         
         .stat-label {
-            font-size: 0.55rem;
-            color: var(--text-muted);
+            font-size: 0.6rem;
+            color: var(--metro-text-muted);
             text-transform: uppercase;
-            letter-spacing: 0.03em;
+            letter-spacing: 0.05em;
             margin-top: 0.15rem;
         }
         
         .stat-card.success {
-            background: var(--accent-light);
-            border-color: var(--accent-success);
+            background: #d1fae5;
+            border-color: var(--metro-success);
         }
         
         .stat-card.success .stat-value {
-            color: var(--accent-success);
+            color: var(--metro-success);
         }
         
         .stat-card.danger {
-            background: #fef2f2;
-            border-color: var(--accent-danger);
+            background: #fecaca;
+            border-color: var(--metro-danger);
         }
         
         [data-theme="dark"] .stat-card.danger {
@@ -356,12 +456,12 @@
         }
         
         .stat-card.danger .stat-value {
-            color: var(--accent-danger);
+            color: var(--metro-danger);
         }
         
         .stat-card.warning {
-            background: #fff3e0;
-            border-color: #f57c00;
+            background: #fef3c7;
+            border-color: var(--metro-warning);
         }
         
         [data-theme="dark"] .stat-card.warning {
@@ -369,34 +469,49 @@
         }
         
         .stat-card.warning .stat-value {
-            color: #f57c00;
+            color: var(--metro-warning);
         }
         
-        .search-container { position: relative; }
+        .search-container { 
+            position: relative;
+            margin-bottom: 0.75rem;
+        }
         
         .search-input {
             width: 100%;
             padding: 0.625rem 0.875rem 0.625rem 2.25rem;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
+            border: 1px solid var(--metro-gray);
+            border-radius: var(--radius-sm);
             font-family: inherit;
             font-size: 0.875rem;
-            background: var(--bg-primary);
-            color: var(--text-primary);
+            background: var(--metro-light-gray);
+            color: var(--metro-text);
             transition: all 0.2s ease;
         }
         
         .search-input:focus {
             outline: none;
-            border-color: var(--accent-primary);
-            box-shadow: 0 0 0 3px rgba(0, 43, 92, 0.15);
+            border-color: var(--metro-navy);
+            background: var(--metro-white);
+            box-shadow: 0 0 0 3px rgba(12, 35, 64, 0.1);
         }
         
         [data-theme="dark"] .search-input:focus {
             box-shadow: 0 0 0 3px rgba(77, 143, 204, 0.2);
         }
         
-        .search-input::placeholder { color: var(--text-muted); }
+        .search-input::placeholder { color: var(--metro-text-muted); }
+        
+        .search-icon {
+            position: absolute;
+            left: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--metro-text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
         
         .search-icon {
             position: absolute;
@@ -442,19 +557,24 @@
         }
         
         .trailer-icon {
-            width: 28px;
-            height: 28px;
-            border-radius: 6px;
+            width: 32px;
+            height: 32px;
+            border-radius: var(--radius-sm);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.9rem;
             flex-shrink: 0;
         }
         
+        .trailer-icon svg {
+            width: 22px;
+            height: 22px;
+            fill: var(--metro-navy);
+            stroke: var(--metro-navy);
+        }
+        
         .trailer-icon.status-checkedin {
-            background: #dcfce7;
-            color: var(--accent-success);
+            background: #d1fae5;
         }
         
         [data-theme="dark"] .trailer-icon.status-checkedin {
@@ -462,8 +582,7 @@
         }
         
         .trailer-icon.status-notcheckedin {
-            background: #fef2f2;
-            color: var(--accent-danger);
+            background: #fecaca;
         }
         
         [data-theme="dark"] .trailer-icon.status-notcheckedin {
@@ -471,8 +590,7 @@
         }
         
         .trailer-icon.status-pickedup {
-            background: #fff3e0;
-            color: #f57c00;
+            background: #fef3c7;
         }
         
         [data-theme="dark"] .trailer-icon.status-pickedup {
@@ -750,11 +868,23 @@
         
         .trailer-id {
             font-weight: 600;
-            font-size: 0.8rem;
-            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--metro-navy);
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+        }
+        
+        .trailer-id .new-badge {
+            background: var(--metro-orange);
+            color: white;
+            font-size: 0.55rem;
+            padding: 0.1rem 0.35rem;
+            border-radius: 3px;
+            margin-left: 0.5rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
         }
         
         .trailer-meta {
@@ -1128,18 +1258,27 @@
     <div class="app-container">
         <header class="header">
             <div class="logo">
-                <div class="logo-icon">
-                    <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzODUuODk4IiBoZWlnaHQ9IjIxMCIgdmlld0JveD0iMCAwIDM4NS44OTggMjEwIj4KICA8IS0tIEJsdWUgYmFja2dyb3VuZCAtLT4KICA8cmVjdCB3aWR0aD0iMzg1Ljg5OCIgaGVpZ2h0PSIyMTAiIGZpbGw9IiMwMDJCNUMiLz4KICAKICA8IS0tIFdoaXRlIHJlY3RhbmdsZSBmb3IgTWV0cm8gVHJhaWxlciBsb2dvIGFyZWEgLS0+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjM4NS44OTgiIGhlaWdodD0iMTU1IiBmaWxsPSIjZmZmZmZmIi8+CiAgCiAgPCEtLSBPcmlnaW5hbCBNZXRybyBUcmFpbGVyIExvZ28gLS0+CiAgPGcgaWQ9Ikdyb3VwXzYzMyIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNC4xNzkgODcuNzUpIj4KICAgIDxwYXRoIGlkPSJQYXRoXzYyNiIgZD0iTTc3LjM2MiwzMTkuMjQxaDUzbC0yLjY3NiwxNS4xNzlIMTEwLjY2M2wtNy41MTksNDIuNjQzSDg0LjE5Mmw3LjUxOS00Mi42NDNINzQuNjg2WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTc0LjY4NiAtMzE5LjI0MSkiIGZpbGw9IiMwMDJCNUMiLz4KICAgIDxwYXRoIGlkPSJQYXRoXzYyNyIgZD0iTTE4NC41MzMsMzU2LjkwNmwtMy41NTQsMjAuMTU3SDE2Mi4wMjVsMTAuMi01Ny44MjFoMjcuM2MxOS4yNzQsMCwyNC43LDUuMjIsMjIuNzE1LDE2LjQ2My0xLjE3NSw2LjY2Ni01LjEzOCwxMi4yODctMTIuMjA5LDE0LjEzNSw1LjcwNywyLjI0OCw5LjE0NiwzLjY5NCw3LjA5MiwxNS4zMzktMS4zMzEsNy41NDgtMi4wMjUsMTAuMTE5LjIyMywxMC4xMTlsLS4zMTIsMS43NjZIMTk3Ljg0M2MtLjI1NS0xLjI4NS0uMDg2LTQuOTc5LjgyMS0xMC4xMTksMS4zMzEtNy41NDkuNDg1LTEwLjAzOC04LjM0OS0xMC4wMzhabTIuMjM3LTEyLjY4OWg3LjQ2OWM1Ljg2MiwwLDkuMjUtMS40NDUsOS45NTctNS40NjEuNzIyLTQuMS0yLjE1LTYuMDI0LTYuNTY3LTYuMDI0aC04LjgzNFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xMDkuMTUzIC0zMTkuMjQxKSIgZmlsbD0iIzAwMkI1QyIvPgogICAgPHBhdGggaWQ9IlBhdGhfNjI4IiBkPSJNMjU4LjYsMzc3LjA2M2wzMC45MTUtNTcuODIxaDE5LjI3NGwxMC41MjQsNTcuODIxSDMwMC40NDVsLS45LTcuNjI5SDI4MC42NjlsLTMuNTE0LDcuNjI5Wm0zNy4zMTktNDAuMzk1LTkuNTE2LDIwLjcyaDExLjk2NloiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xNDcuMjY2IC0zMTkuMjQxKSIgZmlsbD0iIzAwMkI1QyIvPgogICAgPHBhdGggaWQ9IlBhdGhfNjI5IiBkPSJNMzcwLjQzOSwzNzcuMDYzbDEwLjItNTcuODIxaDE4Ljk1M2wtMTAuMiw1Ny44MjFaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTkxLjQgLTMxOS4yNDEpIiBmaWxsPSIjMDAyQjVDIi8+CiAgICA8cGF0aCBpZD0iUGF0aF82MzAiIGQ9Ik00MjIuMDQ1LDM3Ny4wNjNsMTAuMi01Ny44MjFoMTguOTUzbC03LjgxNyw0NC4zMjlINDY5LjRsLTIuMzc5LDEzLjQ5MloiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0yMTEuNzY1IC0zMTkuMjQxKSIgZmlsbD0iIzAwMkI1QyIvPgogICAgPHBhdGggaWQ9IlBhdGhfNjMxIiBkPSJNNTEwLjUzLDM3Ny4wNjNsMTAuMi01Ny44MjFoNDcuMTQxbC0yLjM3OSwxMy40OTFINTM3LjNMNTM1Ljg0MSwzNDFoMjMuODUyTDU1Ny4zMTQsMzU0LjVINTMzLjQ2MmwtMS42LDkuMDc1aDI5LjMxMkw1NTguOCwzNzcuMDYzWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTI0Ni42ODQgLTMxOS4yNDEpIiBmaWxsPSIjMDAyQjVDIi8+CiAgICA8cGF0aCBpZD0iUGF0aF82MzIiIGQ9Ik02MjYuODI4LDM1Ni45MDZsLTMuNTU0LDIwLjE1N0g2MDQuMzJsMTAuMi01Ny44MjFoMjcuM2MxOS4yNzQsMCwyNC43LDUuMjIsMjIuNzE1LDE2LjQ2My0xLjE3NSw2LjY2Ni01LjEzOCwxMi4yODctMTIuMjA5LDE0LjEzNSw1LjcwNywyLjI0OCw5LjE0NiwzLjY5NCw3LjA5MiwxNS4zMzktMS4zMzEsNy41NDgtMi4wMjUsMTAuMTE5LjIyMywxMC4xMTlsLS4zMTIsMS43NjZINjQwLjEzOGMtLjI1NS0xLjI4NS0uMDg2LTQuOTc5LjgyLTEwLjExOSwxLjMzMS03LjU0OS40ODUtMTAuMDM4LTguMzQ5LTEwLjAzOFptMi4yMzctMTIuNjg5aDcuNDY5YzUuODYyLDAsOS4yNS0xLjQ0NSw5Ljk1Ny01LjQ2MS43MjItNC4xLTIuMTUtNi4wMjQtNi41NjctNi4wMjRINjMxLjA5WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTI4My42OTcgLTMxOS4yNDEpIiBmaWxsPSIjMDAyQjVDIi8+CiAgPC9nPgogIDxnIGlkPSJHcm91cF82MzQiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAgMCkiPgogICAgPHBhdGggaWQ9IlBhdGhfNjMzIiBkPSJNNjcuNzgyLDI0Ny4zMTEsODAuMTIsMTc3LjMzOGgyNy43bDQuNjQ4LDQzLjYzNUwxMzIuNSwxNzcuMzM4aDI3LjdsLTEyLjMzNyw2OS45NzNoLTIwLjZsMy43Ny0yMS4zODEsMi4yMS0xMC44ODQsMy4zOTQtMTIuNjM0aC0uMTk1bC0yMC42NDcsNDQuOUg5OS44NTNsLTQuODE1LTQ0LjloLS4xOTRMOTQsMjEyLjcxMyw5Mi41NjYsMjIzLjZsLTQuMTgxLDIzLjcxM1oiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC02Ny43ODIgLTE3NS40OTEpIiBmaWxsPSIjMDAyQjVDIi8+CiAgICA8cGF0aCBpZD0iUGF0aF82MzQiIGQ9Ik0yMjEuODkxLDI0Ny4zMTFsMTIuMzM3LTY5Ljk3M2g1Ny4wNDhMMjg4LjQsMTkzLjY2NUgyNTQuMjg0bC0xLjc2NSwxMC4wMWgyOC44NjRMMjc4LjUsMjIwSDI0OS42NDFMMjQ3LjcsMjMwLjk4M2gzNS40NzNMMjgwLjMsMjQ3LjMxSDIyMS44OTFaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTI4LjU5OSAtMTc1LjQ5MSkiIGZpbGw9IiMwMDJCNUMiLz4KICAgIDxwYXRoIGlkPSJQYXRoXzYzNSIgZD0iTTM0OC44MzYsMTc3LjMzOGg2NC4xNDJsLTMuMjM4LDE4LjM2OGgtMjAuNmwtOS4xLDUxLjZIMzU3LjFsOS4xLTUxLjZIMzQ1LjZaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTc3LjQxOCAtMTc1LjQ5MSkiIGZpbGw9IiMwMDJCNUMiLz4KICAgIDxwYXRoIGlkPSJQYXRoXzYzNiIgZD0iTTQ3OC41MiwyMjIuOTE3bC00LjMsMjQuMzkzSDQ1MS4yODRsMTIuMzM3LTY5Ljk3M2gzMy4wNDJjMjMuMzI0LDAsMjkuODg4LDYuMzE3LDI3LjQ4OSwxOS45MjMtMS40MjIsOC4wNjYtNi4yMTcsMTQuODY5LTE0Ljc3NSwxNy4xLDYuOTA2LDIuNzIxLDExLjA2OCw0LjQ3MSw4LjU4MywxOC41NjItMS42MSw5LjEzNi0yLjQ1LDEyLjI0NS4yNzEsMTIuMjQ1bC0uMzc3LDIuMTM4SDQ5NC42MjhjLS4zMDktMS41NTUtLjEtNi4wMjUuOTkzLTEyLjI0NSwxLjYxMS05LjEzNi41ODctMTIuMTQ4LTEwLjEtMTIuMTQ4aC03Wm0yLjcwOC0xNS4zNTVoOS4wMzhjNy4wOTQsMCwxMS4xOTMtMS43NDksMTIuMDUtNi42MDkuODc0LTQuOTU2LTIuNi03LjI4OS03Ljk0OC03LjI4OWgtMTAuNjlaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMjE5LjEyNSAtMTc1LjQ5MSkiIGZpbGw9IiMwMDJCNUMiLz4KICAgIDxwYXRoIGlkPSJQYXRoXzYzNyIgZD0iTTY1NS44MTIsMjEwLjczMWMtNC4yLDIzLjgxLTIyLjYsMzcuMjIxLTQzLjMsMzcuMjIxLTIxLjk2MywwLTM0LjI0LTEzLjYwNi0zMC4wNDEtMzcuNDE2LDMuODcyLTIxLjk2MywyMS4yNi0zNi4yNSw0My4wMy0zNi4yNUM2NTAuNDc5LDE3NC4yODgsNjU5LjA2OCwxOTIuMjY3LDY1NS44MTIsMjEwLjczMVptLTUwLjQzOCwwYy0xLjU3Nyw4Ljk0MS0uODI2LDIwLjExNywxMC4xNTYsMjAuMTE3LDkuOTEzLDAsMTUuMzA4LTguNTUyLDE3LjM0Ny0yMC4xMTcsMS42OC05LjUyNC0uNDI2LTE5LjYzMS0xMC41ODUtMTkuMzRDNjExLjg5MywxOTEuMzkyLDYwNi45MzMsMjAxLjg4OCw2MDUuMzc0LDIxMC43MzFaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMjcwLjU3NCAtMTc0LjI4NykiIGZpbGw9IiMwMDJCNUMiLz4KICA8L2c+CiAgCiAgPCEtLSBZYXJkVml6IHRleHQgaW4gd2hpdGUgb24gYmx1ZSBiYWNrZ3JvdW5kIC0gaXRhbGljaXplZCB3aXRoIGxhcmdlciBZIGFuZCBWIC0tPgogIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDE5Mi45NDkgMTkwKSI+CiAgICA8dGV4dCB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwgQmxhY2ssIEFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXdlaWdodD0iOTAwIiBmb250LXN0eWxlPSJpdGFsaWMiIGZpbGw9IiNmZmZmZmYiIGxldHRlci1zcGFjaW5nPSIyIj4KICAgICAgPHRzcGFuIGZvbnQtc2l6ZT0iMzQiPlk8L3RzcGFuPjx0c3BhbiBmb250LXNpemU9IjI2Ij5BUkQ8L3RzcGFuPjx0c3BhbiBmb250LXNpemU9IjM0Ij5WPC90c3Bhbj48dHNwYW4gZm9udC1zaXplPSIyNiI+SVo8L3RzcGFuPgogICAgPC90ZXh0PgogIDwvZz4KPC9zdmc+Cg==" alt="Metro Trailer YardViz Logo">
+                <div class="logo-brand">
+                    <span class="logo-metro">METRO</span>
+                    <span class="logo-trailer">TRAILER</span>
                 </div>
+                <div class="logo-text">Yard<span>Viz</span></div>
             </div>
             
             <div class="header-actions">
                 <button class="btn btn-secondary" onclick="app.refreshFromGitHub()" title="Sync from cloud">
-                    <span>🔄</span> Sync
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2">
+                        <path d="M21 12a9 9 0 1 1-9-9"/>
+                        <polyline points="21 3 21 9 15 9"/>
+                    </svg>
+                    Sync
                 </button>
                 
                 <button class="btn btn-secondary" onclick="app.toggleSettings()" title="Settings">
-                    <span>⚙️</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2">
+                        <circle cx="12" cy="12" r="3"/>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                    </svg>
                 </button>
             </div>
         </header>
@@ -1170,8 +1309,13 @@
             <div class="sidebar-section">
                 <div class="section-title">Trailers</div>
                 <div class="search-container">
-                    <span class="search-icon">🔍</span>
-                    <input type="text" class="search-input" id="searchInput" placeholder="Search by Asset ID..." oninput="app.filterTrailers(event)">
+                    <span class="search-icon">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"/>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                        </svg>
+                    </span>
+                    <input type="text" class="search-input" id="searchInput" placeholder="Trailer #..." oninput="app.filterTrailers(event)">
                 </div>
                 <div class="filter-section">
                     <select class="filter-select" id="filterSelect" onchange="app.setFilterMode(this.value)">
@@ -2577,12 +2721,21 @@
                     actionButton = `<button class="btn-pickup" onclick="app.promptPickup('${trailer.id}')">Check Out</button>`;
                 }
                 
+                // SVG trailer icon
+                const trailerSvg = `<svg viewBox="0 0 64 48">
+                    <rect x="2" y="2" width="56" height="26" rx="4" fill="none" stroke-width="5"/>
+                    <rect x="10" y="28" width="5" height="14" rx="1"/>
+                    <rect x="7" y="40" width="11" height="4" rx="1"/>
+                    <circle cx="40" cy="40" r="7"/>
+                    <circle cx="56" cy="40" r="7"/>
+                </svg>`;
+                
                 return `
                 <div class="trailer-item ${this.state.selectedTrailerId === trailer.id ? 'active' : ''} ${pickedUpClass}" 
                      onclick="app.selectTrailer('${trailer.id}')">
-                    <div class="trailer-icon status-${statusClass}">🚛</div>
+                    <div class="trailer-icon status-${statusClass}">${trailerSvg}</div>
                     <div class="trailer-info">
-                        <div class="trailer-id">${trailer.id}${trailer.isNew ? ' 🆕' : ''}${trailer.pickedUp ? ' 📤' : ''}</div>
+                        <div class="trailer-id">${trailer.id}${trailer.isNew ? ' <span class="new-badge">NEW</span>' : ''}${trailer.pickedUp ? ' 📤' : ''}</div>
                     </div>
                     <label class="checkin-toggle" onclick="event.stopPropagation()">
                         <input type="checkbox" ${trailer.checkedIn ? 'checked' : ''} 
