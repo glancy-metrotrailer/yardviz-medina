@@ -140,7 +140,7 @@
       "lat": 41.14799,
       "lng": -81.89767,
       "mtsn": "SHB8AJBL234933549",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
       "isNew": false
     },
@@ -851,7 +851,7 @@
       "lat": 41.14761,
       "lng": -81.89738,
       "mtsn": "GXL5JLAG211531718",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
       "isNew": false
     },
@@ -1083,6 +1083,6 @@
     "T3343",
     "T4352"
   ],
-  "timestamp": 1772719822751,
-  "lastModified": "2026-03-05T14:10:22.751Z"
+  "timestamp": 1772719841484,
+  "lastModified": "2026-03-05T14:10:41.484Z"
 }
