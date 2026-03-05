@@ -1365,6 +1365,7 @@
                 <div class="filter-section">
                     <select class="filter-select" id="filterSelect" onchange="app.setFilterMode(this.value)">
                         <option value="all">All Trailers</option>
+                        <option value="new">New</option>
                         <option value="checkedIn">Checked In</option>
                         <option value="notCheckedIn">Not Checked In</option>
                         <option value="pickedUp">Picked Up</option>
@@ -1547,7 +1548,7 @@
             currentPopup: null,
             githubSha: null,
             isSyncing: false,
-            filterMode: 'all',  // all, checkedIn, notCheckedIn, pickedUp, onSite
+            filterMode: 'all',  // all, new, checkedIn, notCheckedIn, pickedUp, onSite
             pendingCheckInTrailerId: null,
             pendingCheckInCheckbox: null,
             pendingCheckInFromPopup: false
@@ -1738,6 +1739,8 @@
                 
                 // Status filter
                 switch (filterMode) {
+                    case 'new':
+                        return trailer.isNew;
                     case 'checkedIn':
                         return trailer.checkedIn && !trailer.pickedUp;
                     case 'notCheckedIn':
