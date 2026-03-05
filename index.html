@@ -229,6 +229,25 @@
             background: rgba(255,255,255,0.2);
         }
         
+        .btn-secondary svg {
+            stroke: #FFFFFF;
+        }
+        
+        /* Light mode header buttons - need dark icons on light background */
+        [data-theme="light"] .header .btn-secondary {
+            background: rgba(255,255,255,0.9);
+            color: var(--metro-navy);
+            border: 1px solid rgba(12,35,64,0.2);
+        }
+        
+        [data-theme="light"] .header .btn-secondary:hover {
+            background: rgba(255,255,255,1);
+        }
+        
+        [data-theme="light"] .header .btn-secondary svg {
+            stroke: var(--metro-navy);
+        }
+        
         .btn-ghost {
             background: transparent;
             color: var(--metro-text);
@@ -573,12 +592,23 @@
             stroke: var(--metro-navy);
         }
         
+        /* Dark mode: make SVG icons visible with lighter fill/stroke */
+        [data-theme="dark"] .trailer-icon svg {
+            fill: #e0e0e0;
+            stroke: #e0e0e0;
+        }
+        
         .trailer-icon.status-checkedin {
             background: #d1fae5;
         }
         
         [data-theme="dark"] .trailer-icon.status-checkedin {
-            background: #1a2e1a;
+            background: #2d5a3d;
+        }
+        
+        [data-theme="dark"] .trailer-icon.status-checkedin svg {
+            fill: #a7f3d0;
+            stroke: #a7f3d0;
         }
         
         .trailer-icon.status-notcheckedin {
@@ -586,7 +616,12 @@
         }
         
         [data-theme="dark"] .trailer-icon.status-notcheckedin {
-            background: #2e1a1a;
+            background: #5c2a2a;
+        }
+        
+        [data-theme="dark"] .trailer-icon.status-notcheckedin svg {
+            fill: #fca5a5;
+            stroke: #fca5a5;
         }
         
         .trailer-icon.status-pickedup {
@@ -594,7 +629,12 @@
         }
         
         [data-theme="dark"] .trailer-icon.status-pickedup {
-            background: #2e2518;
+            background: #5c4a1a;
+        }
+        
+        [data-theme="dark"] .trailer-icon.status-pickedup svg {
+            fill: #fcd34d;
+            stroke: #fcd34d;
         }
         
         .trailer-item.picked-up {
@@ -873,6 +913,10 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+        }
+        
+        [data-theme="dark"] .trailer-id {
+            color: #e0e0e0;
         }
         
         .trailer-id .new-badge {
@@ -2321,8 +2365,9 @@
                     this.state.pendingCheckInTrailerId = null;
                     this.state.pendingCheckInCheckbox = null;
                     
-                    // Re-render
+                    // Re-render and save to both local and GitHub (to sync isNew=false)
                     this.saveToLocalStorage();
+                    this.saveToGitHub(); // Sync isNew=false to GitHub for all users
                     this.applyFilters();
                     this.renderTrailersOnMap();
                     
@@ -2539,24 +2584,20 @@
                 const data = JSON.parse(content);
                 
                 if (data.trailers && data.trailers.length > 0) {
-                    // Get previously known trailer IDs
-                    const previousIds = this.state.previousTrailerIds || new Set();
-                    const currentIds = new Set(this.state.trailers.map(t => t.id));
-                    
-                    // Preserve local check-in and isNew status
+                    // Preserve local check-in status only (isNew comes from GitHub for consistency)
                     const localStatus = new Map();
                     for (const t of this.state.trailers) {
-                        localStatus.set(t.id, { checkedIn: t.checkedIn, isNew: t.isNew });
+                        localStatus.set(t.id, { checkedIn: t.checkedIn });
                     }
                     
-                    // Count new trailers
+                    // Count new trailers from GitHub data
                     let newTrailerCount = 0;
                     
                     this.state.trailers = data.trailers.map(t => {
                         const existingStatus = localStatus.get(t.id);
-                        const isNewTrailer = previousIds.size > 0 && !previousIds.has(t.id) && !currentIds.has(t.id);
                         
-                        if (isNewTrailer) {
+                        // isNew comes from GitHub data (shared across all users)
+                        if (t.isNew) {
                             newTrailerCount++;
                         }
                         
@@ -2564,8 +2605,8 @@
                             ...t,
                             // Keep local check-in status if we had it, otherwise use data value
                             checkedIn: existingStatus ? existingStatus.checkedIn : (t.checkedIn || false),
-                            // Mark as new if it wasn't in our previous data
-                            isNew: existingStatus ? existingStatus.isNew : isNewTrailer
+                            // isNew comes from GitHub data for consistency across users
+                            isNew: t.isNew || false
                         };
                     });
                     
