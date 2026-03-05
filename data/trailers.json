@@ -563,7 +563,7 @@
       "lat": 41.14866,
       "lng": -81.89828,
       "mtsn": "SHB7BLAG222161447",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
       "isNew": false
     },
@@ -1083,6 +1083,6 @@
     "T3343",
     "T4352"
   ],
-  "timestamp": 1772721285206,
-  "lastModified": "2026-03-05T14:34:45.206Z"
+  "timestamp": 1772721310381,
+  "lastModified": "2026-03-05T14:35:10.381Z"
 }
