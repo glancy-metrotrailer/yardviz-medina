@@ -1136,6 +1136,7 @@
         .toast.success { border-left: 3px solid var(--accent-success); }
         .toast.error { border-left: 3px solid var(--accent-danger); }
         .toast.warning { border-left: 3px solid var(--accent-warning); }
+        .toast.info { border-left: 3px solid var(--metro-blue); }
         
         @keyframes toastIn {
             from { opacity: 0; transform: translateY(20px); }
@@ -2326,6 +2327,7 @@
             console.log('submitCheckIn called');
             const trailerId = this.state.pendingCheckInTrailerId;
             const notes = document.getElementById('checkInNotes').value.trim();
+            const fromPopup = this.state.pendingCheckInFromPopup;
             
             console.log('Trailer ID:', trailerId, 'Notes:', notes);
             
@@ -2340,48 +2342,42 @@
                 return;
             }
             
-            // Update trailer state
+            // Update trailer state immediately (optimistic update)
             trailer.checkedIn = true;
             trailer.isNew = false;
             
-            // Call the addToExcel function with notes
-            try {
-                await this.addToExcelWithNotes(trailerId, notes);
-                
-                // Show success message
-                document.getElementById('checkInSuccess').style.display = 'block';
-                document.querySelector('#checkInModal .modal-buttons').style.display = 'none';
-                document.querySelector('#checkInModal .modal-input').style.display = 'none';
-                document.querySelector('#checkInModal .modal-message').style.display = 'none';
-                
-                // Close after delay
-                setTimeout(() => {
-                    document.getElementById('checkInModal').classList.remove('visible');
-                    document.querySelector('#checkInModal .modal-buttons').style.display = 'flex';
-                    document.querySelector('#checkInModal .modal-input').style.display = 'block';
-                    document.querySelector('#checkInModal .modal-message').style.display = 'block';
-                    document.getElementById('checkInSuccess').style.display = 'none';
-                    
-                    this.state.pendingCheckInTrailerId = null;
-                    this.state.pendingCheckInCheckbox = null;
-                    
-                    // Re-render and save to both local and GitHub (to sync isNew=false)
-                    this.saveToLocalStorage();
-                    this.saveToGitHub(); // Sync isNew=false to GitHub for all users
-                    this.applyFilters();
-                    this.renderTrailersOnMap();
-                    
-                    if (this.state.pendingCheckInFromPopup) {
-                        this.showTrailerPopup(trailer);
-                    }
-                    this.state.pendingCheckInFromPopup = false;
-                }, 1500);
-                
-            } catch (error) {
-                console.error('Error checking in:', error);
-                this.showToast('Error checking in trailer', 'error');
-                this.closeCheckInModal();
+            // Close modal immediately
+            document.getElementById('checkInModal').classList.remove('visible');
+            this.state.pendingCheckInTrailerId = null;
+            this.state.pendingCheckInCheckbox = null;
+            this.state.pendingCheckInFromPopup = false;
+            
+            // Re-render UI immediately
+            this.saveToLocalStorage();
+            this.applyFilters();
+            this.renderTrailersOnMap();
+            
+            if (fromPopup) {
+                this.showTrailerPopup(trailer);
             }
+            
+            // Show "submitting" toast
+            this.showToast(`Checking in ${trailerId}...`, 'info');
+            
+            // Call the Power Automate flow asynchronously
+            this.addToExcelWithNotes(trailerId, notes)
+                .then(() => {
+                    // Success - show toast and sync to GitHub
+                    this.showToast(`✓ ${trailerId} checked in successfully`, 'success');
+                    this.saveToGitHub(); // Sync isNew=false to GitHub for all users
+                })
+                .catch((error) => {
+                    // Failed - show error toast but keep the local state
+                    console.error('Error checking in:', error);
+                    this.showToast(`✗ Failed to sync ${trailerId} to Excel`, 'error');
+                    // Note: We keep the local check-in state even if Excel sync fails
+                    // The trailer is still marked as checked in locally
+                });
         },
         
         async addToExcelWithNotes(trailerId, notes) {
@@ -3072,12 +3068,12 @@
         
         showToast(message, type = 'success') {
             const container = document.getElementById('toastContainer');
-            const icons = { success: '✅', error: '❌', warning: '⚠️' };
+            const icons = { success: '✅', error: '❌', warning: '⚠️', info: 'ℹ️' };
             
             const toast = document.createElement('div');
             toast.className = `toast ${type}`;
             toast.innerHTML = `
-                <span class="toast-icon">${icons[type]}</span>
+                <span class="toast-icon">${icons[type] || 'ℹ️'}</span>
                 <span class="toast-message">${message}</span>
             `;
             
