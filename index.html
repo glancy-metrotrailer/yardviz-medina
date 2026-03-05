@@ -1486,7 +1486,9 @@
             // =====================================================
             powerAutomate: {
                 pickupFlowUrl: 'https://default8417a2420313412ca062453303f8f4.fd.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/6739188d34af4ab2ac5ab12de31ac0ce/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=AiqbS_TEr8CZeXP2ejeW31gC3IkldEiVp9EbN44Qj1s',
-                dropoffFlowUrl: 'https://default8417a2420313412ca062453303f8f4.fd.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/697aa3ff842048d585932a53ec765d2b/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=5u5sALfQmGdWDY6_eFlRc0zpxIpcm0okL4a-HhIXcYw'
+                dropoffFlowUrl: 'https://default8417a2420313412ca062453303f8f4.fd.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/697aa3ff842048d585932a53ec765d2b/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=5u5sALfQmGdWDY6_eFlRc0zpxIpcm0okL4a-HhIXcYw',
+                // Check-in flow uses the same dropoff flow (adds to Excel)
+                checkInFlowUrl: 'https://default8417a2420313412ca062453303f8f4.fd.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/697aa3ff842048d585932a53ec765d2b/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=5u5sALfQmGdWDY6_eFlRc0zpxIpcm0okL4a-HhIXcYw'
             }
             // =====================================================
         },
@@ -1500,7 +1502,10 @@
             currentPopup: null,
             githubSha: null,
             isSyncing: false,
-            filterMode: 'all'  // all, checkedIn, notCheckedIn, pickedUp, onSite
+            filterMode: 'all',  // all, checkedIn, notCheckedIn, pickedUp, onSite
+            pendingCheckInTrailerId: null,
+            pendingCheckInCheckbox: null,
+            pendingCheckInFromPopup: false
         },
         
         // Get GitHub token from localStorage or prompt user
@@ -2274,13 +2279,22 @@
         },
         
         async submitCheckIn() {
+            console.log('submitCheckIn called');
             const trailerId = this.state.pendingCheckInTrailerId;
             const notes = document.getElementById('checkInNotes').value.trim();
             
-            if (!trailerId) return;
+            console.log('Trailer ID:', trailerId, 'Notes:', notes);
+            
+            if (!trailerId) {
+                console.error('No pending trailer ID');
+                return;
+            }
             
             const trailer = this.state.trailers.find(t => t.id === trailerId);
-            if (!trailer) return;
+            if (!trailer) {
+                console.error('Trailer not found:', trailerId);
+                return;
+            }
             
             // Update trailer state
             trailer.checkedIn = true;
@@ -2302,6 +2316,7 @@
                     document.querySelector('#checkInModal .modal-buttons').style.display = 'flex';
                     document.querySelector('#checkInModal .modal-input').style.display = 'block';
                     document.querySelector('#checkInModal .modal-message').style.display = 'block';
+                    document.getElementById('checkInSuccess').style.display = 'none';
                     
                     this.state.pendingCheckInTrailerId = null;
                     this.state.pendingCheckInCheckbox = null;
@@ -2325,8 +2340,9 @@
         },
         
         async addToExcelWithNotes(trailerId, notes) {
+            console.log(`Checking in trailer ${trailerId} with notes: ${notes}`);
             try {
-                const response = await fetch(this.config.powerAutomate.dropoffFlowUrl, {
+                const response = await fetch(this.config.powerAutomate.checkInFlowUrl, {
                     method: 'POST',
                     headers: { 
                         'Content-Type': 'application/json'
@@ -2335,9 +2351,12 @@
                 });
                 
                 if (response.ok || response.status === 202) {
-                    console.log(`Added ${trailerId} to Excel with notes`);
+                    console.log(`Successfully added ${trailerId} to Excel with notes`);
+                    return true;
                 } else {
-                    console.error(`Failed to add ${trailerId} to Excel: ${response.status}`);
+                    const errorText = await response.text();
+                    console.error(`Failed to add ${trailerId} to Excel: ${response.status}`, errorText);
+                    throw new Error(`Flow returned status ${response.status}`);
                 }
             } catch (error) {
                 console.error('Error adding to Excel:', error);
