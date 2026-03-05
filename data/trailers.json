@@ -34,7 +34,7 @@
       "mtsn": "SVE5DJBL232386590",
       "checkedIn": false,
       "pickedUp": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "281501",
@@ -106,7 +106,7 @@
       "mtsn": "SHB7BLAG222162072",
       "checkedIn": false,
       "pickedUp": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "4550",
@@ -115,7 +115,7 @@
       "mtsn": "SHB7BLAG222161567",
       "checkedIn": false,
       "pickedUp": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "4584",
@@ -124,7 +124,7 @@
       "mtsn": "SHB7BLAG222161471",
       "checkedIn": false,
       "pickedUp": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "4793",
@@ -133,7 +133,7 @@
       "mtsn": "SHB7BLAG222162073",
       "checkedIn": false,
       "pickedUp": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "481702",
@@ -142,7 +142,7 @@
       "mtsn": "SHB8AJBL234933549",
       "checkedIn": false,
       "pickedUp": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "481839LG",
@@ -160,7 +160,7 @@
       "mtsn": "SHB81JBL233518668",
       "checkedIn": false,
       "pickedUp": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "48A2203",
@@ -232,7 +232,7 @@
       "mtsn": "SHB7BLAG222162076",
       "checkedIn": false,
       "pickedUp": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "5306253",
@@ -268,7 +268,7 @@
       "mtsn": "SHB8AJBL234427226",
       "checkedIn": false,
       "pickedUp": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "5313020",
@@ -367,7 +367,7 @@
       "mtsn": "SHB7BLAG222161552",
       "checkedIn": false,
       "pickedUp": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "5450069",
@@ -610,7 +610,7 @@
       "mtsn": "SHB7BJBL231700715",
       "checkedIn": false,
       "pickedUp": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "MTRZ277180",
@@ -646,7 +646,7 @@
       "mtsn": "SHB7CJBL234428271",
       "checkedIn": false,
       "pickedUp": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "MTRZ317449",
@@ -655,7 +655,7 @@
       "mtsn": "SHB7CJBL233113441",
       "checkedIn": false,
       "pickedUp": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "MTRZ317801",
@@ -700,7 +700,7 @@
       "mtsn": "SVE5CLAG221018260",
       "checkedIn": false,
       "pickedUp": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "MTRZ324255",
@@ -727,7 +727,7 @@
       "mtsn": "GXL5ELAG195055657",
       "checkedIn": false,
       "pickedUp": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "MTRZ568827",
@@ -736,7 +736,7 @@
       "mtsn": "SVE5CLAG222435071",
       "checkedIn": false,
       "pickedUp": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "MTRZ569002",
@@ -754,7 +754,7 @@
       "mtsn": "SVE5CLAG221523202",
       "checkedIn": false,
       "pickedUp": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "MTRZ581933",
@@ -799,7 +799,7 @@
       "mtsn": "SHB7BLAG222467882",
       "checkedIn": false,
       "pickedUp": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "MTRZ621038",
@@ -808,7 +808,7 @@
       "mtsn": "GXL5ELAG201072885",
       "checkedIn": false,
       "pickedUp": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "MTRZ621444",
@@ -862,7 +862,7 @@
       "mtsn": "SHB7BJBL231902065",
       "checkedIn": false,
       "pickedUp": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "MTRZ694180",
@@ -880,7 +880,7 @@
       "mtsn": "SHB8AJBL234629522",
       "checkedIn": false,
       "pickedUp": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "mtrz822022",
@@ -889,7 +889,7 @@
       "mtsn": "SHB8AJBL234024338",
       "checkedIn": false,
       "pickedUp": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "mtrz822067",
@@ -916,7 +916,7 @@
       "mtsn": "SVE5DJBL240206628",
       "checkedIn": false,
       "pickedUp": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "T1873",
@@ -1073,6 +1073,6 @@
     "T3343",
     "T4352"
   ],
-  "timestamp": 1772716295832,
-  "lastModified": "2026-03-05T13:11:35.832Z"
+  "timestamp": 1772716393595,
+  "lastModified": "2026-03-05T13:13:13.595Z"
 }
