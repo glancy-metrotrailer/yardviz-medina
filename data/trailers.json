@@ -1040,7 +1040,7 @@
       "lat": 41.14785,
       "lng": -81.89748,
       "mtsn": "SVE5DJBL240206628",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
       "isNew": false
     },
@@ -1213,6 +1213,6 @@
     "T3343",
     "T4352"
   ],
-  "timestamp": 1772800187660,
-  "lastModified": "2026-03-06T12:29:47.660Z"
+  "timestamp": 1772800193127,
+  "lastModified": "2026-03-06T12:29:53.127Z"
 }
