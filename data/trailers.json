@@ -959,9 +959,9 @@
       "lat": 41.14707,
       "lng": -81.89758,
       "mtsn": "SHB8AJBL234024338",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "5822033",
@@ -995,9 +995,9 @@
       "lat": 41.14692,
       "lng": -81.89745,
       "mtsn": "SHB8AJBL234124547",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "5822088",
@@ -1563,6 +1563,6 @@
     "T3343",
     "T4352"
   ],
-  "timestamp": 1773832795323,
-  "lastModified": "2026-03-18T11:19:55.323Z"
+  "timestamp": 1773832809849,
+  "lastModified": "2026-03-18T11:20:09.849Z"
 }
