@@ -635,9 +635,9 @@
       "lat": 41.14812,
       "lng": -81.89734,
       "mtsn": "SHB7CJBL234325793",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "5617250",
@@ -1121,9 +1121,9 @@
       "lat": 41.14796,
       "lng": -81.89751,
       "mtsn": "SVE5DJBL240206628",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "MTRZ309166",
@@ -1563,6 +1563,6 @@
     "T3343",
     "T4352"
   ],
-  "timestamp": 1773832994119,
-  "lastModified": "2026-03-18T11:23:14.119Z"
+  "timestamp": 1773833007623,
+  "lastModified": "2026-03-18T11:23:27.623Z"
 }
