@@ -230,9 +230,9 @@
       "lat": 41.14688,
       "lng": -81.89739,
       "mtsn": "SVE5CLAG223145750",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "5317048",
@@ -1563,6 +1563,6 @@
     "T3343",
     "T4352"
   ],
-  "timestamp": 1773832809849,
-  "lastModified": "2026-03-18T11:20:09.849Z"
+  "timestamp": 1773832821174,
+  "lastModified": "2026-03-18T11:20:21.174Z"
 }
