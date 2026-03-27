@@ -1040,9 +1040,9 @@
       "lat": 41.14798,
       "lng": -81.89819,
       "mtsn": "GXL5JLAG211532221",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "5622568",
@@ -1943,6 +1943,6 @@
     "T3343",
     "T4352"
   ],
-  "timestamp": 1774613215168,
-  "lastModified": "2026-03-27T12:06:55.168Z"
+  "timestamp": 1774613624205,
+  "lastModified": "2026-03-27T12:13:44.205Z"
 }
