@@ -1454,9 +1454,9 @@
       "lat": 41.14845,
       "lng": -81.89835,
       "mtsn": "GXL1ASPD182449191",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "MTRZ566572",
@@ -1753,6 +1753,6 @@
     "T3343",
     "T4352"
   ],
-  "timestamp": 1775135678138,
-  "lastModified": "2026-04-02T13:14:38.138Z"
+  "timestamp": 1775135680766,
+  "lastModified": "2026-04-02T13:14:40.766Z"
 }
