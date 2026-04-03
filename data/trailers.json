@@ -1745,9 +1745,9 @@
       "mtsn": "GXL7LLAG222014973",
       "batteryStatus": "OK",
       "arrivedAt": "",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "T2129",
@@ -1971,6 +1971,6 @@
     "T3343",
     "T4352"
   ],
-  "timestamp": 1775226307190,
-  "lastModified": "2026-04-03T14:25:07.190Z"
+  "timestamp": 1775226315900,
+  "lastModified": "2026-04-03T14:25:15.900Z"
 }
