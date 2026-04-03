@@ -2765,6 +2765,22 @@
             }
         },
         
+        formatDate(dateString) {
+            if (!dateString) return 'Unknown';
+            try {
+                const date = new Date(dateString.replace(/\//g, '-'));
+                return date.toLocaleDateString('en-US', { 
+                    month: 'short', 
+                    day: 'numeric', 
+                    year: 'numeric',
+                    hour: 'numeric',
+                    minute: '2-digit'
+                });
+            } catch (e) {
+                return dateString;
+            }
+        },
+        
         getBatteryIcon(batteryStatus) {
             const status = (batteryStatus || '').toLowerCase();
             let batteryClass = 'battery-unknown';
@@ -2940,6 +2956,10 @@
                 </div>
                 ${batteryRow}
                 ${mtsnRow}
+                <div class="popup-row">
+                    <span class="popup-label">Arrived</span>
+                    <span class="popup-value">${trailer.arrivedAt ? this.formatDate(trailer.arrivedAt) : 'Unknown'}</span>
+                </div>
                 <div class="popup-row">
                     <span class="popup-label">Latitude</span>
                     <span class="popup-value">${trailer.lat.toFixed(6)}</span>
