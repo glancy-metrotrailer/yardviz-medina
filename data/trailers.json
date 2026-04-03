@@ -1635,9 +1635,9 @@
       "mtsn": "SVE5CLAG223042972",
       "batteryStatus": "OK",
       "arrivedAt": "",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "MTRZ566036",
@@ -1971,6 +1971,6 @@
     "T3343",
     "T4352"
   ],
-  "timestamp": 1775226245194,
-  "lastModified": "2026-04-03T14:24:05.194Z"
+  "timestamp": 1775226261706,
+  "lastModified": "2026-04-03T14:24:21.706Z"
 }
