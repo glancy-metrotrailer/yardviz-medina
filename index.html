@@ -1556,38 +1556,45 @@
         }
         
         /* Labeled map markers for locate mode */
+        .locate-marker-container {
+            position: relative;
+            cursor: pointer;
+        }
+        
         .locate-marker {
             background: var(--metro-navy);
             color: white;
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 600;
             padding: 6px 10px;
             border-radius: 6px;
             white-space: nowrap;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.4);
             border: 2px solid white;
-            display: flex;
+            display: inline-flex;
             align-items: center;
             gap: 6px;
+        }
+        
+        .locate-marker-text {
+            line-height: 1;
         }
         
         .locate-marker-status {
             width: 8px;
             height: 8px;
             border-radius: 50%;
+            flex-shrink: 0;
         }
         
-        .locate-marker::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 50%;
-            transform: translateX(-50%);
+        .locate-marker-pointer {
             width: 0;
             height: 0;
             border-left: 8px solid transparent;
             border-right: 8px solid transparent;
             border-top: 8px solid var(--metro-navy);
+            margin: 0 auto;
+            margin-top: -1px;
         }
         
         /* Draggable trailer items */
@@ -3689,14 +3696,15 @@
             if (trailer.pickedUp) statusColor = '#f59e0b'; // amber
             else if (trailer.checkedIn) statusColor = '#22c55e'; // green
             
-            // Create marker element
+            // Create marker element with proper structure
             const el = document.createElement('div');
-            el.style.cssText = 'position: relative; cursor: pointer;';
+            el.className = 'locate-marker-container';
             el.innerHTML = `
                 <div class="locate-marker">
-                    <div class="locate-marker-status" style="background: ${statusColor};"></div>
-                    ${trailer.id}
+                    <span class="locate-marker-status" style="background: ${statusColor};"></span>
+                    <span class="locate-marker-text">${trailer.id}</span>
                 </div>
+                <div class="locate-marker-pointer"></div>
             `;
             
             const marker = new maplibregl.Marker({ element: el, anchor: 'bottom' })
@@ -3712,20 +3720,23 @@
         },
         
         hideRegularMarkers() {
-            // Hide the regular marker layer if using layers, or iterate markers
-            const markers = document.querySelectorAll('.maplibregl-marker:not(.locate-marker)');
-            markers.forEach(m => {
-                if (!m.querySelector('.locate-marker')) {
-                    m.style.display = 'none';
-                }
-            });
+            // Hide the regular trailer layers
+            if (this.state.map.getLayer('trailers')) {
+                this.state.map.setLayoutProperty('trailers', 'visibility', 'none');
+            }
+            if (this.state.map.getLayer('trailers-labels')) {
+                this.state.map.setLayoutProperty('trailers-labels', 'visibility', 'none');
+            }
         },
         
         showRegularMarkers() {
-            const markers = document.querySelectorAll('.maplibregl-marker');
-            markers.forEach(m => {
-                m.style.display = '';
-            });
+            // Show the regular trailer layers
+            if (this.state.map.getLayer('trailers')) {
+                this.state.map.setLayoutProperty('trailers', 'visibility', 'visible');
+            }
+            if (this.state.map.getLayer('trailers-labels')) {
+                this.state.map.setLayoutProperty('trailers-labels', 'visibility', 'visible');
+            }
         },
         
         fitToLocateTrailers() {
