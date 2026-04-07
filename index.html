@@ -3705,8 +3705,6 @@
         },
         
         addLocateMarker(trailer) {
-            console.log('Adding locate marker for:', trailer.id, 'at', trailer.lat, trailer.lng);
-            
             let statusColor = '#ef4444'; // red for not checked in
             if (trailer.pickedUp) statusColor = '#f59e0b'; // amber
             else if (trailer.checkedIn) statusColor = '#22c55e'; // green
@@ -3714,6 +3712,9 @@
             // Ensure lat/lng are numbers
             const lat = parseFloat(trailer.lat);
             const lng = parseFloat(trailer.lng);
+            
+            // DEBUG: Show what we're about to use
+            alert(`Creating marker for ${trailer.id}\nlat: ${lat}\nlng: ${lng}\nsetLngLat([${lng}, ${lat}])`);
             
             if (isNaN(lat) || isNaN(lng)) {
                 console.error('Invalid coordinates for trailer:', trailer.id, 'lat:', trailer.lat, 'lng:', trailer.lng);
