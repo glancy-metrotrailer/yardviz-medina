@@ -3226,6 +3226,7 @@
                 
                 return `
                 <div class="trailer-item ${this.state.selectedTrailerId === trailer.id ? 'active' : ''} ${pickedUpClass}" 
+                     data-trailer-id="${trailer.id}"
                      onclick="app.selectTrailer('${trailer.id}')">
                     <div class="trailer-icon status-${statusClass}">${trailerSvg}</div>
                     <div class="trailer-info">
@@ -3243,6 +3244,11 @@
             `}).join('');
             
             this.updateStats();
+            
+            // Make trailer items draggable for locate mode
+            if (this.state.locatePanelOpen) {
+                this.updateTrailerDraggable();
+            }
         },
         
         filterTrailers(event) {
@@ -3540,29 +3546,58 @@
         
         initDragAndDrop() {
             const dropZone = document.getElementById('locateDropZone');
+            const trailerList = document.getElementById('trailerList');
             
-            // Set up drop zone events
-            dropZone.addEventListener('dragover', (e) => {
-                e.preventDefault();
-                dropZone.classList.add('drag-over');
-            });
-            
-            dropZone.addEventListener('dragleave', (e) => {
-                e.preventDefault();
-                dropZone.classList.remove('drag-over');
-            });
-            
-            dropZone.addEventListener('drop', (e) => {
-                e.preventDefault();
-                dropZone.classList.remove('drag-over');
+            // Set up drop zone events (only once)
+            if (!dropZone.dataset.initialized) {
+                dropZone.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    dropZone.classList.add('drag-over');
+                });
                 
-                const trailerId = e.dataTransfer.getData('text/plain');
-                if (trailerId) {
-                    this.addToLocateList(trailerId);
-                }
-            });
+                dropZone.addEventListener('dragleave', (e) => {
+                    e.preventDefault();
+                    dropZone.classList.remove('drag-over');
+                });
+                
+                dropZone.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    dropZone.classList.remove('drag-over');
+                    
+                    const trailerId = e.dataTransfer.getData('text/plain');
+                    if (trailerId) {
+                        this.addToLocateList(trailerId);
+                    }
+                });
+                
+                dropZone.dataset.initialized = 'true';
+            }
             
-            // Make trailer items draggable
+            // Use event delegation on the trailer list container (only once)
+            if (!trailerList.dataset.dragInitialized) {
+                trailerList.addEventListener('dragstart', (e) => {
+                    const item = e.target.closest('.trailer-item');
+                    if (item) {
+                        const trailerId = item.dataset.trailerId;
+                        if (trailerId) {
+                            e.dataTransfer.setData('text/plain', trailerId);
+                            e.dataTransfer.effectAllowed = 'copy';
+                            item.classList.add('dragging');
+                        }
+                    }
+                });
+                
+                trailerList.addEventListener('dragend', (e) => {
+                    const item = e.target.closest('.trailer-item');
+                    if (item) {
+                        item.classList.remove('dragging');
+                    }
+                });
+                
+                trailerList.dataset.dragInitialized = 'true';
+            }
+            
+            // Make all trailer items draggable
             this.updateTrailerDraggable();
         },
         
@@ -3570,18 +3605,6 @@
             const trailerItems = document.querySelectorAll('.trailer-item');
             trailerItems.forEach(item => {
                 item.setAttribute('draggable', 'true');
-                
-                item.addEventListener('dragstart', (e) => {
-                    const trailerId = item.querySelector('.trailer-id')?.textContent?.split(/[\s<]/)[0];
-                    if (trailerId) {
-                        e.dataTransfer.setData('text/plain', trailerId);
-                        item.classList.add('dragging');
-                    }
-                });
-                
-                item.addEventListener('dragend', () => {
-                    item.classList.remove('dragging');
-                });
             });
         },
         
