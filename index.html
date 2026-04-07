@@ -1323,6 +1323,315 @@
             font-family: 'JetBrains Mono', monospace;
         }
         
+        /* Locate Mode Styles */
+        .locate-mode-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.5rem 0.75rem;
+            background: var(--metro-orange);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .locate-mode-btn:hover {
+            background: var(--metro-orange-hover);
+        }
+        
+        .locate-mode-btn svg {
+            width: 14px;
+            height: 14px;
+            stroke: currentColor;
+        }
+        
+        .locate-panel {
+            position: absolute;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100%;
+            background: var(--bg-secondary);
+            border-left: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            z-index: 100;
+            transition: right 0.3s ease;
+            box-shadow: -4px 0 16px rgba(0,0,0,0.1);
+        }
+        
+        .locate-panel.visible {
+            right: 0;
+        }
+        
+        .locate-panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .locate-panel-title {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--text-primary);
+        }
+        
+        .locate-panel-subtitle {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 0.15rem;
+        }
+        
+        .locate-panel-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 0.25rem;
+            line-height: 1;
+        }
+        
+        .locate-panel-close:hover {
+            color: var(--text-primary);
+        }
+        
+        .locate-drop-zone {
+            flex: 1;
+            margin: 1rem;
+            padding: 0.75rem;
+            border: 2px dashed var(--border-color);
+            border-radius: 8px;
+            background: var(--bg-primary);
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        
+        .locate-drop-zone.drag-over {
+            border-color: var(--metro-orange);
+            background: rgba(247, 148, 29, 0.05);
+        }
+        
+        .locate-drop-hint {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+        
+        .locate-trailer-item {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.6rem 0.75rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-left: 3px solid var(--metro-orange);
+            border-radius: 6px;
+        }
+        
+        .locate-trailer-status {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        
+        .locate-trailer-status.checked-in {
+            background: var(--metro-success);
+        }
+        
+        .locate-trailer-status.not-checked-in {
+            background: var(--metro-danger);
+        }
+        
+        .locate-trailer-status.picked-up {
+            background: var(--metro-warning);
+        }
+        
+        .locate-trailer-id {
+            flex: 1;
+            font-weight: 500;
+            font-size: 0.85rem;
+            color: var(--text-primary);
+        }
+        
+        .locate-trailer-remove {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 0.2rem;
+            font-size: 1.1rem;
+            line-height: 1;
+        }
+        
+        .locate-trailer-remove:hover {
+            color: var(--metro-danger);
+        }
+        
+        .locate-panel-actions {
+            padding: 1rem;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .locate-btn-primary {
+            width: 100%;
+            padding: 0.65rem 1rem;
+            background: var(--metro-orange);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .locate-btn-primary:hover {
+            background: var(--metro-orange-hover);
+        }
+        
+        .locate-btn-primary:disabled {
+            background: var(--border-color);
+            cursor: not-allowed;
+        }
+        
+        .locate-btn-secondary {
+            width: 100%;
+            padding: 0.5rem 1rem;
+            background: var(--bg-primary);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .locate-btn-secondary:hover {
+            background: var(--bg-tertiary);
+        }
+        
+        /* Locate mode indicator on map */
+        .locate-mode-indicator {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: var(--metro-orange);
+            color: white;
+            padding: 0.5rem 0.85rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            display: none;
+            align-items: center;
+            gap: 0.5rem;
+            z-index: 10;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        
+        .locate-mode-indicator.visible {
+            display: flex;
+        }
+        
+        .locate-mode-indicator svg {
+            width: 14px;
+            height: 14px;
+        }
+        
+        /* Labeled map markers for locate mode */
+        .locate-marker {
+            background: var(--metro-navy);
+            color: white;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 6px 10px;
+            border-radius: 6px;
+            white-space: nowrap;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            border: 2px solid white;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .locate-marker-status {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+        
+        .locate-marker::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 8px solid var(--metro-navy);
+        }
+        
+        /* Draggable trailer items */
+        .trailer-item[draggable="true"] {
+            cursor: grab;
+        }
+        
+        .trailer-item[draggable="true"]:active {
+            cursor: grabbing;
+        }
+        
+        .trailer-item.dragging {
+            opacity: 0.5;
+        }
+        
+        .drag-handle {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            cursor: grab;
+            padding: 0 0.25rem;
+            user-select: none;
+        }
+        
+        /* Print styles for locate mode */
+        @media print {
+            .locate-panel, .locate-mode-btn, .locate-mode-indicator { display: none !important; }
+        }
+        
+        .print-mode .header,
+        .print-mode .sidebar,
+        .print-mode .map-controls,
+        .print-mode .style-selector,
+        .print-mode .locate-panel {
+            display: none !important;
+        }
+        
+        .print-mode .map-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+        
         @media print {
             .header, .sidebar, .map-controls, .style-selector { display: none !important; }
             .app-container { display: block; }
@@ -1398,8 +1707,8 @@
                     </span>
                     <input type="text" class="search-input" id="searchInput" placeholder="Trailer #..." oninput="app.filterTrailers(event)">
                 </div>
-                <div class="filter-section">
-                    <select class="filter-select" id="filterSelect" onchange="app.setFilterMode(this.value)">
+                <div class="filter-section" style="display: flex; gap: 0.5rem; align-items: center;">
+                    <select class="filter-select" id="filterSelect" onchange="app.setFilterMode(this.value)" style="flex: 1;">
                         <option value="all">All Trailers</option>
                         <option value="new">New</option>
                         <option value="checkedIn">Checked In</option>
@@ -1407,6 +1716,13 @@
                         <option value="pickedUp">Picked Up</option>
                         <option value="onSite">On-Site (Not Picked Up)</option>
                     </select>
+                    <button class="locate-mode-btn" onclick="app.toggleLocatePanel()" title="Locate Mode">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"/>
+                            <path d="m21 21-4.35-4.35"/>
+                        </svg>
+                        Locate
+                    </button>
                 </div>
                 <div class="trailer-list-container" id="trailerListContainer">
                     <div class="empty-state" id="emptyState">
@@ -1443,6 +1759,44 @@
                     <option value="outdoor">🏔️ Outdoor</option>
                     <option value="basic">📍 Basic</option>
                 </select>
+            </div>
+            
+            <!-- Locate Mode Indicator -->
+            <div class="locate-mode-indicator" id="locateModeIndicator">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"/>
+                    <path d="m21 21-4.35-4.35"/>
+                </svg>
+                <span id="locateModeCount">Locate mode: 0 trailers</span>
+            </div>
+            
+            <!-- Locate Panel (Slide-out) -->
+            <div class="locate-panel" id="locatePanel">
+                <div class="locate-panel-header">
+                    <div>
+                        <div class="locate-panel-title">Locate trailers</div>
+                        <div class="locate-panel-subtitle">Drag trailers here to find them</div>
+                    </div>
+                    <button class="locate-panel-close" onclick="app.toggleLocatePanel()">×</button>
+                </div>
+                
+                <div class="locate-drop-zone" id="locateDropZone">
+                    <div class="locate-drop-hint" id="locateDropHint">
+                        ↓ Drop trailers here to locate them on the map
+                    </div>
+                </div>
+                
+                <div class="locate-panel-actions">
+                    <button class="locate-btn-primary" id="locateShowBtn" onclick="app.showLocateTrailers()" disabled>
+                        Show on map
+                    </button>
+                    <button class="locate-btn-secondary" onclick="app.printLocateMap()">
+                        🖨️ Print map
+                    </button>
+                    <button class="locate-btn-secondary" onclick="app.clearLocateList()">
+                        Clear all
+                    </button>
+                </div>
             </div>
         </main>
     </div>
@@ -1583,7 +1937,12 @@
             filterMode: 'all',  // all, new, checkedIn, notCheckedIn, pickedUp, onSite
             pendingCheckInTrailerId: null,
             pendingCheckInCheckbox: null,
-            pendingCheckInFromPopup: false
+            pendingCheckInFromPopup: false,
+            // Locate mode state
+            locatePanelOpen: false,
+            locateTrailers: [],
+            locateModeActive: false,
+            locateMarkers: []
         },
         
         // Get GitHub token from localStorage or prompt user
@@ -3151,6 +3510,277 @@
                 this.showToast('Failed to copy', 'error');
             });
         },
+        
+        // =====================================================
+        // LOCATE MODE FUNCTIONS
+        // =====================================================
+        
+        toggleLocatePanel() {
+            this.state.locatePanelOpen = !this.state.locatePanelOpen;
+            const panel = document.getElementById('locatePanel');
+            
+            if (this.state.locatePanelOpen) {
+                panel.classList.add('visible');
+                this.initDragAndDrop();
+            } else {
+                panel.classList.remove('visible');
+                // If closing panel, also exit locate mode
+                if (this.state.locateModeActive) {
+                    this.exitLocateMode();
+                }
+            }
+        },
+        
+        initDragAndDrop() {
+            const dropZone = document.getElementById('locateDropZone');
+            
+            // Set up drop zone events
+            dropZone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                dropZone.classList.add('drag-over');
+            });
+            
+            dropZone.addEventListener('dragleave', (e) => {
+                e.preventDefault();
+                dropZone.classList.remove('drag-over');
+            });
+            
+            dropZone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                dropZone.classList.remove('drag-over');
+                
+                const trailerId = e.dataTransfer.getData('text/plain');
+                if (trailerId) {
+                    this.addToLocateList(trailerId);
+                }
+            });
+            
+            // Make trailer items draggable
+            this.updateTrailerDraggable();
+        },
+        
+        updateTrailerDraggable() {
+            const trailerItems = document.querySelectorAll('.trailer-item');
+            trailerItems.forEach(item => {
+                item.setAttribute('draggable', 'true');
+                
+                item.addEventListener('dragstart', (e) => {
+                    const trailerId = item.querySelector('.trailer-id')?.textContent?.split(/[\s<]/)[0];
+                    if (trailerId) {
+                        e.dataTransfer.setData('text/plain', trailerId);
+                        item.classList.add('dragging');
+                    }
+                });
+                
+                item.addEventListener('dragend', () => {
+                    item.classList.remove('dragging');
+                });
+            });
+        },
+        
+        addToLocateList(trailerId) {
+            // Check if already in list
+            if (this.state.locateTrailers.find(t => t.id === trailerId)) {
+                this.showToast(`${trailerId} already in locate list`, 'warning');
+                return;
+            }
+            
+            // Find the trailer data
+            const trailer = this.state.trailers.find(t => t.id === trailerId);
+            if (!trailer) {
+                this.showToast(`Trailer ${trailerId} not found`, 'error');
+                return;
+            }
+            
+            // Add to locate list
+            this.state.locateTrailers.push(trailer);
+            this.renderLocateList();
+            this.showToast(`Added ${trailerId} to locate list`, 'info');
+        },
+        
+        removeFromLocateList(trailerId) {
+            this.state.locateTrailers = this.state.locateTrailers.filter(t => t.id !== trailerId);
+            this.renderLocateList();
+            
+            // If in locate mode and list is now empty, exit locate mode
+            if (this.state.locateModeActive && this.state.locateTrailers.length === 0) {
+                this.exitLocateMode();
+            }
+        },
+        
+        renderLocateList() {
+            const dropZone = document.getElementById('locateDropZone');
+            const hint = document.getElementById('locateDropHint');
+            const showBtn = document.getElementById('locateShowBtn');
+            
+            if (this.state.locateTrailers.length === 0) {
+                dropZone.innerHTML = `<div class="locate-drop-hint" id="locateDropHint">
+                    ↓ Drop trailers here to locate them on the map
+                </div>`;
+                showBtn.disabled = true;
+                return;
+            }
+            
+            showBtn.disabled = false;
+            
+            const html = this.state.locateTrailers.map(trailer => {
+                let statusClass = 'not-checked-in';
+                if (trailer.pickedUp) statusClass = 'picked-up';
+                else if (trailer.checkedIn) statusClass = 'checked-in';
+                
+                return `
+                    <div class="locate-trailer-item">
+                        <div class="locate-trailer-status ${statusClass}"></div>
+                        <div class="locate-trailer-id">${trailer.id}</div>
+                        <button class="locate-trailer-remove" onclick="app.removeFromLocateList('${trailer.id}')" title="Remove">×</button>
+                    </div>
+                `;
+            }).join('');
+            
+            dropZone.innerHTML = html + `<div class="locate-drop-hint" style="padding: 1rem;">↓ Drop more trailers here</div>`;
+        },
+        
+        clearLocateList() {
+            this.state.locateTrailers = [];
+            this.renderLocateList();
+            
+            if (this.state.locateModeActive) {
+                this.exitLocateMode();
+            }
+            
+            this.showToast('Locate list cleared', 'info');
+        },
+        
+        showLocateTrailers() {
+            if (this.state.locateTrailers.length === 0) {
+                this.showToast('No trailers in locate list', 'warning');
+                return;
+            }
+            
+            this.state.locateModeActive = true;
+            
+            // Update indicator
+            const indicator = document.getElementById('locateModeIndicator');
+            const countText = document.getElementById('locateModeCount');
+            indicator.classList.add('visible');
+            countText.textContent = `Locate mode: ${this.state.locateTrailers.length} trailer${this.state.locateTrailers.length > 1 ? 's' : ''}`;
+            
+            // Clear existing markers
+            this.clearLocateMarkers();
+            
+            // Hide regular markers
+            this.hideRegularMarkers();
+            
+            // Add labeled markers for locate trailers
+            this.state.locateTrailers.forEach(trailer => {
+                if (trailer.lat && trailer.lng) {
+                    this.addLocateMarker(trailer);
+                }
+            });
+            
+            // Fit map to locate trailers
+            this.fitToLocateTrailers();
+            
+            this.showToast(`Showing ${this.state.locateTrailers.length} trailer(s) on map`, 'success');
+        },
+        
+        addLocateMarker(trailer) {
+            let statusColor = '#ef4444'; // red for not checked in
+            if (trailer.pickedUp) statusColor = '#f59e0b'; // amber
+            else if (trailer.checkedIn) statusColor = '#22c55e'; // green
+            
+            // Create marker element
+            const el = document.createElement('div');
+            el.style.cssText = 'position: relative; cursor: pointer;';
+            el.innerHTML = `
+                <div class="locate-marker">
+                    <div class="locate-marker-status" style="background: ${statusColor};"></div>
+                    ${trailer.id}
+                </div>
+            `;
+            
+            const marker = new maplibregl.Marker({ element: el, anchor: 'bottom' })
+                .setLngLat([trailer.lng, trailer.lat])
+                .addTo(this.state.map);
+            
+            this.state.locateMarkers.push(marker);
+        },
+        
+        clearLocateMarkers() {
+            this.state.locateMarkers.forEach(marker => marker.remove());
+            this.state.locateMarkers = [];
+        },
+        
+        hideRegularMarkers() {
+            // Hide the regular marker layer if using layers, or iterate markers
+            const markers = document.querySelectorAll('.maplibregl-marker:not(.locate-marker)');
+            markers.forEach(m => {
+                if (!m.querySelector('.locate-marker')) {
+                    m.style.display = 'none';
+                }
+            });
+        },
+        
+        showRegularMarkers() {
+            const markers = document.querySelectorAll('.maplibregl-marker');
+            markers.forEach(m => {
+                m.style.display = '';
+            });
+        },
+        
+        fitToLocateTrailers() {
+            if (this.state.locateTrailers.length === 0) return;
+            
+            const bounds = new maplibregl.LngLatBounds();
+            this.state.locateTrailers.forEach(trailer => {
+                if (trailer.lat && trailer.lng) {
+                    bounds.extend([trailer.lng, trailer.lat]);
+                }
+            });
+            
+            this.state.map.fitBounds(bounds, {
+                padding: 80,
+                maxZoom: 19
+            });
+        },
+        
+        exitLocateMode() {
+            this.state.locateModeActive = false;
+            
+            // Hide indicator
+            const indicator = document.getElementById('locateModeIndicator');
+            indicator.classList.remove('visible');
+            
+            // Clear locate markers
+            this.clearLocateMarkers();
+            
+            // Show regular markers
+            this.showRegularMarkers();
+            
+            // Re-render regular markers
+            this.renderTrailersOnMap();
+        },
+        
+        printLocateMap() {
+            if (this.state.locateTrailers.length === 0) {
+                this.showToast('Add trailers to locate list first', 'warning');
+                return;
+            }
+            
+            // Make sure we're in locate mode
+            if (!this.state.locateModeActive) {
+                this.showLocateTrailers();
+            }
+            
+            // Give map time to render, then print
+            setTimeout(() => {
+                window.print();
+            }, 500);
+        },
+        
+        // =====================================================
+        // END LOCATE MODE FUNCTIONS
+        // =====================================================
         
         showLoading(show) {
             const overlay = document.getElementById('loadingOverlay');
