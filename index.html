@@ -1557,7 +1557,9 @@
         
         /* Labeled map markers for locate mode */
         .locate-marker-container {
-            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             cursor: pointer;
         }
         
@@ -1593,8 +1595,6 @@
             border-left: 8px solid transparent;
             border-right: 8px solid transparent;
             border-top: 8px solid var(--metro-navy);
-            margin: 0 auto;
-            margin-top: -1px;
         }
         
         /* Draggable trailer items */
@@ -3602,9 +3602,6 @@
                 return;
             }
             
-            // DEBUG: Show trailer data in alert
-            alert(`Trailer: ${trailer.id}\nlat: ${trailer.lat} (${typeof trailer.lat})\nlng: ${trailer.lng} (${typeof trailer.lng})`);
-            
             // Add to locate list
             this.state.locateTrailers.push({...trailer});
             this.renderLocateList();
@@ -3670,8 +3667,6 @@
                 return;
             }
             
-            console.log('showLocateTrailers called with:', this.state.locateTrailers);
-            
             this.state.locateModeActive = true;
             
             // Update indicator
@@ -3688,13 +3683,10 @@
             
             // Add labeled markers for locate trailers
             this.state.locateTrailers.forEach(trailer => {
-                console.log('Processing trailer:', trailer.id, 'lat:', trailer.lat, 'lng:', trailer.lng);
                 const lat = parseFloat(trailer.lat);
                 const lng = parseFloat(trailer.lng);
                 if (!isNaN(lat) && !isNaN(lng)) {
                     this.addLocateMarker(trailer);
-                } else {
-                    console.error('Invalid coordinates for trailer:', trailer.id);
                 }
             });
             
@@ -3713,11 +3705,8 @@
             const lat = parseFloat(trailer.lat);
             const lng = parseFloat(trailer.lng);
             
-            // DEBUG: Show what we're about to use
-            alert(`Creating marker for ${trailer.id}\nlat: ${lat}\nlng: ${lng}\nsetLngLat([${lng}, ${lat}])`);
-            
             if (isNaN(lat) || isNaN(lng)) {
-                console.error('Invalid coordinates for trailer:', trailer.id, 'lat:', trailer.lat, 'lng:', trailer.lng);
+                console.error('Invalid coordinates for trailer:', trailer.id);
                 return;
             }
             
@@ -3767,30 +3756,23 @@
         fitToLocateTrailers() {
             if (this.state.locateTrailers.length === 0) return;
             
-            console.log('fitToLocateTrailers called');
-            
             const bounds = new maplibregl.LngLatBounds();
             let validCount = 0;
             
             this.state.locateTrailers.forEach(trailer => {
                 const lat = parseFloat(trailer.lat);
                 const lng = parseFloat(trailer.lng);
-                console.log('fitBounds - trailer:', trailer.id, 'lat:', lat, 'lng:', lng);
                 if (!isNaN(lat) && !isNaN(lng) && lat !== 0 && lng !== 0) {
                     bounds.extend([lng, lat]);
                     validCount++;
                 }
             });
             
-            console.log('Valid coordinates count:', validCount, 'bounds:', bounds);
-            
             if (validCount > 0 && !bounds.isEmpty()) {
                 this.state.map.fitBounds(bounds, {
                     padding: 80,
                     maxZoom: 19
                 });
-            } else {
-                console.error('No valid bounds to fit');
             }
         },
         
