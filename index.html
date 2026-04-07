@@ -2184,7 +2184,7 @@
             document.addEventListener('click', (e) => {
                 const exportBtn = document.getElementById('exportBtn');
                 const exportMenu = document.getElementById('exportMenu');
-                if (!exportBtn.contains(e.target) && !exportMenu.contains(e.target)) {
+                if (exportBtn && exportMenu && !exportBtn.contains(e.target) && !exportMenu.contains(e.target)) {
                     exportMenu.classList.remove('visible');
                 }
             });
@@ -3586,6 +3586,9 @@
         },
         
         addToLocateList(trailerId) {
+            // Clean up the trailer ID (remove any extra characters)
+            trailerId = trailerId.trim();
+            
             // Check if already in list
             if (this.state.locateTrailers.find(t => t.id === trailerId)) {
                 this.showToast(`${trailerId} already in locate list`, 'warning');
@@ -3599,8 +3602,11 @@
                 return;
             }
             
+            // DEBUG: Show trailer data in alert
+            alert(`Trailer: ${trailer.id}\nlat: ${trailer.lat} (${typeof trailer.lat})\nlng: ${trailer.lng} (${typeof trailer.lng})`);
+            
             // Add to locate list
-            this.state.locateTrailers.push(trailer);
+            this.state.locateTrailers.push({...trailer});
             this.renderLocateList();
             this.showToast(`Added ${trailerId} to locate list`, 'info');
         },
@@ -3664,6 +3670,8 @@
                 return;
             }
             
+            console.log('showLocateTrailers called with:', this.state.locateTrailers);
+            
             this.state.locateModeActive = true;
             
             // Update indicator
@@ -3680,8 +3688,13 @@
             
             // Add labeled markers for locate trailers
             this.state.locateTrailers.forEach(trailer => {
-                if (trailer.lat && trailer.lng) {
+                console.log('Processing trailer:', trailer.id, 'lat:', trailer.lat, 'lng:', trailer.lng);
+                const lat = parseFloat(trailer.lat);
+                const lng = parseFloat(trailer.lng);
+                if (!isNaN(lat) && !isNaN(lng)) {
                     this.addLocateMarker(trailer);
+                } else {
+                    console.error('Invalid coordinates for trailer:', trailer.id);
                 }
             });
             
@@ -3692,9 +3705,20 @@
         },
         
         addLocateMarker(trailer) {
+            console.log('Adding locate marker for:', trailer.id, 'at', trailer.lat, trailer.lng);
+            
             let statusColor = '#ef4444'; // red for not checked in
             if (trailer.pickedUp) statusColor = '#f59e0b'; // amber
             else if (trailer.checkedIn) statusColor = '#22c55e'; // green
+            
+            // Ensure lat/lng are numbers
+            const lat = parseFloat(trailer.lat);
+            const lng = parseFloat(trailer.lng);
+            
+            if (isNaN(lat) || isNaN(lng)) {
+                console.error('Invalid coordinates for trailer:', trailer.id, 'lat:', trailer.lat, 'lng:', trailer.lng);
+                return;
+            }
             
             // Create marker element with proper structure
             const el = document.createElement('div');
@@ -3708,7 +3732,7 @@
             `;
             
             const marker = new maplibregl.Marker({ element: el, anchor: 'bottom' })
-                .setLngLat([trailer.lng, trailer.lat])
+                .setLngLat([lng, lat])
                 .addTo(this.state.map);
             
             this.state.locateMarkers.push(marker);
@@ -3742,17 +3766,31 @@
         fitToLocateTrailers() {
             if (this.state.locateTrailers.length === 0) return;
             
+            console.log('fitToLocateTrailers called');
+            
             const bounds = new maplibregl.LngLatBounds();
+            let validCount = 0;
+            
             this.state.locateTrailers.forEach(trailer => {
-                if (trailer.lat && trailer.lng) {
-                    bounds.extend([trailer.lng, trailer.lat]);
+                const lat = parseFloat(trailer.lat);
+                const lng = parseFloat(trailer.lng);
+                console.log('fitBounds - trailer:', trailer.id, 'lat:', lat, 'lng:', lng);
+                if (!isNaN(lat) && !isNaN(lng) && lat !== 0 && lng !== 0) {
+                    bounds.extend([lng, lat]);
+                    validCount++;
                 }
             });
             
-            this.state.map.fitBounds(bounds, {
-                padding: 80,
-                maxZoom: 19
-            });
+            console.log('Valid coordinates count:', validCount, 'bounds:', bounds);
+            
+            if (validCount > 0 && !bounds.isEmpty()) {
+                this.state.map.fitBounds(bounds, {
+                    padding: 80,
+                    maxZoom: 19
+                });
+            } else {
+                console.error('No valid bounds to fit');
+            }
         },
         
         exitLocateMode() {
