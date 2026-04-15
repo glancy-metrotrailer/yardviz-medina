@@ -733,9 +733,9 @@
       "mtsn": "GXL5ELAG203617355",
       "batteryStatus": "OK",
       "arrivedAt": "2026-04-14T19:00:25.0941654Z",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "5321831",
@@ -1755,6 +1755,6 @@
     "T2754",
     "T4352"
   ],
-  "timestamp": 1776257349669,
-  "lastModified": "2026-04-15T12:49:09.669Z"
+  "timestamp": 1776257386208,
+  "lastModified": "2026-04-15T12:49:46.208Z"
 }
