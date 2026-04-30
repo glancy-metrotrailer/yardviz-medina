@@ -1063,9 +1063,9 @@
       "mtsn": "SVE5CJBL231883857",
       "batteryStatus": "OK",
       "arrivedAt": "2026-04-30T00:15:24.6669391Z",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "581930",
@@ -1359,6 +1359,6 @@
     "MT53166",
     "T4352"
   ],
-  "timestamp": 1777570573128,
-  "lastModified": "2026-04-30T17:36:13.128Z"
+  "timestamp": 1777570580780,
+  "lastModified": "2026-04-30T17:36:20.780Z"
 }
