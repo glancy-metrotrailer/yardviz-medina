@@ -513,9 +513,9 @@
       "mtsn": "GXL5JLAG210694986",
       "batteryStatus": "OK",
       "arrivedAt": "2026-05-05T14:30:22.8219219Z",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "5322749",
@@ -1323,6 +1323,6 @@
     "MTRZ313015",
     "T4352"
   ],
-  "timestamp": 1778000195893,
-  "lastModified": "2026-05-05T16:56:35.893Z"
+  "timestamp": 1778000215519,
+  "lastModified": "2026-05-05T16:56:55.519Z"
 }
