@@ -524,9 +524,9 @@
       "mtsn": "SVE5CLAG224055130",
       "batteryStatus": "OK",
       "arrivedAt": "2026-05-06T18:15:35.1346343Z",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "5323126",
@@ -1347,6 +1347,6 @@
     "MTRZ313015",
     "T4352"
   ],
-  "timestamp": 1778156114448,
-  "lastModified": "2026-05-07T12:15:14.448Z"
+  "timestamp": 1778156135766,
+  "lastModified": "2026-05-07T12:15:35.766Z"
 }
