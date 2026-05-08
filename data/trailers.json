@@ -524,7 +524,7 @@
       "mtsn": "GXL5JLAG210694986",
       "batteryStatus": "OK",
       "arrivedAt": "2026-05-07T16:30:29.1689899Z",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
       "isNew": false
     },
@@ -1347,6 +1347,6 @@
     "MT53166",
     "T4352"
   ],
-  "timestamp": 1778241184341,
-  "lastModified": "2026-05-08T11:53:04.341Z"
+  "timestamp": 1778241199484,
+  "lastModified": "2026-05-08T11:53:19.484Z"
 }
