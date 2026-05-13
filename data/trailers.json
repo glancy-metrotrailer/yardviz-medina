@@ -975,9 +975,9 @@
       "mtsn": "GXL7LLAG222013600",
       "batteryStatus": "OK",
       "arrivedAt": "2026-05-12T21:00:28.1927363Z",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "5622309",
@@ -1323,6 +1323,6 @@
     "MTRZ625150",
     "T4352"
   ],
-  "timestamp": 1778692339277,
-  "lastModified": "2026-05-13T17:12:19.277Z"
+  "timestamp": 1778692341154,
+  "lastModified": "2026-05-13T17:12:21.154Z"
 }
