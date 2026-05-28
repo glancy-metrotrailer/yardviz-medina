@@ -95,9 +95,9 @@
       "mtsn": "SHB8AJBL240238265",
       "batteryStatus": "OK",
       "arrivedAt": "2026-05-28T14:15:29.4551785Z",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "48F923",
@@ -1575,6 +1575,6 @@
     "T2129",
     "T4352"
   ],
-  "timestamp": 1779990861819,
-  "lastModified": "2026-05-28T17:54:21.819Z"
+  "timestamp": 1779991108552,
+  "lastModified": "2026-05-28T17:58:28.552Z"
 }
