@@ -1228,9 +1228,9 @@
       "mtsn": "GXL1ASPD182348195",
       "batteryStatus": "OK",
       "arrivedAt": "2026-06-02T22:00:31.8344092Z",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "581944",
@@ -1683,6 +1683,6 @@
     "T2754",
     "T4352"
   ],
-  "timestamp": 1780498064178,
-  "lastModified": "2026-06-03T14:47:44.178Z"
+  "timestamp": 1780498066115,
+  "lastModified": "2026-06-03T14:47:46.115Z"
 }
