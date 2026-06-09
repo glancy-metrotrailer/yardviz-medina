@@ -1107,7 +1107,7 @@
       "mtsn": "SVE5BLAG214105120",
       "batteryStatus": "OK",
       "arrivedAt": "2026-05-15T12:15:25.9662548Z",
-      "checkedIn": true,
+      "checkedIn": false,
       "pickedUp": false,
       "isNew": false
     },
@@ -1731,6 +1731,6 @@
     "T2754",
     "T4352"
   ],
-  "timestamp": 1781027280036,
-  "lastModified": "2026-06-09T17:48:00.036Z"
+  "timestamp": 1781027292653,
+  "lastModified": "2026-06-09T17:48:12.653Z"
 }
