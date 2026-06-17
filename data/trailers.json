@@ -238,9 +238,9 @@
       "mtsn": "SHB81JBL233315186",
       "batteryStatus": "OK",
       "arrivedAt": "2026-06-17T15:00:35.1379132Z",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "5315253",
@@ -1659,6 +1659,6 @@
     "T2754",
     "T4352"
   ],
-  "timestamp": 1781710518455,
-  "lastModified": "2026-06-17T15:35:18.455Z"
+  "timestamp": 1781710729249,
+  "lastModified": "2026-06-17T15:38:49.249Z"
 }
