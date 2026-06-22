@@ -821,9 +821,9 @@
       "mtsn": "GXL5ELAG203107275",
       "batteryStatus": "OK",
       "arrivedAt": "2026-06-19T19:00:36.8649016Z",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "5321439",
@@ -887,9 +887,9 @@
       "mtsn": "SVE5CLAG222027955",
       "batteryStatus": "OK",
       "arrivedAt": "2026-06-22T10:15:30.2305438Z",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "5323693",
@@ -2019,6 +2019,6 @@
     "T2754",
     "T4352"
   ],
-  "timestamp": 1782134517942,
-  "lastModified": "2026-06-22T13:21:57.942Z"
+  "timestamp": 1782134533951,
+  "lastModified": "2026-06-22T13:22:13.951Z"
 }
