@@ -176,6 +176,51 @@
             font-weight: 700;
         }
         
+        /* Yard switcher tabs */
+        .yard-tabs {
+            display: flex;
+            gap: 0.25rem;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 0.25rem;
+            border-radius: 10px;
+        }
+        
+        .yard-tab {
+            background: transparent;
+            color: rgba(255, 255, 255, 0.65);
+            border: none;
+            padding: 0.4rem 1.1rem;
+            border-radius: 7px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: color 0.15s, background 0.15s;
+        }
+        
+        .yard-tab:hover {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        .yard-tab.active {
+            background: var(--metro-orange);
+            color: #ffffff;
+        }
+        
+        .yard-tab:focus-visible {
+            outline: 2px solid #ffffff;
+            outline-offset: 1px;
+        }
+        
+        @media (max-width: 900px) {
+            .yard-tabs {
+                order: 3;
+                width: 100%;
+                justify-content: center;
+            }
+        }
+        
         .logo-icon {
             height: 60px;
             width: auto;
@@ -1706,6 +1751,8 @@
                 <div class="logo-text">Yard<span>Viz</span></div>
             </div>
             
+            <div class="yard-tabs" id="yardTabs" role="tablist" aria-label="Select yard"></div>
+            
             <div class="header-actions">
                 <button class="btn btn-secondary" onclick="app.refreshFromGitHub()" title="Sync from cloud">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2">
@@ -1949,31 +1996,59 @@
     const app = {
         config: {
             mapTilerKey: 'u9TdeBJu4j9tNG1lZiu5',
+            
+            // Active yard is applied into the flat slots below by applyYard()
+            activeYardId: 'medina',
+            
+            // These flat slots are populated from the active yard at runtime.
+            // Existing code reads these unchanged - only their source changes.
             propertyCenter: [-81.89786783155066, 41.148623908332276],
             defaultZoom: 17.5,
-            localStorageKey: 'trailerVizGPSData_v2',
-            
-            // =====================================================
-            // GITHUB CONFIGURATION - UPDATE THESE VALUES
-            // =====================================================
+            localStorageKey: 'trailerVizGPSData_v2_medina',
             github: {
                 enabled: true,
-                owner: 'glancy-metrotrailer',
-                repo: 'yardviz-medina',
-                path: 'data/trailers.json',
                 token: null  // Token entered by user at runtime (stored in localStorage)
             },
+            powerAutomate: {},
             
             // =====================================================
-            // POWER AUTOMATE FLOW URLs
+            // YARD DEFINITIONS - add a yard here to make it selectable
             // =====================================================
-            powerAutomate: {
-                pickupFlowUrl: 'https://default8417a2420313412ca062453303f8f4.fd.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/6739188d34af4ab2ac5ab12de31ac0ce/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=AiqbS_TEr8CZeXP2ejeW31gC3IkldEiVp9EbN44Qj1s',
-                dropoffFlowUrl: 'https://default8417a2420313412ca062453303f8f4.fd.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/697aa3ff842048d585932a53ec765d2b/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=5u5sALfQmGdWDY6_eFlRc0zpxIpcm0okL4a-HhIXcYw',
-                // Check-in flow uses the same dropoff flow (adds to Excel)
-                checkInFlowUrl: 'https://default8417a2420313412ca062453303f8f4.fd.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/697aa3ff842048d585932a53ec765d2b/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=5u5sALfQmGdWDY6_eFlRc0zpxIpcm0okL4a-HhIXcYw'
+            yards: {
+                medina: {
+                    name: 'Medina',
+                    center: [-81.89786783155066, 41.148623908332276],
+                    zoom: 17.5,
+                    github: {
+                        owner: 'glancy-metrotrailer',
+                        repo: 'yardviz-medina',
+                        path: 'data/trailers.json'
+                    },
+                    powerAutomate: {
+                        pickupFlowUrl: 'https://default8417a2420313412ca062453303f8f4.fd.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/6739188d34af4ab2ac5ab12de31ac0ce/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=AiqbS_TEr8CZeXP2ejeW31gC3IkldEiVp9EbN44Qj1s',
+                        dropoffFlowUrl: 'https://default8417a2420313412ca062453303f8f4.fd.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/697aa3ff842048d585932a53ec765d2b/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=5u5sALfQmGdWDY6_eFlRc0zpxIpcm0okL4a-HhIXcYw',
+                        checkInFlowUrl: 'https://default8417a2420313412ca062453303f8f4.fd.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/697aa3ff842048d585932a53ec765d2b/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=5u5sALfQmGdWDY6_eFlRc0zpxIpcm0okL4a-HhIXcYw'
+                    }
+                },
+                seville: {
+                    name: 'Seville',
+                    // 8860 Wooster Pike, Seville, OH 44273 [longitude, latitude]
+                    center: [-81.8687802, 41.0315114],
+                    zoom: 17.5,
+                    github: {
+                        owner: 'glancy-metrotrailer',
+                        repo: 'yardviz-medina',        // same repo, different file
+                        path: 'data/seville.json'      // <-- SkyBitz fetch flow must write here
+                    },
+                    powerAutomate: {
+                        // Seville check-ins/pickups go to the SAME Excel file as Medina,
+                        // so it reuses Medina's flow URLs.
+                        pickupFlowUrl: 'https://default8417a2420313412ca062453303f8f4.fd.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/6739188d34af4ab2ac5ab12de31ac0ce/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=AiqbS_TEr8CZeXP2ejeW31gC3IkldEiVp9EbN44Qj1s',
+                        dropoffFlowUrl: 'https://default8417a2420313412ca062453303f8f4.fd.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/697aa3ff842048d585932a53ec765d2b/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=5u5sALfQmGdWDY6_eFlRc0zpxIpcm0okL4a-HhIXcYw',
+                        checkInFlowUrl: 'https://default8417a2420313412ca062453303f8f4.fd.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/697aa3ff842048d585932a53ec765d2b/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=5u5sALfQmGdWDY6_eFlRc0zpxIpcm0okL4a-HhIXcYw'
+                    }
+                }
             }
-            // =====================================================
         },
         
         state: {
@@ -1994,6 +2069,104 @@
             locateTrailers: [],
             locateModeActive: false,
             locateMarkers: []
+        },
+        
+        // =====================================================
+        // YARD SWITCHING
+        // =====================================================
+        applyYard(yardId) {
+            const yard = this.config.yards[yardId];
+            if (!yard) return;
+            
+            this.config.activeYardId = yardId;
+            this.config.propertyCenter = yard.center;
+            this.config.defaultZoom = yard.zoom;
+            this.config.localStorageKey = `trailerVizGPSData_v2_${yardId}`;
+            // Keep enabled/token, swap in this yard's owner/repo/path
+            this.config.github = { ...this.config.github, ...yard.github };
+            this.config.powerAutomate = yard.powerAutomate || {};
+            
+            localStorage.setItem('yardviz_active_yard', yardId);
+        },
+        
+        switchYard(yardId) {
+            if (yardId === this.config.activeYardId) return;
+            if (!this.config.yards[yardId]) return;
+            
+            // Point config at the new yard
+            this.applyYard(yardId);
+            
+            // Reset per-file / per-session state so nothing carries over
+            this.state.githubSha = null;              // SHA is per-file
+            this.state.trailers = [];
+            this.state.filteredTrailers = [];
+            this.state.previousTrailerIds = new Set();
+            this.state.selectedTrailerId = null;
+            
+            // Tear down locate mode + list
+            if (this.state.locateModeActive) this.exitLocateMode();
+            this.state.locateTrailers = [];
+            this.state.locatePanelOpen = false;
+            const panel = document.getElementById('locatePanel');
+            if (panel) panel.classList.remove('visible');
+            this.renderLocateList();
+            
+            // Close any open popup
+            if (this.state.currentPopup) {
+                this.state.currentPopup.remove();
+                this.state.currentPopup = null;
+            }
+            
+            // Update tabs + recenter map
+            this.renderYardTabs();
+            if (this.state.map) {
+                this.state.map.jumpTo({
+                    center: this.config.propertyCenter,
+                    zoom: this.config.defaultZoom
+                });
+                // Clear existing markers right away (new data may be empty or slow)
+                const src = this.state.map.getSource('trailers');
+                if (src) {
+                    src.setData({ type: 'FeatureCollection', features: [] });
+                }
+            }
+            
+            // Clear the list view, then load the new yard's data
+            this.renderTrailerList();
+            if (this.config.github.enabled) {
+                this.loadFromGitHub();
+            } else {
+                this.loadFromLocalStorage();
+            }
+            
+            this.showToast(`Switched to ${this.config.yards[yardId].name} yard`, 'info');
+        },
+        
+        renderYardTabs() {
+            const container = document.getElementById('yardTabs');
+            if (!container) return;
+            container.innerHTML = Object.entries(this.config.yards).map(([id, yard]) => {
+                const active = id === this.config.activeYardId;
+                return `<button class="yard-tab ${active ? 'active' : ''}"
+                        onclick="app.switchYard('${id}')"
+                        aria-pressed="${active}">${yard.name}</button>`;
+            }).join('');
+        },
+        
+        // POST to a Power Automate flow. If the active yard has no URL configured
+        // for this action, skip the network call (and keep local state) instead of
+        // POSTing to an empty URL, which would hit the page itself.
+        async flowPost(url, body) {
+            if (!url) {
+                console.log('No flow URL configured for this yard - skipping Excel sync');
+                this.showToast('Excel sync not set up for this yard', 'warning');
+                return { ok: true, status: 200, skipped: true, text: async () => '', json: async () => ({}) };
+            }
+            return fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(body)
+            });
         },
         
         // Get GitHub token from localStorage or prompt user
@@ -2085,13 +2258,7 @@
             
             try {
                 // Call Power Automate flow
-                const response = await fetch(this.config.powerAutomate.pickupFlowUrl, {
-                    method: 'POST',
-                    headers: { 
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ assetId: trailerId })
-                });
+                const response = await this.flowPost(this.config.powerAutomate.pickupFlowUrl, { assetId: trailerId });
                 
                 if (response.ok || response.status === 202) {
                     // Update local state
@@ -2128,13 +2295,7 @@
             
             try {
                 // Call Power Automate flow
-                const response = await fetch(this.config.powerAutomate.dropoffFlowUrl, {
-                    method: 'POST',
-                    headers: { 
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ assetId: trailerId })
-                });
+                const response = await this.flowPost(this.config.powerAutomate.dropoffFlowUrl, { assetId: trailerId });
                 
                 if (response.ok || response.status === 202) {
                     // Update local state
@@ -2208,6 +2369,12 @@
         
         init() {
             console.log('🚛 YardViz initializing...');
+            
+            // Restore the last-used yard (default to Medina) before anything reads config
+            const savedYard = localStorage.getItem('yardviz_active_yard');
+            this.applyYard(this.config.yards[savedYard] ? savedYard : 'medina');
+            this.renderYardTabs();
+            
             this.initTheme();
             this.initDragDrop();
             this.initMap();
@@ -2830,13 +2997,7 @@
         async addToExcelWithNotes(trailerId, notes) {
             console.log(`Checking in trailer ${trailerId} with notes: ${notes}`);
             try {
-                const response = await fetch(this.config.powerAutomate.checkInFlowUrl, {
-                    method: 'POST',
-                    headers: { 
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ assetId: trailerId, notes: notes || '' })
-                });
+                const response = await this.flowPost(this.config.powerAutomate.checkInFlowUrl, { assetId: trailerId, notes: notes || '' });
                 
                 if (response.ok || response.status === 202) {
                     console.log(`Successfully added ${trailerId} to Excel with notes`);
@@ -2904,13 +3065,7 @@
         
         async addToExcel(trailerId) {
             try {
-                const response = await fetch(this.config.powerAutomate.dropoffFlowUrl, {
-                    method: 'POST',
-                    headers: { 
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ assetId: trailerId })
-                });
+                const response = await this.flowPost(this.config.powerAutomate.dropoffFlowUrl, { assetId: trailerId });
                 
                 if (response.ok || response.status === 202) {
                     console.log(`Added ${trailerId} to Excel`);
@@ -2954,6 +3109,7 @@
         
         async loadFromGitHub(silent = false) {
             const { owner, repo, path } = this.config.github;
+            const requestedYard = this.config.activeYardId;  // guard against mid-flight yard switch
             const token = this.getGitHubToken();
             
             if (!token) {
@@ -2992,6 +3148,12 @@
                 }
                 
                 const fileData = await response.json();
+                
+                // If the user switched yards while this request was in flight,
+                // discard the stale response so it can't overwrite the new yard
+                if (this.config.activeYardId !== requestedYard) {
+                    return;
+                }
                 
                 // Check if data has changed (compare SHA)
                 if (silent && this.state.githubSha === fileData.sha) {
@@ -3243,6 +3405,7 @@
             if (trailers.length === 0) {
                 container.innerHTML = '';
                 emptyState.style.display = 'block';
+                this.updateStats();
                 return;
             }
             
