@@ -128,9 +128,9 @@
       "mtsn": "SVE5DJBL232386974",
       "batteryStatus": "OK",
       "arrivedAt": "2026-07-08T13:49:51.3953777Z",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "40C2420",
@@ -139,9 +139,9 @@
       "mtsn": "SVE5DJBL232386967",
       "batteryStatus": "OK",
       "arrivedAt": "2026-07-08T13:49:51.3954402Z",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "5282303",
@@ -1371,6 +1371,6 @@
     "mtrz561356",
     "MTRZ622832"
   ],
-  "timestamp": 1783523915643,
-  "lastModified": "2026-07-08T15:18:35.643Z"
+  "timestamp": 1783523918780,
+  "lastModified": "2026-07-08T15:18:38.780Z"
 }
