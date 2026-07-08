@@ -958,6 +958,50 @@
             opacity: 0.7;
         }
         
+        /* Add / remove from locate list button (non-drag fallback) */
+        .locate-add-btn {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0.3rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            color: var(--metro-navy);
+            opacity: 0.45;
+            transition: opacity 0.2s, background 0.2s, color 0.2s;
+        }
+        
+        .trailer-item:hover .locate-add-btn {
+            opacity: 0.8;
+        }
+        
+        .locate-add-btn:hover {
+            opacity: 1;
+            background: rgba(247, 148, 29, 0.12);
+            color: var(--metro-orange);
+        }
+        
+        .locate-add-btn:focus-visible {
+            outline: 2px solid var(--metro-orange);
+            outline-offset: 1px;
+            opacity: 1;
+        }
+        
+        .locate-add-btn.active {
+            opacity: 1;
+            color: var(--metro-orange);
+        }
+        
+        .locate-add-btn svg {
+            width: 16px;
+            height: 16px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+        }
+        
         .battery-icon {
             display: inline-flex;
             align-items: center;
@@ -3228,6 +3272,13 @@
                 // Battery icon
                 const batteryIcon = this.getBatteryIcon(trailer.batteryStatus);
                 
+                // Is this trailer already in the locate list?
+                const inLocate = this.state.locateTrailers.some(t => t.id === trailer.id);
+                const locateIcon = inLocate
+                    ? `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><circle cx="12" cy="12" r="2.5" fill="currentColor" stroke="none"/></svg>`
+                    : `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/></svg>`;
+                const locateLabel = inLocate ? 'Remove from locate list' : 'Add to locate list';
+                
                 return `
                 <div class="trailer-item ${this.state.selectedTrailerId === trailer.id ? 'active' : ''} ${pickedUpClass}" 
                      data-trailer-id="${trailer.id}"
@@ -3236,6 +3287,7 @@
                     <div class="trailer-info">
                         <div class="trailer-id">${trailer.id}<button class="copy-btn" onclick="event.stopPropagation(); app.copyTrailerId('${trailer.id}')" title="Copy trailer number"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button>${batteryIcon}${trailer.isNew ? ' <span class="new-badge">NEW</span>' : ''}${trailer.pickedUp ? ' 📤' : ''}</div>
                     </div>
+                    <button class="locate-add-btn ${inLocate ? 'active' : ''}" onclick="event.stopPropagation(); app.toggleLocateMembership('${trailer.id}')" title="${locateLabel}" aria-label="${locateLabel}" aria-pressed="${inLocate}">${locateIcon}</button>
                     <label class="checkin-toggle" onclick="event.stopPropagation()">
                         <input type="checkbox" ${trailer.checkedIn ? 'checked' : ''} 
                                onchange="app.promptCheckIn('${trailer.id}', event)">
@@ -3614,6 +3666,19 @@
             });
         },
         
+        toggleLocateMembership(trailerId) {
+            const inList = this.state.locateTrailers.some(t => t.id === trailerId);
+            if (inList) {
+                this.removeFromLocateList(trailerId);
+            } else {
+                // Open the panel if it's closed so the list is visible as it builds
+                if (!this.state.locatePanelOpen) {
+                    this.toggleLocatePanel();
+                }
+                this.addToLocateList(trailerId);
+            }
+        },
+        
         addToLocateList(trailerId) {
             // Clean up the trailer ID (remove any extra characters)
             trailerId = trailerId.trim();
@@ -3634,16 +3699,47 @@
             // Add to locate list
             this.state.locateTrailers.push({...trailer});
             this.renderLocateList();
+            this.renderTrailerList();  // keep sidebar locate buttons in sync
+            
+            // If locate mode is already showing on the map, refresh it live
+            if (this.state.locateModeActive) {
+                this.refreshLocateMarkers();
+            }
+            
             this.showToast(`Added ${trailerId} to locate list`, 'info');
         },
         
         removeFromLocateList(trailerId) {
             this.state.locateTrailers = this.state.locateTrailers.filter(t => t.id !== trailerId);
             this.renderLocateList();
+            this.renderTrailerList();  // keep sidebar locate buttons in sync
             
             // If in locate mode and list is now empty, exit locate mode
             if (this.state.locateModeActive && this.state.locateTrailers.length === 0) {
                 this.exitLocateMode();
+            } else if (this.state.locateModeActive) {
+                // Otherwise refresh the markers so the removed one disappears live
+                this.refreshLocateMarkers();
+            }
+        },
+        
+        refreshLocateMarkers() {
+            // Quietly rebuild the labeled markers for the current locate list
+            // (used when the list changes while locate mode is already active)
+            this.clearLocateMarkers();
+            this.state.locateTrailers.forEach(trailer => {
+                const lat = parseFloat(trailer.lat);
+                const lng = parseFloat(trailer.lng);
+                if (!isNaN(lat) && !isNaN(lng)) {
+                    this.addLocateMarker(trailer);
+                }
+            });
+            
+            // Update the count in the indicator
+            const countText = document.getElementById('locateModeCount');
+            if (countText) {
+                const n = this.state.locateTrailers.length;
+                countText.textContent = `Locate mode: ${n} trailer${n > 1 ? 's' : ''}`;
             }
         },
         
@@ -3682,6 +3778,7 @@
         clearLocateList() {
             this.state.locateTrailers = [];
             this.renderLocateList();
+            this.renderTrailerList();  // reset sidebar locate buttons
             
             if (this.state.locateModeActive) {
                 this.exitLocateMode();
