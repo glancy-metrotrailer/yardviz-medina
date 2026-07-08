@@ -2759,6 +2759,19 @@
             }
         },
         
+        renderTrailersWhenReady() {
+            if (!this.state.map) return;
+            // setData/addLayer only need the STYLE loaded, not the tiles. After a
+            // same-style yard switch the style is already loaded, so render now.
+            if (this.state.map.isStyleLoaded()) {
+                this.renderTrailersOnMap();
+            } else {
+                // Style still parsing (e.g. during initial load): the map is
+                // definitely not idle yet, so 'idle' will fire and isn't racy here.
+                this.state.map.once('idle', () => this.renderTrailersOnMap());
+            }
+        },
+        
         renderTrailersOnMap() {
             if (!this.state.map || this.state.trailers.length === 0) {
                 this.showLoading(false);
@@ -3205,9 +3218,7 @@
                     }));
                     
                     this.renderTrailerList();
-                    if (this.state.map && this.state.map.loaded()) {
-                        this.renderTrailersOnMap();
-                    }
+                    this.renderTrailersWhenReady();
                     
                     console.log(`☁️ Loaded ${data.trailers.length} trailers from GitHub (${newTrailerCount} new)`);
                     if (!silent) {
