@@ -2174,7 +2174,10 @@
                 
                 // Auto-refresh every 2 minutes
                 setInterval(() => {
-                    console.log('🔄 Auto-refreshing data...');
+                    // Don't pull while a local save is in flight - avoids reverting edits
+                    if (this.state.isSyncing) {
+                        return;
+                    }
                     this.loadFromGitHub(true); // silent refresh
                 }, 2 * 60 * 1000);
             } else {
@@ -2546,25 +2549,12 @@
         },
         
         renderTrailersOnMap() {
-            console.log('📍 Rendering trailers at GPS coordinates...');
-            
             if (!this.state.map || this.state.trailers.length === 0) {
                 this.showLoading(false);
                 return;
             }
             
-            // Remove existing layers
-            if (this.state.map.getLayer('trailers')) {
-                this.state.map.removeLayer('trailers');
-            }
-            if (this.state.map.getLayer('trailers-labels')) {
-                this.state.map.removeLayer('trailers-labels');
-            }
-            if (this.state.map.getSource('trailers')) {
-                this.state.map.removeSource('trailers');
-            }
-            
-            // Create features
+            // Build GeoJSON features from current trailer state
             const features = this.state.trailers.map(trailer => {
                 let status;
                 if (trailer.pickedUp) {
@@ -2592,57 +2582,74 @@
                 };
             });
             
-            // Add source
-            this.state.map.addSource('trailers', {
-                type: 'geojson',
-                data: {
-                    type: 'FeatureCollection',
-                    features: features
-                }
-            });
+            const featureCollection = { type: 'FeatureCollection', features };
+            const existingSource = this.state.map.getSource('trailers');
             
-            // Add trailer symbols layer
-            this.state.map.addLayer({
-                id: 'trailers',
-                type: 'symbol',
-                source: 'trailers',
-                layout: {
-                    'icon-image': ['concat', 'trailer-', ['get', 'status']],
-                    'icon-size': 1.2,
-                    'icon-rotation-alignment': 'map',
-                    'icon-allow-overlap': true,
-                    'icon-ignore-placement': true
-                }
-            });
+            if (existingSource) {
+                // Source already exists: update data in place (no layer/handler churn)
+                existingSource.setData(featureCollection);
+            } else {
+                // First render: create the source, layers, and register handlers once
+                this.state.map.addSource('trailers', {
+                    type: 'geojson',
+                    data: featureCollection
+                });
+                
+                this.state.map.addLayer({
+                    id: 'trailers',
+                    type: 'symbol',
+                    source: 'trailers',
+                    layout: {
+                        'icon-image': ['concat', 'trailer-', ['get', 'status']],
+                        'icon-size': 1.2,
+                        'icon-rotation-alignment': 'map',
+                        'icon-allow-overlap': true,
+                        'icon-ignore-placement': true
+                    }
+                });
+                
+                this.state.map.addLayer({
+                    id: 'trailers-labels',
+                    type: 'symbol',
+                    source: 'trailers',
+                    layout: {
+                        'text-field': ['get', 'id'],
+                        'text-font': ['Open Sans Bold', 'Arial Unicode MS Bold'],
+                        'text-size': 10,
+                        'text-offset': [0, 1.5],
+                        'text-allow-overlap': false
+                    },
+                    paint: {
+                        'text-color': '#ffffff',
+                        'text-halo-color': '#000000',
+                        'text-halo-width': 1.5
+                    }
+                });
+                
+                this.registerTrailerLayerHandlers();
+            }
             
-            // Add labels layer
-            this.state.map.addLayer({
-                id: 'trailers-labels',
-                type: 'symbol',
-                source: 'trailers',
-                layout: {
-                    'text-field': ['get', 'id'],
-                    'text-font': ['Open Sans Bold', 'Arial Unicode MS Bold'],
-                    'text-size': 10,
-                    'text-offset': [0, 1.5],
-                    'text-allow-overlap': false
-                },
-                paint: {
-                    'text-color': '#ffffff',
-                    'text-halo-color': '#000000',
-                    'text-halo-width': 1.5
-                }
-            });
+            // If locate mode is active, keep the regular layers hidden after a refresh
+            if (this.state.locateModeActive) {
+                this.hideRegularMarkers();
+            }
             
-            // Click handler
+            this.updateStats();
+            this.showLoading(false);
+        },
+        
+        registerTrailerLayerHandlers() {
+            // Layer-scoped handlers persist on the map instance even across
+            // setStyle(), so register them only once for the life of the map
+            if (this.state.trailerHandlersRegistered) return;
+            this.state.trailerHandlersRegistered = true;
+            
             this.state.map.on('click', 'trailers', (e) => {
                 if (e.features && e.features.length > 0) {
-                    const trailerId = e.features[0].properties.id;
-                    this.selectTrailer(trailerId);
+                    this.selectTrailer(e.features[0].properties.id);
                 }
             });
             
-            // Hover cursor
             this.state.map.on('mouseenter', 'trailers', () => {
                 this.state.map.getCanvas().style.cursor = 'pointer';
             });
@@ -2650,11 +2657,6 @@
             this.state.map.on('mouseleave', 'trailers', () => {
                 this.state.map.getCanvas().style.cursor = '';
             });
-            
-            this.updateStats();
-            this.showLoading(false);
-            
-            console.log(`✅ Rendered ${features.length} trailers`);
         },
         
         // Check-in modal functions
@@ -2959,10 +2961,11 @@
                 const data = JSON.parse(content);
                 
                 if (data.trailers && data.trailers.length > 0) {
-                    // Preserve local check-in status only (isNew comes from GitHub for consistency)
+                    // Preserve local check-in / picked-up status so an in-flight
+                    // edit isn't reverted by a background refresh
                     const localStatus = new Map();
                     for (const t of this.state.trailers) {
-                        localStatus.set(t.id, { checkedIn: t.checkedIn });
+                        localStatus.set(t.id, { checkedIn: t.checkedIn, pickedUp: t.pickedUp });
                     }
                     
                     // Count new trailers from GitHub data
@@ -2978,8 +2981,9 @@
                         
                         return {
                             ...t,
-                            // Keep local check-in status if we had it, otherwise use data value
+                            // Keep local status if we had it, otherwise use the value from GitHub
                             checkedIn: existingStatus ? existingStatus.checkedIn : (t.checkedIn || false),
+                            pickedUp: existingStatus ? existingStatus.pickedUp : (t.pickedUp || false),
                             // isNew comes from GitHub data for consistency across users
                             isNew: t.isNew || false
                         };
@@ -3252,7 +3256,9 @@
         },
         
         filterTrailers(event) {
-            this.applyFilters();
+            // Debounce so we don't rebuild the whole list on every keystroke
+            clearTimeout(this._searchDebounce);
+            this._searchDebounce = setTimeout(() => this.applyFilters(), 150);
         },
         
         selectTrailer(trailerId) {
