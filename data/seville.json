@@ -106,9 +106,9 @@
       "mtsn": "SVE5DJBL232386968",
       "batteryStatus": "OK",
       "arrivedAt": "2026-07-08T13:49:51.3952535Z",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "40C2418",
@@ -1371,6 +1371,6 @@
     "mtrz561356",
     "MTRZ622832"
   ],
-  "timestamp": 1783523909909,
-  "lastModified": "2026-07-08T15:18:29.909Z"
+  "timestamp": 1783523911856,
+  "lastModified": "2026-07-08T15:18:31.856Z"
 }
