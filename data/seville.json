@@ -414,9 +414,9 @@
       "mtsn": "SHB81JBL233518587",
       "batteryStatus": "OK",
       "arrivedAt": "2026-07-14T13:45:41.0284308Z",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "5317985",
@@ -1563,6 +1563,6 @@
     "MTRZ581494",
     "MTRZ622832"
   ],
-  "timestamp": 1784118629308,
-  "lastModified": "2026-07-15T12:30:29.308Z"
+  "timestamp": 1784118639541,
+  "lastModified": "2026-07-15T12:30:39.541Z"
 }
