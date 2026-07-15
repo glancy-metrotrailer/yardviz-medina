@@ -1470,9 +1470,9 @@
       "mtsn": "SHB7BLAG222160815",
       "batteryStatus": "OK",
       "arrivedAt": "2026-07-15T14:00:27.1748921Z",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
-      "isNew": true
+      "isNew": false
     }
   ],
   "previousTrailerIds": [
@@ -1611,6 +1611,6 @@
     "MTRZ622832",
     "T1337"
   ],
-  "timestamp": 1784137931487,
-  "lastModified": "2026-07-15T17:52:11.487Z"
+  "timestamp": 1784137933847,
+  "lastModified": "2026-07-15T17:52:13.847Z"
 }
