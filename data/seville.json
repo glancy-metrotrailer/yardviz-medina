@@ -1448,9 +1448,9 @@
       "mtsn": "SHB8AJBL235137086",
       "batteryStatus": "OK",
       "arrivedAt": "2026-07-21T15:00:35.3019840Z",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "MTRZ280430",
@@ -1731,6 +1731,6 @@
     "mtrz822096",
     "T1337"
   ],
-  "timestamp": 1784661902845,
-  "lastModified": "2026-07-21T19:25:02.845Z"
+  "timestamp": 1784661914947,
+  "lastModified": "2026-07-21T19:25:14.947Z"
 }
