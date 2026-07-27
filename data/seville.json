@@ -810,9 +810,9 @@
       "mtsn": "SHB7BLAG222773843",
       "batteryStatus": "OK",
       "arrivedAt": "2026-07-26T08:45:23.8080196Z",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "5327668",
@@ -1383,6 +1383,6 @@
     "MTRZ622832",
     "T1337"
   ],
-  "timestamp": 1785179463218,
-  "lastModified": "2026-07-27T19:11:03.218Z"
+  "timestamp": 1785179475344,
+  "lastModified": "2026-07-27T19:11:15.344Z"
 }
