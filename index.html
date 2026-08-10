@@ -504,6 +504,24 @@
             margin-top: 0.1rem;
         }
         
+        .departed-coords {
+            font-size: 0.68rem;
+            color: var(--text-secondary);
+            font-variant-numeric: tabular-nums;
+            margin-top: 0.05rem;
+        }
+        
+        .departed-coords-missing {
+            color: #c2410c;
+            font-style: italic;
+        }
+        
+        .departed-btn-loc {
+            background: var(--bg-secondary, rgba(0,0,0,0.05));
+            border: 1px solid var(--border-color);
+            padding: 0.4rem 0.5rem;
+        }
+        
         .departed-actions {
             display: flex;
             gap: 0.35rem;
@@ -2208,7 +2226,9 @@
             // Departed (left-the-yard) tab state
             departed: [],
             ignored: [],
-            sidebarTab: 'onlot'   // 'onlot' | 'departed'
+            sidebarTab: 'onlot',   // 'onlot' | 'departed'
+            departedLocationMarker: null,
+            departedLocationMarkerId: null
         },
         
         // =====================================================
@@ -2246,6 +2266,7 @@
             // Reset departed/ignored and return to the On Lot tab
             this.state.departed = [];
             this.state.ignored = [];
+            this.clearDepartedLocationMarker();
             this.switchSidebarTab('onlot');
             this.updateDepartedCount();
             
@@ -2349,13 +2370,23 @@
             list.innerHTML = items.map(d => {
                 const seen = d.lastSeen ? this.timeAgo(d.lastSeen) : '';
                 const meta = seen ? `Last seen ${seen}` : 'Left the yard';
+                const hasLoc = d.lastLat != null && d.lastLng != null
+                    && !isNaN(parseFloat(d.lastLat)) && !isNaN(parseFloat(d.lastLng));
+                const coords = hasLoc
+                    ? `<div class="departed-coords">${parseFloat(d.lastLat).toFixed(5)}, ${parseFloat(d.lastLng).toFixed(5)}</div>`
+                    : `<div class="departed-coords departed-coords-missing">No last location</div>`;
+                const locBtn = hasLoc
+                    ? `<button class="departed-btn departed-btn-loc" onclick="app.showDepartedLocation('${d.id}')" title="Show last known location on map">📍</button>`
+                    : '';
                 return `
                 <div class="departed-item" data-departed-id="${d.id}">
                     <div class="departed-info">
                         <div class="departed-id">${d.id}</div>
                         <div class="departed-meta">${meta}</div>
+                        ${coords}
                     </div>
                     <div class="departed-actions">
+                        ${locBtn}
                         <button class="departed-btn departed-btn-checkout" onclick="app.promptCheckOutDeparted('${d.id}')">Check Out</button>
                         <button class="departed-btn departed-btn-ignore" onclick="app.ignoreDeparted('${d.id}')">Ignore</button>
                     </div>
@@ -2375,6 +2406,45 @@
             return `${days} day${days > 1 ? 's' : ''} ago`;
         },
         
+        showDepartedLocation(trailerId) {
+            const d = (this.state.departed || []).find(x => x.id === trailerId);
+            if (!d) return;
+            const lat = parseFloat(d.lastLat);
+            const lng = parseFloat(d.lastLng);
+            if (isNaN(lat) || isNaN(lng)) {
+                this.showToast(`No last location recorded for ${trailerId}`, 'warning');
+                return;
+            }
+            
+            // Clear any previous last-location marker
+            this.clearDepartedLocationMarker();
+            
+            const el = document.createElement('div');
+            el.className = 'locate-marker-container';
+            el.innerHTML = `
+                <div class="locate-marker" style="background:#b91c1c;">
+                    <span class="locate-marker-text">${trailerId}</span>
+                </div>
+                <div class="locate-marker-pointer" style="border-top-color:#b91c1c;"></div>`;
+            
+            this.state.departedLocationMarker = new maplibregl.Marker({ element: el, anchor: 'bottom' })
+                .setLngLat([lng, lat])
+                .addTo(this.state.map);
+            this.state.departedLocationMarkerId = trailerId;
+            
+            this.state.map.flyTo({ center: [lng, lat], zoom: 18 });
+            const seen = d.lastSeen ? this.timeAgo(d.lastSeen) : 'unknown time';
+            this.showToast(`${trailerId} last seen here (${seen})`, 'info');
+        },
+        
+        clearDepartedLocationMarker() {
+            if (this.state.departedLocationMarker) {
+                this.state.departedLocationMarker.remove();
+                this.state.departedLocationMarker = null;
+                this.state.departedLocationMarkerId = null;
+            }
+        },
+        
         promptCheckOutDeparted(trailerId) {
             this.showModal(
                 'Confirm Check Out',
@@ -2392,6 +2462,7 @@
                 if (response.ok || response.status === 202) {
                     // Remove from departed and persist so it doesn't linger
                     this.state.departed = (this.state.departed || []).filter(d => d.id !== trailerId);
+                    if (this.state.departedLocationMarkerId === trailerId) this.clearDepartedLocationMarker();
                     this.renderDepartedList();
                     await this.saveToGitHub();
                     this.showToast(`✓ ${trailerId} checked out`, 'success');
@@ -2413,6 +2484,7 @@
                 this.state.ignored.push({ id: trailerId, ignoredAt: new Date().toISOString() });
             }
             this.state.departed = (this.state.departed || []).filter(d => d.id !== trailerId);
+            if (this.state.departedLocationMarkerId === trailerId) this.clearDepartedLocationMarker();
             this.renderDepartedList();
             await this.saveToGitHub();
             this.showToast(`${trailerId} ignored`, 'info');
