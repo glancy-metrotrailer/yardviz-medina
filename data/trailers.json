@@ -1261,7 +1261,7 @@
       "mtsn": "GXL5HLAG210275281",
       "batteryStatus": "OK",
       "arrivedAt": "2026-08-07T20:15:27.4672910Z",
-      "checkedIn": true,
+      "checkedIn": false,
       "pickedUp": false,
       "isNew": false
     },
@@ -3315,6 +3315,6 @@
     "T3343",
     "T4352"
   ],
-  "timestamp": 1786375142651,
-  "lastModified": "2026-08-10T15:19:02.651Z"
+  "timestamp": 1786375244947,
+  "lastModified": "2026-08-10T15:20:44.947Z"
 }
