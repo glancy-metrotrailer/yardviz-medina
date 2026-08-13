@@ -821,9 +821,9 @@
       "mtsn": "SHB7BLAG222773899",
       "batteryStatus": "OK",
       "arrivedAt": "2026-08-12T15:30:41.1529341Z",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "5327716",
@@ -1637,6 +1637,6 @@
   ],
   "departed": [],
   "ignored": [],
-  "timestamp": 1786626342291,
-  "lastModified": "2026-08-13T13:05:42.291Z"
+  "timestamp": 1786626344141,
+  "lastModified": "2026-08-13T13:05:44.141Z"
 }
