@@ -315,7 +315,7 @@
       "mtsn": "SHB8AJBL234731203",
       "batteryStatus": "OK",
       "arrivedAt": "2026-08-13T16:45:51.0498698Z",
-      "checkedIn": true,
+      "checkedIn": false,
       "pickedUp": false,
       "isNew": false
     },
@@ -1316,7 +1316,7 @@
       "mtsn": "SVE5CLAG224159112",
       "batteryStatus": "OK",
       "arrivedAt": "2026-08-13T16:45:51.0573754Z",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
       "isNew": false
     },
@@ -2152,7 +2152,7 @@
       "mtsn": "SVE5CLAG224159238",
       "batteryStatus": "OK",
       "arrivedAt": "2026-08-13T18:30:43.7726224Z",
-      "checkedIn": true,
+      "checkedIn": false,
       "pickedUp": false,
       "isNew": false
     },
@@ -2350,7 +2350,7 @@
       "mtsn": "SHB8AJBL241749777",
       "batteryStatus": "OK",
       "arrivedAt": "2026-08-13T18:45:39.2088482Z",
-      "checkedIn": true,
+      "checkedIn": false,
       "pickedUp": false,
       "isNew": false
     },
@@ -3113,6 +3113,6 @@
   ],
   "departed": [],
   "ignored": [],
-  "timestamp": 1786647693418,
-  "lastModified": "2026-08-13T19:01:33.418Z"
+  "timestamp": 1786648501205,
+  "lastModified": "2026-08-13T19:15:01.205Z"
 }
