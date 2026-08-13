@@ -601,9 +601,9 @@
       "mtsn": "GXL5HLAG205264538",
       "batteryStatus": "OK",
       "arrivedAt": "2026-08-13T13:15:29.7751339Z",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "5322987",
@@ -1709,6 +1709,6 @@
   ],
   "departed": [],
   "ignored": [],
-  "timestamp": 1786632260135,
-  "lastModified": "2026-08-13T14:44:20.135Z"
+  "timestamp": 1786632266661,
+  "lastModified": "2026-08-13T14:44:26.661Z"
 }
