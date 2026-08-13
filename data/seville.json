@@ -832,9 +832,9 @@
       "mtsn": "SHB7BLAG222773800",
       "batteryStatus": "OK",
       "arrivedAt": "2026-08-13T04:30:31.1842312Z",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "5327717",
@@ -843,9 +843,9 @@
       "mtsn": "SHB7BLAG222773793",
       "batteryStatus": "OK",
       "arrivedAt": "2026-08-13T09:00:25.8344497Z",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "5327719",
@@ -1637,6 +1637,6 @@
   ],
   "departed": [],
   "ignored": [],
-  "timestamp": 1786626345799,
-  "lastModified": "2026-08-13T13:05:45.799Z"
+  "timestamp": 1786626348440,
+  "lastModified": "2026-08-13T13:05:48.440Z"
 }
