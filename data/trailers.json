@@ -2053,7 +2053,7 @@
       "mtsn": "SVE5CLAG224159238",
       "batteryStatus": "OK",
       "arrivedAt": "2026-08-13T18:30:43.7726224Z",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
       "isNew": false
     },
@@ -2981,6 +2981,6 @@
   ],
   "departed": [],
   "ignored": [],
-  "timestamp": 1786708935896,
-  "lastModified": "2026-08-14T12:02:15.896Z"
+  "timestamp": 1786708950464,
+  "lastModified": "2026-08-14T12:02:30.464Z"
 }
