@@ -8,7 +8,7 @@
       "batteryStatus": "OK",
       "arrivedAt": "2026-08-11T13:24:36.8553139Z",
       "timeOfObservation": "2026-08-16T18:10:34Z",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
       "isNew": false
     },
@@ -3112,6 +3112,6 @@
   ],
   "departed": [],
   "ignored": [],
-  "timestamp": 1786967026577,
-  "lastModified": "2026-08-17T11:43:46.577Z"
+  "timestamp": 1786967028773,
+  "lastModified": "2026-08-17T11:43:48.773Z"
 }
