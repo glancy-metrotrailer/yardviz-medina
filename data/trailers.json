@@ -657,7 +657,7 @@
       "arrivedAt": "2026-08-17T12:15:41.5519162Z",
       "timeOfObservation": "2026-08-17T12:49:51Z",
       "checkedIn": true,
-      "pickedUp": true,
+      "pickedUp": false,
       "isNew": false
     },
     {
@@ -3138,6 +3138,6 @@
   ],
   "departed": [],
   "ignored": [],
-  "timestamp": 1786973157927,
-  "lastModified": "2026-08-17T13:25:57.927Z"
+  "timestamp": 1786974241311,
+  "lastModified": "2026-08-17T13:44:01.311Z"
 }
