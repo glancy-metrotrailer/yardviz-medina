@@ -3335,9 +3335,14 @@
             
             // Call the Power Automate flow asynchronously
             this.addToExcelWithNotes(trailerId, notes)
-                .then(() => {
-                    // Success - show toast and sync to GitHub
-                    this.showToast(`✓ ${trailerId} checked in successfully`, 'success');
+                .then((result) => {
+                    // Surface the flow's message (e.g. "Trailer already exists in inventory")
+                    const message = result && result.message;
+                    if (result && result.success === false) {
+                        this.showToast(message || `${trailerId} already in inventory`, 'warning');
+                    } else {
+                        this.showToast(message || `✓ ${trailerId} checked in successfully`, 'success');
+                    }
                     this.saveToGitHub(); // Sync isNew=false to GitHub for all users
                 })
                 .catch((error) => {
@@ -3361,8 +3366,10 @@
                 });
                 
                 if (response.ok || response.status === 202) {
-                    console.log(`Successfully added ${trailerId} to Excel with notes`);
-                    return true;
+                    console.log(`Check-in flow succeeded for ${trailerId}`);
+                    let result = {};
+                    try { result = await response.json(); } catch (e) { result = {}; }
+                    return result;  // { success, message } from the flow
                 } else {
                     const errorText = await response.text();
                     console.error(`Failed to add ${trailerId} to Excel: ${response.status}`, errorText);
