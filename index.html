@@ -2592,84 +2592,83 @@
             );
         },
         
-        async executePickup(trailerId) {
+        executePickup(trailerId) {
             const trailer = this.state.trailers.find(t => t.id === trailerId);
             if (!trailer) return;
             
-            this.showLoading(true);
+            // Optimistic update - reflect immediately, run the flow in the background
+            trailer.pickedUp = true;
+            this.saveToLocalStorage();
+            this.applyFilters();
+            this.renderTrailersOnMap();
+            if (this.state.selectedTrailerId === trailerId) {
+                this.showTrailerPopup(trailer);
+            }
+            this.showToast(`Marking ${trailerId} as picked up...`, 'info');
             
-            try {
-                // Call Power Automate flow
-                const response = await this.flowPost(this.config.powerAutomate.pickupFlowUrl, { assetId: trailerId });
-                
-                if (response.ok || response.status === 202) {
-                    // Update local state
-                    trailer.pickedUp = true;
-                    
+            this.flowPost(this.config.powerAutomate.pickupFlowUrl, { assetId: trailerId })
+                .then(response => {
+                    if (response.ok || response.status === 202) {
+                        this.showToast(`✓ ${trailerId} marked as picked up`, 'success');
+                    } else {
+                        throw new Error(`Flow returned status ${response.status}`);
+                    }
+                })
+                .catch(error => {
+                    console.error('Pickup error:', error);
+                    // Revert the optimistic change so local state matches Excel
+                    trailer.pickedUp = false;
                     this.saveToLocalStorage();
                     this.applyFilters();
                     this.renderTrailersOnMap();
-                    
-                    // Update popup if open
                     if (this.state.selectedTrailerId === trailerId) {
                         this.showTrailerPopup(trailer);
                     }
-                    
-                    this.showToast(`Trailer ${trailerId} marked as picked up`, 'success');
-                } else {
-                    const errorText = await response.text();
-                    console.error('Flow error response:', errorText);
-                    throw new Error(`Flow returned status ${response.status}`);
-                }
-            } catch (error) {
-                console.error('Pickup error:', error);
-                this.showToast('Failed to update Excel. Please try again.', 'error');
-            } finally {
-                this.showLoading(false);
-            }
+                    this.showToast(`✗ Failed to pick up ${trailerId}`, 'error');
+                });
         },
         
-        async executeDropoff(trailerId) {
+        executeDropoff(trailerId) {
             const trailer = this.state.trailers.find(t => t.id === trailerId);
             if (!trailer) return;
             
-            this.showLoading(true);
+            // Optimistic update - reflect immediately, run the flow in the background
+            trailer.pickedUp = false;
+            this.saveToLocalStorage();
+            this.applyFilters();
+            this.renderTrailersOnMap();
+            if (this.state.selectedTrailerId === trailerId) {
+                this.showTrailerPopup(trailer);
+            }
+            this.showToast(`Marking ${trailerId} as dropped off...`, 'info');
             
-            try {
-                // Call Power Automate flow (same add-a-row flow as check-in, so
-                // it needs the same fields - send '' not null to avoid type errors)
-                const response = await this.flowPost(this.config.powerAutomate.dropoffFlowUrl, {
-                    assetId: trailerId,
-                    notes: '',
-                    mtsn: trailer.mtsn || '',
-                    timeOfObservation: trailer.timeOfObservation || ''
-                });
-                
-                if (response.ok || response.status === 202) {
-                    // Update local state
-                    trailer.pickedUp = false;
-                    
+            // Same add-a-row flow as check-in, so it needs the same fields
+            // (send '' not null to avoid type errors)
+            this.flowPost(this.config.powerAutomate.dropoffFlowUrl, {
+                assetId: trailerId,
+                notes: '',
+                mtsn: trailer.mtsn || '',
+                timeOfObservation: trailer.timeOfObservation || ''
+            })
+                .then(response => {
+                    if (response.ok || response.status === 202) {
+                        this.showToast(`✓ ${trailerId} marked as dropped off`, 'success');
+                    } else {
+                        throw new Error(`Flow returned status ${response.status}`);
+                    }
+                })
+                .catch(error => {
+                    console.error('Dropoff error:', error);
+                    // Revert the optimistic change so local state matches Excel
+                    trailer.pickedUp = true;
                     this.saveToLocalStorage();
                     this.applyFilters();
                     this.renderTrailersOnMap();
-                    
-                    // Update popup if open
                     if (this.state.selectedTrailerId === trailerId) {
                         this.showTrailerPopup(trailer);
                     }
-                    
-                    this.showToast(`Trailer ${trailerId} marked as dropped off`, 'success');
-                } else {
-                    const errorText = await response.text();
-                    console.error('Flow error response:', errorText);
-                    throw new Error(`Flow returned status ${response.status}`);
-                }
-            } catch (error) {
-                console.error('Dropoff error:', error);
-                this.showToast('Failed to update Excel. Please try again.', 'error');
-            } finally {
-                this.showLoading(false);
-            }
+                    this.showToast(`✗ Failed to drop off ${trailerId}`, 'error');
+                });
         },
         
         // Filter functions
