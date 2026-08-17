@@ -2636,8 +2636,14 @@
             this.showLoading(true);
             
             try {
-                // Call Power Automate flow
-                const response = await this.flowPost(this.config.powerAutomate.dropoffFlowUrl, { assetId: trailerId });
+                // Call Power Automate flow (same add-a-row flow as check-in, so
+                // it needs the same fields - send '' not null to avoid type errors)
+                const response = await this.flowPost(this.config.powerAutomate.dropoffFlowUrl, {
+                    assetId: trailerId,
+                    notes: '',
+                    mtsn: trailer.mtsn || '',
+                    timeOfObservation: trailer.timeOfObservation || ''
+                });
                 
                 if (response.ok || response.status === 202) {
                     // Update local state
