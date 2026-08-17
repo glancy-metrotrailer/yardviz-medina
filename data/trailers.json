@@ -2840,9 +2840,9 @@
       "batteryStatus": "OK",
       "arrivedAt": "2026-08-15T23:15:25.2362006Z",
       "timeOfObservation": "2026-08-17T10:55:04Z",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "MTRZ581962",
@@ -3177,6 +3177,6 @@
   ],
   "departed": [],
   "ignored": [],
-  "timestamp": 1786979193922,
-  "lastModified": "2026-08-17T15:06:33.922Z"
+  "timestamp": 1786979195563,
+  "lastModified": "2026-08-17T15:06:35.563Z"
 }
