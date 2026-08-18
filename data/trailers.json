@@ -2564,9 +2564,9 @@
       "batteryStatus": "OK",
       "arrivedAt": "2026-08-18T13:00:53.7339836Z",
       "timeOfObservation": "2026-08-18T13:46:26Z",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "5822055",
@@ -3258,6 +3258,6 @@
     }
   ],
   "ignored": [],
-  "timestamp": 1787074197848,
-  "lastModified": "2026-08-18T17:29:57.848Z"
+  "timestamp": 1787074208768,
+  "lastModified": "2026-08-18T17:30:08.768Z"
 }
