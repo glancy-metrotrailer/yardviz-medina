@@ -3214,14 +3214,6 @@
       "missedCycles": 1
     },
     {
-      "id": "5616035",
-      "mtsn": "SVE5CLAG221522904",
-      "lastLat": 41.14834,
-      "lastLng": -81.8983,
-      "lastSeen": "2026-08-18T20:01:37.1633475Z",
-      "missedCycles": 1
-    },
-    {
       "id": "5822048",
       "mtsn": "SHB8AJBL234124572",
       "lastLat": 41.14851,
@@ -3271,6 +3263,6 @@
     }
   ],
   "ignored": [],
-  "timestamp": 1787155171259,
-  "lastModified": "2026-08-19T15:59:31.259Z"
+  "timestamp": 1787155212561,
+  "lastModified": "2026-08-19T16:00:12.561Z"
 }
