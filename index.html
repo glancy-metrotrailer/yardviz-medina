@@ -1322,7 +1322,38 @@
             bottom: 1rem;
             right: 1rem;
             z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.4rem;
         }
+        
+        .bounds-toggle {
+            padding: 0.5rem 0.75rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.8rem;
+            color: var(--text-primary);
+            cursor: pointer;
+            box-shadow: var(--shadow-md);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            transition: background 0.2s, color 0.2s, border-color 0.2s;
+        }
+        
+        .bounds-toggle:hover { border-color: var(--metro-orange); }
+        
+        .bounds-toggle.active {
+            background: var(--metro-orange);
+            color: #ffffff;
+            border-color: var(--metro-orange);
+        }
+        
+        .bounds-toggle-icon { font-size: 0.95rem; line-height: 1; }
         
         .style-select {
             padding: 0.5rem 2rem 0.5rem 0.75rem;
@@ -2015,6 +2046,9 @@
             </div>
             
             <div class="style-selector">
+                <button class="bounds-toggle" id="fetchBoundsBtn" onclick="app.toggleFetchBounds()" title="Show the SkyBitz fetch area for this yard">
+                    <span class="bounds-toggle-icon">⬚</span> Fetch area
+                </button>
                 <select class="style-select" id="mapStyle" onchange="app.changeMapStyle(event)">
                     <option value="satellite">🛰️ Satellite</option>
                     <option value="streets">🗺️ Streets</option>
@@ -2183,6 +2217,8 @@
                     name: 'Medina',
                     center: [-81.89786783155066, 41.148623908332276],
                     zoom: 17.5,
+                    // SkyBitz fetch box (from the Medina fetch flow filter)
+                    bounds: { north: 41.157, south: 41.140, east: -81.885, west: -81.910 },
                     github: {
                         owner: 'glancy-metrotrailer',
                         repo: 'yardviz-medina',
@@ -2199,6 +2235,8 @@
                     // 8860 Wooster Pike, Seville, OH 44273 [longitude, latitude]
                     center: [-81.8687802, 41.0315114],
                     zoom: 17.5,
+                    // SkyBitz fetch box (100m buffer around the property)
+                    bounds: { north: 41.0334, south: 41.0296, east: -81.8625, west: -81.8751 },
                     github: {
                         owner: 'glancy-metrotrailer',
                         repo: 'yardviz-medina',        // same repo, different file
@@ -2237,7 +2275,8 @@
             ignored: [],
             sidebarTab: 'onlot',   // 'onlot' | 'departed'
             departedLocationMarker: null,
-            departedLocationMarkerId: null
+            departedLocationMarkerId: null,
+            fetchBoundsVisible: false
         },
         
         // =====================================================
@@ -2304,6 +2343,10 @@
                 const src = this.state.map.getSource('trailers');
                 if (src) {
                     src.setData({ type: 'FeatureCollection', features: [] });
+                }
+                // If the fetch-area overlay is on, redraw it for the new yard
+                if (this.state.fetchBoundsVisible) {
+                    this.drawFetchBounds();
                 }
             }
             
@@ -4004,6 +4047,70 @@
             });
         },
         
+        toggleFetchBounds() {
+            this.state.fetchBoundsVisible = !this.state.fetchBoundsVisible;
+            const btn = document.getElementById('fetchBoundsBtn');
+            if (btn) btn.classList.toggle('active', this.state.fetchBoundsVisible);
+            if (this.state.fetchBoundsVisible) {
+                this.drawFetchBounds();
+            } else {
+                this.removeFetchBounds();
+            }
+        },
+        
+        drawFetchBounds() {
+            if (!this.state.map) return;
+            const yard = this.config.yards[this.config.activeYardId];
+            const b = yard && yard.bounds;
+            if (!b) {
+                this.showToast('No fetch area defined for this yard', 'warning');
+                return;
+            }
+            
+            const geojson = {
+                type: 'Feature',
+                geometry: {
+                    type: 'Polygon',
+                    coordinates: [[
+                        [b.west, b.north],
+                        [b.east, b.north],
+                        [b.east, b.south],
+                        [b.west, b.south],
+                        [b.west, b.north]
+                    ]]
+                }
+            };
+            
+            const src = this.state.map.getSource('fetch-bounds');
+            if (src) {
+                src.setData(geojson);
+            } else {
+                this.state.map.addSource('fetch-bounds', { type: 'geojson', data: geojson });
+                this.state.map.addLayer({
+                    id: 'fetch-bounds-fill',
+                    type: 'fill',
+                    source: 'fetch-bounds',
+                    paint: { 'fill-color': '#F7941D', 'fill-opacity': 0.08 }
+                });
+                this.state.map.addLayer({
+                    id: 'fetch-bounds-line',
+                    type: 'line',
+                    source: 'fetch-bounds',
+                    paint: { 'line-color': '#F7941D', 'line-width': 2, 'line-dasharray': [2, 1] }
+                });
+            }
+        },
+        
+        removeFetchBounds() {
+            if (!this.state.map) return;
+            ['fetch-bounds-fill', 'fetch-bounds-line'].forEach(id => {
+                if (this.state.map.getLayer(id)) this.state.map.removeLayer(id);
+            });
+            if (this.state.map.getSource('fetch-bounds')) {
+                this.state.map.removeSource('fetch-bounds');
+            }
+        },
+        
         changeMapStyle(event) {
             const style = event.target.value;
             const styleUrl = `${this.mapStyles[style]}?key=${this.config.mapTilerKey}`;
@@ -4015,6 +4122,9 @@
                     this.createTrailerImages();
                     if (this.state.trailers.length > 0) {
                         this.renderTrailersOnMap();
+                    }
+                    if (this.state.fetchBoundsVisible) {
+                        this.drawFetchBounds();
                     }
                 }, 100);
             });
