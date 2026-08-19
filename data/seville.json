@@ -2216,9 +2216,9 @@
       "batteryStatus": "OK",
       "arrivedAt": "2026-08-19T14:15:38.1371276Z",
       "timeOfObservation": "2026-08-19T06:25:34Z",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "MT53166",
@@ -2519,6 +2519,6 @@
       "ignoredAt": "2026-08-19T15:52:25.443Z"
     }
   ],
-  "timestamp": 1787154745445,
-  "lastModified": "2026-08-19T15:52:25.445Z"
+  "timestamp": 1787154761148,
+  "lastModified": "2026-08-19T15:52:41.148Z"
 }
