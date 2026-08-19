@@ -41,7 +41,7 @@
       "batteryStatus": "OK",
       "arrivedAt": "2026-08-17T19:45:34.4798967Z",
       "checkedIn": true,
-      "pickedUp": true,
+      "pickedUp": false,
       "isNew": false
     },
     {
@@ -1997,6 +1997,6 @@
   ],
   "departed": [],
   "ignored": [],
-  "timestamp": 1787143083431,
-  "lastModified": "2026-08-19T12:38:03.431Z"
+  "timestamp": 1787143093134,
+  "lastModified": "2026-08-19T12:38:13.134Z"
 }
