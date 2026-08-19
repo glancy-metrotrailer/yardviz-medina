@@ -2205,11 +2205,11 @@
                         path: 'data/seville.json'      // <-- SkyBitz fetch flow must write here
                     },
                     powerAutomate: {
-                        // Seville check-ins/pickups go to the SAME Excel file as Medina,
-                        // so it reuses Medina's flow URLs.
-                        pickupFlowUrl: 'https://default8417a2420313412ca062453303f8f4.fd.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/6739188d34af4ab2ac5ab12de31ac0ce/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=AiqbS_TEr8CZeXP2ejeW31gC3IkldEiVp9EbN44Qj1s',
-                        dropoffFlowUrl: 'https://default8417a2420313412ca062453303f8f4.fd.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/697aa3ff842048d585932a53ec765d2b/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=5u5sALfQmGdWDY6_eFlRc0zpxIpcm0okL4a-HhIXcYw',
-                        checkInFlowUrl: 'https://default8417a2420313412ca062453303f8f4.fd.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/697aa3ff842048d585932a53ec765d2b/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=5u5sALfQmGdWDY6_eFlRc0zpxIpcm0okL4a-HhIXcYw'
+                        // Seville has its own flows writing to the Seville tab (Table2).
+                        // pickup is disabled until the Seville pickup flow is built (Stage 2).
+                        pickupFlowUrl: '',
+                        dropoffFlowUrl: 'https://default8417a2420313412ca062453303f8f4.fd.environment.api.powerplatform.com:443/powerautomate/automations/direct/cu/30/workflows/80ee64dea4ae4a1cbd43dad05676231a/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=k-dwiXJ06ajjEO_TJslvNyiXZtRA4ajENJtpoHaZtlQ',
+                        checkInFlowUrl: 'https://default8417a2420313412ca062453303f8f4.fd.environment.api.powerplatform.com:443/powerautomate/automations/direct/cu/30/workflows/80ee64dea4ae4a1cbd43dad05676231a/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=k-dwiXJ06ajjEO_TJslvNyiXZtRA4ajENJtpoHaZtlQ'
                     }
                 }
             }
