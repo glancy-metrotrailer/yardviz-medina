@@ -92,9 +92,9 @@
       "batteryStatus": "OK",
       "arrivedAt": "2026-08-19T14:15:38.1240282Z",
       "timeOfObservation": "2026-08-19T12:55:34Z",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "40C2418",
@@ -2518,6 +2518,6 @@
     }
   ],
   "ignored": [],
-  "timestamp": 1787154231127,
-  "lastModified": "2026-08-19T15:43:51.127Z"
+  "timestamp": 1787154240197,
+  "lastModified": "2026-08-19T15:44:00.197Z"
 }
