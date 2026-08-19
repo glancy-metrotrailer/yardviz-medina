@@ -2512,22 +2512,13 @@
     "T1029",
     "T1337"
   ],
-  "departed": [
-    {
-      "id": "5622258",
-      "mtsn": "SVE5BLAG214105155",
-      "lastLat": 41.03126,
-      "lastLng": -81.86601,
-      "lastSeen": "2026-08-19T16:01:18.7566925Z",
-      "missedCycles": 1
-    }
-  ],
+  "departed": [],
   "ignored": [
     {
       "id": "5625095",
       "ignoredAt": "2026-08-19T15:52:25.443Z"
     }
   ],
-  "timestamp": 1787155681897,
-  "lastModified": "2026-08-19T16:08:01.897Z"
+  "timestamp": 1787155715900,
+  "lastModified": "2026-08-19T16:08:35.900Z"
 }
