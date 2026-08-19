@@ -3188,16 +3188,7 @@
     "T3343",
     "T4352"
   ],
-  "departed": [
-    {
-      "id": "5321624",
-      "mtsn": "GXL5ELAG203310062",
-      "lastLat": 41.14785,
-      "lastLng": -81.89814,
-      "lastSeen": "2026-08-19T13:01:35.9689534Z",
-      "missedCycles": 1
-    }
-  ],
+  "departed": [],
   "ignored": [
     {
       "id": "",
@@ -3212,6 +3203,6 @@
       "ignoredAt": "2026-08-19T16:04:59.172Z"
     }
   ],
-  "timestamp": 1787155649656,
-  "lastModified": "2026-08-19T16:07:29.656Z"
+  "timestamp": 1787155654515,
+  "lastModified": "2026-08-19T16:07:34.515Z"
 }
