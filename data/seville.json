@@ -2512,17 +2512,13 @@
     "T1029",
     "T1337"
   ],
-  "departed": [
+  "departed": [],
+  "ignored": [
     {
       "id": "5625095",
-      "mtsn": "SHB7BJBL231902145",
-      "lastLat": 41.03168,
-      "lastLng": -81.86398,
-      "lastSeen": "2026-08-19T13:46:20.7978045Z",
-      "missedCycles": 1
+      "ignoredAt": "2026-08-19T15:52:25.443Z"
     }
   ],
-  "ignored": [],
-  "timestamp": 1787154742545,
-  "lastModified": "2026-08-19T15:52:22.545Z"
+  "timestamp": 1787154745445,
+  "lastModified": "2026-08-19T15:52:25.445Z"
 }
