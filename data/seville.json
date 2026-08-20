@@ -2616,16 +2616,7 @@
     "T1029",
     "T1337"
   ],
-  "departed": [
-    {
-      "id": "MT53166",
-      "mtsn": "SHB8AJBL233922246",
-      "lastLat": 41.0311,
-      "lastLng": -81.86539,
-      "lastSeen": "2026-08-20T19:01:22.6704747Z",
-      "missedCycles": 1
-    }
-  ],
+  "departed": [],
   "ignored": [
     {
       "id": "5625095",
@@ -2640,6 +2631,6 @@
       "ignoredAt": "2026-08-19T19:55:51.158Z"
     }
   ],
-  "timestamp": 1787254164966,
-  "lastModified": "2026-08-20T19:29:24.966Z"
+  "timestamp": 1787254192812,
+  "lastModified": "2026-08-20T19:29:52.812Z"
 }
