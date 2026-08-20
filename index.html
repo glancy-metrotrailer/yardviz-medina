@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YardViz - Trailer GPS Visualizer</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTMiIGZpbGw9IiMwYzIzNDAiLz48dGV4dCB4PSIzMiIgeT0iMzQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJjZW50cmFsIiBmb250LWZhbWlseT0iSW50ZXIsIC1hcHBsZS1zeXN0ZW0sIEJsaW5rTWFjU3lzdGVtRm9udCwgJ1NlZ29lIFVJJywgQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjkiIGZvbnQtd2VpZ2h0PSI3MDAiIGxldHRlci1zcGFjaW5nPSIwLjUiPjx0c3BhbiBmaWxsPSIjZmZmZmZmIj5ZPC90c3Bhbj48dHNwYW4gZmlsbD0iIzAwNjZjYyI+VjwvdHNwYW4+PC90ZXh0Pjwvc3ZnPg==" />
     
     <!-- MapLibre GL JS -->
     <link href="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.css" rel="stylesheet" />
@@ -629,6 +630,16 @@
             padding: 0.75rem 0.5rem;
             border: 1px solid var(--metro-gray);
             text-align: center;
+            cursor: pointer;
+            transition: border-color 0.15s, transform 0.1s;
+        }
+        
+        .stat-card:hover {
+            border-color: var(--metro-blue);
+        }
+        
+        .stat-card:active {
+            transform: scale(0.97);
         }
         
         .stat-value {
@@ -1951,19 +1962,19 @@
             <div class="sidebar-section">
                 <div class="section-title">Statistics</div>
                 <div class="stats-grid">
-                    <div class="stat-card">
+                    <div class="stat-card" onclick="app.statClick('all')" title="Show all trailers">
                         <div class="stat-value" id="statTrailers">0</div>
                         <div class="stat-label">Total</div>
                     </div>
-                    <div class="stat-card success">
+                    <div class="stat-card success" onclick="app.statClick('checkedIn')" title="Show checked-in trailers">
                         <div class="stat-value" id="statCheckedIn">0</div>
                         <div class="stat-label">Checked In</div>
                     </div>
-                    <div class="stat-card danger">
+                    <div class="stat-card danger" onclick="app.statClick('notCheckedIn')" title="Show not-checked-in trailers">
                         <div class="stat-value" id="statNotCheckedIn">0</div>
                         <div class="stat-label">Not Checked</div>
                     </div>
-                    <div class="stat-card warning">
+                    <div class="stat-card warning" onclick="app.switchSidebarTab('departed')" title="Show picked-up trailers">
                         <div class="stat-value" id="statPickedUp">0</div>
                         <div class="stat-label">Picked Up</div>
                     </div>
@@ -1973,7 +1984,7 @@
             <div class="sidebar-section">
                 <div class="sidebar-tabs">
                     <button class="sidebar-tab active" id="tabOnlot" onclick="app.switchSidebarTab('onlot')">On Lot</button>
-                    <button class="sidebar-tab" id="tabDeparted" onclick="app.switchSidebarTab('departed')">Departed<span class="sidebar-tab-count" id="departedCount" style="display:none;">0</span></button>
+                    <button class="sidebar-tab" id="tabDeparted" onclick="app.switchSidebarTab('departed')">Picked Up<span class="sidebar-tab-count" id="departedCount" style="display:none;">0</span></button>
                 </div>
 
                 <!-- ON LOT view -->
@@ -1993,8 +2004,6 @@
                             <option value="new">New</option>
                             <option value="checkedIn">Checked In</option>
                             <option value="notCheckedIn">Not Checked In</option>
-                            <option value="pickedUp">Picked Up</option>
-                            <option value="onSite">On-Site (Not Picked Up)</option>
                         </select>
                         <button class="locate-mode-btn" onclick="app.toggleLocatePanel()" title="Locate Mode">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -2019,7 +2028,7 @@
                     <div class="trailer-list-container" id="departedListContainer">
                         <div class="empty-state" id="departedEmptyState">
                             <div class="empty-state-icon">🚚</div>
-                            <div class="empty-state-text">No departed trailers</div>
+                            <div class="empty-state-text">No picked up trailers</div>
                         </div>
                         <div class="trailer-list" id="departedList"></div>
                     </div>
@@ -2235,8 +2244,9 @@
                     // 8860 Wooster Pike, Seville, OH 44273 [longitude, latitude]
                     center: [-81.8687802, 41.0315114],
                     zoom: 17.5,
-                    // SkyBitz fetch box (100m buffer around the property)
-                    bounds: { north: 41.0334, south: 41.0296, east: -81.8625, west: -81.8751 },
+                    // SkyBitz fetch box - asymmetric: tighter on N (highway) and
+                    // E (gas station), a little looser on S/W where there's no contamination
+                    bounds: { north: 41.0328, south: 41.0300, east: -81.8633, west: -81.8746 },
                     github: {
                         owner: 'glancy-metrotrailer',
                         repo: 'yardviz-medina',        // same repo, different file
@@ -2399,8 +2409,10 @@
         
         updateDepartedCount() {
             const badge = document.getElementById('departedCount');
-            if (!badge) return;
             const n = this.getVisibleDeparted().length;
+            const statEl = document.getElementById('statPickedUp');
+            if (statEl) statEl.textContent = n;
+            if (!badge) return;
             badge.textContent = n;
             badge.style.display = n > 0 ? 'inline-flex' : 'none';
         },
@@ -2433,7 +2445,7 @@
                 return `
                 <div class="departed-item" data-departed-id="${d.id}">
                     <div class="departed-info">
-                        <div class="departed-id">${d.id}</div>
+                        <div class="departed-id">${d.id}<button class="copy-btn" onclick="event.stopPropagation(); app.copyTrailerId('${d.id}')" title="Copy trailer number"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div>
                         <div class="departed-meta">${meta}</div>
                         ${coords}
                     </div>
@@ -2507,25 +2519,32 @@
             );
         },
         
-        async executeCheckOutDeparted(trailerId) {
-            this.showLoading(true);
-            try {
-                const response = await this.flowPost(this.config.powerAutomate.pickupFlowUrl, { assetId: trailerId });
-                if (response.ok || response.status === 202) {
-                    // Remove from departed and persist so it doesn't linger
-                    this.state.departed = (this.state.departed || []).filter(d => d.id !== trailerId);
-                    if (this.state.departedLocationMarkerId === trailerId) this.clearDepartedLocationMarker();
-                    this.renderDepartedList();
-                    await this.saveToGitHub();
-                    this.showToast(`✓ ${trailerId} checked out`, 'success');
-                } else {
+        executeCheckOutDeparted(trailerId) {
+            // Optimistic: remove from the list immediately, run the flow in the background
+            const removed = (this.state.departed || []).find(d => d.id === trailerId);
+            this.state.departed = (this.state.departed || []).filter(d => d.id !== trailerId);
+            if (this.state.departedLocationMarkerId === trailerId) this.clearDepartedLocationMarker();
+            this.renderDepartedList();
+            this.showToast(`Checking out ${trailerId}...`, 'info');
+            
+            this.flowPost(this.config.powerAutomate.pickupFlowUrl, { assetId: trailerId })
+                .then(response => {
+                    if (response.ok || response.status === 202) {
+                        this.saveToGitHub(); // persist the removal from departed
+                        this.showToast(`✓ ${trailerId} checked out`, 'success');
+                    } else {
+                        throw new Error(`Flow returned status ${response.status}`);
+                    }
+                })
+                .catch(() => {
+                    // Revert - put it back in the list since Excel wasn't updated
+                    if (removed) {
+                        this.state.departed = this.state.departed || [];
+                        this.state.departed.push(removed);
+                        this.renderDepartedList();
+                    }
                     this.showToast(`✗ Failed to check out ${trailerId}`, 'error');
-                }
-            } catch (e) {
-                this.showToast(`✗ Failed to check out ${trailerId}`, 'error');
-            } finally {
-                this.showLoading(false);
-            }
+                });
         },
         
         async ignoreDeparted(trailerId) {
@@ -2727,6 +2746,14 @@
         setFilterMode(mode) {
             this.state.filterMode = mode;
             this.applyFilters();
+        },
+        
+        // Clicking a statistics card jumps to the On Lot list filtered to that set
+        statClick(mode) {
+            this.switchSidebarTab('onlot');
+            this.setFilterMode(mode);
+            const sel = document.getElementById('filterSelect');
+            if (sel) sel.value = mode;
         },
         
         applyFilters() {
@@ -4011,7 +4038,6 @@
         
         updateStats() {
             const trailers = this.state.trailers;
-            const pickedUp = trailers.filter(t => t.pickedUp).length;
             const onSite = trailers.filter(t => !t.pickedUp);
             const checkedIn = onSite.filter(t => t.checkedIn).length;
             const notCheckedIn = onSite.filter(t => !t.checkedIn).length;
@@ -4019,7 +4045,8 @@
             document.getElementById('statTrailers').textContent = trailers.length;
             document.getElementById('statCheckedIn').textContent = checkedIn;
             document.getElementById('statNotCheckedIn').textContent = notCheckedIn;
-            document.getElementById('statPickedUp').textContent = pickedUp;
+            // "Picked Up" now tracks the Picked Up tab (departed list)
+            document.getElementById('statPickedUp').textContent = this.getVisibleDeparted().length;
         },
         
         zoomIn() { this.state.map.zoomIn(); },
