@@ -3097,16 +3097,7 @@
     "T3343",
     "T4352"
   ],
-  "departed": [
-    {
-      "id": "5317930",
-      "mtsn": "SHB8AJBL234628968",
-      "lastLat": 41.14865,
-      "lastLng": -81.89838,
-      "lastSeen": "2026-08-20T13:31:47.8095409Z",
-      "missedCycles": 1
-    }
-  ],
+  "departed": [],
   "ignored": [
     {
       "id": "",
@@ -3137,6 +3128,6 @@
       "ignoredAt": "2026-08-20T11:46:36.625Z"
     }
   ],
-  "timestamp": 1787233350828,
-  "lastModified": "2026-08-20T13:42:30.828Z"
+  "timestamp": 1787233369716,
+  "lastModified": "2026-08-20T13:42:49.716Z"
 }
