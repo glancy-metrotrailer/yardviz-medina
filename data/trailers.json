@@ -3108,14 +3108,6 @@
       "lastLng": -81.89826,
       "lastSeen": "2026-08-20T09:16:21.0222295Z",
       "missedCycles": 1
-    },
-    {
-      "id": "568322",
-      "mtsn": "GXL5ELAG195055657",
-      "lastLat": 41.14748,
-      "lastLng": -81.89839,
-      "lastSeen": "2026-08-20T11:32:10.8116254Z",
-      "missedCycles": 1
     }
   ],
   "ignored": [
@@ -3136,6 +3128,6 @@
       "ignoredAt": "2026-08-20T11:44:20.296Z"
     }
   ],
-  "timestamp": 1787226260298,
-  "lastModified": "2026-08-20T11:44:20.298Z"
+  "timestamp": 1787226292816,
+  "lastModified": "2026-08-20T11:44:52.816Z"
 }
