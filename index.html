@@ -3691,6 +3691,14 @@
         async saveToGitHub() {
             if (this.state.isSyncing) return;
             
+            // Safety guard: never overwrite the file with an empty trailer list.
+            // If our in-memory state is empty (e.g. we loaded during a GitHub blip),
+            // writing it would wipe the good file - exactly the failure we're avoiding.
+            if (!Array.isArray(this.state.trailers) || this.state.trailers.length === 0) {
+                console.warn('saveToGitHub skipped: trailer list is empty, refusing to overwrite remote data');
+                return;
+            }
+            
             const { owner, repo, path } = this.config.github;
             const token = localStorage.getItem('yardviz_github_token');
             
