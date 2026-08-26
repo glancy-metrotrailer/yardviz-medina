@@ -1394,6 +1394,23 @@
             min-width: 220px;
         }
         
+        .popup-divider {
+            height: 1px;
+            background: var(--border-color);
+            margin: 0.5rem 0;
+        }
+        
+        .popup-badge {
+            display: inline-block;
+            padding: 0.15rem 0.5rem;
+            border-radius: 999px;
+            color: #ffffff;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            white-space: nowrap;
+        }
+        
         .maplibregl-popup-close-button {
             color: var(--text-muted) !important;
             font-size: 1.25rem !important;
@@ -3962,11 +3979,28 @@
             this.showTrailerPopup(trailer);
         },
         
+        // Decode Business Central enum encoding (e.g. "On_x0020_Rent" -> "On Rent")
+        formatBcStatus(s) {
+            if (!s) return '';
+            return String(s)
+                .replace(/_x([0-9A-Fa-f]{4})_/g, (m, hex) => String.fromCharCode(parseInt(hex, 16)))
+                .replace(/_/g, ' ')
+                .trim();
+        },
+        
+        fleetStatusColor(label) {
+            const t = (label || '').toLowerCase();
+            if (t.includes('out of service')) return '#ef4444'; // red
+            if (t.includes('reserved')) return '#f57c00';        // orange
+            if (t.includes('on rent')) return '#22c55e';         // green
+            if (t.includes('available') || t.includes('off rent')) return '#0066cc'; // blue
+            return '#64748b';                                     // gray (unknown)
+        },
+        
         showTrailerPopup(trailer) {
             if (this.state.currentPopup) {
                 this.state.currentPopup.remove();
             }
-            
             let statusColor, statusText;
             if (trailer.pickedUp) {
                 statusColor = '#f57c00';
@@ -3999,6 +4033,31 @@
                     <span class="popup-value">${this.getBatteryIcon(trailer.batteryStatus)} ${trailer.batteryStatus || 'Unknown'}</span>
                    </div>`;
             
+            // Rental / fleet status (from Business Central fleetAssets, written by the fetch flow)
+            let rentalSection = '';
+            const hasFleetData = trailer.fleetStatus != null || trailer.onRent != null;
+            if (hasFleetData) {
+                const fleetLabel = this.formatBcStatus(trailer.fleetStatus) || 'Unknown';
+                const fleetColor = this.fleetStatusColor(fleetLabel);
+                const offRent = this.formatBcStatus(trailer.offRentStatus);
+                const reserved = trailer.reservedCustomerName;
+                const oos = this.formatBcStatus(trailer.outOfServiceReason);
+                rentalSection = `
+                    <div class="popup-divider"></div>
+                    <div class="popup-row">
+                        <span class="popup-label">Fleet Status</span>
+                        <span class="popup-badge" style="background:${fleetColor}">${fleetLabel}</span>
+                    </div>
+                    <div class="popup-row">
+                        <span class="popup-label">On Rent</span>
+                        <span class="popup-value" style="font-weight:600; color:${trailer.onRent ? '#22c55e' : '#64748b'}">${trailer.onRent ? 'Yes' : 'No'}</span>
+                    </div>
+                    ${offRent ? `<div class="popup-row"><span class="popup-label">Off-Rent Status</span><span class="popup-value">${offRent}</span></div>` : ''}
+                    ${reserved ? `<div class="popup-row"><span class="popup-label">Reserved For</span><span class="popup-value">${reserved}</span></div>` : ''}
+                    ${oos ? `<div class="popup-row"><span class="popup-label">Out of Service</span><span class="popup-value" style="color:#ef4444">${oos}</span></div>` : ''}
+                `;
+            }
+            
             const popupContent = `
                 <div class="popup-header">
                     <span class="popup-icon">🚛</span>
@@ -4017,6 +4076,7 @@
                         <span class="checkin-slider"></span>
                     </label>
                 </div>
+                ${rentalSection}
                 ${batteryRow}
                 ${mtsnRow}
                 <div class="popup-row">
