@@ -1328,9 +1328,9 @@
       "batteryStatus": "OK",
       "arrivedAt": "2026-08-26T17:45:26.7018881Z",
       "timeOfObservation": "2026-08-26T19:56:21Z",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "53R1624",
@@ -3151,6 +3151,6 @@
       "ignoredAt": "2026-08-26T20:04:27.865Z"
     }
   ],
-  "timestamp": 1787774700346,
-  "lastModified": "2026-08-26T20:05:00.346Z"
+  "timestamp": 1787774716106,
+  "lastModified": "2026-08-26T20:05:16.106Z"
 }
