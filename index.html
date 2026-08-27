@@ -1132,6 +1132,18 @@
             letter-spacing: 0.03em;
         }
         
+        .trailer-id .rent-badge {
+            background: #22c55e;
+            color: white;
+            font-size: 0.55rem;
+            padding: 0.1rem 0.35rem;
+            border-radius: 3px;
+            margin-left: 0.35rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+        
         .copy-btn {
             background: transparent;
             border: none;
@@ -2459,12 +2471,17 @@
                 const locBtn = hasLoc
                     ? `<button class="departed-btn departed-btn-loc" onclick="app.showDepartedLocation('${d.id}')" title="Show last known location on map">📍</button>`
                     : '';
+                const rentBadge = d.onRent ? ' <span class="rent-badge">ON RENT</span>' : '';
+                const customerLine = d.onRent && d.customerName
+                    ? `<div class="departed-coords">${d.customerName}</div>`
+                    : '';
                 return `
                 <div class="departed-item" data-departed-id="${d.id}">
                     <div class="departed-info">
-                        <div class="departed-id">${d.id}<button class="copy-btn" onclick="event.stopPropagation(); app.copyTrailerId('${d.id}')" title="Copy trailer number"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div>
+                        <div class="departed-id">${d.id}<button class="copy-btn" onclick="event.stopPropagation(); app.copyTrailerId('${d.id}')" title="Copy trailer number"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button>${rentBadge}</div>
                         <div class="departed-meta">${meta}</div>
                         ${coords}
+                        ${customerLine}
                     </div>
                     <div class="departed-actions">
                         ${locBtn}
@@ -3935,7 +3952,7 @@
                      onclick="app.selectTrailer('${trailer.id}')">
                     <div class="trailer-icon status-${statusClass}">${trailerSvg}</div>
                     <div class="trailer-info">
-                        <div class="trailer-id">${trailer.id}<button class="copy-btn" onclick="event.stopPropagation(); app.copyTrailerId('${trailer.id}')" title="Copy trailer number"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button>${batteryIcon}${trailer.isNew ? ' <span class="new-badge">NEW</span>' : ''}${trailer.pickedUp ? ' 📤' : ''}</div>
+                        <div class="trailer-id">${trailer.id}<button class="copy-btn" onclick="event.stopPropagation(); app.copyTrailerId('${trailer.id}')" title="Copy trailer number"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button>${batteryIcon}${trailer.isNew ? ' <span class="new-badge">NEW</span>' : ''}${trailer.onRent ? ' <span class="rent-badge">ON RENT</span>' : ''}${trailer.pickedUp ? ' 📤' : ''}</div>
                     </div>
                     <button class="locate-add-btn ${inLocate ? 'active' : ''}" onclick="event.stopPropagation(); app.toggleLocateMembership('${trailer.id}')" title="${locateLabel}" aria-label="${locateLabel}" aria-pressed="${inLocate}">${locateIcon}</button>
                     <label class="checkin-toggle" onclick="event.stopPropagation()">
@@ -4042,6 +4059,7 @@
                 const offRent = this.formatBcStatus(trailer.offRentStatus);
                 const reserved = trailer.reservedCustomerName;
                 const oos = this.formatBcStatus(trailer.outOfServiceReason);
+                const customer = trailer.customerName;
                 rentalSection = `
                     <div class="popup-divider"></div>
                     <div class="popup-row">
@@ -4052,6 +4070,7 @@
                         <span class="popup-label">On Rent</span>
                         <span class="popup-value" style="font-weight:600; color:${trailer.onRent ? '#22c55e' : '#64748b'}">${trailer.onRent ? 'Yes' : 'No'}</span>
                     </div>
+                    ${customer ? `<div class="popup-row"><span class="popup-label">Customer</span><span class="popup-value">${customer}</span></div>` : ''}
                     ${offRent ? `<div class="popup-row"><span class="popup-label">Off-Rent Status</span><span class="popup-value">${offRent}</span></div>` : ''}
                     ${reserved ? `<div class="popup-row"><span class="popup-label">Reserved For</span><span class="popup-value">${reserved}</span></div>` : ''}
                     ${oos ? `<div class="popup-row"><span class="popup-label">Out of Service</span><span class="popup-value" style="color:#ef4444">${oos}</span></div>` : ''}
