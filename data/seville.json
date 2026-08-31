@@ -4299,20 +4299,6 @@
   ],
   "departed": [
     {
-      "id": "5324424",
-      "mtsn": "SHB7BLAG223879533",
-      "lastLat": 41.0318,
-      "lastLng": -81.86574,
-      "lastSeen": "2026-08-28T18:01:18.8600588Z",
-      "missedCycles": 1,
-      "fleetStatus": "Reserved_x0020_for_x0020_Customer",
-      "onRent": false,
-      "offRentStatus": "Reserved_x0020_for_x0020_Customer",
-      "reservedCustomerName": "Traffix",
-      "outOfServiceReason": "",
-      "customerName": ""
-    },
-    {
       "id": "5622118",
       "mtsn": "GXL5JLAG211428835",
       "lastLat": 41.03106,
@@ -4493,6 +4479,6 @@
       "ignoredAt": "2026-08-31T13:30:15.293Z"
     }
   ],
-  "timestamp": 1788183020117,
-  "lastModified": "2026-08-31T13:30:20.117Z"
+  "timestamp": 1788183030788,
+  "lastModified": "2026-08-31T13:30:30.788Z"
 }
