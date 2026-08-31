@@ -4313,20 +4313,6 @@
       "customerName": ""
     },
     {
-      "id": "",
-      "mtsn": "SHB7BLAG222468482",
-      "lastLat": 41.03108,
-      "lastLng": -81.86625,
-      "lastSeen": "2026-08-28T13:17:04.5133802Z",
-      "missedCycles": 1,
-      "fleetStatus": "Reserved_x0020_for_x0020_Customer",
-      "onRent": false,
-      "offRentStatus": "Reserved_x0020_for_x0020_Customer",
-      "reservedCustomerName": "RXO",
-      "outOfServiceReason": "",
-      "customerName": ""
-    },
-    {
       "id": "5321989",
       "mtsn": "SHB7BLAG223577358",
       "lastLat": 41.03121,
@@ -4567,8 +4553,12 @@
     {
       "id": "MTRZ581938",
       "ignoredAt": "2026-08-31T13:27:51.737Z"
+    },
+    {
+      "id": "",
+      "ignoredAt": "2026-08-31T13:28:38.951Z"
     }
   ],
-  "timestamp": 1788182886649,
-  "lastModified": "2026-08-31T13:28:06.649Z"
+  "timestamp": 1788182918953,
+  "lastModified": "2026-08-31T13:28:38.953Z"
 }
