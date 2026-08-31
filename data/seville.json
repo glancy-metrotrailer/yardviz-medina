@@ -4299,20 +4299,6 @@
   ],
   "departed": [
     {
-      "id": "5327781",
-      "mtsn": "SHB7BLAG222775726",
-      "lastLat": 41.03183,
-      "lastLng": -81.86649,
-      "lastSeen": "2026-08-29T00:01:29.9003394Z",
-      "missedCycles": 1,
-      "fleetStatus": "Reserved_x0020_for_x0020_Customer",
-      "onRent": false,
-      "offRentStatus": "Reserved_x0020_for_x0020_Customer",
-      "reservedCustomerName": "PHOENIX",
-      "outOfServiceReason": "",
-      "customerName": ""
-    },
-    {
       "id": "5327798",
       "mtsn": "SHB7BLAG222775622",
       "lastLat": 41.03186,
@@ -4389,6 +4375,6 @@
       "ignoredAt": "2026-08-31T13:34:22.437Z"
     }
   ],
-  "timestamp": 1788183262438,
-  "lastModified": "2026-08-31T13:34:22.438Z"
+  "timestamp": 1788183343793,
+  "lastModified": "2026-08-31T13:35:43.793Z"
 }
