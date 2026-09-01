@@ -4316,36 +4316,7 @@
     "T1029",
     "T1337"
   ],
-  "departed": [
-    {
-      "id": "487260",
-      "mtsn": "SHB81JBL233518464",
-      "lastLat": 41.0312,
-      "lastLng": -81.86736,
-      "lastSeen": "2026-09-01T19:31:40.9065544Z",
-      "missedCycles": 1,
-      "fleetStatus": "",
-      "onRent": false,
-      "offRentStatus": "",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": ""
-    },
-    {
-      "id": "5319183",
-      "mtsn": "SHB7BLAG222468176",
-      "lastLat": 41.03107,
-      "lastLng": -81.86703,
-      "lastSeen": "2026-09-01T16:16:30.2359713Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": ""
-    }
-  ],
+  "departed": [],
   "ignored": [
     {
       "id": "5327754",
@@ -4426,8 +4397,12 @@
     {
       "id": "5327784",
       "ignoredAt": "2026-09-01T14:31:35.618Z"
+    },
+    {
+      "id": "5319183",
+      "ignoredAt": "2026-09-01T20:07:43.297Z"
     }
   ],
-  "timestamp": 1788293258368,
-  "lastModified": "2026-09-01T20:07:38.368Z"
+  "timestamp": 1788293263297,
+  "lastModified": "2026-09-01T20:07:43.297Z"
 }
