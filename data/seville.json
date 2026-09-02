@@ -4164,22 +4164,7 @@
     "T1029",
     "T1337"
   ],
-  "departed": [
-    {
-      "id": "5315254",
-      "mtsn": "SHB8AJBL233923019",
-      "lastLat": 41.03108,
-      "lastLng": -81.86552,
-      "lastSeen": "2026-09-02T13:31:28.7519195Z",
-      "missedCycles": 1,
-      "fleetStatus": "Available",
-      "onRent": false,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": ""
-    }
-  ],
+  "departed": [],
   "ignored": [
     {
       "id": "5327754",
@@ -4300,8 +4285,12 @@
     {
       "id": "5327777",
       "ignoredAt": "2026-09-02T18:37:36.999Z"
+    },
+    {
+      "id": "5315254",
+      "ignoredAt": "2026-09-02T18:38:11.212Z"
     }
   ],
-  "timestamp": 1788374257000,
-  "lastModified": "2026-09-02T18:37:37.000Z"
+  "timestamp": 1788374291213,
+  "lastModified": "2026-09-02T18:38:11.213Z"
 }
