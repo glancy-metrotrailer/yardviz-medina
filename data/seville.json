@@ -4244,34 +4244,6 @@
       "reservedCustomerName": "",
       "outOfServiceReason": "",
       "customerName": ""
-    },
-    {
-      "id": "5327797",
-      "mtsn": "SHB7BLAG222775593",
-      "lastLat": 41.0318,
-      "lastLng": -81.86638,
-      "lastSeen": "2026-09-01T20:16:52.8125018Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": ""
-    },
-    {
-      "id": "5327759",
-      "mtsn": "SHB7BLAG222773861",
-      "lastLat": 41.0318,
-      "lastLng": -81.86607,
-      "lastSeen": "2026-09-01T20:16:52.8124378Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": ""
     }
   ],
   "ignored": [
@@ -4366,8 +4338,16 @@
     {
       "id": "5327789",
       "ignoredAt": "2026-09-02T12:20:51.800Z"
+    },
+    {
+      "id": "5327797",
+      "ignoredAt": "2026-09-02T12:20:52.496Z"
+    },
+    {
+      "id": "5327759",
+      "ignoredAt": "2026-09-02T12:20:53.554Z"
     }
   ],
-  "timestamp": 1788351651801,
-  "lastModified": "2026-09-02T12:20:51.801Z"
+  "timestamp": 1788351653555,
+  "lastModified": "2026-09-02T12:20:53.555Z"
 }
