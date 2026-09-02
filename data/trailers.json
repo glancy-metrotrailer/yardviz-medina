@@ -2684,9 +2684,9 @@
       "batteryStatus": "OK",
       "arrivedAt": "2026-09-02T12:00:50.0438262Z",
       "timeOfObservation": "2026-09-02T11:58:34Z",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "T2754",
@@ -3198,6 +3198,6 @@
       "ignoredAt": "2026-09-02T12:10:25.891Z"
     }
   ],
-  "timestamp": 1788351025891,
-  "lastModified": "2026-09-02T12:10:25.891Z"
+  "timestamp": 1788351212811,
+  "lastModified": "2026-09-02T12:13:32.811Z"
 }
