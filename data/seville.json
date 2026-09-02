@@ -4178,20 +4178,6 @@
       "reservedCustomerName": "",
       "outOfServiceReason": "",
       "customerName": ""
-    },
-    {
-      "id": "5327777",
-      "mtsn": "SHB7BLAG222775597",
-      "lastLat": 41.03175,
-      "lastLng": -81.86591,
-      "lastSeen": "2026-09-02T17:16:14.3861291Z",
-      "missedCycles": 1,
-      "fleetStatus": "Reserved_x0020_for_x0020_Customer",
-      "onRent": false,
-      "offRentStatus": "Reserved_x0020_for_x0020_Customer",
-      "reservedCustomerName": "PHOENIX",
-      "outOfServiceReason": "",
-      "customerName": ""
     }
   ],
   "ignored": [
@@ -4310,8 +4296,12 @@
     {
       "id": "5327794",
       "ignoredAt": "2026-09-02T18:37:20.568Z"
+    },
+    {
+      "id": "5327777",
+      "ignoredAt": "2026-09-02T18:37:36.999Z"
     }
   ],
-  "timestamp": 1788374240569,
-  "lastModified": "2026-09-02T18:37:20.569Z"
+  "timestamp": 1788374257000,
+  "lastModified": "2026-09-02T18:37:37.000Z"
 }
