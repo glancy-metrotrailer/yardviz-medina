@@ -183,6 +183,12 @@
         token: null,
 
         init() {
+            // Visiting with ?reset clears the stored token and re-shows setup
+            // (handy on a TV/kiosk where you can't open the console)
+            if (location.search.indexOf('reset') !== -1) {
+                localStorage.removeItem('yardviz_display_token');
+            }
+            
             this.token = localStorage.getItem('yardviz_display_token')
                       || localStorage.getItem('yardviz_github_token');
             
