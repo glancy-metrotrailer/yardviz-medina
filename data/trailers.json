@@ -992,7 +992,7 @@
       "batteryStatus": "OK",
       "arrivedAt": "2026-09-03T13:30:55.7472841Z",
       "timeOfObservation": "2026-09-03T13:21:51Z",
-      "checkedIn": true,
+      "checkedIn": false,
       "pickedUp": false,
       "isNew": false,
       "fleetStatus": "Available",
@@ -1010,7 +1010,7 @@
       "batteryStatus": "OK",
       "arrivedAt": "2026-09-03T12:15:32.6946608Z",
       "timeOfObservation": "2026-09-03T12:55:34Z",
-      "checkedIn": true,
+      "checkedIn": false,
       "pickedUp": false,
       "isNew": false,
       "fleetStatus": "Available",
@@ -3140,6 +3140,6 @@
       "ignoredAt": "2026-09-02T14:42:20.475Z"
     }
   ],
-  "timestamp": 1788442886402,
-  "lastModified": "2026-09-03T13:41:26.402Z"
+  "timestamp": 1788443143964,
+  "lastModified": "2026-09-03T13:45:43.964Z"
 }
