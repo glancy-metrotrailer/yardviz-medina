@@ -138,6 +138,21 @@
             font-size: 1rem; font-weight: 600; cursor: pointer;
         }
         .token-note { font-size: 0.8rem !important; color: #94a3b8 !important; margin: 0.75rem 0 0 !important; }
+
+        /* "You are here" marker */
+        .yah-marker { display: flex; flex-direction: column; align-items: center; }
+        .yah-label {
+            background: #ef4444; color: #fff;
+            font-size: 13px; font-weight: 800; letter-spacing: 0.02em;
+            padding: 5px 11px; border-radius: 6px; white-space: nowrap;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.5);
+            border: 2px solid #fff; text-transform: uppercase;
+        }
+        .yah-dot {
+            width: 16px; height: 16px; border-radius: 50%;
+            background: #ef4444; border: 3px solid #fff; margin-top: 3px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+        }
     </style>
 </head>
 <body>
@@ -173,12 +188,13 @@
         pollMs: 3000,
         yards: {
             // Medina center shifted ~50 yards south for better display framing
-            medina:  { name: 'Medina',  center: [-81.89786783155066, 41.1482120], zoom: 17 },
+            medina:  { name: 'Medina',  center: [-81.89786783155066, 41.1482120], zoom: 17, youAreHere: [-81.89795624680701, 41.14860406577813] },
             seville: { name: 'Seville', center: [-81.8687802, 41.0315114], zoom: 16 }
         },
 
         map: null,
         markers: [],
+        yahMarker: null,       // "you are here" marker
         lastSignature: null,   // to detect changes without redundant re-renders
         activeYard: null,
         token: null,
@@ -283,6 +299,9 @@
                 document.getElementById('yardName').textContent = this.yards[yard].name;
                 this.activeYard = yard;
             }
+            
+            // "You are here" marker for yards that define one
+            this.drawYouAreHere(yard);
 
             // Draw markers - keep the whole yard in view (don't zoom to the trailer)
             let placed = 0;
@@ -315,6 +334,19 @@
 
         showWaiting(show) {
             document.getElementById('waiting').classList.toggle('hidden', !show);
+        },
+        
+        drawYouAreHere(yard) {
+            const cfg = yard && this.yards[yard];
+            const yah = cfg && cfg.youAreHere;
+            // Remove any existing marker first (yard may have changed)
+            if (this.yahMarker) { this.yahMarker.remove(); this.yahMarker = null; }
+            if (!yah) return;
+            const el = document.createElement('div');
+            el.className = 'yah-marker';
+            el.innerHTML = `<div class="yah-label">You Are Here</div><div class="yah-dot"></div>`;
+            this.yahMarker = new maplibregl.Marker({ element: el, anchor: 'bottom' })
+                .setLngLat(yah).addTo(this.map);
         }
     };
 
