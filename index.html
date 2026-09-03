@@ -865,6 +865,20 @@
             background: #16a34a;
         }
         
+        .btn-display {
+            background: var(--metro-blue);
+            color: white;
+            border: none;
+            padding: 0.5rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: filter 0.15s;
+        }
+        .btn-display:hover { filter: brightness(0.92); }
+        
         .btn-dropoff {
             background: #f59e0b;
             color: white;
@@ -2124,8 +2138,14 @@
                     <button class="locate-btn-primary" id="locateShowBtn" onclick="app.showLocateTrailers()" disabled>
                         Show on map
                     </button>
+                    <button class="locate-btn-primary" id="locateDisplayBtn" onclick="app.sendLocateToDisplay()" disabled style="background:var(--metro-blue);">
+                        🖥️ Send to Display
+                    </button>
                     <button class="locate-btn-secondary" onclick="app.printLocateMap()">
                         🖨️ Print map
+                    </button>
+                    <button class="locate-btn-secondary" onclick="app.clearDisplay()">
+                        Clear Display
                     </button>
                     <button class="locate-btn-secondary" onclick="app.clearLocateList()">
                         Clear all
@@ -3722,6 +3742,80 @@
             }
         },
         
+        // ==========================================================
+        // DRIVER DISPLAY (second-screen) - writes data/display-state.json
+        // which display.html polls and renders. Read-only for the display.
+        // ==========================================================
+        async saveDisplayState(trailers) {
+            const { owner, repo } = this.config.github;
+            const path = 'data/display-state.json';
+            const token = localStorage.getItem('yardviz_github_token');
+            if (!token) { this.showToast('No GitHub token set', 'error'); return false; }
+            
+            const payload = {
+                yard: this.config.activeYardId,
+                trailers: (trailers || []).map(t => ({ id: t.id, lat: t.lat, lng: t.lng })),
+                timestamp: Date.now()
+            };
+            const content = btoa(unescape(encodeURIComponent(JSON.stringify(payload, null, 2))));
+            
+            try {
+                // Look up the current SHA (file may not exist yet on first write)
+                let sha = null;
+                const getRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`, {
+                    headers: { 'Authorization': `token ${token}` }
+                });
+                if (getRes.ok) { sha = (await getRes.json()).sha; }
+                
+                const body = { message: `Display: ${payload.trailers.length} trailer(s)`, content };
+                if (sha) body.sha = sha;
+                
+                const putRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`, {
+                    method: 'PUT',
+                    headers: { 'Authorization': `token ${token}`, 'Content-Type': 'application/json' },
+                    body: JSON.stringify(body)
+                });
+                if (!putRes.ok) throw new Error(`status ${putRes.status}`);
+                return true;
+            } catch (e) {
+                console.error('saveDisplayState failed', e);
+                this.showToast('Failed to update display', 'error');
+                return false;
+            }
+        },
+        
+        async sendToDisplay(trailerId) {
+            const t = this.state.trailers.find(x => x.id === trailerId);
+            if (!t) return;
+            this.showToast(`Sending ${trailerId} to display…`, 'info');
+            if (await this.saveDisplayState([t])) {
+                this.showToast(`🖥️ ${trailerId} on display`, 'success');
+            }
+        },
+        
+        async sendLocateToDisplay() {
+            // Resolve each locate-list entry to live coordinates
+            const resolved = this.state.locateTrailers.map(lt => {
+                const t = this.state.trailers.find(x => x.id === lt.id) || lt;
+                return { id: lt.id, lat: t.lat, lng: t.lng };
+            }).filter(t => t.lat != null && t.lng != null);
+            
+            if (resolved.length === 0) {
+                this.showToast('No trailers with coordinates to display', 'warning');
+                return;
+            }
+            this.showToast(`Sending ${resolved.length} to display…`, 'info');
+            if (await this.saveDisplayState(resolved)) {
+                this.showToast(`🖥️ ${resolved.length} trailer(s) on display`, 'success');
+            }
+        },
+        
+        async clearDisplay() {
+            if (await this.saveDisplayState([])) {
+                this.showToast('Display cleared', 'info');
+            }
+        },
+        
         async saveToGitHub() {
             if (this.state.isSyncing) return;
             
@@ -4111,6 +4205,7 @@
                     <span class="popup-value">${trailer.lng.toFixed(6)}</span>
                 </div>
                 ${actionButton}
+                <button class="btn-display" style="width:100%; margin-top:8px;" onclick="app.sendToDisplay('${trailer.id}')">🖥️ Show on Display</button>
             `;
             
             this.state.currentPopup = new maplibregl.Popup({
@@ -4526,16 +4621,19 @@
             const dropZone = document.getElementById('locateDropZone');
             const hint = document.getElementById('locateDropHint');
             const showBtn = document.getElementById('locateShowBtn');
+            const displayBtn = document.getElementById('locateDisplayBtn');
             
             if (this.state.locateTrailers.length === 0) {
                 dropZone.innerHTML = `<div class="locate-drop-hint" id="locateDropHint">
                     ↓ Drop trailers here to locate them on the map
                 </div>`;
                 showBtn.disabled = true;
+                if (displayBtn) displayBtn.disabled = true;
                 return;
             }
             
             showBtn.disabled = false;
+            if (displayBtn) displayBtn.disabled = false;
             
             const html = this.state.locateTrailers.map(trailer => {
                 let statusClass = 'not-checked-in';
