@@ -283,8 +283,7 @@
                 this.activeYard = yard;
             }
 
-            // Draw markers and fit to them
-            const bounds = new maplibregl.LngLatBounds();
+            // Draw markers - keep the whole yard in view (don't zoom to the trailer)
             let placed = 0;
             trailers.forEach(t => {
                 const lat = parseFloat(t.lat), lng = parseFloat(t.lng);
@@ -296,7 +295,6 @@
                 const marker = new maplibregl.Marker({ element: el, anchor: 'bottom' })
                     .setLngLat([lng, lat]).addTo(this.map);
                 this.markers.push(marker);
-                bounds.extend([lng, lat]);
                 placed++;
             });
 
@@ -308,11 +306,10 @@
                 pill.style.display = 'none';
             }
 
-            if (placed === 1) {
-                this.map.flyTo({ center: bounds.getCenter(), zoom: 18.5, duration: 900 });
-            } else if (placed > 1) {
-                this.map.fitBounds(bounds, { padding: 120, maxZoom: 18.5, duration: 900 });
-            }
+            // Center on the yard at a zoom that shows the whole lot, regardless of
+            // how many trailers are pushed - the markers stay in the full-yard view.
+            const yardCfg = (yard && this.yards[yard]) ? this.yards[yard] : this.yards.medina;
+            this.map.flyTo({ center: yardCfg.center, zoom: yardCfg.zoom, duration: 900 });
         },
 
         showWaiting(show) {
