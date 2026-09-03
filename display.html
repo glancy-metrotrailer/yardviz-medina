@@ -116,6 +116,28 @@
             padding: 0.4rem 1rem; border-radius: 6px; font-size: 0.9rem; font-weight: 600;
             display: none;
         }
+
+        .token-setup {
+            position: absolute; inset: 0; z-index: 30;
+            background: rgba(12,35,64,0.97);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .token-box {
+            background: #fff; border-radius: 14px; padding: 2rem;
+            max-width: 420px; width: 90%; text-align: center;
+        }
+        .token-box h2 { color: var(--metro-navy); margin-bottom: 0.5rem; }
+        .token-box p { color: #475569; font-size: 0.95rem; margin-bottom: 1rem; }
+        .token-box input {
+            width: 100%; padding: 0.7rem; border: 1px solid #cbd5e1;
+            border-radius: 8px; font-size: 0.95rem; margin-bottom: 0.75rem;
+        }
+        .token-box button {
+            width: 100%; padding: 0.7rem; background: var(--metro-blue);
+            color: #fff; border: none; border-radius: 8px;
+            font-size: 1rem; font-weight: 600; cursor: pointer;
+        }
+        .token-note { font-size: 0.8rem !important; color: #94a3b8 !important; margin: 0.75rem 0 0 !important; }
     </style>
 </head>
 <body>
@@ -143,8 +165,11 @@
         // Config mirrored from the main app
         mapTilerKey: 'u9TdeBJu4j9tNG1lZiu5',
         satelliteStyle: 'https://api.maptiler.com/maps/hybrid/style.json',
-        // Where the main app writes the "currently displayed" trailers
-        stateUrl: 'https://raw.githubusercontent.com/glancy-metrotrailer/yardviz-medina/main/data/display-state.json',
+        owner: 'glancy-metrotrailer',
+        repo: 'yardviz-medina',
+        statePath: 'data/display-state.json',
+        // Fallback raw URL (used only if no token is set - can be up to ~5 min stale)
+        rawUrl: 'https://raw.githubusercontent.com/glancy-metrotrailer/yardviz-medina/main/data/display-state.json',
         pollMs: 3000,
         yards: {
             medina:  { name: 'Medina',  center: [-81.89786783155066, 41.148623908332276], zoom: 17 },
@@ -155,8 +180,12 @@
         markers: [],
         lastSignature: null,   // to detect changes without redundant re-renders
         activeYard: null,
+        token: null,
 
         init() {
+            this.token = localStorage.getItem('yardviz_display_token')
+                      || localStorage.getItem('yardviz_github_token');
+            
             this.map = new maplibregl.Map({
                 container: 'map',
                 style: `${this.satelliteStyle}?key=${this.mapTilerKey}`,
@@ -168,19 +197,54 @@
                 this.poll();
                 setInterval(() => this.poll(), this.pollMs);
             });
+            
+            if (!this.token) this.showTokenSetup();
         },
 
         async poll() {
             try {
-                // cache-bust so we always get the latest committed file
-                const res = await fetch(`${this.stateUrl}?t=${Date.now()}`, { cache: 'no-store' });
-                if (!res.ok) return;                 // leave current view as-is on a blip
-                const state = await res.json();
+                let state;
+                if (this.token) {
+                    // GitHub API - always fresh (no CDN cache), needs token for poll rate
+                    const res = await fetch(
+                        `https://api.github.com/repos/${this.owner}/${this.repo}/contents/${this.statePath}?ref=main`,
+                        { headers: { 'Authorization': `token ${this.token}`, 'Accept': 'application/vnd.github.v3+json' }, cache: 'no-store' }
+                    );
+                    if (!res.ok) return;
+                    const data = await res.json();
+                    state = JSON.parse(decodeURIComponent(escape(atob(data.content))));
+                } else {
+                    // Fallback: raw CDN (may lag up to ~5 min)
+                    const res = await fetch(`${this.rawUrl}?t=${Date.now()}`, { cache: 'no-store' });
+                    if (!res.ok) return;
+                    state = await res.json();
+                }
                 this.apply(state);
             } catch (e) {
-                // network hiccup - keep showing whatever's up
                 console.warn('poll failed', e);
             }
+        },
+        
+        showTokenSetup() {
+            const o = document.createElement('div');
+            o.className = 'token-setup';
+            o.innerHTML = `
+                <div class="token-box">
+                    <h2>One-time setup</h2>
+                    <p>Paste a GitHub token so this display stays up to date in real time. It's stored only on this device.</p>
+                    <input type="password" id="tokenInput" placeholder="GitHub token" />
+                    <button id="tokenSave">Save & Start</button>
+                    <p class="token-note">A fine-grained token with read-only Contents access to this repo is recommended.</p>
+                </div>`;
+            document.body.appendChild(o);
+            document.getElementById('tokenSave').onclick = () => {
+                const v = document.getElementById('tokenInput').value.trim();
+                if (!v) return;
+                localStorage.setItem('yardviz_display_token', v);
+                this.token = v;
+                o.remove();
+                this.poll();
+            };
         },
 
         apply(state) {
