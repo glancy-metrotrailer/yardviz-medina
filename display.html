@@ -212,7 +212,9 @@
                     );
                     if (!res.ok) return;
                     const data = await res.json();
-                    state = JSON.parse(decodeURIComponent(escape(atob(data.content))));
+                    // GitHub API returns base64 with embedded newlines - strip them before decoding
+                    const b64 = (data.content || '').replace(/\s/g, '');
+                    state = JSON.parse(decodeURIComponent(escape(atob(b64))));
                 } else {
                     // Fallback: raw CDN (may lag up to ~5 min)
                     const res = await fetch(`${this.rawUrl}?t=${Date.now()}`, { cache: 'no-store' });
