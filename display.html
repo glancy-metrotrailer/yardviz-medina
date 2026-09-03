@@ -172,8 +172,9 @@
         rawUrl: 'https://raw.githubusercontent.com/glancy-metrotrailer/yardviz-medina/main/data/display-state.json',
         pollMs: 3000,
         yards: {
-            medina:  { name: 'Medina',  center: [-81.89786783155066, 41.148623908332276], zoom: 17 },
-            seville: { name: 'Seville', center: [-81.8687802, 41.0315114], zoom: 17 }
+            // Medina center shifted ~50 yards south for better display framing
+            medina:  { name: 'Medina',  center: [-81.89786783155066, 41.1482120], zoom: 17 },
+            seville: { name: 'Seville', center: [-81.8687802, 41.0315114], zoom: 20 }
         },
 
         map: null,
