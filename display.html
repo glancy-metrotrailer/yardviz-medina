@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YardViz Display</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTMiIGZpbGw9IiMwYzIzNDAiLz48dGV4dCB4PSIzMiIgeT0iMzQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJjZW50cmFsIiBmb250LWZhbWlseT0iSW50ZXIsIC1hcHBsZS1zeXN0ZW0sIEJsaW5rTWFjU3lzdGVtRm9udCwgJ1NlZ29lIFVJJywgQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjkiIGZvbnQtd2VpZ2h0PSI3MDAiIGxldHRlci1zcGFjaW5nPSIwLjUiPjx0c3BhbiBmaWxsPSIjZmZmZmZmIj5ZPC90c3Bhbj48dHNwYW4gZmlsbD0iIzAwNjZjYyI+VjwvdHNwYW4+PC90ZXh0Pjwvc3ZnPg==" />
+    <link href="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.css" rel="stylesheet" />
+    <script src="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --metro-navy: #0c2340;
+            --metro-blue: #0066cc;
+            --metro-orange: #F7941D;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { height: 100%; font-family: 'Inter', -apple-system, sans-serif; }
+        #map { position: absolute; inset: 0; }
+
+        /* Header banner */
+        .display-header {
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            z-index: 10;
+            background: linear-gradient(180deg, rgba(12,35,64,0.92) 0%, rgba(12,35,64,0.0) 100%);
+            padding: 1rem 1.5rem 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            pointer-events: none;
+        }
+        .display-title {
+            display: flex; align-items: center; gap: 0.75rem;
+            color: #fff;
+        }
+        .display-logo {
+            width: 40px; height: 40px; border-radius: 9px;
+            background: var(--metro-navy);
+            border: 1px solid rgba(255,255,255,0.25);
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 800; font-size: 1.1rem;
+        }
+        .display-logo .y { color: #fff; }
+        .display-logo .v { color: var(--metro-blue); }
+        .display-title h1 { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.01em; }
+        .display-yard {
+            color: #fff; font-size: 1.4rem; font-weight: 800;
+            text-transform: uppercase; letter-spacing: 0.04em;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+        }
+
+        /* Waiting / empty state */
+        .waiting {
+            position: absolute; inset: 0; z-index: 5;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            background: var(--metro-navy);
+            color: #fff; text-align: center; gap: 1rem;
+            transition: opacity 0.4s;
+        }
+        .waiting.hidden { opacity: 0; pointer-events: none; }
+        .waiting-logo {
+            width: 96px; height: 96px; border-radius: 20px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.15);
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 800; font-size: 2.5rem; margin-bottom: 0.5rem;
+        }
+        .waiting-logo .y { color: #fff; }
+        .waiting-logo .v { color: var(--metro-blue); }
+        .waiting h2 { font-size: 1.75rem; font-weight: 700; }
+        .waiting p { font-size: 1.05rem; opacity: 0.7; }
+
+        /* Trailer count pill */
+        .count-pill {
+            position: absolute; bottom: 1.25rem; left: 50%;
+            transform: translateX(-50%); z-index: 10;
+            background: rgba(12,35,64,0.9);
+            color: #fff; padding: 0.6rem 1.4rem;
+            border-radius: 999px; font-size: 1.05rem; font-weight: 600;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+            display: none;
+        }
+
+        /* Locate-style markers (matched to main app) */
+        .locate-marker-container {
+            display: flex; flex-direction: column; align-items: center;
+        }
+        .locate-marker {
+            background: var(--metro-navy); color: white;
+            font-size: 16px; font-weight: 700;
+            padding: 8px 14px; border-radius: 8px; white-space: nowrap;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.5);
+            border: 3px solid white;
+            display: inline-flex; align-items: center; gap: 8px;
+        }
+        .locate-marker-pointer {
+            width: 0; height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 12px solid var(--metro-navy);
+        }
+        /* subtle pulse to draw the eye */
+        .locate-marker { animation: markerpulse 1.8s ease-in-out infinite; }
+        @keyframes markerpulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.06); }
+        }
+
+        .stale-note {
+            position: absolute; top: 4.5rem; left: 50%; transform: translateX(-50%);
+            z-index: 10; background: rgba(220,38,38,0.92); color: #fff;
+            padding: 0.4rem 1rem; border-radius: 6px; font-size: 0.9rem; font-weight: 600;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+
+    <div class="display-header">
+        <div class="display-title">
+            <div class="display-logo"><span class="y">Y</span><span class="v">V</span></div>
+            <h1>Trailer Locator</h1>
+        </div>
+        <div class="display-yard" id="yardName"></div>
+    </div>
+
+    <div class="stale-note" id="staleNote">Showing last known location</div>
+    <div class="count-pill" id="countPill"></div>
+
+    <div class="waiting" id="waiting">
+        <div class="waiting-logo"><span class="y">Y</span><span class="v">V</span></div>
+        <h2>Ready</h2>
+        <p>Waiting for a trailer to be sent to the display…</p>
+    </div>
+
+    <script>
+    const DISPLAY = {
+        // Config mirrored from the main app
+        mapTilerKey: 'u9TdeBJu4j9tNG1lZiu5',
+        satelliteStyle: 'https://api.maptiler.com/maps/hybrid/style.json',
+        // Where the main app writes the "currently displayed" trailers
+        stateUrl: 'https://raw.githubusercontent.com/glancy-metrotrailer/yardviz-medina/main/data/display-state.json',
+        pollMs: 3000,
+        yards: {
+            medina:  { name: 'Medina',  center: [-81.89786783155066, 41.148623908332276], zoom: 17 },
+            seville: { name: 'Seville', center: [-81.8687802, 41.0315114], zoom: 17 }
+        },
+
+        map: null,
+        markers: [],
+        lastSignature: null,   // to detect changes without redundant re-renders
+        activeYard: null,
+
+        init() {
+            this.map = new maplibregl.Map({
+                container: 'map',
+                style: `${this.satelliteStyle}?key=${this.mapTilerKey}`,
+                center: this.yards.medina.center,
+                zoom: 15,
+                attributionControl: false
+            });
+            this.map.on('load', () => {
+                this.poll();
+                setInterval(() => this.poll(), this.pollMs);
+            });
+        },
+
+        async poll() {
+            try {
+                // cache-bust so we always get the latest committed file
+                const res = await fetch(`${this.stateUrl}?t=${Date.now()}`, { cache: 'no-store' });
+                if (!res.ok) return;                 // leave current view as-is on a blip
+                const state = await res.json();
+                this.apply(state);
+            } catch (e) {
+                // network hiccup - keep showing whatever's up
+                console.warn('poll failed', e);
+            }
+        },
+
+        apply(state) {
+            const trailers = Array.isArray(state && state.trailers) ? state.trailers : [];
+            const yard = state && state.yard;
+
+            // Build a signature so we only re-render when the pushed set actually changes
+            const sig = JSON.stringify({ yard, ids: trailers.map(t => t.id).sort() });
+            if (sig === this.lastSignature) return;
+            this.lastSignature = sig;
+
+            // Clear old markers
+            this.markers.forEach(m => m.remove());
+            this.markers = [];
+
+            if (trailers.length === 0) {
+                this.showWaiting(true);
+                document.getElementById('countPill').style.display = 'none';
+                document.getElementById('yardName').textContent = '';
+                return;
+            }
+
+            this.showWaiting(false);
+
+            // Yard label + switch base view if the yard changed
+            if (yard && this.yards[yard]) {
+                document.getElementById('yardName').textContent = this.yards[yard].name;
+                this.activeYard = yard;
+            }
+
+            // Draw markers and fit to them
+            const bounds = new maplibregl.LngLatBounds();
+            let placed = 0;
+            trailers.forEach(t => {
+                const lat = parseFloat(t.lat), lng = parseFloat(t.lng);
+                if (isNaN(lat) || isNaN(lng)) return;
+                const el = document.createElement('div');
+                el.className = 'locate-marker-container';
+                el.innerHTML = `<div class="locate-marker"><span class="locate-marker-text">${t.id}</span></div>
+                                <div class="locate-marker-pointer"></div>`;
+                const marker = new maplibregl.Marker({ element: el, anchor: 'bottom' })
+                    .setLngLat([lng, lat]).addTo(this.map);
+                this.markers.push(marker);
+                bounds.extend([lng, lat]);
+                placed++;
+            });
+
+            const pill = document.getElementById('countPill');
+            if (placed > 1) {
+                pill.textContent = `${placed} trailers`;
+                pill.style.display = 'block';
+            } else {
+                pill.style.display = 'none';
+            }
+
+            if (placed === 1) {
+                this.map.flyTo({ center: bounds.getCenter(), zoom: 18.5, duration: 900 });
+            } else if (placed > 1) {
+                this.map.fitBounds(bounds, { padding: 120, maxZoom: 18.5, duration: 900 });
+            }
+        },
+
+        showWaiting(show) {
+            document.getElementById('waiting').classList.toggle('hidden', !show);
+        }
+    };
+
+    DISPLAY.init();
+    </script>
+</body>
+</html>
