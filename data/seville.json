@@ -3641,20 +3641,6 @@
   ],
   "departed": [
     {
-      "id": "5317694",
-      "mtsn": "SHB7CJBL233012715",
-      "lastLat": 41.03183,
-      "lastLng": -81.86629,
-      "lastSeen": "2026-09-04T06:16:29.5220703Z",
-      "missedCycles": 1,
-      "fleetStatus": "Available",
-      "onRent": false,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": ""
-    },
-    {
       "id": "531448",
       "mtsn": "SVE5CLAG221627044",
       "lastLat": 41.03214,
@@ -4013,6 +3999,6 @@
       "ignoredAt": "2026-09-08T19:04:39.432Z"
     }
   ],
-  "timestamp": 1788894382893,
-  "lastModified": "2026-09-08T19:06:22.893Z"
+  "timestamp": 1788894397790,
+  "lastModified": "2026-09-08T19:06:37.790Z"
 }
