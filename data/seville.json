@@ -3641,20 +3641,6 @@
   ],
   "departed": [
     {
-      "id": "53920",
-      "mtsn": "SHB7BLAG223981682",
-      "lastLat": 41.03195,
-      "lastLng": -81.86562,
-      "lastSeen": "2026-09-04T13:16:46.3603246Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "Walmart #3621"
-    },
-    {
       "id": "5616065",
       "mtsn": "SVE5CLAG215114143",
       "lastLat": 41.03102,
@@ -3915,6 +3901,6 @@
       "ignoredAt": "2026-09-08T19:04:39.432Z"
     }
   ],
-  "timestamp": 1788894465522,
-  "lastModified": "2026-09-08T19:07:45.522Z"
+  "timestamp": 1788894477022,
+  "lastModified": "2026-09-08T19:07:57.022Z"
 }
