@@ -3641,20 +3641,6 @@
   ],
   "departed": [
     {
-      "id": "5327762",
-      "mtsn": "SHB7BLAG222775694",
-      "lastLat": 41.03174,
-      "lastLng": -81.8667,
-      "lastSeen": "2026-09-03T18:31:35.5048133Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": ""
-    },
-    {
       "id": "5616238",
       "mtsn": "SHB8AJBL241951834",
       "lastLat": 41.0318,
@@ -3933,6 +3919,20 @@
       "reservedCustomerName": "",
       "outOfServiceReason": "",
       "customerName": ""
+    },
+    {
+      "id": "562454",
+      "mtsn": "SVE5CLAG223852468",
+      "lastLat": 41.03149,
+      "lastLng": -81.86738,
+      "lastSeen": "2026-09-03T18:01:27.9896450Z",
+      "missedCycles": 1,
+      "fleetStatus": "On_x0020_Rent",
+      "onRent": true,
+      "offRentStatus": "Available",
+      "reservedCustomerName": "",
+      "outOfServiceReason": "",
+      "customerName": "R16 Express Inc. "
     }
   ],
   "ignored": [
@@ -4065,6 +4065,6 @@
       "ignoredAt": "2026-09-03T13:53:22.431Z"
     }
   ],
-  "timestamp": 1788894267577,
-  "lastModified": "2026-09-08T19:04:27.577Z"
+  "timestamp": 1788894278800,
+  "lastModified": "2026-09-08T19:04:38.800Z"
 }
