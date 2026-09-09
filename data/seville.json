@@ -3621,22 +3621,7 @@
     "T1029",
     "T1337"
   ],
-  "departed": [
-    {
-      "id": "5327778",
-      "mtsn": "SHB7BLAG222775673",
-      "lastLat": 41.03175,
-      "lastLng": -81.86624,
-      "lastSeen": "2026-09-09T14:46:12.5520270Z",
-      "missedCycles": 1,
-      "fleetStatus": "Reserved_x0020_for_x0020_Customer",
-      "onRent": false,
-      "offRentStatus": "Reserved_x0020_for_x0020_Customer",
-      "reservedCustomerName": "PHOENIX",
-      "outOfServiceReason": "",
-      "customerName": ""
-    }
-  ],
+  "departed": [],
   "ignored": [
     {
       "id": "5327754",
@@ -3807,6 +3792,6 @@
       "ignoredAt": "2026-09-09T12:46:38.349Z"
     }
   ],
-  "timestamp": 1788973532884,
-  "lastModified": "2026-09-09T17:05:32.884Z"
+  "timestamp": 1788973548855,
+  "lastModified": "2026-09-09T17:05:48.855Z"
 }
