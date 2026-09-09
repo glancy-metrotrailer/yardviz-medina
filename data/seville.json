@@ -3767,81 +3767,11 @@
   ],
   "departed": [
     {
-      "id": "561411",
-      "mtsn": "SVE5CLAG221625662",
-      "lastLat": 41.03166,
-      "lastLng": -81.86871,
-      "lastSeen": "2026-09-08T17:01:24.8697502Z",
-      "missedCycles": 1,
-      "fleetStatus": "Available",
-      "onRent": false,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": ""
-    },
-    {
-      "id": "5327845",
-      "mtsn": "SHB7BLAG222775592",
-      "lastLat": 41.03181,
-      "lastLng": -81.86564,
-      "lastSeen": "2026-09-08T20:16:26.2636938Z",
-      "missedCycles": 1,
-      "fleetStatus": "Available",
-      "onRent": false,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": ""
-    },
-    {
-      "id": "5324551",
-      "mtsn": "SVE5CLAG224159044",
-      "lastLat": 41.03109,
-      "lastLng": -81.86411,
-      "lastSeen": "2026-09-08T23:01:30.0835411Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "J Rayl Transport, Inc. "
-    },
-    {
-      "id": "5315257",
-      "mtsn": "SHB8AJBL233923003",
-      "lastLat": 41.03203,
-      "lastLng": -81.87184,
-      "lastSeen": "2026-09-09T09:31:53.9361671Z",
-      "missedCycles": 1,
-      "fleetStatus": "Available",
-      "onRent": false,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": ""
-    },
-    {
       "id": "5315260",
       "mtsn": "SHB8AJBL233923017",
       "lastLat": 41.03141,
       "lastLng": -81.87211,
       "lastSeen": "2026-09-09T09:46:28.9721527Z",
-      "missedCycles": 1,
-      "fleetStatus": "Available",
-      "onRent": false,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": ""
-    },
-    {
-      "id": "555286",
-      "mtsn": "SHB7CJBL234731065",
-      "lastLat": 41.03188,
-      "lastLng": -81.87195,
-      "lastSeen": "2026-09-08T09:16:30.5672505Z",
       "missedCycles": 1,
       "fleetStatus": "Available",
       "onRent": false,
@@ -4003,8 +3933,16 @@
     {
       "id": "557305",
       "ignoredAt": "2026-09-09T12:42:37.140Z"
+    },
+    {
+      "id": "555286",
+      "ignoredAt": "2026-09-09T12:42:38.371Z"
+    },
+    {
+      "id": "561411",
+      "ignoredAt": "2026-09-09T12:45:11.479Z"
     }
   ],
-  "timestamp": 1788957757140,
-  "lastModified": "2026-09-09T12:42:37.140Z"
+  "timestamp": 1788957911480,
+  "lastModified": "2026-09-09T12:45:11.480Z"
 }
