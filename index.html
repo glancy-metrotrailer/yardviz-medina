@@ -3500,7 +3500,8 @@
                     assetId: trailerId,
                     notes: notes || '',
                     mtsn: trailer.mtsn || '',
-                    timeOfObservation: trailer.timeOfObservation || ''
+                    timeOfObservation: trailer.timeOfObservation || '',
+                    skybitzGroup: trailer.skybitzGroup || ''
                 });
                 
                 if (response.ok || response.status === 202) {
@@ -4144,6 +4145,13 @@
                     <span class="popup-value">${this.getBatteryIcon(trailer.batteryStatus)} ${trailer.batteryStatus || 'Unknown'}</span>
                    </div>`;
             
+            const groupRow = trailer.skybitzGroup
+                ? `<div class="popup-row">
+                    <span class="popup-label">SkyBitz Group</span>
+                    <span class="popup-value">${trailer.skybitzGroup}</span>
+                   </div>`
+                : '';
+            
             // Rental / fleet status (from Business Central fleetAssets, written by the fetch flow)
             let rentalSection = '';
             const hasFleetData = trailer.fleetStatus != null || trailer.onRent != null;
@@ -4190,6 +4198,7 @@
                     </label>
                 </div>
                 ${rentalSection}
+                ${groupRow}
                 ${batteryRow}
                 ${mtsnRow}
                 <div class="popup-row">
