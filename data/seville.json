@@ -3897,22 +3897,7 @@
     "T1029",
     "T1337"
   ],
-  "departed": [
-    {
-      "id": "5622116",
-      "mtsn": "GXL5JLAG211428924",
-      "lastLat": 41.03197,
-      "lastLng": -81.87193,
-      "lastSeen": "2026-09-10T10:16:36.5133566Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "Phoenix Cargo, LLC"
-    }
-  ],
+  "departed": [],
   "ignored": [
     {
       "id": "5327754",
@@ -4085,8 +4070,12 @@
     {
       "id": "5319040",
       "ignoredAt": "2026-09-10T12:55:07.139Z"
+    },
+    {
+      "id": "5622116",
+      "ignoredAt": "2026-09-10T13:15:42.957Z"
     }
   ],
-  "timestamp": 1789046120259,
-  "lastModified": "2026-09-10T13:15:20.259Z"
+  "timestamp": 1789046142957,
+  "lastModified": "2026-09-10T13:15:42.957Z"
 }
