@@ -2698,16 +2698,7 @@
     "T1873",
     "T4352"
   ],
-  "departed": [
-    {
-      "id": "557304",
-      "mtsn": "SHB8AJBL240844840",
-      "lastLat": 41.14814,
-      "lastLng": -81.89832,
-      "lastSeen": "2026-09-11T02:32:06.8156433Z",
-      "missedCycles": 1
-    }
-  ],
+  "departed": [],
   "ignored": [
     {
       "id": "",
@@ -3082,6 +3073,6 @@
       "ignoredAt": "2026-09-11T12:50:19.842Z"
     }
   ],
-  "timestamp": 1789131019843,
-  "lastModified": "2026-09-11T12:50:19.843Z"
+  "timestamp": 1789131133847,
+  "lastModified": "2026-09-11T12:52:13.847Z"
 }
