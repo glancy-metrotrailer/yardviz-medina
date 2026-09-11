@@ -1,11 +1,5 @@
 {
-  "yard": "medina",
-  "trailers": [
-    {
-      "id": "535191",
-      "lat": 41.14866,
-      "lng": -81.89825
-    }
-  ],
-  "timestamp": 1789061463125
+  "yard": "seville",
+  "trailers": [],
+  "timestamp": 1789152061561
 }
