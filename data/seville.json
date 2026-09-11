@@ -3841,22 +3841,7 @@
     "T1029",
     "T1337"
   ],
-  "departed": [
-    {
-      "id": "5319170",
-      "mtsn": "SHB7BLAG222774582",
-      "lastLat": 41.032,
-      "lastLng": -81.8664,
-      "lastSeen": "2026-09-11T06:46:19.9511313Z",
-      "missedCycles": 1,
-      "fleetStatus": "Reserved_x0020_for_x0020_Customer",
-      "onRent": false,
-      "offRentStatus": "Reserved_x0020_for_x0020_Customer",
-      "reservedCustomerName": "ITS",
-      "outOfServiceReason": "",
-      "customerName": ""
-    }
-  ],
+  "departed": [],
   "ignored": [
     {
       "id": "5327754",
@@ -4039,6 +4024,6 @@
       "ignoredAt": "2026-09-11T13:32:56.934Z"
     }
   ],
-  "timestamp": 1789133582798,
-  "lastModified": "2026-09-11T13:33:02.798Z"
+  "timestamp": 1789133586364,
+  "lastModified": "2026-09-11T13:33:06.364Z"
 }
