@@ -4076,20 +4076,6 @@
       "reservedCustomerName": "ITS",
       "outOfServiceReason": "",
       "customerName": ""
-    },
-    {
-      "id": "557437",
-      "mtsn": "SVE5CLAG222233179",
-      "lastLat": 41.0309,
-      "lastLng": -81.86429,
-      "lastSeen": "2026-09-15T11:16:15.0436552Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "Victory Equipment and Services, LLC"
     }
   ],
   "ignored": [
@@ -4282,6 +4268,6 @@
       "ignoredAt": "2026-09-15T15:12:34.850Z"
     }
   ],
-  "timestamp": 1789485154852,
-  "lastModified": "2026-09-15T15:12:34.852Z"
+  "timestamp": 1789485159373,
+  "lastModified": "2026-09-15T15:12:39.374Z"
 }
