@@ -2833,22 +2833,6 @@
   ],
   "departed": [
     {
-      "id": "5315227",
-      "mtsn": "SHB7CJBL243055513",
-      "lastLat": 41.14902,
-      "lastLng": -81.89655,
-      "lastSeen": "2026-09-14T14:16:40.9727576Z",
-      "missedCycles": 1
-    },
-    {
-      "id": "5324353",
-      "mtsn": "SVE5CJBL231984208",
-      "lastLat": 41.14846,
-      "lastLng": -81.8983,
-      "lastSeen": "2026-09-14T16:31:44.1250219Z",
-      "missedCycles": 1
-    },
-    {
       "id": "5319102",
       "mtsn": "SHB7BLAG223879063",
       "lastLat": 41.14771,
@@ -2894,6 +2878,14 @@
       "lastLat": 41.14716,
       "lastLng": -81.89817,
       "lastSeen": "2026-09-15T00:16:16.0279516Z",
+      "missedCycles": 1
+    },
+    {
+      "id": "5324353",
+      "mtsn": "SVE5CJBL231984208",
+      "lastLat": 41.14846,
+      "lastLng": -81.8983,
+      "lastSeen": "2026-09-14T16:31:44.1250219Z",
       "missedCycles": 1
     }
   ],
@@ -3273,8 +3265,12 @@
     {
       "id": "5622111",
       "ignoredAt": "2026-09-14T13:08:36.524Z"
+    },
+    {
+      "id": "5315227",
+      "ignoredAt": "2026-09-15T12:46:31.618Z"
     }
   ],
-  "timestamp": 1789476349353,
-  "lastModified": "2026-09-15T12:45:49.353Z"
+  "timestamp": 1789476391620,
+  "lastModified": "2026-09-15T12:46:31.620Z"
 }
