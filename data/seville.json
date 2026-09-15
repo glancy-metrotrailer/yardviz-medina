@@ -4078,20 +4078,6 @@
       "customerName": ""
     },
     {
-      "id": "557071",
-      "mtsn": "SHB8AJBL241749761",
-      "lastLat": 41.03107,
-      "lastLng": -81.86682,
-      "lastSeen": "2026-09-15T05:31:21.4074371Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "Victory Equipment and Services, LLC"
-    },
-    {
       "id": "5317894",
       "mtsn": "SHB81JBL233518587",
       "lastLat": 41.0319,
@@ -4334,6 +4320,6 @@
       "ignoredAt": "2026-09-15T15:11:34.288Z"
     }
   ],
-  "timestamp": 1789485101844,
-  "lastModified": "2026-09-15T15:11:41.844Z"
+  "timestamp": 1789485106660,
+  "lastModified": "2026-09-15T15:11:46.660Z"
 }
