@@ -2766,16 +2766,7 @@
     "T1873",
     "T4352"
   ],
-  "departed": [
-    {
-      "id": "5322428",
-      "mtsn": "GXL5HLAG210275041",
-      "lastLat": 41.14727,
-      "lastLng": -81.89752,
-      "lastSeen": "2026-09-16T13:46:11.7284492Z",
-      "missedCycles": 1
-    }
-  ],
+  "departed": [],
   "ignored": [
     {
       "id": "",
@@ -3190,6 +3181,6 @@
       "ignoredAt": "2026-09-15T15:51:04.341Z"
     }
   ],
-  "timestamp": 1789567579210,
-  "lastModified": "2026-09-16T14:06:19.210Z"
+  "timestamp": 1789567626786,
+  "lastModified": "2026-09-16T14:07:06.786Z"
 }
