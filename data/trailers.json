@@ -1297,7 +1297,7 @@
       "batteryStatus": "OK",
       "arrivedAt": "2026-07-21T12:45:35.9322737Z",
       "timeOfObservation": "2026-09-17T23:02:34Z",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
       "isNew": false,
       "skybitzGroup": "SLAM TRUCKING"
@@ -3460,6 +3460,6 @@
       "ignoredAt": "2026-09-15T15:51:04.341Z"
     }
   ],
-  "timestamp": 1789732813106,
-  "lastModified": "2026-09-18T12:00:13.106Z"
+  "timestamp": 1789732821887,
+  "lastModified": "2026-09-18T12:00:21.887Z"
 }
