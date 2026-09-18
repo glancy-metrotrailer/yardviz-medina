@@ -3906,20 +3906,6 @@
       "reservedCustomerName": "",
       "outOfServiceReason": "",
       "customerName": ""
-    },
-    {
-      "id": "568322",
-      "mtsn": "GXL5ELAG195055657",
-      "lastLat": 41.03173,
-      "lastLng": -81.86578,
-      "lastSeen": "2026-09-17T21:01:14.8109116Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "XPO Logistics- RXO Division"
     }
   ],
   "ignored": [
@@ -4182,8 +4168,12 @@
     {
       "id": "5327835",
       "ignoredAt": "2026-09-18T17:33:45.609Z"
+    },
+    {
+      "id": "568322",
+      "ignoredAt": "2026-09-18T17:34:10.107Z"
     }
   ],
-  "timestamp": 1789752825612,
-  "lastModified": "2026-09-18T17:33:45.612Z"
+  "timestamp": 1789752850109,
+  "lastModified": "2026-09-18T17:34:10.109Z"
 }
