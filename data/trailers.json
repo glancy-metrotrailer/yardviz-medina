@@ -242,7 +242,7 @@
       "batteryStatus": "OK",
       "arrivedAt": "2026-07-30T13:30:29.6117987Z",
       "timeOfObservation": "2026-09-18T00:36:34Z",
-      "checkedIn": true,
+      "checkedIn": false,
       "pickedUp": false,
       "isNew": false,
       "skybitzGroup": "LIQUIDITY HEBRON KY"
@@ -3460,6 +3460,6 @@
       "ignoredAt": "2026-09-15T15:51:04.341Z"
     }
   ],
-  "timestamp": 1789733356174,
-  "lastModified": "2026-09-18T12:09:16.174Z"
+  "timestamp": 1789733418683,
+  "lastModified": "2026-09-18T12:10:18.683Z"
 }
