@@ -245,7 +245,7 @@
       "checkedIn": true,
       "pickedUp": false,
       "isNew": false,
-      "skybitzGroup": "LIQUIDITY HEBRON KY"
+      "skybitzGroup": ""
     },
     {
       "id": "5308249",
@@ -3460,6 +3460,6 @@
       "ignoredAt": "2026-09-15T15:51:04.341Z"
     }
   ],
-  "timestamp": 1789733422140,
-  "lastModified": "2026-09-18T12:10:22.140Z"
+  "timestamp": 1789733483579,
+  "lastModified": "2026-09-18T12:11:23.579Z"
 }
