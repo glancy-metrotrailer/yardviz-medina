@@ -4018,20 +4018,6 @@
       "reservedCustomerName": "",
       "outOfServiceReason": "",
       "customerName": ""
-    },
-    {
-      "id": "6093",
-      "mtsn": "SHB7BLAG222161527",
-      "lastLat": 41.03192,
-      "lastLng": -81.86652,
-      "lastSeen": "2026-09-18T15:16:39.2182625Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "Las Vegas Recycling, Inc."
     }
   ],
   "ignored": [
@@ -4278,8 +4264,12 @@
     {
       "id": "6094",
       "ignoredAt": "2026-09-18T17:32:50.304Z"
+    },
+    {
+      "id": "6093",
+      "ignoredAt": "2026-09-18T17:32:52.435Z"
     }
   ],
-  "timestamp": 1789752770308,
-  "lastModified": "2026-09-18T17:32:50.308Z"
+  "timestamp": 1789752772437,
+  "lastModified": "2026-09-18T17:32:52.437Z"
 }
