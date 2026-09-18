@@ -3640,20 +3640,6 @@
       "reservedCustomerName": "",
       "outOfServiceReason": "",
       "customerName": "XPO Logistics- RXO Division"
-    },
-    {
-      "id": "557159",
-      "mtsn": "SHB8AJBL233922560",
-      "lastLat": 41.03182,
-      "lastLng": -81.86678,
-      "lastSeen": "2026-09-16T20:01:22.6189043Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "XPO Logistics- RXO Division"
     }
   ],
   "ignored": [
@@ -3988,8 +3974,12 @@
     {
       "id": "5317355",
       "ignoredAt": "2026-09-18T17:41:35.545Z"
+    },
+    {
+      "id": "557159",
+      "ignoredAt": "2026-09-18T17:41:47.343Z"
     }
   ],
-  "timestamp": 1789753295546,
-  "lastModified": "2026-09-18T17:41:35.546Z"
+  "timestamp": 1789753307345,
+  "lastModified": "2026-09-18T17:41:47.345Z"
 }
