@@ -125,7 +125,7 @@
       "batteryStatus": "OK",
       "arrivedAt": "2026-06-08T20:00:31.5899571Z",
       "timeOfObservation": "2026-09-17T22:28:34Z",
-      "checkedIn": true,
+      "checkedIn": false,
       "pickedUp": false,
       "isNew": false,
       "skybitzGroup": "CRT LOGISTICS"
@@ -3460,6 +3460,6 @@
       "ignoredAt": "2026-09-15T15:51:04.341Z"
     }
   ],
-  "timestamp": 1789733149268,
-  "lastModified": "2026-09-18T12:05:49.268Z"
+  "timestamp": 1789733238038,
+  "lastModified": "2026-09-18T12:07:18.038Z"
 }
