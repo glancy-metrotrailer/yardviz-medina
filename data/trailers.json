@@ -1300,7 +1300,7 @@
       "checkedIn": true,
       "pickedUp": false,
       "isNew": false,
-      "skybitzGroup": "SLAM TRUCKING"
+      "skybitzGroup": ""
     },
     {
       "id": "5402",
@@ -3460,6 +3460,6 @@
       "ignoredAt": "2026-09-15T15:51:04.341Z"
     }
   ],
-  "timestamp": 1789733079709,
-  "lastModified": "2026-09-18T12:04:39.709Z"
+  "timestamp": 1789733149268,
+  "lastModified": "2026-09-18T12:05:49.268Z"
 }
