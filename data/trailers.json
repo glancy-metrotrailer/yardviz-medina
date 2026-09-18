@@ -128,7 +128,7 @@
       "checkedIn": true,
       "pickedUp": false,
       "isNew": false,
-      "skybitzGroup": "CRT LOGISTICS"
+      "skybitzGroup": ""
     },
     {
       "id": "4760",
@@ -151,7 +151,7 @@
       "batteryStatus": "OK",
       "arrivedAt": "2026-09-01T21:00:28.9945869Z",
       "timeOfObservation": "2026-09-18T00:28:04Z",
-      "checkedIn": true,
+      "checkedIn": false,
       "pickedUp": false,
       "isNew": false,
       "skybitzGroup": "PEPSICO"
@@ -3460,6 +3460,6 @@
       "ignoredAt": "2026-09-15T15:51:04.341Z"
     }
   ],
-  "timestamp": 1789733242706,
-  "lastModified": "2026-09-18T12:07:22.706Z"
+  "timestamp": 1789733254679,
+  "lastModified": "2026-09-18T12:07:34.679Z"
 }
