@@ -344,8 +344,7 @@
             if (!yah) return;
             const el = document.createElement('div');
             el.className = 'yah-marker';
-            el.innerHTML = `<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://w3.org viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⭐</text></svg>">
-`;
+            el.innerHTML = `<div class="yah-label">You Are Here</div><div class="yah-dot"></div>`;
             this.yahMarker = new maplibregl.Marker({ element: el, anchor: 'bottom' })
                 .setLngLat(yah).addTo(this.map);
         }
