@@ -8,7 +8,7 @@
       "batteryStatus": "OK",
       "arrivedAt": "2026-08-11T13:24:36.8553139Z",
       "timeOfObservation": "2026-09-17T18:10:34Z",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
       "isNew": false,
       "skybitzGroup": ""
@@ -3629,6 +3629,6 @@
       "ignoredAt": "2026-09-18T13:22:26.459Z"
     }
   ],
-  "timestamp": 1789754730925,
-  "lastModified": "2026-09-18T18:05:30.925Z"
+  "timestamp": 1789754744397,
+  "lastModified": "2026-09-18T18:05:44.397Z"
 }
