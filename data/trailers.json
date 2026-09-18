@@ -151,7 +151,7 @@
       "batteryStatus": "OK",
       "arrivedAt": "2026-09-01T21:00:28.9945869Z",
       "timeOfObservation": "2026-09-18T00:28:04Z",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
       "isNew": false,
       "skybitzGroup": "PEPSICO"
@@ -3460,6 +3460,6 @@
       "ignoredAt": "2026-09-15T15:51:04.341Z"
     }
   ],
-  "timestamp": 1789733254679,
-  "lastModified": "2026-09-18T12:07:34.679Z"
+  "timestamp": 1789733258705,
+  "lastModified": "2026-09-18T12:07:38.705Z"
 }
