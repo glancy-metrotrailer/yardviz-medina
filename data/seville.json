@@ -2132,9 +2132,9 @@
       "batteryStatus": "OK",
       "arrivedAt": "2026-09-16T15:15:40.8837617Z",
       "timeOfObservation": "2026-09-18T04:42:34Z",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
-      "isNew": true,
+      "isNew": false,
       "fleetStatus": "On_x0020_Rent",
       "onRent": true,
       "offRentStatus": "Available",
@@ -2528,9 +2528,9 @@
       "batteryStatus": "OK",
       "arrivedAt": "2026-09-17T03:30:23.0451724Z",
       "timeOfObservation": "2026-09-18T08:12:34Z",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
-      "isNew": true,
+      "isNew": false,
       "fleetStatus": "On_x0020_Rent",
       "onRent": true,
       "offRentStatus": "Available",
@@ -4322,6 +4322,6 @@
       "ignoredAt": "2026-09-15T15:15:28.819Z"
     }
   ],
-  "timestamp": 1789734241673,
-  "lastModified": "2026-09-18T12:24:01.673Z"
+  "timestamp": 1789734245702,
+  "lastModified": "2026-09-18T12:24:05.702Z"
 }
