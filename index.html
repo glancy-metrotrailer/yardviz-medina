@@ -1426,6 +1426,56 @@
             margin: 0.5rem 0;
         }
         
+        .popup-tabs {
+            display: flex;
+            gap: 4px;
+            margin: 0.5rem 0 0.6rem;
+        }
+        .popup-tab {
+            flex: 1;
+            background: var(--bg-primary, rgba(0,0,0,0.05));
+            border: none;
+            padding: 0.4rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            font-family: inherit;
+            color: var(--text-secondary, #64748b);
+            cursor: pointer;
+            transition: background 0.15s, color 0.15s;
+        }
+        .popup-tab.active {
+            background: var(--metro-navy);
+            color: #fff;
+        }
+        .popup-pane { display: none; }
+        .popup-pane.active { display: block; }
+        
+        .modal-group-choice {
+            margin: 0.5rem 0 0.75rem;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--bg-primary, rgba(0,0,0,0.03));
+        }
+        .modal-group-label {
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+        .modal-group-toggle {
+            display: flex;
+            gap: 1.25rem;
+        }
+        .group-radio {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.9rem;
+            cursor: pointer;
+            color: var(--text-primary);
+        }
+        
         .popup-badge {
             display: inline-block;
             padding: 0.15rem 0.5rem;
@@ -2175,6 +2225,13 @@
             <div class="modal-title">📋 Check In Trailer</div>
             <div class="modal-message" id="checkInModalMessage">Add notes for this check-in (optional)</div>
             <textarea class="modal-input" id="checkInNotes" placeholder="Enter notes here..."></textarea>
+            <div class="modal-group-choice" id="checkInGroupChoice" style="display:none;">
+                <div class="modal-group-label">Remove from SkyBitz group <strong id="checkInGroupName"></strong>?</div>
+                <div class="modal-group-toggle">
+                    <label class="group-radio"><input type="radio" name="removeGroup" value="yes"> Yes</label>
+                    <label class="group-radio"><input type="radio" name="removeGroup" value="no" checked> No</label>
+                </div>
+            </div>
             <div class="modal-buttons">
                 <button class="modal-btn modal-btn-cancel" onclick="app.closeCheckInModal()">Cancel</button>
                 <button class="modal-btn modal-btn-confirm checkin" onclick="app.submitCheckIn()">Submit</button>
@@ -2285,7 +2342,8 @@
                     powerAutomate: {
                         pickupFlowUrl: 'https://default8417a2420313412ca062453303f8f4.fd.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/6739188d34af4ab2ac5ab12de31ac0ce/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=AiqbS_TEr8CZeXP2ejeW31gC3IkldEiVp9EbN44Qj1s',
                         dropoffFlowUrl: 'https://default8417a2420313412ca062453303f8f4.fd.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/697aa3ff842048d585932a53ec765d2b/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=5u5sALfQmGdWDY6_eFlRc0zpxIpcm0okL4a-HhIXcYw',
-                        checkInFlowUrl: 'https://default8417a2420313412ca062453303f8f4.fd.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/697aa3ff842048d585932a53ec765d2b/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=5u5sALfQmGdWDY6_eFlRc0zpxIpcm0okL4a-HhIXcYw'
+                        checkInFlowUrl: 'https://default8417a2420313412ca062453303f8f4.fd.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/697aa3ff842048d585932a53ec765d2b/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=5u5sALfQmGdWDY6_eFlRc0zpxIpcm0okL4a-HhIXcYw',
+                        removeFromGroupFlowUrl: 'https://default8417a2420313412ca062453303f8f4.fd.environment.api.powerplatform.com:443/powerautomate/automations/direct/cu/07/workflows/7c15dc702517481586f1fec4dbd0b86d/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=-Cq-usfBh32jpHdWA4jB2wEPccL8L5tBfrJABncZdSk'
                     }
                 },
                 seville: {
@@ -2305,7 +2363,8 @@
                         // Seville has its own flows writing to the Seville tab (Table2).
                         pickupFlowUrl: 'https://default8417a2420313412ca062453303f8f4.fd.environment.api.powerplatform.com:443/powerautomate/automations/direct/cu/27/workflows/0e9c0d8d063e4011a94e260db2f3d2b1/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=uiziWNuBg3DXo95bR_Cm7xcPthkKfRDDgIYz8q79QcA',
                         dropoffFlowUrl: 'https://default8417a2420313412ca062453303f8f4.fd.environment.api.powerplatform.com:443/powerautomate/automations/direct/cu/30/workflows/80ee64dea4ae4a1cbd43dad05676231a/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=k-dwiXJ06ajjEO_TJslvNyiXZtRA4ajENJtpoHaZtlQ',
-                        checkInFlowUrl: 'https://default8417a2420313412ca062453303f8f4.fd.environment.api.powerplatform.com:443/powerautomate/automations/direct/cu/30/workflows/80ee64dea4ae4a1cbd43dad05676231a/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=k-dwiXJ06ajjEO_TJslvNyiXZtRA4ajENJtpoHaZtlQ'
+                        checkInFlowUrl: 'https://default8417a2420313412ca062453303f8f4.fd.environment.api.powerplatform.com:443/powerautomate/automations/direct/cu/30/workflows/80ee64dea4ae4a1cbd43dad05676231a/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=k-dwiXJ06ajjEO_TJslvNyiXZtRA4ajENJtpoHaZtlQ',
+                        removeFromGroupFlowUrl: 'https://default8417a2420313412ca062453303f8f4.fd.environment.api.powerplatform.com:443/powerautomate/automations/direct/cu/14/workflows/5502ff066e504de981794ea6c57e28c6/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=Qzn1E0jXly5bHucPgKl3yS_EStAxiZWQFjTaf1huDs4'
                     }
                 }
             }
@@ -3388,6 +3447,7 @@
             document.getElementById('checkInModalMessage').textContent = `Add notes for trailer ${trailerId} (optional)`;
             document.getElementById('checkInNotes').value = '';
             document.getElementById('checkInSuccess').style.display = 'none';
+            this.setupGroupChoice(trailer);
             document.getElementById('checkInModal').classList.add('visible');
             
             // Reset checkbox until confirmed
@@ -3417,7 +3477,21 @@
             document.getElementById('checkInModalMessage').textContent = `Add notes for trailer ${trailerId} (optional)`;
             document.getElementById('checkInNotes').value = '';
             document.getElementById('checkInSuccess').style.display = 'none';
+            this.setupGroupChoice(trailer);
             document.getElementById('checkInModal').classList.add('visible');
+        },
+        
+        setupGroupChoice(trailer) {
+            const wrap = document.getElementById('checkInGroupChoice');
+            if (!wrap) return;
+            if (trailer && trailer.skybitzGroup) {
+                document.getElementById('checkInGroupName').textContent = trailer.skybitzGroup;
+                const no = document.querySelector('input[name="removeGroup"][value="no"]');
+                if (no) no.checked = true;   // default to No (don't remove)
+                wrap.style.display = 'block';
+            } else {
+                wrap.style.display = 'none';
+            }
         },
         
         closeCheckInModal() {
@@ -3430,11 +3504,37 @@
             this.renderTrailerList();
         },
         
+        async removeFromSkybitzGroup(trailerId, group) {
+            const url = this.config.powerAutomate.removeFromGroupFlowUrl;
+            if (!url) {
+                console.warn('removeFromGroupFlowUrl not configured for this yard');
+                this.showToast('Group removal not set up for this yard', 'warning');
+                return;
+            }
+            try {
+                const response = await this.flowPost(url, { assetId: trailerId, skybitzGroup: group });
+                if (response.ok || response.status === 202) {
+                    this.showToast(`Removed ${trailerId} from group ${group}`, 'success');
+                    // reflect locally so the popup/list stop showing the group
+                    const t = this.state.trailers.find(x => x.id === trailerId);
+                    if (t) { t.skybitzGroup = ''; }
+                } else {
+                    this.showToast(`Couldn't remove ${trailerId} from group`, 'error');
+                }
+            } catch (e) {
+                console.error('removeFromSkybitzGroup failed', e);
+                this.showToast(`Couldn't remove ${trailerId} from group`, 'error');
+            }
+        },
+        
         async submitCheckIn() {
             console.log('submitCheckIn called');
             const trailerId = this.state.pendingCheckInTrailerId;
             const notes = document.getElementById('checkInNotes').value.trim();
             const fromPopup = this.state.pendingCheckInFromPopup;
+            // Read the group-removal choice (only meaningful if the trailer is grouped)
+            const removeGroupChoice = document.querySelector('input[name="removeGroup"]:checked');
+            const wantRemoveGroup = removeGroupChoice && removeGroupChoice.value === 'yes';
             
             console.log('Trailer ID:', trailerId, 'Notes:', notes);
             
@@ -3471,6 +3571,12 @@
             // Show "submitting" toast
             this.showToast(`Checking in ${trailerId}...`, 'info');
             
+            // If the user chose to remove the trailer from its SkyBitz group, fire that
+            // (separate flow) in the background - independent of the check-in result.
+            if (wantRemoveGroup && trailer.skybitzGroup) {
+                this.removeFromSkybitzGroup(trailerId, trailer.skybitzGroup);
+            }
+            
             // Call the Power Automate flow asynchronously
             this.addToExcelWithNotes(trailerId, notes)
                 .then((result) => {
@@ -3500,8 +3606,7 @@
                     assetId: trailerId,
                     notes: notes || '',
                     mtsn: trailer.mtsn || '',
-                    timeOfObservation: trailer.timeOfObservation || '',
-                    skybitzGroup: trailer.skybitzGroup || ''
+                    timeOfObservation: trailer.timeOfObservation || ''
                 });
                 
                 if (response.ok || response.status === 202) {
@@ -4109,11 +4214,20 @@
             return '#64748b';                                     // gray (unknown)
         },
         
+        switchPopupTab(event, tab) {
+            const container = event.target.closest('.maplibregl-popup-content');
+            if (!container) return;
+            container.querySelectorAll('.popup-tab').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+            container.querySelectorAll('.popup-pane').forEach(p => {
+                p.classList.toggle('active', p.getAttribute('data-pane') === tab);
+            });
+        },
+        
         showTrailerPopup(trailer) {
             if (this.state.currentPopup) {
                 this.state.currentPopup.remove();
-            }
-            let statusColor, statusText;
+            }let statusColor, statusText;
             if (trailer.pickedUp) {
                 statusColor = '#f57c00';
                 statusText = 'PICKED UP';
@@ -4185,33 +4299,41 @@
                     <span class="popup-title">${trailer.id}</span>
                     <button class="copy-btn" onclick="app.copyTrailerId('${trailer.id}')" title="Copy trailer number" style="margin-left: 4px;"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button>
                 </div>
-                <div class="popup-row">
-                    <span class="popup-label">Status</span>
-                    <span class="popup-value" style="color: ${statusColor}">${statusText}</span>
+                <div class="popup-tabs">
+                    <button class="popup-tab active" onclick="app.switchPopupTab(event,'details')">Details</button>
+                    <button class="popup-tab" onclick="app.switchPopupTab(event,'skybitz')">SkyBitz</button>
                 </div>
-                <div class="popup-row">
-                    <span class="popup-label">Check In</span>
-                    <label class="checkin-toggle">
-                        <input type="checkbox" ${trailer.checkedIn ? 'checked' : ''} 
-                               onchange="app.promptCheckInFromPopup('${trailer.id}', this.checked)">
-                        <span class="checkin-slider"></span>
-                    </label>
+                <div class="popup-pane active" data-pane="details">
+                    <div class="popup-row">
+                        <span class="popup-label">Status</span>
+                        <span class="popup-value" style="color: ${statusColor}">${statusText}</span>
+                    </div>
+                    <div class="popup-row">
+                        <span class="popup-label">Check In</span>
+                        <label class="checkin-toggle">
+                            <input type="checkbox" ${trailer.checkedIn ? 'checked' : ''} 
+                                   onchange="app.promptCheckInFromPopup('${trailer.id}', this.checked)">
+                            <span class="checkin-slider"></span>
+                        </label>
+                    </div>
+                    ${rentalSection}
+                    <div class="popup-row">
+                        <span class="popup-label">Arrived</span>
+                        <span class="popup-value">${trailer.arrivedAt ? this.formatDate(trailer.arrivedAt) : 'Unknown'}</span>
+                    </div>
                 </div>
-                ${rentalSection}
-                ${groupRow}
-                ${batteryRow}
-                ${mtsnRow}
-                <div class="popup-row">
-                    <span class="popup-label">Arrived</span>
-                    <span class="popup-value">${trailer.arrivedAt ? this.formatDate(trailer.arrivedAt) : 'Unknown'}</span>
-                </div>
-                <div class="popup-row">
-                    <span class="popup-label">Latitude</span>
-                    <span class="popup-value">${trailer.lat.toFixed(6)}</span>
-                </div>
-                <div class="popup-row">
-                    <span class="popup-label">Longitude</span>
-                    <span class="popup-value">${trailer.lng.toFixed(6)}</span>
+                <div class="popup-pane" data-pane="skybitz">
+                    ${groupRow || '<div class="popup-row"><span class="popup-label">SkyBitz Group</span><span class="popup-value" style="color:var(--text-muted,#94a3b8)">None</span></div>'}
+                    ${batteryRow}
+                    ${mtsnRow}
+                    <div class="popup-row">
+                        <span class="popup-label">Latitude</span>
+                        <span class="popup-value">${trailer.lat.toFixed(6)}</span>
+                    </div>
+                    <div class="popup-row">
+                        <span class="popup-label">Longitude</span>
+                        <span class="popup-value">${trailer.lng.toFixed(6)}</span>
+                    </div>
                 </div>
                 ${actionButton}
                 <button class="btn-display" style="width:100%; margin-top:8px;" onclick="app.sendToDisplay('${trailer.id}')">🖥️ Show on Display</button>
