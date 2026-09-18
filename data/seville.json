@@ -4046,34 +4046,6 @@
       "reservedCustomerName": "",
       "outOfServiceReason": "",
       "customerName": "UPS"
-    },
-    {
-      "id": "6038",
-      "mtsn": "SHB7BLAG222161483",
-      "lastLat": 41.03123,
-      "lastLng": -81.87182,
-      "lastSeen": "2026-09-18T15:46:26.3008500Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "TireHub, LLC"
-    },
-    {
-      "id": "6044",
-      "mtsn": "SHB7BLAG222161463",
-      "lastLat": 41.03179,
-      "lastLng": -81.86562,
-      "lastSeen": "2026-09-18T16:16:26.4960064Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "UPS"
     }
   ],
   "ignored": [
@@ -4308,8 +4280,12 @@
     {
       "id": "6384",
       "ignoredAt": "2026-09-18T17:32:29.045Z"
+    },
+    {
+      "id": "6038",
+      "ignoredAt": "2026-09-18T17:32:48.670Z"
     }
   ],
-  "timestamp": 1789752749047,
-  "lastModified": "2026-09-18T17:32:29.047Z"
+  "timestamp": 1789752768673,
+  "lastModified": "2026-09-18T17:32:48.673Z"
 }
