@@ -4032,20 +4032,6 @@
       "reservedCustomerName": "",
       "outOfServiceReason": "",
       "customerName": "Las Vegas Recycling, Inc."
-    },
-    {
-      "id": "6094",
-      "mtsn": "SHB7BLAG222161448",
-      "lastLat": 41.03202,
-      "lastLng": -81.86675,
-      "lastSeen": "2026-09-18T15:16:39.2183217Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "UPS"
     }
   ],
   "ignored": [
@@ -4288,8 +4274,12 @@
     {
       "id": "6044",
       "ignoredAt": "2026-09-18T17:32:49.436Z"
+    },
+    {
+      "id": "6094",
+      "ignoredAt": "2026-09-18T17:32:50.304Z"
     }
   ],
-  "timestamp": 1789752769438,
-  "lastModified": "2026-09-18T17:32:49.438Z"
+  "timestamp": 1789752770308,
+  "lastModified": "2026-09-18T17:32:50.308Z"
 }
