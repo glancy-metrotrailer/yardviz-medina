@@ -154,7 +154,7 @@
       "checkedIn": true,
       "pickedUp": false,
       "isNew": false,
-      "skybitzGroup": "PEPSICO"
+      "skybitzGroup": ""
     },
     {
       "id": "5088",
@@ -177,7 +177,7 @@
       "batteryStatus": "OK",
       "arrivedAt": "2026-08-21T18:00:50.1325011Z",
       "timeOfObservation": "2026-09-17T18:31:34Z",
-      "checkedIn": true,
+      "checkedIn": false,
       "pickedUp": false,
       "isNew": false,
       "skybitzGroup": "LIQUIDITY HEBRON KY"
@@ -3460,6 +3460,6 @@
       "ignoredAt": "2026-09-15T15:51:04.341Z"
     }
   ],
-  "timestamp": 1789733258705,
-  "lastModified": "2026-09-18T12:07:38.705Z"
+  "timestamp": 1789733273163,
+  "lastModified": "2026-09-18T12:07:53.163Z"
 }
