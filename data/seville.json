@@ -3850,20 +3850,6 @@
       "reservedCustomerName": "ITS",
       "outOfServiceReason": "",
       "customerName": ""
-    },
-    {
-      "id": "531775",
-      "mtsn": "SHB8AJBL240643451",
-      "lastLat": 41.03184,
-      "lastLng": -81.86603,
-      "lastSeen": "2026-09-17T19:16:12.2592716Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": ""
     }
   ],
   "ignored": [
@@ -4142,8 +4128,12 @@
     {
       "id": "557353",
       "ignoredAt": "2026-09-18T17:35:54.441Z"
+    },
+    {
+      "id": "531775",
+      "ignoredAt": "2026-09-18T17:36:01.955Z"
     }
   ],
-  "timestamp": 1789752954443,
-  "lastModified": "2026-09-18T17:35:54.443Z"
+  "timestamp": 1789752961957,
+  "lastModified": "2026-09-18T17:36:01.957Z"
 }
