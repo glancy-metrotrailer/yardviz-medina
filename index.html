@@ -2089,7 +2089,7 @@
                                 <line x1="21" y1="21" x2="16.65" y2="16.65"/>
                             </svg>
                         </span>
-                        <input type="text" class="search-input" id="searchInput" placeholder="Trailer #..." oninput="app.filterTrailers(event)">
+                        <input type="text" class="search-input" id="searchInput" placeholder="Search trailer #, VIN, or customer..." oninput="app.filterTrailers(event)">
                     </div>
                     <div class="filter-section" style="display: flex; gap: 0.5rem; align-items: center;">
                         <select class="filter-select" id="filterSelect" onchange="app.setFilterMode(this.value)" style="flex: 1;">
@@ -2874,9 +2874,16 @@
             const filterMode = this.state.filterMode;
             
             this.state.filteredTrailers = this.state.trailers.filter(trailer => {
-                // Search filter
-                if (searchTerm && !trailer.id.toLowerCase().includes(searchTerm)) {
-                    return false;
+                // Search filter - matches trailer #, VIN, or customer name
+                if (searchTerm) {
+                    const haystack = [
+                        trailer.id,
+                        trailer.vin,
+                        trailer.customerName
+                    ].filter(Boolean).join(' ').toLowerCase();
+                    if (!haystack.includes(searchTerm)) {
+                        return false;
+                    }
                 }
                 
                 // Status filter
