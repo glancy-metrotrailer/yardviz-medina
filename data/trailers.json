@@ -3253,16 +3253,7 @@
     "T1873",
     "T4352"
   ],
-  "departed": [
-    {
-      "id": "5323660",
-      "mtsn": "SVE5CLAG222740810",
-      "lastLat": 41.14851,
-      "lastLng": -81.89802,
-      "lastSeen": "2026-09-18T22:16:30.4231618Z",
-      "missedCycles": 1
-    }
-  ],
+  "departed": [],
   "ignored": [
     {
       "id": "",
@@ -3681,6 +3672,6 @@
       "ignoredAt": "2026-09-18T13:22:26.459Z"
     }
   ],
-  "timestamp": 1789992450840,
-  "lastModified": "2026-09-21T12:07:30.840Z"
+  "timestamp": 1789992492997,
+  "lastModified": "2026-09-21T12:08:12.997Z"
 }
