@@ -3515,14 +3515,14 @@
       "customerName": ""
     },
     {
-      "id": "40C2416",
-      "mtsn": "SVE5DJBL232386965",
-      "lastLat": 41.03198,
-      "lastLng": -81.87093,
-      "lastSeen": "2026-09-20T15:31:34.2483120Z",
+      "id": "281915",
+      "mtsn": "SHB8AJBL234629831",
+      "lastLat": 41.0327,
+      "lastLng": -81.86422,
+      "lastSeen": "2026-09-18T19:16:17.9879525Z",
       "missedCycles": 1,
-      "fleetStatus": "Available",
-      "onRent": false,
+      "fleetStatus": "On_x0020_Rent",
+      "onRent": true,
       "offRentStatus": "Available",
       "reservedCustomerName": "",
       "outOfServiceReason": "",
@@ -3891,6 +3891,6 @@
       "ignoredAt": "2026-09-18T17:47:46.346Z"
     }
   ],
-  "timestamp": 1789992772325,
-  "lastModified": "2026-09-21T12:12:52.325Z"
+  "timestamp": 1789992942457,
+  "lastModified": "2026-09-21T12:15:42.457Z"
 }
