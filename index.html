@@ -722,6 +722,13 @@
         
         .search-input::placeholder { color: var(--metro-text-muted); }
         
+        .result-count {
+            font-size: 0.72rem;
+            color: var(--text-secondary, #64748b);
+            padding: 0.25rem 0.15rem 0;
+            font-weight: 500;
+        }
+        
         .search-icon {
             position: absolute;
             left: 0.75rem;
@@ -2106,6 +2113,7 @@
                             Locate
                         </button>
                     </div>
+                    <div class="result-count" id="resultCount" style="display:none;"></div>
                     <div class="trailer-list-container" id="trailerListContainer">
                         <div class="empty-state" id="emptyState">
                             <div class="empty-state-icon">📋</div>
@@ -4113,6 +4121,8 @@
             const emptyState = document.getElementById('emptyState');
             const trailers = this.state.filteredTrailers;
             
+            this.updateResultCount(trailers.length);
+            
             if (trailers.length === 0) {
                 container.innerHTML = '';
                 emptyState.style.display = 'block';
@@ -4178,6 +4188,20 @@
             // Make trailer items draggable for locate mode
             if (this.state.locatePanelOpen) {
                 this.updateTrailerDraggable();
+            }
+        },
+        
+        updateResultCount(count) {
+            const el = document.getElementById('resultCount');
+            if (!el) return;
+            const searchTerm = (document.getElementById('searchInput')?.value || '').trim();
+            const filterActive = this.state.filterMode && this.state.filterMode !== 'all';
+            // Show the count only when the list is actually being narrowed
+            if (searchTerm || filterActive) {
+                el.textContent = `${count} ${count === 1 ? 'result' : 'results'}`;
+                el.style.display = 'block';
+            } else {
+                el.style.display = 'none';
             }
         },
         
