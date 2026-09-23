@@ -2025,6 +2025,119 @@
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 3px; }
         ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+        /* ===== Drone photo overlay + alignment mode ===== */
+        .photo-align-panel {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            width: 272px;
+            max-height: calc(100% - 2rem);
+            overflow-y: auto;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-top: 3px solid var(--metro-orange);
+            border-radius: 10px;
+            box-shadow: var(--shadow-lg);
+            z-index: 60;
+            display: none;
+            font-size: 0.8rem;
+            color: var(--text-primary);
+        }
+        .photo-align-panel.visible { display: block; }
+        .pa-header { padding: 0.75rem 0.9rem 0.5rem; }
+        .pa-title { font-weight: 600; font-size: 0.95rem; }
+        .pa-help { color: var(--text-secondary); margin-top: 0.25rem; line-height: 1.4; }
+        .pa-section { padding: 0.6rem 0.9rem; border-top: 1px solid var(--border-color); }
+        .pa-row { display: flex; align-items: center; gap: 0.4rem; margin-bottom: 0.4rem; }
+        .pa-row:last-child { margin-bottom: 0; }
+        .pa-row label { flex: 0 0 64px; color: var(--text-secondary); }
+        .pa-row input[type="number"] {
+            flex: 1; min-width: 0;
+            padding: 0.3rem 0.4rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: inherit; font-size: 0.8rem;
+        }
+        .pa-row input[type="range"] { flex: 1; accent-color: var(--metro-orange); }
+        .pa-unit { flex: 0 0 18px; color: var(--text-muted); }
+        .pa-step {
+            flex: 0 0 26px; height: 26px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            cursor: pointer; font-size: 0.75rem;
+        }
+        .pa-step:hover { border-color: var(--metro-orange); }
+        .pa-check { display: flex; align-items: center; gap: 0.4rem; cursor: pointer; margin-bottom: 0.35rem; }
+        .pa-check:last-child { margin-bottom: 0; }
+        .pa-nudge { display: grid; grid-template-columns: repeat(3, 30px); gap: 3px; justify-content: center; }
+        .pa-nudge .pa-step { width: 30px; height: 30px; }
+        .pa-nudge-label { text-align: center; color: var(--text-muted); margin-top: 0.3rem; }
+        .pa-keys { color: var(--text-muted); line-height: 1.5; }
+        .pa-keys kbd {
+            font-family: inherit; font-size: 0.7rem;
+            padding: 0 0.3rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            background: var(--bg-primary);
+        }
+        .pa-actions { display: flex; gap: 0.4rem; padding: 0.7rem 0.9rem 0.9rem; border-top: 1px solid var(--border-color); }
+        .pa-btn {
+            flex: 1; padding: 0.5rem;
+            border-radius: 6px; border: 1px solid var(--border-color);
+            background: var(--bg-primary); color: var(--text-primary);
+            font-family: inherit; font-size: 0.8rem; font-weight: 600; cursor: pointer;
+        }
+        .pa-btn.primary { background: var(--metro-navy); border-color: var(--metro-navy); color: #fff; }
+        .pa-btn:hover { border-color: var(--metro-orange); }
+        .pa-output {
+            display: none;
+            padding: 0.7rem 0.9rem 0.9rem;
+            border-top: 1px solid var(--border-color);
+        }
+        .pa-output.visible { display: block; }
+        .pa-output textarea {
+            width: 100%; height: 118px; resize: vertical;
+            font-family: Consolas, 'Courier New', monospace; font-size: 0.7rem;
+            border: 1px solid var(--border-color); border-radius: 6px;
+            background: var(--bg-primary); color: var(--text-primary);
+            padding: 0.4rem; margin: 0.4rem 0;
+        }
+
+        .pa-handle {
+            width: 16px; height: 16px;
+            background: #fff;
+            border: 3px solid var(--metro-navy);
+            border-radius: 3px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.5);
+            cursor: nwse-resize;
+        }
+        .pa-handle.ne, .pa-handle.sw { cursor: nesw-resize; }
+        .pa-handle-rotate {
+            width: 24px; height: 24px;
+            border-radius: 50%;
+            background: var(--metro-orange);
+            border: 2px solid #fff;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.5);
+            color: #fff; font-size: 14px; font-weight: 700;
+            display: flex; align-items: center; justify-content: center;
+            cursor: grab;
+        }
+        .pa-handle-move {
+            width: 26px; height: 26px;
+            border-radius: 50%;
+            background: var(--metro-navy);
+            border: 2px solid #fff;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.5);
+            color: #fff; font-size: 15px;
+            display: flex; align-items: center; justify-content: center;
+            cursor: move;
+        }
+        .map-container.photo-aligning .maplibregl-canvas { cursor: move; }
     </style>
 </head>
 <body>
@@ -2156,6 +2269,9 @@
             </div>
             
             <div class="style-selector">
+                <button class="bounds-toggle" id="dronePhotoBtn" onclick="app.toggleDronePhoto()" title="Show the drone photo of this yard over the map">
+                    <span class="bounds-toggle-icon">▣</span> Drone photo
+                </button>
                 <button class="bounds-toggle" id="fetchBoundsBtn" onclick="app.toggleFetchBounds()" title="Show the SkyBitz fetch area for this yard">
                     <span class="bounds-toggle-icon">⬚</span> Fetch area
                 </button>
@@ -2165,6 +2281,71 @@
                     <option value="outdoor">🏔️ Outdoor</option>
                     <option value="basic">📍 Basic</option>
                 </select>
+            </div>
+            
+            <!-- Drone photo alignment panel -->
+            <div class="photo-align-panel" id="photoAlignPanel" role="dialog" aria-label="Align drone photo">
+                <div class="pa-header">
+                    <div class="pa-title">Align drone photo</div>
+                    <div class="pa-help">Drag the photo to move it. Drag a white corner to resize, or the orange handle to rotate. Lower the opacity to line up buildings, fences and pavement edges with the satellite view.</div>
+                </div>
+                <div class="pa-section">
+                    <div class="pa-row">
+                        <label for="paRotation">Rotation</label>
+                        <button class="pa-step" onclick="app.adjustPhoto('rotation', -1)" title="Rotate left 1°">−1</button>
+                        <input type="number" id="paRotation" step="0.1" onchange="app.setPhotoField('rotation', this.value)">
+                        <span class="pa-unit">°</span>
+                        <button class="pa-step" onclick="app.adjustPhoto('rotation', 1)" title="Rotate right 1°">+1</button>
+                    </div>
+                    <div class="pa-row">
+                        <label for="paWidth">Width</label>
+                        <button class="pa-step" onclick="app.adjustPhoto('scale', -0.01)" title="Shrink 1%">−</button>
+                        <input type="number" id="paWidth" step="0.1" min="5" onchange="app.setPhotoField('width', this.value)">
+                        <span class="pa-unit">m</span>
+                        <button class="pa-step" onclick="app.adjustPhoto('scale', 0.01)" title="Grow 1%">+</button>
+                    </div>
+                    <div class="pa-row">
+                        <label for="paHeight">Height</label>
+                        <span style="flex:0 0 26px"></span>
+                        <input type="number" id="paHeight" step="0.1" min="5" onchange="app.setPhotoField('height', this.value)">
+                        <span class="pa-unit">m</span>
+                        <span style="flex:0 0 26px"></span>
+                    </div>
+                    <div class="pa-row">
+                        <label for="paOpacity">Opacity</label>
+                        <input type="range" id="paOpacity" min="0" max="100" value="60" oninput="app.setPhotoOpacity(this.value)">
+                    </div>
+                </div>
+                <div class="pa-section">
+                    <label class="pa-check"><input type="checkbox" id="paLockAspect" checked> Keep proportions when resizing</label>
+                    <label class="pa-check"><input type="checkbox" id="paShowTrailers" checked onchange="app.setAlignTrailersVisible(this.checked)"> Show trailers</label>
+                </div>
+                <div class="pa-section">
+                    <div class="pa-nudge">
+                        <span></span><button class="pa-step" onclick="app.nudgePhoto(0, 1)" title="Nudge north">▲</button><span></span>
+                        <button class="pa-step" onclick="app.nudgePhoto(-1, 0)" title="Nudge west">◀</button>
+                        <span></span>
+                        <button class="pa-step" onclick="app.nudgePhoto(1, 0)" title="Nudge east">▶</button>
+                        <span></span><button class="pa-step" onclick="app.nudgePhoto(0, -1)" title="Nudge south">▼</button><span></span>
+                    </div>
+                    <div class="pa-nudge-label">Nudge 0.25 m</div>
+                </div>
+                <div class="pa-section pa-keys">
+                    Keyboard: <kbd>←↑→↓</kbd> nudge, <kbd>[</kbd> <kbd>]</kbd> rotate 0.1°, <kbd>−</kbd> <kbd>=</kbd> resize 0.2%. Hold <kbd>Shift</kbd> for bigger steps.
+                </div>
+                <div class="pa-actions">
+                    <button class="pa-btn" onclick="app.exitPhotoAlign(false)">Cancel</button>
+                    <button class="pa-btn" onclick="app.resetPhotoAlign()">Reset</button>
+                    <button class="pa-btn primary" onclick="app.savePhotoAlign()">Save</button>
+                </div>
+                <div class="pa-output" id="paOutput">
+                    <div class="pa-help">Saved in this browser. To show the photo for everyone, paste this into the yard's <code>overlay</code> config in index.html and commit:</div>
+                    <textarea id="paOutputText" readonly></textarea>
+                    <div style="display:flex; gap:0.4rem;">
+                        <button class="pa-btn primary" onclick="app.copyPhotoCorners()">Copy</button>
+                        <button class="pa-btn" onclick="app.exitPhotoAlign(true)">Done</button>
+                    </div>
+                </div>
             </div>
             
             <!-- Locate Mode Indicator -->
@@ -2272,6 +2453,13 @@
             </div>
             
             <div class="settings-section">
+                <div class="settings-section-title">Drone Photo</div>
+                <button class="btn btn-secondary" style="width: 100%;" onclick="app.toggleSettings(); app.enterPhotoAlign();">
+                    <span>▣</span> Align drone photo
+                </button>
+            </div>
+            
+            <div class="settings-section">
                 <div class="settings-section-title">Data Import</div>
                 <input type="file" id="fileInput" accept=".xlsx,.xls,.csv,.tsv" onchange="app.handleFileUpload(event)" style="display: none;">
                 <button class="btn btn-secondary" style="width: 100%;" onclick="document.getElementById('fileInput').click()">
@@ -2342,6 +2530,13 @@
                     zoom: 17.5,
                     // SkyBitz fetch box (from the Medina fetch flow filter)
                     bounds: { north: 41.157, south: 41.140, east: -81.885, west: -81.910 },
+                    // Drone photo overlay. corners = [top-left, top-right, bottom-right, bottom-left]
+                    // as [lng, lat]. Set by "Align drone photo" -> Save -> paste here.
+                    overlay: {
+                        image: 'data/medina_lot_pic.jpg',
+                        start: { center: [-81.898039, 41.147694], width: 135 },  // from the photo's GPS tag
+                        corners: null
+                    },
                     github: {
                         owner: 'glancy-metrotrailer',
                         repo: 'yardviz-medina',
@@ -2402,7 +2597,15 @@
             sidebarTab: 'onlot',   // 'onlot' | 'departed'
             departedLocationMarker: null,
             departedLocationMarkerId: null,
-            fetchBoundsVisible: false
+            fetchBoundsVisible: false,
+            // Drone photo overlay
+            photoVisible: true,
+            photoAligning: false,
+            photoAlign: null,        // { center:[lng,lat], width, height, rotation, aspect }
+            photoAlignStart: null,
+            photoOpacity: 0.6,
+            photoHandles: [],
+            photoAspectCache: {}
         },
         
         // =====================================================
@@ -2443,6 +2646,10 @@
             this.clearDepartedLocationMarker();
             this.switchSidebarTab('onlot');
             this.updateDepartedCount();
+            
+            // Leave photo alignment without saving; swap in the new yard's photo
+            if (this.state.photoAligning) this.exitPhotoAlign(false);
+            this.drawDronePhoto();
             
             // Tear down locate mode + list
             if (this.state.locateModeActive) this.exitLocateMode();
@@ -2929,6 +3136,7 @@
             this.applyYard(this.config.yards[savedYard] ? savedYard : 'medina');
             this.renderYardTabs();
             
+            this.state.photoVisible = localStorage.getItem('yardviz_photo_visible') !== 'false';
             this.initTheme();
             this.initDragDrop();
             this.initMap();
@@ -3021,6 +3229,8 @@
             this.state.map.on('load', () => {
                 console.log('✅ Map loaded');
                 this.createTrailerImages();
+                this.drawDronePhoto();
+                this.initPhotoAlignEvents();
                 
                 if (this.state.trailers.length > 0) {
                     setTimeout(() => this.renderTrailersOnMap(), 500);
@@ -3410,6 +3620,10 @@
             // If locate mode is active, keep the regular layers hidden after a refresh
             if (this.state.locateModeActive) {
                 this.hideRegularMarkers();
+            }
+            if (this.state.photoAligning) {
+                const cb = document.getElementById('paShowTrailers');
+                if (cb && !cb.checked) this.setAlignTrailersVisible(false);
             }
             
             this.updateStats();
@@ -4482,6 +4696,524 @@
             }
         },
         
+        // =====================================================
+        // DRONE PHOTO OVERLAY + ALIGNMENT MODE
+        // =====================================================
+        getPhotoConfig() {
+            const yard = this.config.yards[this.config.activeYardId];
+            return yard && yard.overlay ? yard.overlay : null;
+        },
+        
+        getPhotoUrl() {
+            const ov = this.getPhotoConfig();
+            if (!ov || !ov.image) return null;
+            if (/^https?:\/\//.test(ov.image)) return ov.image;
+            // raw.githubusercontent.com sends CORS headers, so this works from
+            // GitHub Pages or a local file:// copy alike
+            const gh = this.config.github;
+            return `https://raw.githubusercontent.com/${gh.owner}/${gh.repo}/main/${ov.image}`;
+        },
+        
+        getSavedPhotoCorners() {
+            try {
+                const raw = localStorage.getItem(`yardviz_photo_corners_${this.config.activeYardId}`);
+                if (raw) {
+                    const c = JSON.parse(raw);
+                    if (Array.isArray(c) && c.length === 4) return c;
+                }
+            } catch (e) { /* fall through to config */ }
+            const ov = this.getPhotoConfig();
+            return ov && Array.isArray(ov.corners) && ov.corners.length === 4 ? ov.corners : null;
+        },
+        
+        // Local east/north metres around a centre point. At yard scale this is
+        // conformal with the map's Web Mercator, so rectangles stay rectangles.
+        photoToLocal(lngLat, center) {
+            const mLat = 111320;
+            const mLng = 111320 * Math.cos(center[1] * Math.PI / 180);
+            return { e: (lngLat[0] - center[0]) * mLng, n: (lngLat[1] - center[1]) * mLat };
+        },
+        
+        photoFromLocal(e, n, center) {
+            const mLat = 111320;
+            const mLng = 111320 * Math.cos(center[1] * Math.PI / 180);
+            return [center[0] + e / mLng, center[1] + n / mLat];
+        },
+        
+        // rotation = compass bearing the TOP of the photo points toward (clockwise)
+        photoLocalToWorld(x, y, a) {
+            const t = a.rotation * Math.PI / 180;
+            const e = x * Math.cos(t) + y * Math.sin(t);
+            const n = -x * Math.sin(t) + y * Math.cos(t);
+            return this.photoFromLocal(e, n, a.center);
+        },
+        
+        photoWorldToLocal(lngLat, a) {
+            const { e, n } = this.photoToLocal(lngLat, a.center);
+            const t = a.rotation * Math.PI / 180;
+            return { x: e * Math.cos(t) - n * Math.sin(t), y: e * Math.sin(t) + n * Math.cos(t) };
+        },
+        
+        photoCornersFromParams(a) {
+            const hw = a.width / 2, hh = a.height / 2;
+            return [
+                this.photoLocalToWorld(-hw,  hh, a),   // top-left
+                this.photoLocalToWorld( hw,  hh, a),   // top-right
+                this.photoLocalToWorld( hw, -hh, a),   // bottom-right
+                this.photoLocalToWorld(-hw, -hh, a)    // bottom-left
+            ];
+        },
+        
+        photoParamsFromCorners(c) {
+            const center = [
+                (c[0][0] + c[1][0] + c[2][0] + c[3][0]) / 4,
+                (c[0][1] + c[1][1] + c[2][1] + c[3][1]) / 4
+            ];
+            const tl = this.photoToLocal(c[0], center);
+            const tr = this.photoToLocal(c[1], center);
+            const bl = this.photoToLocal(c[3], center);
+            const width = Math.hypot(tr.e - tl.e, tr.n - tl.n);
+            const height = Math.hypot(tl.e - bl.e, tl.n - bl.n);
+            let rotation = Math.atan2(tl.e - bl.e, tl.n - bl.n) * 180 / Math.PI;
+            rotation = ((rotation % 360) + 360) % 360;
+            return { center, width, height, rotation };
+        },
+        
+        getPhotoAspect(url) {
+            if (this.state.photoAspectCache[url]) return Promise.resolve(this.state.photoAspectCache[url]);
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                img.onload = () => {
+                    const aspect = img.naturalHeight / img.naturalWidth;
+                    this.state.photoAspectCache[url] = aspect;
+                    resolve(aspect);
+                };
+                img.onerror = () => reject(new Error('Photo failed to load'));
+                img.src = url;
+            });
+        },
+        
+        drawDronePhoto() {
+            const map = this.state.map;
+            if (!map) return;
+            
+            const url = this.getPhotoUrl();
+            const corners = this.state.photoAligning
+                ? this.photoCornersFromParams(this.state.photoAlign)
+                : this.getSavedPhotoCorners();
+            const show = url && corners && (this.state.photoAligning || this.state.photoVisible);
+            
+            if (!show) {
+                this.removeDronePhoto();
+                this.updateDronePhotoBtn();
+                return;
+            }
+            
+            // Swapping yards means a different image: rebuild the source
+            if (map.getSource('drone-photo') && this.state.photoLoadedUrl !== url) {
+                this.removeDronePhoto();
+            }
+            
+            // Keep the photo under the trailers and the fetch-area outline
+            const beforeId = ['fetch-bounds-fill', 'trailers'].find(id => map.getLayer(id));
+            const opacity = this.state.photoAligning ? this.state.photoOpacity : 1;
+            
+            const src = map.getSource('drone-photo');
+            if (src) {
+                src.setCoordinates(corners);
+                map.setPaintProperty('drone-photo', 'raster-opacity', opacity);
+            } else {
+                map.addSource('drone-photo', { type: 'image', url, coordinates: corners });
+                map.addLayer({
+                    id: 'drone-photo',
+                    type: 'raster',
+                    source: 'drone-photo',
+                    paint: { 'raster-opacity': opacity, 'raster-fade-duration': 0 }
+                }, beforeId);
+                this.state.photoLoadedUrl = url;
+            }
+            
+            // Dashed outline + stem to the rotate handle, only while aligning
+            if (this.state.photoAligning) {
+                const a = this.state.photoAlign;
+                const topMid = this.photoLocalToWorld(0, a.height / 2, a);
+                const outline = {
+                    type: 'FeatureCollection',
+                    features: [
+                        { type: 'Feature', geometry: { type: 'LineString', coordinates: [...corners, corners[0]] } },
+                        { type: 'Feature', geometry: { type: 'LineString', coordinates: [topMid, this.getRotateHandlePos()] } }
+                    ]
+                };
+                const osrc = map.getSource('drone-photo-outline');
+                if (osrc) {
+                    osrc.setData(outline);
+                } else {
+                    map.addSource('drone-photo-outline', { type: 'geojson', data: outline });
+                    map.addLayer({
+                        id: 'drone-photo-outline',
+                        type: 'line',
+                        source: 'drone-photo-outline',
+                        paint: { 'line-color': '#F7941D', 'line-width': 2, 'line-dasharray': [3, 2] }
+                    }, beforeId);
+                }
+            } else {
+                if (map.getLayer('drone-photo-outline')) map.removeLayer('drone-photo-outline');
+                if (map.getSource('drone-photo-outline')) map.removeSource('drone-photo-outline');
+            }
+            
+            this.updateDronePhotoBtn();
+        },
+        
+        removeDronePhoto() {
+            const map = this.state.map;
+            if (!map) return;
+            ['drone-photo-outline', 'drone-photo'].forEach(id => {
+                if (map.getLayer(id)) map.removeLayer(id);
+                if (map.getSource(id)) map.removeSource(id);
+            });
+            this.state.photoLoadedUrl = null;
+        },
+        
+        updateDronePhotoBtn() {
+            const btn = document.getElementById('dronePhotoBtn');
+            if (!btn) return;
+            const hasPhoto = !!this.getPhotoConfig();
+            btn.style.display = hasPhoto ? '' : 'none';
+            btn.classList.toggle('active', !!(this.state.map && this.state.map.getLayer('drone-photo')));
+        },
+        
+        toggleDronePhoto() {
+            if (this.state.photoAligning) return;
+            if (!this.getSavedPhotoCorners()) {
+                this.showToast('The drone photo hasn\'t been placed yet. Line it up, then save.', 'info');
+                this.enterPhotoAlign();
+                return;
+            }
+            this.state.photoVisible = !this.state.photoVisible;
+            localStorage.setItem('yardviz_photo_visible', String(this.state.photoVisible));
+            this.drawDronePhoto();
+        },
+        
+        async enterPhotoAlign() {
+            if (this.state.photoAligning || !this.state.map) return;
+            const ov = this.getPhotoConfig();
+            const url = this.getPhotoUrl();
+            if (!ov || !url) {
+                this.showToast('No drone photo is set up for this yard', 'warning');
+                return;
+            }
+            
+            let aspect;
+            try {
+                aspect = await this.getPhotoAspect(url);
+            } catch (e) {
+                this.showToast(`Couldn't load ${ov.image} from GitHub. Check that the file is committed.`, 'error');
+                return;
+            }
+            
+            const saved = this.getSavedPhotoCorners();
+            let params;
+            if (saved) {
+                params = this.photoParamsFromCorners(saved);
+            } else {
+                const start = ov.start || {};
+                const width = start.width || 135;
+                params = {
+                    center: start.center || this.config.propertyCenter,
+                    width,
+                    height: width * aspect,
+                    rotation: start.rotation || 0
+                };
+            }
+            
+            this.state.photoAlign = params;
+            this.state.photoAlignStart = JSON.parse(JSON.stringify(params));
+            this.state.photoAligning = true;
+            
+            const map = this.state.map;
+            map.keyboard.disable();   // arrow keys nudge the photo instead of panning
+            document.querySelector('.map-container').classList.add('photo-aligning');
+            document.getElementById('photoAlignPanel').classList.add('visible');
+            document.getElementById('paOutput').classList.remove('visible');
+            document.getElementById('paOpacity').value = Math.round(this.state.photoOpacity * 100);
+            document.getElementById('paShowTrailers').checked = true;
+            
+            this.createPhotoHandles();
+            this.updatePhotoAlign();
+            
+            const bounds = new maplibregl.LngLatBounds();
+            this.photoCornersFromParams(params).forEach(c => bounds.extend(c));
+            bounds.extend(this.getRotateHandlePos());
+            map.fitBounds(bounds, { padding: { top: 60, bottom: 60, left: 310, right: 60 }, duration: 800 });
+        },
+        
+        exitPhotoAlign(saved) {
+            if (!this.state.photoAligning) return;
+            this.state.photoAligning = false;
+            this.state.photoBodyDrag = null;
+            
+            this.state.photoHandles.forEach(h => h.marker.remove());
+            this.state.photoHandles = [];
+            
+            const map = this.state.map;
+            map.keyboard.enable();
+            map.dragPan.enable();
+            document.querySelector('.map-container').classList.remove('photo-aligning');
+            document.getElementById('photoAlignPanel').classList.remove('visible');
+            this.setAlignTrailersVisible(true);
+            
+            this.drawDronePhoto();
+            if (!saved && !this.getSavedPhotoCorners()) {
+                this.showToast('Alignment cancelled', 'info');
+            }
+        },
+        
+        resetPhotoAlign() {
+            if (!this.state.photoAlignStart) return;
+            this.state.photoAlign = JSON.parse(JSON.stringify(this.state.photoAlignStart));
+            this.updatePhotoAlign();
+        },
+        
+        savePhotoAlign() {
+            const corners = this.photoCornersFromParams(this.state.photoAlign)
+                .map(c => [Number(c[0].toFixed(7)), Number(c[1].toFixed(7))]);
+            localStorage.setItem(`yardviz_photo_corners_${this.config.activeYardId}`, JSON.stringify(corners));
+            this.state.photoVisible = true;
+            localStorage.setItem('yardviz_photo_visible', 'true');
+            
+            const ov = this.getPhotoConfig();
+            const labels = ['top-left', 'top-right', 'bottom-right', 'bottom-left'];
+            const lines = corners.map((c, i) => `        [${c[0]}, ${c[1]}]${i < 3 ? ',' : ' '}  // ${labels[i]}`);
+            document.getElementById('paOutputText').value =
+`overlay: {
+    image: '${ov.image}',
+    corners: [
+${lines.join('\n')}
+    ]
+},`;
+            document.getElementById('paOutput').classList.add('visible');
+            this.showToast('Photo position saved in this browser', 'success');
+        },
+        
+        copyPhotoCorners() {
+            const ta = document.getElementById('paOutputText');
+            const done = () => this.showToast('Copied. Paste it over the yard\'s overlay block in index.html.', 'success');
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(ta.value).then(done).catch(() => {
+                    ta.select(); document.execCommand('copy'); done();
+                });
+            } else {
+                ta.select(); document.execCommand('copy'); done();
+            }
+        },
+        
+        getRotateHandlePos() {
+            const a = this.state.photoAlign;
+            return this.photoLocalToWorld(0, a.height / 2 + Math.max(8, a.height * 0.08), a);
+        },
+        
+        createPhotoHandles() {
+            this.state.photoHandles.forEach(h => h.marker.remove());
+            this.state.photoHandles = [];
+            
+            const make = (kind, className, html) => {
+                const el = document.createElement('div');
+                el.className = className;
+                if (html) el.innerHTML = html;
+                const marker = new maplibregl.Marker({ element: el, draggable: true, anchor: 'center' })
+                    .setLngLat(this.state.photoAlign.center)
+                    .addTo(this.state.map);
+                const handle = { kind, marker };
+                marker.on('drag', () => this.onPhotoHandleDrag(handle));
+                marker.on('dragend', () => this.updatePhotoAlign());
+                this.state.photoHandles.push(handle);
+            };
+            
+            make('corner-0', 'pa-handle nw');
+            make('corner-1', 'pa-handle ne');
+            make('corner-2', 'pa-handle se');
+            make('corner-3', 'pa-handle sw');
+            make('rotate', 'pa-handle-rotate', '↻');
+            make('move', 'pa-handle-move', '✥');
+        },
+        
+        positionPhotoHandles(skip) {
+            const a = this.state.photoAlign;
+            const corners = this.photoCornersFromParams(a);
+            this.state.photoHandles.forEach(h => {
+                if (h === skip) return;
+                if (h.kind.startsWith('corner-')) h.marker.setLngLat(corners[Number(h.kind.slice(7))]);
+                else if (h.kind === 'rotate') h.marker.setLngLat(this.getRotateHandlePos());
+                else if (h.kind === 'move') h.marker.setLngLat(a.center);
+            });
+        },
+        
+        onPhotoHandleDrag(handle) {
+            const a = this.state.photoAlign;
+            const ll = handle.marker.getLngLat();
+            const p = [ll.lng, ll.lat];
+            
+            if (handle.kind === 'move') {
+                a.center = p;
+            } else if (handle.kind === 'rotate') {
+                const { e, n } = this.photoToLocal(p, a.center);
+                a.rotation = ((Math.atan2(e, n) * 180 / Math.PI) + 360) % 360;
+            } else {
+                // Corner drag resizes around the centre
+                const { x, y } = this.photoWorldToLocal(p, a);
+                if (document.getElementById('paLockAspect').checked) {
+                    const s = Math.hypot(x, y) / Math.hypot(a.width / 2, a.height / 2);
+                    const w = a.width * s, h = a.height * s;
+                    if (Math.min(w, h) >= 5) { a.width = w; a.height = h; }
+                } else {
+                    a.width = Math.max(5, Math.abs(x) * 2);
+                    a.height = Math.max(5, Math.abs(y) * 2);
+                }
+            }
+            this.updatePhotoAlign(handle);
+        },
+        
+        updatePhotoAlign(skipHandle) {
+            if (!this.state.photoAligning) return;
+            this.drawDronePhoto();
+            this.positionPhotoHandles(skipHandle);
+            const a = this.state.photoAlign;
+            document.getElementById('paRotation').value = a.rotation.toFixed(1);
+            document.getElementById('paWidth').value = a.width.toFixed(1);
+            document.getElementById('paHeight').value = a.height.toFixed(1);
+        },
+        
+        nudgePhoto(dx, dy, step = 0.25) {
+            const a = this.state.photoAlign;
+            if (!a) return;
+            a.center = this.photoFromLocal(dx * step, dy * step, a.center);
+            this.updatePhotoAlign();
+        },
+        
+        adjustPhoto(kind, amount) {
+            const a = this.state.photoAlign;
+            if (!a) return;
+            if (kind === 'rotation') {
+                a.rotation = (((a.rotation + amount) % 360) + 360) % 360;
+            } else if (kind === 'scale') {
+                a.width *= (1 + amount);
+                a.height *= (1 + amount);
+            }
+            this.updatePhotoAlign();
+        },
+        
+        setPhotoField(field, value) {
+            const a = this.state.photoAlign;
+            const v = parseFloat(value);
+            if (!a || !isFinite(v)) { this.updatePhotoAlign(); return; }
+            const lock = document.getElementById('paLockAspect').checked;
+            if (field === 'rotation') {
+                a.rotation = ((v % 360) + 360) % 360;
+            } else if (field === 'width' && v >= 5) {
+                if (lock) a.height *= v / a.width;
+                a.width = v;
+            } else if (field === 'height' && v >= 5) {
+                if (lock) a.width *= v / a.height;
+                a.height = v;
+            }
+            this.updatePhotoAlign();
+        },
+        
+        setPhotoOpacity(value) {
+            this.state.photoOpacity = Number(value) / 100;
+            if (this.state.map && this.state.map.getLayer('drone-photo')) {
+                this.state.map.setPaintProperty('drone-photo', 'raster-opacity', this.state.photoOpacity);
+            }
+        },
+        
+        setAlignTrailersVisible(show) {
+            const map = this.state.map;
+            if (!map) return;
+            if (show && this.state.locateModeActive) return;  // locate mode owns these layers
+            ['trailers', 'trailers-labels'].forEach(id => {
+                if (map.getLayer(id)) map.setLayoutProperty(id, 'visibility', show ? 'visible' : 'none');
+            });
+        },
+        
+        isPointInPhoto(point) {
+            if (!this.state.photoAlign) return false;
+            const pts = this.photoCornersFromParams(this.state.photoAlign).map(c => this.state.map.project(c));
+            let inside = false;
+            for (let i = 0, j = pts.length - 1; i < pts.length; j = i++) {
+                const xi = pts[i].x, yi = pts[i].y, xj = pts[j].x, yj = pts[j].y;
+                if ((yi > point.y) !== (yj > point.y) &&
+                    point.x < (xj - xi) * (point.y - yi) / (yj - yi) + xi) inside = !inside;
+            }
+            return inside;
+        },
+        
+        initPhotoAlignEvents() {
+            if (this.state.photoEventsRegistered) return;
+            this.state.photoEventsRegistered = true;
+            const map = this.state.map;
+            
+            // Drag the photo body to move it
+            const start = (e) => {
+                if (!this.state.photoAligning) return;
+                if (e.points && e.points.length > 1) return;   // leave pinch-zoom alone
+                // Grabbing a corner/rotate/move handle is the marker's job, not a body drag
+                const t = e.originalEvent && e.originalEvent.target;
+                if (t && t.closest && t.closest('.maplibregl-marker')) return;
+                if (!this.isPointInPhoto(e.point)) return;
+                e.preventDefault();
+                map.dragPan.disable();
+                this.state.photoBodyDrag = {
+                    startLngLat: [e.lngLat.lng, e.lngLat.lat],
+                    startCenter: [...this.state.photoAlign.center]
+                };
+            };
+            const move = (e) => {
+                const d = this.state.photoBodyDrag;
+                if (!d || !this.state.photoAligning) return;
+                this.state.photoAlign.center = [
+                    d.startCenter[0] + (e.lngLat.lng - d.startLngLat[0]),
+                    d.startCenter[1] + (e.lngLat.lat - d.startLngLat[1])
+                ];
+                this.updatePhotoAlign();
+            };
+            const end = () => {
+                if (!this.state.photoBodyDrag) return;
+                this.state.photoBodyDrag = null;
+                map.dragPan.enable();
+            };
+            
+            map.on('mousedown', start);
+            map.on('touchstart', start);
+            map.on('mousemove', move);
+            map.on('touchmove', move);
+            map.on('mouseup', end);
+            map.on('touchend', end);
+            window.addEventListener('mouseup', end);
+            
+            // Keyboard fine-tuning
+            document.addEventListener('keydown', (e) => {
+                if (!this.state.photoAligning) return;
+                const tag = (e.target.tagName || '').toLowerCase();
+                if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
+                const big = e.shiftKey;
+                const step = big ? 2 : 0.25;
+                let handled = true;
+                switch (e.key) {
+                    case 'ArrowUp':    this.nudgePhoto(0, 1, step); break;
+                    case 'ArrowDown':  this.nudgePhoto(0, -1, step); break;
+                    case 'ArrowLeft':  this.nudgePhoto(-1, 0, step); break;
+                    case 'ArrowRight': this.nudgePhoto(1, 0, step); break;
+                    case '[': case '{': this.adjustPhoto('rotation', big ? -1 : -0.1); break;
+                    case ']': case '}': this.adjustPhoto('rotation', big ? 1 : 0.1); break;
+                    case '-': case '_': this.adjustPhoto('scale', big ? -0.02 : -0.002); break;
+                    case '=': case '+': this.adjustPhoto('scale', big ? 0.02 : 0.002); break;
+                    default: handled = false;
+                }
+                if (handled) e.preventDefault();
+            });
+        },
+        
+
         changeMapStyle(event) {
             const style = event.target.value;
             const styleUrl = `${this.mapStyles[style]}?key=${this.config.mapTilerKey}`;
@@ -4496,6 +5228,10 @@
                     }
                     if (this.state.fetchBoundsVisible) {
                         this.drawFetchBounds();
+                    }
+                    this.drawDronePhoto();
+                    if (this.state.photoAligning && !document.getElementById('paShowTrailers').checked) {
+                        this.setAlignTrailersVisible(false);
                     }
                 }, 100);
             });
