@@ -188,7 +188,17 @@
         pollMs: 3000,
         yards: {
             // Medina center shifted ~50 yards south for better display framing
-            medina:  { name: 'Medina',  center: [-81.89786783155066, 41.1482120], zoom: 17, youAreHere: [-81.89795624680701, 41.14860406577813] },
+            medina:  { name: 'Medina',  center: [-81.89786783155066, 41.1482120], zoom: 17, youAreHere: [-81.89795624680701, 41.14860406577813],
+                       // Drone photo - keep these corners in sync with the Medina overlay in index.html
+                       overlay: {
+                           image: 'data/medina_lot_pic.jpg',
+                           corners: [
+                               [-81.8998356, 41.1483882],  // top-left
+                               [-81.8982832, 41.1495759],  // top-right
+                               [-81.8954801, 41.1474984],  // bottom-right
+                               [-81.8970325, 41.1463107]   // bottom-left
+                           ]
+                       } },
             seville: { name: 'Seville', center: [-81.8687802, 41.0315114], zoom: 16 }
         },
 
@@ -197,6 +207,7 @@
         yahMarker: null,       // "you are here" marker
         lastSignature: null,   // to detect changes without redundant re-renders
         activeYard: null,
+        photoYard: null,       // yard whose drone photo is currently on the map
         token: null,
 
         init() {
@@ -217,6 +228,7 @@
                 attributionControl: false
             });
             this.map.on('load', () => {
+                this.drawDronePhoto('medina');
                 this.poll();
                 setInterval(() => this.poll(), this.pollMs);
             });
@@ -300,7 +312,8 @@
                 this.activeYard = yard;
             }
             
-            // "You are here" marker for yards that define one
+            // Drone photo + "You are here" marker for yards that define them
+            this.drawDronePhoto(yard || 'medina');
             this.drawYouAreHere(yard);
 
             // Draw markers - keep the whole yard in view (don't zoom to the trailer)
@@ -334,6 +347,30 @@
 
         showWaiting(show) {
             document.getElementById('waiting').classList.toggle('hidden', !show);
+        },
+        
+        drawDronePhoto(yard) {
+            if (!this.map || yard === this.photoYard) return;
+            if (this.map.getLayer('drone-photo')) this.map.removeLayer('drone-photo');
+            if (this.map.getSource('drone-photo')) this.map.removeSource('drone-photo');
+            this.photoYard = yard;
+            
+            const ov = this.yards[yard] && this.yards[yard].overlay;
+            if (!ov || !ov.corners) return;
+            
+            // Under the map's labels so road names still show on top
+            const firstLabel = (this.map.getStyle().layers || []).find(l => l.type === 'symbol');
+            this.map.addSource('drone-photo', {
+                type: 'image',
+                url: `https://raw.githubusercontent.com/${this.owner}/${this.repo}/main/${ov.image}`,
+                coordinates: ov.corners
+            });
+            this.map.addLayer({
+                id: 'drone-photo',
+                type: 'raster',
+                source: 'drone-photo',
+                paint: { 'raster-opacity': 1, 'raster-fade-duration': 0 }
+            }, firstLabel ? firstLabel.id : undefined);
         },
         
         drawYouAreHere(yard) {
