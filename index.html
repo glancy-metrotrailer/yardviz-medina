@@ -2138,6 +2138,10 @@
             cursor: move;
         }
         .map-container.photo-aligning .maplibregl-canvas { cursor: move; }
+        .drone-photo-row { display: flex; gap: 0.4rem; }
+        .map-container.photo-aligning #dronePhotoEditBtn {
+            background: var(--metro-orange); color: #fff; border-color: var(--metro-orange);
+        }
     </style>
 </head>
 <body>
@@ -2269,9 +2273,14 @@
             </div>
             
             <div class="style-selector">
-                <button class="bounds-toggle" id="dronePhotoBtn" onclick="app.toggleDronePhoto()" title="Show the drone photo of this yard over the map">
-                    <span class="bounds-toggle-icon">▣</span> Drone photo
-                </button>
+                <div class="drone-photo-row" id="dronePhotoRow">
+                    <button class="bounds-toggle" id="dronePhotoEditBtn" onclick="app.enterPhotoAlign()" title="Move, resize or rotate the drone photo">
+                        <span class="bounds-toggle-icon">✎</span> Align
+                    </button>
+                    <button class="bounds-toggle" id="dronePhotoBtn" onclick="app.toggleDronePhoto()" title="Show the drone photo of this yard over the map">
+                        <span class="bounds-toggle-icon">▣</span> Drone photo
+                    </button>
+                </div>
                 <button class="bounds-toggle" id="fetchBoundsBtn" onclick="app.toggleFetchBounds()" title="Show the SkyBitz fetch area for this yard">
                     <span class="bounds-toggle-icon">⬚</span> Fetch area
                 </button>
@@ -2536,10 +2545,10 @@
                         image: 'data/medina_lot_pic.jpg',
                         start: { center: [-81.898039, 41.147694], width: 135 },  // from the photo's GPS tag
                         corners: [
-                            [-81.8998174, 41.1483331],  // top-left
-                            [-81.898321, 41.1496072],   // top-right
-                            [-81.8953139, 41.1476046],  // bottom-right
-                            [-81.8968103, 41.1463305]   // bottom-left
+                            [-81.8998003, 41.1483652],  // top-left
+                            [-81.8983058, 41.1495725],  // top-right
+                            [-81.8954565, 41.1475725],  // bottom-right
+                            [-81.8969509, 41.1463652]   // bottom-left
                         ]
                     },
                     github: {
@@ -4883,7 +4892,8 @@
             const btn = document.getElementById('dronePhotoBtn');
             if (!btn) return;
             const hasPhoto = !!this.getPhotoConfig();
-            btn.style.display = hasPhoto ? '' : 'none';
+            const row = document.getElementById('dronePhotoRow');
+            if (row) row.style.display = hasPhoto ? '' : 'none';
             btn.classList.toggle('active', !!(this.state.map && this.state.map.getLayer('drone-photo')));
         },
         
