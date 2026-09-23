@@ -2535,7 +2535,12 @@
                     overlay: {
                         image: 'data/medina_lot_pic.jpg',
                         start: { center: [-81.898039, 41.147694], width: 135 },  // from the photo's GPS tag
-                        corners: null
+                        corners: [
+                            [-81.8998174, 41.1483331],  // top-left
+                            [-81.898321, 41.1496072],   // top-right
+                            [-81.8953139, 41.1476046],  // bottom-right
+                            [-81.8968103, 41.1463305]   // bottom-left
+                        ]
                     },
                     github: {
                         owner: 'glancy-metrotrailer',
