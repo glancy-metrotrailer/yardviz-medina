@@ -3547,76 +3547,6 @@
   ],
   "departed": [
     {
-      "id": "5327878",
-      "mtsn": "SHB7BLAG222775526",
-      "lastLat": 41.03184,
-      "lastLng": -81.86571,
-      "lastSeen": "2026-09-22T21:16:43.2974598Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "Phoenix Cargo, LLC"
-    },
-    {
-      "id": "557394",
-      "mtsn": "SHB8AJBL240844946",
-      "lastLat": 41.03115,
-      "lastLng": -81.86587,
-      "lastSeen": "2026-09-22T21:46:09.0355505Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "XPO Logistics- RXO Division"
-    },
-    {
-      "id": "5323355",
-      "mtsn": "SVE5CLAG222129176",
-      "lastLat": 41.03108,
-      "lastLng": -81.86607,
-      "lastSeen": "2026-09-23T10:16:14.2761079Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "Its Logistics, LLC"
-    },
-    {
-      "id": "5323329",
-      "mtsn": "SHB7BLAG224083452",
-      "lastLat": 41.03192,
-      "lastLng": -81.87209,
-      "lastSeen": "2026-09-23T11:16:14.4815195Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "XPO Logistics- RXO Division"
-    },
-    {
-      "id": "5327946",
-      "mtsn": "SHB7BLAG222672228",
-      "lastLat": 41.03177,
-      "lastLng": -81.86534,
-      "lastSeen": "2026-09-23T12:46:11.3181448Z",
-      "missedCycles": 1,
-      "fleetStatus": "Available",
-      "onRent": false,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": ""
-    },
-    {
       "id": "5327912",
       "mtsn": "SHB7BLAG221956888",
       "lastLat": 41.03179,
@@ -3811,6 +3741,62 @@
       "reservedCustomerName": "ITS",
       "outOfServiceReason": "",
       "customerName": ""
+    },
+    {
+      "id": "5327878",
+      "mtsn": "SHB7BLAG222775526",
+      "lastLat": 41.03184,
+      "lastLng": -81.86571,
+      "lastSeen": "2026-09-22T21:16:43.2974598Z",
+      "missedCycles": 1,
+      "fleetStatus": "On_x0020_Rent",
+      "onRent": true,
+      "offRentStatus": "Available",
+      "reservedCustomerName": "",
+      "outOfServiceReason": "",
+      "customerName": "Phoenix Cargo, LLC"
+    },
+    {
+      "id": "557394",
+      "mtsn": "SHB8AJBL240844946",
+      "lastLat": 41.03115,
+      "lastLng": -81.86587,
+      "lastSeen": "2026-09-22T21:46:09.0355505Z",
+      "missedCycles": 1,
+      "fleetStatus": "On_x0020_Rent",
+      "onRent": true,
+      "offRentStatus": "Available",
+      "reservedCustomerName": "",
+      "outOfServiceReason": "",
+      "customerName": "XPO Logistics- RXO Division"
+    },
+    {
+      "id": "5323355",
+      "mtsn": "SVE5CLAG222129176",
+      "lastLat": 41.03108,
+      "lastLng": -81.86607,
+      "lastSeen": "2026-09-23T10:16:14.2761079Z",
+      "missedCycles": 1,
+      "fleetStatus": "On_x0020_Rent",
+      "onRent": true,
+      "offRentStatus": "Available",
+      "reservedCustomerName": "",
+      "outOfServiceReason": "",
+      "customerName": "Its Logistics, LLC"
+    },
+    {
+      "id": "5323329",
+      "mtsn": "SHB7BLAG224083452",
+      "lastLat": 41.03192,
+      "lastLng": -81.87209,
+      "lastSeen": "2026-09-23T11:16:14.4815195Z",
+      "missedCycles": 1,
+      "fleetStatus": "On_x0020_Rent",
+      "onRent": true,
+      "offRentStatus": "Available",
+      "reservedCustomerName": "",
+      "outOfServiceReason": "",
+      "customerName": "XPO Logistics- RXO Division"
     }
   ],
   "ignored": [
@@ -4179,6 +4165,6 @@
       "ignoredAt": "2026-09-21T12:16:25.180Z"
     }
   ],
-  "timestamp": 1790279020341,
-  "lastModified": "2026-09-24T19:43:40.341Z"
+  "timestamp": 1790279032178,
+  "lastModified": "2026-09-24T19:43:52.178Z"
 }
