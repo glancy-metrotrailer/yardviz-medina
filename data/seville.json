@@ -3547,62 +3547,6 @@
   ],
   "departed": [
     {
-      "id": "5616135",
-      "mtsn": "SHB8AJBL241648253",
-      "lastLat": 41.03201,
-      "lastLng": -81.87206,
-      "lastSeen": "2026-09-24T09:01:18.5881149Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "Its Logistics, LLC"
-    },
-    {
-      "id": "54090",
-      "mtsn": "SHB7BLAG223981570",
-      "lastLat": 41.03161,
-      "lastLng": -81.87201,
-      "lastSeen": "2026-09-24T09:31:14.3390216Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "Its Logistics, LLC"
-    },
-    {
-      "id": "531618",
-      "mtsn": "GXL5ELAG200667005",
-      "lastLat": 41.03157,
-      "lastLng": -81.87191,
-      "lastSeen": "2026-09-24T11:16:43.1114812Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "Its Logistics, LLC"
-    },
-    {
-      "id": "5322909",
-      "mtsn": "GXL5HLAG205264538",
-      "lastLat": 41.03202,
-      "lastLng": -81.86627,
-      "lastSeen": "2026-09-24T13:01:15.8646928Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "Its Logistics, LLC"
-    },
-    {
       "id": "5317866",
       "mtsn": "SHB7CJBL233113067",
       "lastLat": 41.03124,
@@ -3769,6 +3713,48 @@
       "reservedCustomerName": "",
       "outOfServiceReason": "",
       "customerName": "XPO Logistics- RXO Division"
+    },
+    {
+      "id": "5616135",
+      "mtsn": "SHB8AJBL241648253",
+      "lastLat": 41.03201,
+      "lastLng": -81.87206,
+      "lastSeen": "2026-09-24T09:01:18.5881149Z",
+      "missedCycles": 1,
+      "fleetStatus": "On_x0020_Rent",
+      "onRent": true,
+      "offRentStatus": "Available",
+      "reservedCustomerName": "",
+      "outOfServiceReason": "",
+      "customerName": "Its Logistics, LLC"
+    },
+    {
+      "id": "54090",
+      "mtsn": "SHB7BLAG223981570",
+      "lastLat": 41.03161,
+      "lastLng": -81.87201,
+      "lastSeen": "2026-09-24T09:31:14.3390216Z",
+      "missedCycles": 1,
+      "fleetStatus": "On_x0020_Rent",
+      "onRent": true,
+      "offRentStatus": "Available",
+      "reservedCustomerName": "",
+      "outOfServiceReason": "",
+      "customerName": "Its Logistics, LLC"
+    },
+    {
+      "id": "531618",
+      "mtsn": "GXL5ELAG200667005",
+      "lastLat": 41.03157,
+      "lastLng": -81.87191,
+      "lastSeen": "2026-09-24T11:16:43.1114812Z",
+      "missedCycles": 1,
+      "fleetStatus": "On_x0020_Rent",
+      "onRent": true,
+      "offRentStatus": "Available",
+      "reservedCustomerName": "",
+      "outOfServiceReason": "",
+      "customerName": "Its Logistics, LLC"
     }
   ],
   "ignored": [
@@ -4137,6 +4123,6 @@
       "ignoredAt": "2026-09-21T12:16:25.180Z"
     }
   ],
-  "timestamp": 1790279036559,
-  "lastModified": "2026-09-24T19:43:56.559Z"
+  "timestamp": 1790279051640,
+  "lastModified": "2026-09-24T19:44:11.640Z"
 }
