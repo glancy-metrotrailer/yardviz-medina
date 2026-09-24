@@ -187,8 +187,10 @@
         rawUrl: 'https://raw.githubusercontent.com/glancy-metrotrailer/yardviz-medina/main/data/display-state.json',
         pollMs: 3000,
         yards: {
-            // Medina center shifted ~50 yards south for better display framing
-            medina:  { name: 'Medina',  center: [-81.89786783155066, 41.1482120], zoom: 17, youAreHere: [-81.89795624680701, 41.14860406577813],
+            // bearing: map rotation per yard - 0 = north up, 180 = south up.
+            // Yards with a drone photo are framed to fit the whole photo on screen;
+            // others use center/zoom.
+            medina:  { name: 'Medina',  center: [-81.8976600, 41.1478500], zoom: 17, bearing: 180, youAreHere: [-81.89795624680701, 41.14860406577813],
                        // Drone photo - keep these corners in sync with the Medina overlay in index.html
                        overlay: {
                            image: 'data/medina_lot_pic_blended.webp',
@@ -199,7 +201,7 @@
                                [-81.8970325, 41.1463107]   // bottom-left
                            ]
                        } },
-            seville: { name: 'Seville', center: [-81.8687802, 41.0315114], zoom: 16 }
+            seville: { name: 'Seville', center: [-81.8687802, 41.0315114], zoom: 16, bearing: 0 }
         },
 
         map: null,
@@ -208,6 +210,7 @@
         lastSignature: null,   // to detect changes without redundant re-renders
         activeYard: null,
         photoYard: null,       // yard whose drone photo is currently on the map
+        framedYard: null,      // yard the camera is currently framed on
         token: null,
 
         init() {
@@ -224,16 +227,66 @@
                 container: 'map',
                 style: `${this.satelliteStyle}?key=${this.mapTilerKey}`,
                 center: this.yards.medina.center,
-                zoom: 15,
+                zoom: this.yards.medina.zoom,
+                bearing: this.yards.medina.bearing || 0,
                 attributionControl: false
             });
             this.map.on('load', () => {
                 this.drawDronePhoto('medina');
+                this.frameYard('medina', false);
                 this.poll();
                 setInterval(() => this.poll(), this.pollMs);
             });
             
+            // Keep the whole lot in view if the screen size changes
+            this.map.on('resize', () => {
+                const y = this.framedYard;
+                this.framedYard = null;
+                if (y) this.frameYard(y, false);
+            });
+            
             if (!this.token) this.showTokenSetup();
+        },
+        
+        // Fixed camera per yard: never zooms to individual trailers
+        frameYard(yard, animate) {
+            const cfg = this.yards[yard] || this.yards.medina;
+            if (!this.map || this.framedYard === yard) return;
+            this.framedYard = yard;
+            const bearing = cfg.bearing || 0;
+            const duration = animate ? 900 : 0;
+            const corners = cfg.overlay && cfg.overlay.corners;
+            if (corners) {
+                // Fit the photo's actual (rotated) outline as tightly as the screen allows
+                const pad = { top: 80, bottom: 20, left: 20, right: 20 };  // top clears the header bar
+                const center = [
+                    corners.reduce((a, c) => a + c[0], 0) / corners.length,
+                    corners.reduce((a, c) => a + c[1], 0) / corners.length
+                ];
+                const cosLat = Math.cos(center[1] * Math.PI / 180);
+                const t = bearing * Math.PI / 180;
+                let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+                corners.forEach(c => {
+                    const e = (c[0] - center[0]) * 111320 * cosLat;   // metres east
+                    const n = (c[1] - center[1]) * 111320;            // metres north
+                    // screen axes after rotating the map by the bearing
+                    const x = e * Math.cos(t) - n * Math.sin(t);
+                    const y = e * Math.sin(t) + n * Math.cos(t);
+                    minX = Math.min(minX, x); maxX = Math.max(maxX, x);
+                    minY = Math.min(minY, y); maxY = Math.max(maxY, y);
+                });
+                const box = this.map.getContainer();
+                const availW = box.clientWidth - pad.left - pad.right;
+                const availH = box.clientHeight - pad.top - pad.bottom;
+                const mppZ0 = 40075016.686 * cosLat / 512;             // metres per pixel at zoom 0
+                const zoom = Math.min(
+                    Math.log2(mppZ0 * availW / (maxX - minX)),
+                    Math.log2(mppZ0 * availH / (maxY - minY))
+                );
+                this.map.easeTo({ center, zoom, bearing, padding: pad, duration });
+            } else {
+                this.map.easeTo({ center: cfg.center, zoom: cfg.zoom, bearing, duration });
+            }
         },
 
         async poll() {
@@ -339,10 +392,8 @@
                 pill.style.display = 'none';
             }
 
-            // Center on the yard at a zoom that shows the whole lot, regardless of
-            // how many trailers are pushed - the markers stay in the full-yard view.
-            const yardCfg = (yard && this.yards[yard]) ? this.yards[yard] : this.yards.medina;
-            this.map.flyTo({ center: yardCfg.center, zoom: yardCfg.zoom, duration: 900 });
+            // Camera stays on the whole lot; it only moves when the yard changes
+            this.frameYard((yard && this.yards[yard]) ? yard : 'medina', true);
         },
 
         showWaiting(show) {
