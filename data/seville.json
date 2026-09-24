@@ -3559,34 +3559,6 @@
       "reservedCustomerName": "ITS",
       "outOfServiceReason": "",
       "customerName": ""
-    },
-    {
-      "id": "5327878",
-      "mtsn": "SHB7BLAG222775526",
-      "lastLat": 41.03184,
-      "lastLng": -81.86571,
-      "lastSeen": "2026-09-22T21:16:43.2974598Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "Phoenix Cargo, LLC"
-    },
-    {
-      "id": "557394",
-      "mtsn": "SHB8AJBL240844946",
-      "lastLat": 41.03115,
-      "lastLng": -81.86587,
-      "lastSeen": "2026-09-22T21:46:09.0355505Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "XPO Logistics- RXO Division"
     }
   ],
   "ignored": [
@@ -3981,8 +3953,16 @@
     {
       "id": "5323355",
       "ignoredAt": "2026-09-24T19:44:39.881Z"
+    },
+    {
+      "id": "557394",
+      "ignoredAt": "2026-09-24T19:44:40.704Z"
+    },
+    {
+      "id": "5327878",
+      "ignoredAt": "2026-09-24T19:44:41.323Z"
     }
   ],
-  "timestamp": 1790279079882,
-  "lastModified": "2026-09-24T19:44:39.882Z"
+  "timestamp": 1790279081324,
+  "lastModified": "2026-09-24T19:44:41.324Z"
 }
