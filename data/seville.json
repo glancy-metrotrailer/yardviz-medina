@@ -3615,34 +3615,6 @@
       "reservedCustomerName": "",
       "outOfServiceReason": "",
       "customerName": "XPO Logistics- RXO Division"
-    },
-    {
-      "id": "5616135",
-      "mtsn": "SHB8AJBL241648253",
-      "lastLat": 41.03201,
-      "lastLng": -81.87206,
-      "lastSeen": "2026-09-24T09:01:18.5881149Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "Its Logistics, LLC"
-    },
-    {
-      "id": "54090",
-      "mtsn": "SHB7BLAG223981570",
-      "lastLat": 41.03161,
-      "lastLng": -81.87201,
-      "lastSeen": "2026-09-24T09:31:14.3390216Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "Its Logistics, LLC"
     }
   ],
   "ignored": [
@@ -4021,8 +3993,16 @@
     {
       "id": "531618",
       "ignoredAt": "2026-09-24T19:44:37.870Z"
+    },
+    {
+      "id": "54090",
+      "ignoredAt": "2026-09-24T19:44:38.353Z"
+    },
+    {
+      "id": "5616135",
+      "ignoredAt": "2026-09-24T19:44:38.779Z"
     }
   ],
-  "timestamp": 1790279077871,
-  "lastModified": "2026-09-24T19:44:37.871Z"
+  "timestamp": 1790279078781,
+  "lastModified": "2026-09-24T19:44:38.781Z"
 }
