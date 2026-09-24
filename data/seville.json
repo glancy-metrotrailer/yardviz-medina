@@ -3547,20 +3547,6 @@
   ],
   "departed": [
     {
-      "id": "40C2414",
-      "mtsn": "SHB81JBL233315998",
-      "lastLat": 41.03201,
-      "lastLng": -81.87099,
-      "lastSeen": "2026-09-22T15:31:29.9587996Z",
-      "missedCycles": 1,
-      "fleetStatus": "Available",
-      "onRent": false,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": ""
-    },
-    {
       "id": "40C2416",
       "mtsn": "SVE5DJBL232386965",
       "lastLat": 41.03204,
@@ -4277,6 +4263,6 @@
       "ignoredAt": "2026-09-21T12:16:25.180Z"
     }
   ],
-  "timestamp": 1790279005721,
-  "lastModified": "2026-09-24T19:43:25.721Z"
+  "timestamp": 1790279009596,
+  "lastModified": "2026-09-24T19:43:29.596Z"
 }
