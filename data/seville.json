@@ -3566,20 +3566,6 @@
   ],
   "departed": [
     {
-      "id": "581102",
-      "mtsn": "SVE5CLAG224159311",
-      "lastLat": 41.03195,
-      "lastLng": -81.86555,
-      "lastSeen": "2026-09-25T01:46:19.4321011Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "New Bern Corporation 1035-710 (Pepsico)"
-    },
-    {
       "id": "582343",
       "mtsn": "SVE5BLAG214808628",
       "lastLat": 41.0311,
@@ -4016,8 +4002,12 @@
     {
       "id": "5327872",
       "ignoredAt": "2026-09-25T12:53:25.018Z"
+    },
+    {
+      "id": "581102",
+      "ignoredAt": "2026-09-25T12:54:04.980Z"
     }
   ],
-  "timestamp": 1790340824265,
-  "lastModified": "2026-09-25T12:53:44.265Z"
+  "timestamp": 1790340844981,
+  "lastModified": "2026-09-25T12:54:04.981Z"
 }
