@@ -3620,34 +3620,6 @@
   ],
   "departed": [
     {
-      "id": "581987",
-      "mtsn": "SHB8AJBL241749879",
-      "lastLat": 41.03129,
-      "lastLng": -81.86682,
-      "lastSeen": "2026-09-25T16:01:24.2773855Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "XPO Logistics- RXO Division"
-    },
-    {
-      "id": "5822022",
-      "mtsn": "SHB8AJBL234024338",
-      "lastLat": 41.03199,
-      "lastLng": -81.86668,
-      "lastSeen": "2026-09-25T16:31:35.2753812Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "Pepsico, Inc. PepLoc2742"
-    },
-    {
       "id": "5313398",
       "mtsn": "SHB7BLAG223879195",
       "lastLat": 41.03178,
@@ -3751,6 +3723,20 @@
       "lastLat": 41.03125,
       "lastLng": -81.86587,
       "lastSeen": "2026-09-25T18:46:05.5172756Z",
+      "missedCycles": 1,
+      "fleetStatus": "On_x0020_Rent",
+      "onRent": true,
+      "offRentStatus": "Available",
+      "reservedCustomerName": "",
+      "outOfServiceReason": "",
+      "customerName": "XPO Logistics- RXO Division"
+    },
+    {
+      "id": "581987",
+      "mtsn": "SHB8AJBL241749879",
+      "lastLat": 41.03129,
+      "lastLng": -81.86682,
+      "lastSeen": "2026-09-25T16:01:24.2773855Z",
       "missedCycles": 1,
       "fleetStatus": "On_x0020_Rent",
       "onRent": true,
@@ -4186,6 +4172,6 @@
       "ignoredAt": "2026-09-25T14:15:44.164Z"
     }
   ],
-  "timestamp": 1790362461903,
-  "lastModified": "2026-09-25T18:54:21.903Z"
+  "timestamp": 1790362465584,
+  "lastModified": "2026-09-25T18:54:25.584Z"
 }
