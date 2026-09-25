@@ -5690,16 +5690,7 @@
     "T1873",
     "T4352"
   ],
-  "departed": [
-    {
-      "id": "5315766",
-      "mtsn": "SHB7BLAG222161483",
-      "lastLat": 41.14812,
-      "lastLng": -81.89841,
-      "lastSeen": "2026-09-25T09:17:32.9882823Z",
-      "missedCycles": 1
-    }
-  ],
+  "departed": [],
   "ignored": [
     {
       "id": "",
@@ -6186,6 +6177,6 @@
       "ignoredAt": "2026-09-24T13:25:20.716Z"
     }
   ],
-  "timestamp": 1790337399396,
-  "lastModified": "2026-09-25T11:56:39.396Z"
+  "timestamp": 1790337406938,
+  "lastModified": "2026-09-25T11:56:46.938Z"
 }
