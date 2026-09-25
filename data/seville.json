@@ -3366,9 +3366,9 @@
       "batteryStatus": "OK",
       "arrivedAt": "2026-09-25T16:30:26.2174614Z",
       "timeOfObservation": "2026-09-25T16:19:04Z",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
-      "isNew": true,
+      "isNew": false,
       "fleetStatus": "Available",
       "onRent": false,
       "offRentStatus": "Available",
@@ -3618,22 +3618,7 @@
     "T1029",
     "T1337"
   ],
-  "departed": [
-    {
-      "id": "581987",
-      "mtsn": "SHB8AJBL241749879",
-      "lastLat": 41.03129,
-      "lastLng": -81.86682,
-      "lastSeen": "2026-09-25T16:01:24.2773855Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "XPO Logistics- RXO Division"
-    }
-  ],
+  "departed": [],
   "ignored": [
     {
       "id": "5327754",
@@ -4062,8 +4047,12 @@
     {
       "id": "5822025",
       "ignoredAt": "2026-09-25T18:54:46.225Z"
+    },
+    {
+      "id": "581987",
+      "ignoredAt": "2026-09-25T18:54:47.022Z"
     }
   ],
-  "timestamp": 1790362486226,
-  "lastModified": "2026-09-25T18:54:46.226Z"
+  "timestamp": 1790362493130,
+  "lastModified": "2026-09-25T18:54:53.130Z"
 }
