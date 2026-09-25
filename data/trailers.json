@@ -5002,9 +5002,9 @@
       "batteryStatus": "OK",
       "arrivedAt": "2026-09-25T15:45:29.9608754Z",
       "timeOfObservation": "2026-09-25T15:29:04Z",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
-      "isNew": true,
+      "isNew": false,
       "fleetStatus": "On_x0020_Rent",
       "onRent": true,
       "offRentStatus": "Available",
@@ -5737,16 +5737,7 @@
     "T1873",
     "T4352"
   ],
-  "departed": [
-    {
-      "id": "531669",
-      "mtsn": "SVE5CLAG223446658",
-      "lastLat": 41.14835,
-      "lastLng": -81.89805,
-      "lastSeen": "2026-09-25T16:46:31.6615428Z",
-      "missedCycles": 1
-    }
-  ],
+  "departed": [],
   "ignored": [
     {
       "id": "",
@@ -6295,8 +6286,12 @@
     {
       "id": "555275",
       "ignoredAt": "2026-09-25T18:51:28.174Z"
+    },
+    {
+      "id": "531669",
+      "ignoredAt": "2026-09-25T18:51:28.666Z"
     }
   ],
-  "timestamp": 1790362288175,
-  "lastModified": "2026-09-25T18:51:28.175Z"
+  "timestamp": 1790362303783,
+  "lastModified": "2026-09-25T18:51:43.783Z"
 }
