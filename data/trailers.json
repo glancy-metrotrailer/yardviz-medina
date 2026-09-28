@@ -3518,9 +3518,9 @@
       "batteryStatus": "OK",
       "arrivedAt": "2026-09-25T20:00:34.2158013Z",
       "timeOfObservation": "2026-09-28T11:07:34Z",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
-      "isNew": true,
+      "isNew": false,
       "fleetStatus": "",
       "onRent": false,
       "offRentStatus": "",
@@ -5592,16 +5592,7 @@
     "MTZR816487",
     "T4352"
   ],
-  "departed": [
-    {
-      "id": "MTRZ531897",
-      "mtsn": "SHB8AJBL234629907",
-      "lastLat": 41.14817,
-      "lastLng": -81.89847,
-      "lastSeen": "2026-09-25T19:16:30.8468944Z",
-      "missedCycles": 1
-    }
-  ],
+  "departed": [],
   "ignored": [
     {
       "id": "",
@@ -6170,8 +6161,12 @@
     {
       "id": "5317909",
       "ignoredAt": "2026-09-28T11:55:34.850Z"
+    },
+    {
+      "id": "MTRZ531897",
+      "ignoredAt": "2026-09-28T11:55:35.321Z"
     }
   ],
-  "timestamp": 1790596534852,
-  "lastModified": "2026-09-28T11:55:34.852Z"
+  "timestamp": 1790596545060,
+  "lastModified": "2026-09-28T11:55:45.060Z"
 }
