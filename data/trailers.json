@@ -5730,16 +5730,7 @@
     "MTZR816487",
     "T4352"
   ],
-  "departed": [
-    {
-      "id": "555202",
-      "mtsn": "SVE5CLAG223751226",
-      "lastLat": 41.14804,
-      "lastLng": -81.89829,
-      "lastSeen": "2026-09-28T18:32:01.2661380Z",
-      "missedCycles": 1
-    }
-  ],
+  "departed": [],
   "ignored": [
     {
       "id": "",
@@ -6314,6 +6305,6 @@
       "ignoredAt": "2026-09-28T11:55:35.321Z"
     }
   ],
-  "timestamp": 1790622392035,
-  "lastModified": "2026-09-28T19:06:32.035Z"
+  "timestamp": 1790622395865,
+  "lastModified": "2026-09-28T19:06:35.865Z"
 }
