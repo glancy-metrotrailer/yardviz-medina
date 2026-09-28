@@ -2182,9 +2182,9 @@
       "batteryStatus": "OK",
       "arrivedAt": "2026-09-26T12:15:25.9046636Z",
       "timeOfObservation": "2026-09-28T12:11:34Z",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
-      "isNew": true,
+      "isNew": false,
       "fleetStatus": "",
       "onRent": false,
       "offRentStatus": "",
@@ -3606,22 +3606,7 @@
     "MTZR314142",
     "T1337"
   ],
-  "departed": [
-    {
-      "id": "581507",
-      "mtsn": "SVE5CLAG224055199",
-      "lastLat": 41.0312,
-      "lastLng": -81.86698,
-      "lastSeen": "2026-09-26T08:16:07.5423043Z",
-      "missedCycles": 1,
-      "fleetStatus": "Available",
-      "onRent": false,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": ""
-    }
-  ],
+  "departed": [],
   "ignored": [
     {
       "id": "5327754",
@@ -4066,8 +4051,12 @@
     {
       "id": "5315675",
       "ignoredAt": "2026-09-28T12:24:49.704Z"
+    },
+    {
+      "id": "581507",
+      "ignoredAt": "2026-09-28T12:24:50.326Z"
     }
   ],
-  "timestamp": 1790598289705,
-  "lastModified": "2026-09-28T12:24:49.705Z"
+  "timestamp": 1790598305833,
+  "lastModified": "2026-09-28T12:25:05.833Z"
 }
