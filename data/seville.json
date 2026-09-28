@@ -3608,20 +3608,6 @@
   ],
   "departed": [
     {
-      "id": "551655",
-      "mtsn": "SHB8AJBL234124514",
-      "lastLat": 41.032,
-      "lastLng": -81.86716,
-      "lastSeen": "2026-09-26T08:31:09.2032482Z",
-      "missedCycles": 1,
-      "fleetStatus": "Available",
-      "onRent": false,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": ""
-    },
-    {
       "id": "5313078",
       "mtsn": "SVE5CLAG223043895",
       "lastLat": 41.03161,
@@ -3921,6 +3907,20 @@
       "lastLat": 41.03199,
       "lastLng": -81.87138,
       "lastSeen": "2026-09-26T02:01:27.2992899Z",
+      "missedCycles": 1,
+      "fleetStatus": "Available",
+      "onRent": false,
+      "offRentStatus": "Available",
+      "reservedCustomerName": "",
+      "outOfServiceReason": "",
+      "customerName": ""
+    },
+    {
+      "id": "581507",
+      "mtsn": "SVE5CLAG224055199",
+      "lastLat": 41.0312,
+      "lastLng": -81.86698,
+      "lastSeen": "2026-09-26T08:16:07.5423043Z",
       "missedCycles": 1,
       "fleetStatus": "Available",
       "onRent": false,
@@ -4364,6 +4364,6 @@
       "ignoredAt": "2026-09-25T18:54:47.022Z"
     }
   ],
-  "timestamp": 1790598234574,
-  "lastModified": "2026-09-28T12:23:54.574Z"
+  "timestamp": 1790598237890,
+  "lastModified": "2026-09-28T12:23:57.890Z"
 }
