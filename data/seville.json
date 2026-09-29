@@ -3647,34 +3647,6 @@
   ],
   "departed": [
     {
-      "id": "5621089",
-      "mtsn": "SHB7BLAG223981669",
-      "lastLat": 41.03167,
-      "lastLng": -81.86381,
-      "lastSeen": "2026-09-28T14:18:11.2559378Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "J Rayl Transport, Inc. "
-    },
-    {
-      "id": "569079",
-      "mtsn": "SHB7CJBL243055522",
-      "lastLat": 41.03181,
-      "lastLng": -81.86547,
-      "lastSeen": "2026-09-28T17:16:21.7003333Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "PEPSI - New River VA"
-    },
-    {
       "id": "MTRZ315231",
       "mtsn": "SHB7CJBL233113249",
       "lastLat": 41.03119,
@@ -4293,6 +4265,6 @@
       "ignoredAt": "2026-09-28T12:24:50.326Z"
     }
   ],
-  "timestamp": 1790685850385,
-  "lastModified": "2026-09-29T12:44:10.385Z"
+  "timestamp": 1790685882389,
+  "lastModified": "2026-09-29T12:44:42.389Z"
 }
