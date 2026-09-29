@@ -3647,48 +3647,6 @@
   ],
   "departed": [
     {
-      "id": "MTRZ315689",
-      "mtsn": "SHB81JBL232708649",
-      "lastLat": 41.03179,
-      "lastLng": -81.86539,
-      "lastSeen": "2026-09-28T19:31:41.9022550Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "XPO Logistics- RXO Division"
-    },
-    {
-      "id": "5319182",
-      "mtsn": "SHB7BLAG222569711",
-      "lastLat": 41.03144,
-      "lastLng": -81.86633,
-      "lastSeen": "2026-09-28T19:46:14.5818762Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "Victory Equipment and Services, LLC"
-    },
-    {
-      "id": "52117",
-      "mtsn": "SHB8AJBL240946934",
-      "lastLat": 41.03199,
-      "lastLng": -81.86592,
-      "lastSeen": "2026-09-28T22:31:13.2134961Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "PEPSI - New River VA"
-    },
-    {
       "id": "581959",
       "mtsn": "SHB8AJBL240338898",
       "lastLat": 41.03109,
@@ -3799,6 +3757,34 @@
       "reservedCustomerName": "",
       "outOfServiceReason": "",
       "customerName": "XPO Logistics- RXO Division"
+    },
+    {
+      "id": "MTRZ315689",
+      "mtsn": "SHB81JBL232708649",
+      "lastLat": 41.03179,
+      "lastLng": -81.86539,
+      "lastSeen": "2026-09-28T19:31:41.9022550Z",
+      "missedCycles": 1,
+      "fleetStatus": "On_x0020_Rent",
+      "onRent": true,
+      "offRentStatus": "Available",
+      "reservedCustomerName": "",
+      "outOfServiceReason": "",
+      "customerName": "XPO Logistics- RXO Division"
+    },
+    {
+      "id": "5319182",
+      "mtsn": "SHB7BLAG222569711",
+      "lastLat": 41.03144,
+      "lastLng": -81.86633,
+      "lastSeen": "2026-09-28T19:46:14.5818762Z",
+      "missedCycles": 1,
+      "fleetStatus": "On_x0020_Rent",
+      "onRent": true,
+      "offRentStatus": "Available",
+      "reservedCustomerName": "",
+      "outOfServiceReason": "",
+      "customerName": "Victory Equipment and Services, LLC"
     }
   ],
   "ignored": [
@@ -4251,6 +4237,6 @@
       "ignoredAt": "2026-09-28T12:24:50.326Z"
     }
   ],
-  "timestamp": 1790685902479,
-  "lastModified": "2026-09-29T12:45:02.479Z"
+  "timestamp": 1790685909733,
+  "lastModified": "2026-09-29T12:45:09.733Z"
 }
