@@ -2917,7 +2917,7 @@
       "reservedCustomerName": "",
       "outOfServiceReason": "",
       "customerName": "Highway Trucking, LLC",
-      "skybitzGroup": "PHOENIX CARGO",
+      "skybitzGroup": "",
       "vin": ""
     },
     {
@@ -3068,9 +3068,9 @@
       "batteryStatus": "OK",
       "arrivedAt": "2026-09-28T18:30:29.0030293Z",
       "timeOfObservation": "2026-09-28T22:13:34Z",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
-      "isNew": true,
+      "isNew": false,
       "fleetStatus": "On_x0020_Rent",
       "onRent": true,
       "offRentStatus": "Available",
@@ -6378,6 +6378,6 @@
       "ignoredAt": "2026-09-29T12:19:50.962Z"
     }
   ],
-  "timestamp": 1790712266452,
-  "lastModified": "2026-09-29T20:04:26.452Z"
+  "timestamp": 1790712280142,
+  "lastModified": "2026-09-29T20:04:40.142Z"
 }
