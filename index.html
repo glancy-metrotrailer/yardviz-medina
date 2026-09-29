@@ -1973,6 +1973,39 @@
             border-top: 8px solid var(--metro-navy);
         }
         
+        /* Label declutter: labels slide off overlapping spots, leader line points home */
+        /* (no position override on the container - MapLibre needs it absolute) */
+        .locate-marker, .locate-marker-pointer {
+            position: relative;
+            z-index: 1;
+            translate: var(--lm-dx, 0px) var(--lm-dy, 0px);
+        }
+        svg.lm-leaders {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            overflow: visible;
+        }
+        svg.lm-leaders .lm-halo { stroke: rgba(255,255,255,0.9); stroke-width: 4; fill: none; stroke-linecap: round; }
+        svg.lm-leaders .lm-line { stroke: var(--metro-navy); stroke-width: 2; fill: none; stroke-linecap: round; }
+        .locate-marker-dot {
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            width: 10px;
+            height: 10px;
+            margin: 0 0 -5px -5px;
+            border-radius: 50%;
+            background: var(--metro-navy);
+            border: 2px solid #fff;
+            box-sizing: border-box;
+            pointer-events: none;
+            display: none;
+        }
+        .locate-marker-container.lm-moved .locate-marker-dot { display: block; }
+
+        
         /* Draggable trailer items */
         .trailer-item[draggable="true"] {
             cursor: grab;
@@ -3245,6 +3278,10 @@
                 this.createTrailerImages();
                 this.drawDronePhoto();
                 this.initPhotoAlignEvents();
+                // Re-space locate labels whenever their on-screen spacing changes
+                ['zoom', 'rotate', 'pitch', 'resize'].forEach(ev =>
+                    this.state.map.on(ev, () => this.scheduleMarkerLayout()));
+                this.state.map.on('move', () => this.scheduleLeaderDraw());
                 
                 if (this.state.trailers.length > 0) {
                     setTimeout(() => this.renderTrailersOnMap(), 500);
@@ -3982,7 +4019,8 @@
                     headers: {
                         'Authorization': `token ${token}`,
                         'Accept': 'application/vnd.github.v3+json'
-                    }
+                    },
+                    cache: 'no-store'   // GitHub marks this cacheable for 60s; a stale copy means a stale SHA
                 });
                 
                 if (response.status === 401) {
@@ -4020,6 +4058,7 @@
                 
                 const content = atob(fileData.content);
                 const data = JSON.parse(content);
+                this.state.syncBase = data;   // last version we know is on GitHub (merge base)
                 
                 // Departed / ignored lists are owned by the fetch flow; load them
                 // regardless of the trailers array (all trailers could have left).
@@ -4166,7 +4205,11 @@
         },
         
         async saveToGitHub() {
-            if (this.state.isSyncing) return;
+            if (this.state.isSyncing) {
+                // Don't drop the change - save again as soon as the current save finishes
+                this.state.saveQueued = true;
+                return;
+            }
             
             // Safety guard: never overwrite the file with an empty trailer list.
             // If our in-memory state is empty (e.g. we loaded during a GitHub blip),
@@ -4185,81 +4228,204 @@
             }
             
             const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+            const headers = {
+                'Authorization': `token ${token}`,
+                'Accept': 'application/vnd.github.v3+json'
+            };
+            const savingYard = this.config.activeYardId;
             
             this.state.isSyncing = true;
             
             try {
                 console.log('☁️ Saving data to GitHub...');
                 
-                const data = {
-                    trailers: this.state.trailers,
-                    previousTrailerIds: Array.from(this.state.previousTrailerIds),
-                    departed: this.state.departed || [],
-                    ignored: this.state.ignored || [],
-                    timestamp: Date.now(),
-                    lastModified: new Date().toISOString()
-                };
-                
-                const content = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
-                
                 // Get current SHA if we don't have it
                 if (!this.state.githubSha) {
-                    try {
-                        const getResponse = await fetch(url, {
-                            headers: {
-                                'Authorization': `token ${token}`,
-                                'Accept': 'application/vnd.github.v3+json'
-                            }
-                        });
-                        if (getResponse.ok) {
-                            const fileData = await getResponse.json();
-                            this.state.githubSha = fileData.sha;
-                        }
-                    } catch (e) {
-                        // File doesn't exist yet, that's OK
+                    const remote = await this.fetchRemoteTrailerFile(url, headers);
+                    if (remote) {
+                        this.state.githubSha = remote.sha;
+                        if (!this.state.syncBase) this.state.syncBase = remote.data;
                     }
                 }
                 
-                const body = {
-                    message: `Update trailer data - ${new Date().toLocaleString()}`,
-                    content: content
-                };
+                let data = this.buildSyncPayload();
+                const MAX_ATTEMPTS = 4;
                 
-                if (this.state.githubSha) {
-                    body.sha = this.state.githubSha;
+                for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
+                    const body = {
+                        message: `Update trailer data - ${new Date().toLocaleString()}`,
+                        content: btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))))
+                    };
+                    if (this.state.githubSha) body.sha = this.state.githubSha;
+                    
+                    const response = await fetch(url, {
+                        method: 'PUT',
+                        headers: { ...headers, 'Content-Type': 'application/json' },
+                        body: JSON.stringify(body)
+                    });
+                    
+                    if (response.status === 401) {
+                        this.showToast('Invalid GitHub token', 'error');
+                        localStorage.removeItem('yardviz_github_token');
+                        return;
+                    }
+                    
+                    if (response.ok) {
+                        const result = await response.json();
+                        this.state.githubSha = result.content.sha;
+                        this.state.syncBase = data;
+                        console.log(attempt > 1 ? `☁️ Data saved to GitHub (merged, attempt ${attempt})` : '☁️ Data saved to GitHub');
+                        return;
+                    }
+                    
+                    const errorData = await response.json().catch(() => ({}));
+                    const msg = errorData.message || `GitHub API error: ${response.status}`;
+                    const isConflict = response.status === 409 ||
+                        (response.status === 422 && /does not match|sha/i.test(msg));
+                    
+                    if (!isConflict || attempt === MAX_ATTEMPTS) {
+                        const err = new Error(msg);
+                        err.status = response.status;
+                        err.resetAt = response.headers.get('x-ratelimit-reset');
+                        throw err;
+                    }
+                    
+                    // Someone else saved since we last loaded: pull their version,
+                    // merge our changes on top, and try again with their SHA.
+                    console.log(`☁️ Save conflict (attempt ${attempt}) - merging with the latest cloud copy`);
+                    await new Promise(r => setTimeout(r, 300 * attempt + Math.random() * 400));
+                    const remote = await this.fetchRemoteTrailerFile(url, headers);
+                    if (!remote) throw new Error('Could not re-read cloud data after a conflict');
+                    if (this.config.activeYardId !== savingYard) return;   // yard changed mid-save
+                    
+                    data = this.mergeTrailerData(this.state.syncBase, this.buildSyncPayload(), remote.data);
+                    this.state.githubSha = remote.sha;
+                    this.state.syncBase = remote.data;
+                    this.applyMergedTrailerData(data);
                 }
-                
-                const response = await fetch(url, {
-                    method: 'PUT',
-                    headers: {
-                        'Authorization': `token ${token}`,
-                        'Accept': 'application/vnd.github.v3+json',
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(body)
-                });
-                
-                if (response.status === 401) {
-                    this.showToast('Invalid GitHub token', 'error');
-                    localStorage.removeItem('yardviz_github_token');
-                    return;
-                }
-                
-                if (!response.ok) {
-                    const errorData = await response.json();
-                    throw new Error(errorData.message || `GitHub API error: ${response.status}`);
-                }
-                
-                const result = await response.json();
-                this.state.githubSha = result.content.sha;
-                
-                console.log('☁️ Data saved to GitHub');
             } catch (error) {
                 console.error('GitHub save error:', error);
-                this.showToast('Could not sync to cloud', 'error');
+                let reason = '';
+                if (error.status === 403 || error.status === 429) {
+                    const t = error.resetAt ? new Date(Number(error.resetAt) * 1000) : null;
+                    reason = t ? ` (GitHub rate limit - resets ${t.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })})` : ' (GitHub rate limit)';
+                } else if (error.status === 409 || error.status === 422) {
+                    reason = ' (others are saving at the same time - try again)';
+                } else if (error instanceof TypeError) {
+                    reason = ' (no connection)';
+                }
+                this.showToast(`Could not sync to cloud${reason}`, 'error');
             } finally {
                 this.state.isSyncing = false;
+                if (this.state.saveQueued) {
+                    this.state.saveQueued = false;
+                    setTimeout(() => this.saveToGitHub(), 250);
+                }
             }
+        },
+        
+        buildSyncPayload() {
+            return {
+                trailers: this.state.trailers,
+                previousTrailerIds: Array.from(this.state.previousTrailerIds),
+                departed: this.state.departed || [],
+                ignored: this.state.ignored || [],
+                timestamp: Date.now(),
+                lastModified: new Date().toISOString()
+            };
+        },
+        
+        async fetchRemoteTrailerFile(url, headers) {
+            try {
+                const res = await fetch(url, { headers, cache: 'no-store' });
+                if (!res.ok) return null;
+                const fileData = await res.json();
+                const b64 = (fileData.content || '').replace(/\s/g, '');
+                const data = JSON.parse(decodeURIComponent(escape(atob(b64))));
+                return { sha: fileData.sha, data };
+            } catch (e) {
+                return null;
+            }
+        },
+        
+        // Stable comparison that ignores key order and empty/false values,
+        // so a trailer only counts as "changed" when its content really changed
+        syncEqual(a, b) {
+            const norm = (v) => {
+                if (Array.isArray(v)) return v.map(norm);
+                if (v && typeof v === 'object') {
+                    const out = {};
+                    Object.keys(v).sort().forEach(k => {
+                        const x = v[k];
+                        if (x === undefined || x === null || x === false || x === '') return;
+                        out[k] = norm(x);
+                    });
+                    return out;
+                }
+                return v;
+            };
+            return JSON.stringify(norm(a)) === JSON.stringify(norm(b));
+        },
+        
+        // Three-way merge by id: keep whatever each side changed since the
+        // common base. If both changed the same trailer, ours wins.
+        mergeById(base, local, remote) {
+            const idx = (arr) => new Map((arr || []).filter(x => x && x.id != null).map(x => [x.id, x]));
+            const B = idx(base), L = idx(local), R = idx(remote);
+            const out = [];
+            const seen = new Set();
+            const decide = (id) => {
+                if (seen.has(id)) return;
+                seen.add(id);
+                const b = B.get(id), l = L.get(id), r = R.get(id);
+                if (l && r) {
+                    out.push(b && this.syncEqual(l, b) ? r : l);
+                } else if (l && !r) {
+                    // Missing remotely: new on our side, or removed by someone else
+                    if (!b || !this.syncEqual(l, b)) out.push(l);
+                } else if (!l && r) {
+                    // Missing locally: new on their side, or removed by us
+                    if (!b || !this.syncEqual(r, b)) out.push(r);
+                }
+            };
+            (remote || []).forEach(x => x && decide(x.id));
+            (local || []).forEach(x => x && decide(x.id));
+            return out;
+        },
+        
+        mergeTrailerData(base, local, remote) {
+            base = base || {};
+            return {
+                trailers: this.mergeById(base.trailers, local.trailers, remote.trailers),
+                previousTrailerIds: Array.from(new Set([
+                    ...(remote.previousTrailerIds || []),
+                    ...(local.previousTrailerIds || [])
+                ])),
+                departed: this.mergeById(base.departed, local.departed, remote.departed),
+                ignored: this.mergeById(base.ignored, local.ignored, remote.ignored),
+                timestamp: Date.now(),
+                lastModified: new Date().toISOString()
+            };
+        },
+        
+        applyMergedTrailerData(data) {
+            this.state.trailers = data.trailers;
+            this.state.previousTrailerIds = new Set(data.previousTrailerIds);
+            this.state.departed = data.departed;
+            this.state.ignored = data.ignored;
+            try {
+                localStorage.setItem(this.config.localStorageKey, JSON.stringify({
+                    trailers: this.state.trailers,
+                    previousTrailerIds: data.previousTrailerIds
+                }));
+            } catch (e) { /* cache only */ }
+            // Re-apply the current search/filter and redraw
+            this.state.filteredTrailers = [...this.state.trailers];
+            if (typeof this.applyFilters === 'function') this.applyFilters();
+            else this.renderTrailerList();
+            this.renderTrailersWhenReady();
+            if (this.state.sidebarTab === 'departed') this.renderDepartedList();
+            else this.updateDepartedCount();
         },
         
         async refreshFromGitHub() {
@@ -5642,11 +5808,147 @@ ${lines.join('\n')}
                 .addTo(this.state.map);
             
             this.state.locateMarkers.push(marker);
+            this.scheduleMarkerLayout();
+        },
+        
+        // =====================================================
+        // MARKER LABEL DECLUTTER
+        // Keeps each pin on its trailer; when labels would overlap, the label
+        // slides to the nearest free spot and a leader line points back to
+        // the trailer's exact position.
+        // =====================================================
+        scheduleMarkerLayout() {
+            if (this._labelLayoutPending) return;
+            this._labelLayoutPending = true;
+            requestAnimationFrame(() => {
+                this._labelLayoutPending = false;
+                this.layoutMarkerLabels();
+            });
+        },
+        
+        layoutMarkerLabels() {
+            const map = this.state.map;
+            const markers = this.state.locateMarkers;
+            if (!map || !markers || !markers.length) return;
+            
+            const GAP = 4;
+            const items = [];
+            markers.forEach(m => {
+                const el = m.getElement();
+                const label = el && el.querySelector('.locate-marker');
+                if (!label) return;
+                const p = map.project(m.getLngLat());
+                items.push({ el, p, w: label.offsetWidth, h: el.offsetHeight });
+            });
+            if (!items.length) return;
+            
+            // Other trailers' pin points are obstacles too, so a label never hides a trailer
+            const DOT = 7;
+            const dots = items.map(it => ({ l: it.p.x - DOT, r: it.p.x + DOT, t: it.p.y - DOT, b: it.p.y + DOT, owner: it }));
+            
+            const overlap = (a, b) => Math.max(0, Math.min(a.r, b.r) - Math.max(a.l, b.l)) *
+                                      Math.max(0, Math.min(a.b, b.b) - Math.max(a.t, b.t));
+            
+            // Place lower labels first so crowded groups fan out upward
+            items.sort((a, b) => (b.p.y - a.p.y) || (a.p.x - b.p.x));
+            const placed = [];
+            
+            items.forEach(it => {
+                // Fan crowded labels outward: prefer the direction pointing away
+                // from nearby trailers, which keeps leader lines from crossing
+                let ax = 0, ay = 0;
+                items.forEach(o => {
+                    if (o === it) return;
+                    const vx = it.p.x - o.p.x, vy = it.p.y - o.p.y;
+                    const d = Math.hypot(vx, vy);
+                    if (d > 0 && d < 120) { ax += vx / d; ay += vy / d; }
+                });
+                const an = Math.hypot(ax, ay);
+                if (an > 0) { ax /= an; ay /= an; }
+                
+                const candidates = [];
+                for (let j = -4; j <= 2; j++) {
+                    for (let i = -4; i <= 4; i++) {
+                        const dx = i * (it.w / 2 + GAP);
+                        const dy = j * (it.h + GAP);
+                        const dist = Math.hypot(dx, dy);
+                        const along = dist > 0 ? (dx * ax + dy * ay) / dist : 0;   // -1..1
+                        const cost = Math.hypot(dx, dy * 1.2) * (1 - 0.45 * along) + (j > 0 ? 25 : 0);
+                        candidates.push({ dx, dy, cost });
+                    }
+                }
+                candidates.sort((a, b) => a.cost - b.cost);
+                
+                let best = null, bestHit = Infinity;
+                for (const c of candidates) {
+                    const box = {
+                        l: it.p.x + c.dx - it.w / 2 - GAP / 2,
+                        r: it.p.x + c.dx + it.w / 2 + GAP / 2,
+                        t: it.p.y + c.dy - it.h - GAP / 2,
+                        b: it.p.y + c.dy + GAP / 2
+                    };
+                    let hit = 0;
+                    for (const q of placed) hit += overlap(box, q);
+                    for (const d of dots) if (d.owner !== it) hit += overlap(box, d) * 0.5;
+                    if (hit < bestHit) { best = { c, box }; bestHit = hit; }
+                    if (hit === 0) break;
+                }
+                placed.push(best.box);
+                
+                const { dx, dy } = best.c;
+                const moved = dx !== 0 || dy !== 0;
+                it.el.style.setProperty('--lm-dx', `${dx}px`);
+                it.el.style.setProperty('--lm-dy', `${dy}px`);
+                it.el.classList.toggle('lm-moved', moved);
+                
+                it.el._lmOffset = moved ? { dx, dy } : null;
+                if (!it.el.querySelector('.locate-marker-dot')) {
+                    const dot = document.createElement('div');
+                    dot.className = 'locate-marker-dot';
+                    it.el.prepend(dot);
+                }
+            });
+            this.drawMarkerLeaders();
+        },
+        
+        // Leader lines live in one SVG layer beneath every marker, so a line
+        // never crosses over another trailer's label
+        drawMarkerLeaders() {
+            const map = this.state.map;
+            const markers = this.state.locateMarkers || [];
+            if (!map) return;
+            const host = map.getCanvasContainer();
+            let svg = host.querySelector('svg.lm-leaders');
+            if (!svg) {
+                svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                svg.setAttribute('class', 'lm-leaders');
+                const canvas = host.querySelector('canvas');
+                host.insertBefore(svg, canvas ? canvas.nextSibling : host.firstChild);
+            }
+            let paths = '';
+            markers.forEach(m => {
+                const off = m.getElement()._lmOffset;
+                if (!off) return;
+                const p = map.project(m.getLngLat());
+                const d = `M${p.x.toFixed(1)},${p.y.toFixed(1)}L${(p.x + off.dx).toFixed(1)},${(p.y + off.dy).toFixed(1)}`;
+                paths += `<path d="${d}" class="lm-halo"/><path d="${d}" class="lm-line"/>`;
+            });
+            svg.innerHTML = paths;
+        },
+        
+        scheduleLeaderDraw() {
+            if (this._leaderDrawPending) return;
+            this._leaderDrawPending = true;
+            requestAnimationFrame(() => {
+                this._leaderDrawPending = false;
+                this.drawMarkerLeaders();
+            });
         },
         
         clearLocateMarkers() {
             this.state.locateMarkers.forEach(marker => marker.remove());
             this.state.locateMarkers = [];
+            this.drawMarkerLeaders();
         },
         
         hideRegularMarkers() {
