@@ -2837,7 +2837,7 @@
       "reservedCustomerName": "",
       "outOfServiceReason": "",
       "customerName": "CloudTrucks, LLC",
-      "skybitzGroup": "CLOUDTRUCKS",
+      "skybitzGroup": "",
       "vin": ""
     },
     {
@@ -2908,9 +2908,9 @@
       "batteryStatus": "OK",
       "arrivedAt": "2026-09-26T20:30:31.5553202Z",
       "timeOfObservation": "2026-09-29T18:31:34Z",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
-      "isNew": true,
+      "isNew": false,
       "fleetStatus": "On_x0020_Rent",
       "onRent": true,
       "offRentStatus": "Available",
@@ -6378,6 +6378,6 @@
       "ignoredAt": "2026-09-29T12:19:50.962Z"
     }
   ],
-  "timestamp": 1790712257590,
-  "lastModified": "2026-09-29T20:04:17.590Z"
+  "timestamp": 1790712266452,
+  "lastModified": "2026-09-29T20:04:26.452Z"
 }
