@@ -728,9 +728,9 @@
       "batteryStatus": "OK",
       "arrivedAt": "2026-09-29T19:15:39.4375864Z",
       "timeOfObservation": "2026-09-29T19:04:04Z",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
-      "isNew": true,
+      "isNew": false,
       "fleetStatus": "Available",
       "onRent": false,
       "offRentStatus": "Available",
@@ -5545,7 +5545,6 @@
     "5316322",
     "5317012",
     "5317041",
-    "5317063",
     "5317150",
     "5317188",
     "5317277",
@@ -5612,6 +5611,7 @@
     "557455",
     "559045",
     "561100",
+    "5616038",
     "5617007",
     "5617117",
     "5617126",
@@ -5764,6 +5764,7 @@
     "MTRZ816440",
     "MTRZ816456",
     "MTRZ816482",
+    "MTRZ816487",
     "MTRZ816499",
     "MTRZ816664",
     "MTRZ817024",
@@ -5775,7 +5776,6 @@
     "MTRZ822097",
     "mtrz822114",
     "MTRZ951160",
-    "MTZR816487",
     "T4352"
   ],
   "departed": [
@@ -6378,6 +6378,6 @@
       "ignoredAt": "2026-09-29T12:19:50.962Z"
     }
   ],
-  "timestamp": 1790712214074,
-  "lastModified": "2026-09-29T20:03:34.074Z"
+  "timestamp": 1790712228275,
+  "lastModified": "2026-09-29T20:03:48.275Z"
 }
