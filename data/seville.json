@@ -3647,20 +3647,6 @@
   ],
   "departed": [
     {
-      "id": "581959",
-      "mtsn": "SHB8AJBL240338898",
-      "lastLat": 41.03109,
-      "lastLng": -81.86591,
-      "lastSeen": "2026-09-28T23:17:14.6079707Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "PEPSI - New River VA"
-    },
-    {
       "id": "587697",
       "mtsn": "SHB7BLAG224083060",
       "lastLat": 41.03163,
@@ -4237,6 +4223,6 @@
       "ignoredAt": "2026-09-28T12:24:50.326Z"
     }
   ],
-  "timestamp": 1790685909733,
-  "lastModified": "2026-09-29T12:45:09.733Z"
+  "timestamp": 1790685912841,
+  "lastModified": "2026-09-29T12:45:12.841Z"
 }
