@@ -3625,22 +3625,7 @@
     "MTRZ924160",
     "T1337"
   ],
-  "departed": [
-    {
-      "id": "5315210",
-      "mtsn": "SVE5DJBL240307102",
-      "lastLat": 41.03265,
-      "lastLng": -81.86439,
-      "lastSeen": "2026-09-30T13:31:29.4109284Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "Goodyear Commercial Tire and Service Center #070"
-    }
-  ],
+  "departed": [],
   "ignored": [
     {
       "id": "5327754",
@@ -4133,8 +4118,12 @@
     {
       "id": "581455",
       "ignoredAt": "2026-09-30T13:59:56.005Z"
+    },
+    {
+      "id": "5315210",
+      "ignoredAt": "2026-09-30T14:00:39.766Z"
     }
   ],
-  "timestamp": 1790776806059,
-  "lastModified": "2026-09-30T14:00:06.059Z"
+  "timestamp": 1790776839767,
+  "lastModified": "2026-09-30T14:00:39.767Z"
 }
