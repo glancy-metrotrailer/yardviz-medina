@@ -3653,20 +3653,6 @@
       "reservedCustomerName": "",
       "outOfServiceReason": "",
       "customerName": "Goodyear Commercial Tire and Service Center #070"
-    },
-    {
-      "id": "581455",
-      "mtsn": "SHB7BLAG223880287",
-      "lastLat": 41.03154,
-      "lastLng": -81.86408,
-      "lastSeen": "2026-09-29T20:16:17.0146271Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "XPO Logistics- RXO Division"
     }
   ],
   "ignored": [
@@ -4157,8 +4143,12 @@
     {
       "id": "MTRZ281644",
       "ignoredAt": "2026-09-30T13:59:41.120Z"
+    },
+    {
+      "id": "581455",
+      "ignoredAt": "2026-09-30T13:59:56.005Z"
     }
   ],
-  "timestamp": 1790776781121,
-  "lastModified": "2026-09-30T13:59:41.121Z"
+  "timestamp": 1790776796007,
+  "lastModified": "2026-09-30T13:59:56.007Z"
 }
