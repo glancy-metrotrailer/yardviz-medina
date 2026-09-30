@@ -3627,34 +3627,6 @@
   ],
   "departed": [
     {
-      "id": "581455",
-      "mtsn": "SHB7BLAG223880287",
-      "lastLat": 41.03154,
-      "lastLng": -81.86408,
-      "lastSeen": "2026-09-29T20:16:17.0146271Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "XPO Logistics- RXO Division"
-    },
-    {
-      "id": "531908C",
-      "mtsn": "SHB7BLAG223981969",
-      "lastLat": 41.0318,
-      "lastLng": -81.86629,
-      "lastSeen": "2026-09-30T02:01:25.6442734Z",
-      "missedCycles": 1,
-      "fleetStatus": "Reserved_x0020_for_x0020_Customer",
-      "onRent": false,
-      "offRentStatus": "Reserved_x0020_for_x0020_Customer",
-      "reservedCustomerName": "ITS",
-      "outOfServiceReason": "",
-      "customerName": ""
-    },
-    {
       "id": "MTZR314142",
       "mtsn": "SVE5CLAG224054737",
       "lastLat": 41.0312,
@@ -3723,6 +3695,20 @@
       "reservedCustomerName": "",
       "outOfServiceReason": "",
       "customerName": "Goodyear Commercial Tire and Service Center #070"
+    },
+    {
+      "id": "581455",
+      "mtsn": "SHB7BLAG223880287",
+      "lastLat": 41.03154,
+      "lastLng": -81.86408,
+      "lastSeen": "2026-09-29T20:16:17.0146271Z",
+      "missedCycles": 1,
+      "fleetStatus": "On_x0020_Rent",
+      "onRent": true,
+      "offRentStatus": "Available",
+      "reservedCustomerName": "",
+      "outOfServiceReason": "",
+      "customerName": "XPO Logistics- RXO Division"
     }
   ],
   "ignored": [
@@ -4203,6 +4189,6 @@
       "ignoredAt": "2026-09-29T18:18:09.866Z"
     }
   ],
-  "timestamp": 1790776714242,
-  "lastModified": "2026-09-30T13:58:34.242Z"
+  "timestamp": 1790776736743,
+  "lastModified": "2026-09-30T13:58:56.743Z"
 }
