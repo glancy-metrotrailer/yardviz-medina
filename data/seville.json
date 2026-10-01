@@ -3576,20 +3576,6 @@
   ],
   "departed": [
     {
-      "id": "5317513",
-      "mtsn": "SHB7CJBL240743546",
-      "lastLat": 41.03109,
-      "lastLng": -81.86581,
-      "lastSeen": "2026-10-01T16:16:12.9167406Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "Victory Equipment and Services, LLC"
-    },
-    {
       "id": "5327678",
       "mtsn": "SHB7BLAG222773839",
       "lastLat": 41.03118,
@@ -3602,6 +3588,20 @@
       "reservedCustomerName": "ADVANCE TRANS INC",
       "outOfServiceReason": "",
       "customerName": ""
+    },
+    {
+      "id": "539108",
+      "mtsn": "SVE5CLAG224159280",
+      "lastLat": 41.03199,
+      "lastLng": -81.86679,
+      "lastSeen": "2026-10-01T12:46:19.0563629Z",
+      "missedCycles": 1,
+      "fleetStatus": "On_x0020_Rent",
+      "onRent": true,
+      "offRentStatus": "Available",
+      "reservedCustomerName": "",
+      "outOfServiceReason": "",
+      "customerName": "Fiber Global Inc. "
     }
   ],
   "ignored": [
@@ -4102,6 +4102,6 @@
       "ignoredAt": "2026-09-30T14:00:39.766Z"
     }
   ],
-  "timestamp": 1790882825634,
-  "lastModified": "2026-10-01T19:27:05.634Z"
+  "timestamp": 1790882827174,
+  "lastModified": "2026-10-01T19:27:07.174Z"
 }
