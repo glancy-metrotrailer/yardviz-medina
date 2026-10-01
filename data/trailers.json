@@ -1080,9 +1080,9 @@
       "batteryStatus": "OK",
       "arrivedAt": "2026-09-30T19:15:37.8866246Z",
       "timeOfObservation": "2026-10-01T14:37:34Z",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
-      "isNew": true,
+      "isNew": false,
       "fleetStatus": "On_x0020_Rent",
       "onRent": true,
       "offRentStatus": "Available",
@@ -6752,6 +6752,6 @@
       "ignoredAt": "2026-09-29T20:05:10.169Z"
     }
   ],
-  "timestamp": 1790869824489,
-  "lastModified": "2026-10-01T15:50:24.489Z"
+  "timestamp": 1790869830228,
+  "lastModified": "2026-10-01T15:50:30.228Z"
 }
