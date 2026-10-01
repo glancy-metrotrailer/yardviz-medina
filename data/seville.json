@@ -3576,20 +3576,6 @@
   ],
   "departed": [
     {
-      "id": "5308301",
-      "mtsn": "SHB7BLAG222569710",
-      "lastLat": 41.03131,
-      "lastLng": -81.87181,
-      "lastSeen": "2026-10-01T13:31:29.6612307Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "Big M Masonry"
-    },
-    {
       "id": "5317513",
       "mtsn": "SHB7CJBL240743546",
       "lastLat": 41.03109,
@@ -4116,6 +4102,6 @@
       "ignoredAt": "2026-09-30T14:00:39.766Z"
     }
   ],
-  "timestamp": 1790882823949,
-  "lastModified": "2026-10-01T19:27:03.949Z"
+  "timestamp": 1790882825634,
+  "lastModified": "2026-10-01T19:27:05.634Z"
 }
