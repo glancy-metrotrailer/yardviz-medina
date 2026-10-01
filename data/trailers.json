@@ -5989,14 +5989,6 @@
       "lastLng": -81.89734,
       "lastSeen": "2026-10-01T07:31:39.7961184Z",
       "missedCycles": 1
-    },
-    {
-      "id": "MTRZ187300",
-      "mtsn": "SHB7BLAG222161378",
-      "lastLat": 41.14714,
-      "lastLng": -81.89729,
-      "lastSeen": "2026-10-01T11:17:20.4879386Z",
-      "missedCycles": 1
     }
   ],
   "ignored": [
@@ -6655,8 +6647,12 @@
     {
       "id": "MTRZ315233",
       "ignoredAt": "2026-10-01T17:36:52.920Z"
+    },
+    {
+      "id": "MTRZ187300",
+      "ignoredAt": "2026-10-01T17:36:53.430Z"
     }
   ],
-  "timestamp": 1790876212921,
-  "lastModified": "2026-10-01T17:36:52.921Z"
+  "timestamp": 1790876214047,
+  "lastModified": "2026-10-01T17:36:54.047Z"
 }
