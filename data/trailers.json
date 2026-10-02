@@ -5802,14 +5802,6 @@
       "lastLng": -81.89833,
       "lastSeen": "2026-10-01T20:31:43.1908420Z",
       "missedCycles": 1
-    },
-    {
-      "id": "MTRZ561399",
-      "mtsn": "GXL5ELAG193121679",
-      "lastLat": 41.14843,
-      "lastLng": -81.89841,
-      "lastSeen": "2026-10-01T21:02:21.1082095Z",
-      "missedCycles": 1
     }
   ],
   "ignored": [
@@ -6492,8 +6484,12 @@
     {
       "id": "568795",
       "ignoredAt": "2026-10-01T19:26:41.157Z"
+    },
+    {
+      "id": "MTRZ561399",
+      "ignoredAt": "2026-10-02T12:14:26.768Z"
     }
   ],
-  "timestamp": 1790943256587,
-  "lastModified": "2026-10-02T12:14:16.587Z"
+  "timestamp": 1790943266770,
+  "lastModified": "2026-10-02T12:14:26.770Z"
 }
