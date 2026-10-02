@@ -5778,16 +5778,7 @@
     "T1873",
     "T4352"
   ],
-  "departed": [
-    {
-      "id": "MTRZ555321",
-      "mtsn": "SHB8AJBL240541826",
-      "lastLat": 41.14842,
-      "lastLng": -81.89822,
-      "lastSeen": "2026-10-01T21:32:30.8133151Z",
-      "missedCycles": 1
-    }
-  ],
+  "departed": [],
   "ignored": [
     {
       "id": "",
@@ -6480,8 +6471,12 @@
     {
       "id": "MTRZ581333",
       "ignoredAt": "2026-10-02T12:14:29.715Z"
+    },
+    {
+      "id": "MTRZ555321",
+      "ignoredAt": "2026-10-02T12:14:30.457Z"
     }
   ],
-  "timestamp": 1790943270022,
-  "lastModified": "2026-10-02T12:14:30.022Z"
+  "timestamp": 1790943271070,
+  "lastModified": "2026-10-02T12:14:31.070Z"
 }
