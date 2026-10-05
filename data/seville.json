@@ -3579,20 +3579,6 @@
   ],
   "departed": [
     {
-      "id": "5327661",
-      "mtsn": "SHB7BLAG222773757",
-      "lastLat": 41.03194,
-      "lastLng": -81.86417,
-      "lastSeen": "2026-10-03T23:31:08.8445535Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "Phoenix Cargo, LLC"
-    },
-    {
       "id": "5316602",
       "mtsn": "SHB8AJBL234528897",
       "lastLat": 41.03142,
@@ -4107,8 +4093,12 @@
     {
       "id": "539108",
       "ignoredAt": "2026-10-01T19:27:09.476Z"
+    },
+    {
+      "id": "5327661",
+      "ignoredAt": "2026-10-05T12:55:36.927Z"
     }
   ],
-  "timestamp": 1791204880537,
-  "lastModified": "2026-10-05T12:54:40.537Z"
+  "timestamp": 1791204936928,
+  "lastModified": "2026-10-05T12:55:36.928Z"
 }
