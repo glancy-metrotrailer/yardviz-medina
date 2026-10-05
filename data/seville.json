@@ -3579,20 +3579,6 @@
   ],
   "departed": [
     {
-      "id": "5327828",
-      "mtsn": "SHB7BLAG222775642",
-      "lastLat": 41.03132,
-      "lastLng": -81.86624,
-      "lastSeen": "2026-10-01T21:01:34.3705240Z",
-      "missedCycles": 1,
-      "fleetStatus": "Reserved_x0020_for_x0020_Customer",
-      "onRent": false,
-      "offRentStatus": "Reserved_x0020_for_x0020_Customer",
-      "reservedCustomerName": "ADVANCE TRANS INC",
-      "outOfServiceReason": "",
-      "customerName": ""
-    },
-    {
       "id": "564596",
       "mtsn": "SHB81JBL233314941",
       "lastLat": 41.03186,
@@ -4193,6 +4179,6 @@
       "ignoredAt": "2026-10-01T19:27:09.476Z"
     }
   ],
-  "timestamp": 1791204813945,
-  "lastModified": "2026-10-05T12:53:33.945Z"
+  "timestamp": 1791204831723,
+  "lastModified": "2026-10-05T12:53:51.723Z"
 }
