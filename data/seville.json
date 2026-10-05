@@ -3579,20 +3579,6 @@
   ],
   "departed": [
     {
-      "id": "5312303",
-      "mtsn": "SHB7BLAG222774440",
-      "lastLat": 41.03115,
-      "lastLng": -81.86612,
-      "lastSeen": "2026-10-02T18:16:12.7661311Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "Kirk NationaLease Co - CLE"
-    },
-    {
       "id": "5327096",
       "mtsn": "SHB7BLAG223176244",
       "lastLat": 41.03112,
@@ -4151,6 +4137,6 @@
       "ignoredAt": "2026-10-01T19:27:09.476Z"
     }
   ],
-  "timestamp": 1791204855384,
-  "lastModified": "2026-10-05T12:54:15.384Z"
+  "timestamp": 1791204860262,
+  "lastModified": "2026-10-05T12:54:20.262Z"
 }
