@@ -5144,16 +5144,7 @@
     "T1873",
     "T4352"
   ],
-  "departed": [
-    {
-      "id": "MTRZ532006",
-      "mtsn": "SVE5CLAG224159383",
-      "lastLat": 41.1476,
-      "lastLng": -81.89735,
-      "lastSeen": "2026-10-02T22:16:41.5165649Z",
-      "missedCycles": 1
-    }
-  ],
+  "departed": [],
   "ignored": [
     {
       "id": "",
@@ -5942,8 +5933,12 @@
     {
       "id": "MTRZ581302",
       "ignoredAt": "2026-10-05T13:03:11.858Z"
+    },
+    {
+      "id": "MTRZ532006",
+      "ignoredAt": "2026-10-05T13:03:25.259Z"
     }
   ],
-  "timestamp": 1791205391859,
-  "lastModified": "2026-10-05T13:03:11.859Z"
+  "timestamp": 1791205405260,
+  "lastModified": "2026-10-05T13:03:25.260Z"
 }
