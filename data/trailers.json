@@ -5218,14 +5218,6 @@
       "missedCycles": 1
     },
     {
-      "id": "MTRZ581332",
-      "mtsn": "SHB8AJBL234628977",
-      "lastLat": 41.14855,
-      "lastLng": -81.89734,
-      "lastSeen": "2026-10-04T18:47:02.4975082Z",
-      "missedCycles": 1
-    },
-    {
       "id": "MTRZ581302",
       "mtsn": "SVE5CLAG221523202",
       "lastLat": 41.14697,
@@ -5986,8 +5978,12 @@
     {
       "id": "MTRZ586015",
       "ignoredAt": "2026-10-05T13:00:15.741Z"
+    },
+    {
+      "id": "MTRZ581332",
+      "ignoredAt": "2026-10-05T13:00:34.052Z"
     }
   ],
-  "timestamp": 1791205215742,
-  "lastModified": "2026-10-05T13:00:15.742Z"
+  "timestamp": 1791205234053,
+  "lastModified": "2026-10-05T13:00:34.053Z"
 }
