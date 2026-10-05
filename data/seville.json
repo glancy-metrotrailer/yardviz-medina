@@ -3677,20 +3677,6 @@
       "customerName": "Victory Equipment and Services, LLC"
     },
     {
-      "id": "5327826",
-      "mtsn": "SHB7BLAG222775534",
-      "lastLat": 41.03135,
-      "lastLng": -81.87144,
-      "lastSeen": "2026-10-03T21:16:05.3510077Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "Advance Trans, Inc. "
-    },
-    {
       "id": "5327661",
       "mtsn": "SHB7BLAG222773757",
       "lastLat": 41.03194,
@@ -4221,6 +4207,6 @@
       "ignoredAt": "2026-10-01T19:27:09.476Z"
     }
   ],
-  "timestamp": 1791204697419,
-  "lastModified": "2026-10-05T12:51:37.419Z"
+  "timestamp": 1791204786357,
+  "lastModified": "2026-10-05T12:53:06.357Z"
 }
