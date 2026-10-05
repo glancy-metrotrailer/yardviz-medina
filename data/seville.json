@@ -3577,22 +3577,7 @@
     "MTRZ924160",
     "T1337"
   ],
-  "departed": [
-    {
-      "id": "5316602",
-      "mtsn": "SHB8AJBL234528897",
-      "lastLat": 41.03142,
-      "lastLng": -81.86833,
-      "lastSeen": "2026-10-04T05:16:08.2331923Z",
-      "missedCycles": 1,
-      "fleetStatus": "Available",
-      "onRent": false,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": ""
-    }
-  ],
+  "departed": [],
   "ignored": [
     {
       "id": "5327754",
@@ -4097,8 +4082,12 @@
     {
       "id": "5327661",
       "ignoredAt": "2026-10-05T12:55:36.927Z"
+    },
+    {
+      "id": "5316602",
+      "ignoredAt": "2026-10-05T12:55:38.726Z"
     }
   ],
-  "timestamp": 1791204936928,
-  "lastModified": "2026-10-05T12:55:36.928Z"
+  "timestamp": 1791204938726,
+  "lastModified": "2026-10-05T12:55:38.726Z"
 }
