@@ -5146,46 +5146,6 @@
   ],
   "departed": [
     {
-      "id": "MTRZ581519",
-      "mtsn": "SHB7CJBL232406387",
-      "lastLat": 41.14848,
-      "lastLng": -81.89824,
-      "lastSeen": "2026-10-02T19:46:23.2311181Z",
-      "missedCycles": 1
-    },
-    {
-      "id": "MTRZ581403",
-      "mtsn": "SVE5CLAG224159238",
-      "lastLat": 41.14818,
-      "lastLng": -81.89809,
-      "lastSeen": "2026-10-02T20:47:06.3402718Z",
-      "missedCycles": 1
-    },
-    {
-      "id": "MTRZ581302",
-      "mtsn": "SVE5CLAG221523202",
-      "lastLat": 41.14697,
-      "lastLng": -81.89751,
-      "lastSeen": "2026-10-02T21:46:36.3363956Z",
-      "missedCycles": 1
-    },
-    {
-      "id": "MTRZ532006",
-      "mtsn": "SVE5CLAG224159383",
-      "lastLat": 41.1476,
-      "lastLng": -81.89735,
-      "lastSeen": "2026-10-02T22:16:41.5165649Z",
-      "missedCycles": 1
-    },
-    {
-      "id": "MTRZ558117",
-      "mtsn": "SHB8AJBL234427770",
-      "lastLat": 41.14799,
-      "lastLng": -81.89812,
-      "lastSeen": "2026-10-03T04:31:57.5543061Z",
-      "missedCycles": 1
-    },
-    {
       "id": "6096",
       "mtsn": "SHB7BLAG222161238",
       "lastLat": 41.14842,
@@ -5279,6 +5239,38 @@
       "lastLat": 41.14718,
       "lastLng": -81.89719,
       "lastSeen": "2026-10-04T18:47:02.4975461Z",
+      "missedCycles": 1
+    },
+    {
+      "id": "MTRZ581519",
+      "mtsn": "SHB7CJBL232406387",
+      "lastLat": 41.14848,
+      "lastLng": -81.89824,
+      "lastSeen": "2026-10-02T19:46:23.2311181Z",
+      "missedCycles": 1
+    },
+    {
+      "id": "MTRZ581403",
+      "mtsn": "SVE5CLAG224159238",
+      "lastLat": 41.14818,
+      "lastLng": -81.89809,
+      "lastSeen": "2026-10-02T20:47:06.3402718Z",
+      "missedCycles": 1
+    },
+    {
+      "id": "MTRZ581302",
+      "mtsn": "SVE5CLAG221523202",
+      "lastLat": 41.14697,
+      "lastLng": -81.89751,
+      "lastSeen": "2026-10-02T21:46:36.3363956Z",
+      "missedCycles": 1
+    },
+    {
+      "id": "MTRZ532006",
+      "mtsn": "SVE5CLAG224159383",
+      "lastLat": 41.1476,
+      "lastLng": -81.89735,
+      "lastSeen": "2026-10-02T22:16:41.5165649Z",
       "missedCycles": 1
     }
   ],
@@ -6006,8 +5998,12 @@
     {
       "id": "MTRZ313032",
       "ignoredAt": "2026-10-02T19:23:58.811Z"
+    },
+    {
+      "id": "MTRZ558117",
+      "ignoredAt": "2026-10-05T12:58:21.178Z"
     }
   ],
-  "timestamp": 1791205042225,
-  "lastModified": "2026-10-05T12:57:22.225Z"
+  "timestamp": 1791205101180,
+  "lastModified": "2026-10-05T12:58:21.180Z"
 }
