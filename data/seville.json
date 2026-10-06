@@ -3263,22 +3263,7 @@
     "MTRZ924160",
     "T1337"
   ],
-  "departed": [
-    {
-      "id": "5327073",
-      "mtsn": "SHB7BLAG223176204",
-      "lastLat": 41.03072,
-      "lastLng": -81.8693,
-      "lastSeen": "2026-10-06T12:46:14.8279989Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "Victory Equipment and Services, LLC"
-    }
-  ],
+  "departed": [],
   "ignored": [
     {
       "id": "5327754",
@@ -3875,8 +3860,12 @@
     {
       "id": "MTRZ315253",
       "ignoredAt": "2026-10-06T13:17:22.063Z"
+    },
+    {
+      "id": "5327073",
+      "ignoredAt": "2026-10-06T13:17:32.185Z"
     }
   ],
-  "timestamp": 1791292642064,
-  "lastModified": "2026-10-06T13:17:22.064Z"
+  "timestamp": 1791292652186,
+  "lastModified": "2026-10-06T13:17:32.186Z"
 }
