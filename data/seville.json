@@ -3489,48 +3489,6 @@
       "customerName": ""
     },
     {
-      "id": "5817021",
-      "mtsn": "SHB7BLAG224082704",
-      "lastLat": 41.03142,
-      "lastLng": -81.8662,
-      "lastSeen": "2026-10-06T06:17:17.2511009Z",
-      "missedCycles": 1,
-      "fleetStatus": "Available",
-      "onRent": false,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": ""
-    },
-    {
-      "id": "5817025",
-      "mtsn": "SHB7BLAG223576982",
-      "lastLat": 41.03141,
-      "lastLng": -81.86656,
-      "lastSeen": "2026-10-06T06:46:05.0109633Z",
-      "missedCycles": 1,
-      "fleetStatus": "Available",
-      "onRent": false,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": ""
-    },
-    {
-      "id": "581967",
-      "mtsn": "SHB8AJBL241748856",
-      "lastLat": 41.03138,
-      "lastLng": -81.86604,
-      "lastSeen": "2026-10-06T08:16:08.1476947Z",
-      "missedCycles": 1,
-      "fleetStatus": "Available",
-      "onRent": false,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": ""
-    },
-    {
       "id": "MTRZ567220",
       "mtsn": "SHB8AJBL240238499",
       "lastLat": 41.03124,
@@ -3648,6 +3606,20 @@
       "lastLat": 41.03128,
       "lastLng": -81.86668,
       "lastSeen": "2026-10-06T00:16:18.0883172Z",
+      "missedCycles": 1,
+      "fleetStatus": "Available",
+      "onRent": false,
+      "offRentStatus": "Available",
+      "reservedCustomerName": "",
+      "outOfServiceReason": "",
+      "customerName": ""
+    },
+    {
+      "id": "5817021",
+      "mtsn": "SHB7BLAG224082704",
+      "lastLat": 41.03142,
+      "lastLng": -81.8662,
+      "lastSeen": "2026-10-06T06:17:17.2511009Z",
       "missedCycles": 1,
       "fleetStatus": "Available",
       "onRent": false,
@@ -4175,6 +4147,6 @@
       "ignoredAt": "2026-10-06T13:09:46.292Z"
     }
   ],
-  "timestamp": 1791292252223,
-  "lastModified": "2026-10-06T13:10:52.223Z"
+  "timestamp": 1791292258014,
+  "lastModified": "2026-10-06T13:10:58.014Z"
 }
