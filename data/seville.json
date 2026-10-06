@@ -3321,20 +3321,6 @@
       "customerName": "UPS"
     },
     {
-      "id": "5822050",
-      "mtsn": "SHB8AJBL234124552",
-      "lastLat": 41.03179,
-      "lastLng": -81.86656,
-      "lastSeen": "2026-10-05T16:46:24.8138287Z",
-      "missedCycles": 1,
-      "fleetStatus": "Available",
-      "onRent": false,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": ""
-    },
-    {
       "id": "MTRZ315611",
       "mtsn": "SHB8AJBL234124790",
       "lastLat": 41.03123,
@@ -3382,20 +3368,6 @@
       "lastLat": 41.03107,
       "lastLng": -81.86661,
       "lastSeen": "2026-10-05T18:31:41.2683214Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "UPS"
-    },
-    {
-      "id": "582203",
-      "mtsn": "SVE5CLAG224055661",
-      "lastLat": 41.03121,
-      "lastLng": -81.86552,
-      "lastSeen": "2026-10-05T19:31:05.8129959Z",
       "missedCycles": 1,
       "fleetStatus": "On_x0020_Rent",
       "onRent": true,
@@ -3461,20 +3433,6 @@
       "customerName": "UPS"
     },
     {
-      "id": "5816530",
-      "mtsn": "SHB8AJBL240339511",
-      "lastLat": 41.03115,
-      "lastLng": -81.8665,
-      "lastSeen": "2026-10-05T21:46:28.9504583Z",
-      "missedCycles": 1,
-      "fleetStatus": "Available",
-      "onRent": false,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": ""
-    },
-    {
       "id": "MTRZ816503",
       "mtsn": "SHB8AJBL240339519",
       "lastLat": 41.03143,
@@ -3487,20 +3445,6 @@
       "reservedCustomerName": "",
       "outOfServiceReason": "",
       "customerName": "UPS"
-    },
-    {
-      "id": "580805",
-      "mtsn": "SHB7BLAG224082883",
-      "lastLat": 41.03202,
-      "lastLng": -81.86636,
-      "lastSeen": "2026-10-05T23:16:19.6244571Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "True Up Companies, LLC"
     },
     {
       "id": "MTRZ551655",
@@ -3541,48 +3485,6 @@
       "onRent": false,
       "offRentStatus": "Available",
       "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": ""
-    },
-    {
-      "id": "581713",
-      "mtsn": "SVE5CLAG223346477",
-      "lastLat": 41.03136,
-      "lastLng": -81.86584,
-      "lastSeen": "2026-10-06T00:16:18.0882595Z",
-      "missedCycles": 1,
-      "fleetStatus": "Available",
-      "onRent": false,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": ""
-    },
-    {
-      "id": "581781",
-      "mtsn": "SHB8AJBL240946329",
-      "lastLat": 41.03128,
-      "lastLng": -81.86668,
-      "lastSeen": "2026-10-06T00:16:18.0883172Z",
-      "missedCycles": 1,
-      "fleetStatus": "Available",
-      "onRent": false,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": ""
-    },
-    {
-      "id": "551764",
-      "mtsn": "SHB7BLAG222774445",
-      "lastLat": 41.03124,
-      "lastLng": -81.86581,
-      "lastSeen": "2026-10-06T00:31:18.3517040Z",
-      "missedCycles": 1,
-      "fleetStatus": "Reserved_x0020_for_x0020_Customer",
-      "onRent": false,
-      "offRentStatus": "Reserved_x0020_for_x0020_Customer",
-      "reservedCustomerName": "Victory",
       "outOfServiceReason": "",
       "customerName": ""
     },
@@ -3697,6 +3599,90 @@
       "reservedCustomerName": "",
       "outOfServiceReason": "",
       "customerName": "Victory Equipment and Services, LLC"
+    },
+    {
+      "id": "5822050",
+      "mtsn": "SHB8AJBL234124552",
+      "lastLat": 41.03179,
+      "lastLng": -81.86656,
+      "lastSeen": "2026-10-05T16:46:24.8138287Z",
+      "missedCycles": 1,
+      "fleetStatus": "Available",
+      "onRent": false,
+      "offRentStatus": "Available",
+      "reservedCustomerName": "",
+      "outOfServiceReason": "",
+      "customerName": ""
+    },
+    {
+      "id": "582203",
+      "mtsn": "SVE5CLAG224055661",
+      "lastLat": 41.03121,
+      "lastLng": -81.86552,
+      "lastSeen": "2026-10-05T19:31:05.8129959Z",
+      "missedCycles": 1,
+      "fleetStatus": "On_x0020_Rent",
+      "onRent": true,
+      "offRentStatus": "Available",
+      "reservedCustomerName": "",
+      "outOfServiceReason": "",
+      "customerName": "UPS"
+    },
+    {
+      "id": "5816530",
+      "mtsn": "SHB8AJBL240339511",
+      "lastLat": 41.03115,
+      "lastLng": -81.8665,
+      "lastSeen": "2026-10-05T21:46:28.9504583Z",
+      "missedCycles": 1,
+      "fleetStatus": "Available",
+      "onRent": false,
+      "offRentStatus": "Available",
+      "reservedCustomerName": "",
+      "outOfServiceReason": "",
+      "customerName": ""
+    },
+    {
+      "id": "580805",
+      "mtsn": "SHB7BLAG224082883",
+      "lastLat": 41.03202,
+      "lastLng": -81.86636,
+      "lastSeen": "2026-10-05T23:16:19.6244571Z",
+      "missedCycles": 1,
+      "fleetStatus": "On_x0020_Rent",
+      "onRent": true,
+      "offRentStatus": "Available",
+      "reservedCustomerName": "",
+      "outOfServiceReason": "",
+      "customerName": "True Up Companies, LLC"
+    },
+    {
+      "id": "581713",
+      "mtsn": "SVE5CLAG223346477",
+      "lastLat": 41.03136,
+      "lastLng": -81.86584,
+      "lastSeen": "2026-10-06T00:16:18.0882595Z",
+      "missedCycles": 1,
+      "fleetStatus": "Available",
+      "onRent": false,
+      "offRentStatus": "Available",
+      "reservedCustomerName": "",
+      "outOfServiceReason": "",
+      "customerName": ""
+    },
+    {
+      "id": "581781",
+      "mtsn": "SHB8AJBL240946329",
+      "lastLat": 41.03128,
+      "lastLng": -81.86668,
+      "lastSeen": "2026-10-06T00:16:18.0883172Z",
+      "missedCycles": 1,
+      "fleetStatus": "Available",
+      "onRent": false,
+      "offRentStatus": "Available",
+      "reservedCustomerName": "",
+      "outOfServiceReason": "",
+      "customerName": ""
     }
   ],
   "ignored": [
@@ -4217,6 +4203,6 @@
       "ignoredAt": "2026-10-06T13:09:46.292Z"
     }
   ],
-  "timestamp": 1791292211382,
-  "lastModified": "2026-10-06T13:10:11.382Z"
+  "timestamp": 1791292248816,
+  "lastModified": "2026-10-06T13:10:48.816Z"
 }
