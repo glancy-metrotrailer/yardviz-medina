@@ -3265,34 +3265,6 @@
   ],
   "departed": [
     {
-      "id": "MTRZ315253",
-      "mtsn": "SHB8AJBL233923025",
-      "lastLat": 41.03124,
-      "lastLng": -81.86646,
-      "lastSeen": "2026-10-05T16:01:38.3801714Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "UPS"
-    },
-    {
-      "id": "MTRZ315611",
-      "mtsn": "SHB8AJBL234124790",
-      "lastLat": 41.03123,
-      "lastLng": -81.8653,
-      "lastSeen": "2026-10-05T17:31:12.0108968Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "UPS"
-    },
-    {
       "id": "MTRZ316435",
       "mtsn": "SHB8AJBL234528790",
       "lastLat": 41.03119,
@@ -3599,6 +3571,20 @@
       "reservedCustomerName": "",
       "outOfServiceReason": "",
       "customerName": ""
+    },
+    {
+      "id": "MTRZ315253",
+      "mtsn": "SHB8AJBL233923025",
+      "lastLat": 41.03124,
+      "lastLng": -81.86646,
+      "lastSeen": "2026-10-05T16:01:38.3801714Z",
+      "missedCycles": 1,
+      "fleetStatus": "On_x0020_Rent",
+      "onRent": true,
+      "offRentStatus": "Available",
+      "reservedCustomerName": "",
+      "outOfServiceReason": "",
+      "customerName": "UPS"
     }
   ],
   "ignored": [
@@ -4117,8 +4103,12 @@
     {
       "id": "MTRZ816528",
       "ignoredAt": "2026-10-06T13:09:46.292Z"
+    },
+    {
+      "id": "MTRZ315611",
+      "ignoredAt": "2026-10-06T13:12:12.967Z"
     }
   ],
-  "timestamp": 1791292310138,
-  "lastModified": "2026-10-06T13:11:50.138Z"
+  "timestamp": 1791292332969,
+  "lastModified": "2026-10-06T13:12:12.969Z"
 }
