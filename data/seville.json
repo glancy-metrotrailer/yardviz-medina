@@ -3265,34 +3265,6 @@
   ],
   "departed": [
     {
-      "id": "5327073",
-      "mtsn": "SHB7BLAG223176204",
-      "lastLat": 41.03072,
-      "lastLng": -81.8693,
-      "lastSeen": "2026-10-06T12:46:14.8279989Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "Victory Equipment and Services, LLC"
-    },
-    {
-      "id": "582203",
-      "mtsn": "SVE5CLAG224055661",
-      "lastLat": 41.03121,
-      "lastLng": -81.86552,
-      "lastSeen": "2026-10-05T19:31:05.8129959Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "UPS"
-    },
-    {
       "id": "580805",
       "mtsn": "SHB7BLAG224082883",
       "lastLat": 41.03202,
@@ -3417,6 +3389,20 @@
       "reservedCustomerName": "",
       "outOfServiceReason": "",
       "customerName": "UPS"
+    },
+    {
+      "id": "5327073",
+      "mtsn": "SHB7BLAG223176204",
+      "lastLat": 41.03072,
+      "lastLng": -81.8693,
+      "lastSeen": "2026-10-06T12:46:14.8279989Z",
+      "missedCycles": 1,
+      "fleetStatus": "On_x0020_Rent",
+      "onRent": true,
+      "offRentStatus": "Available",
+      "reservedCustomerName": "",
+      "outOfServiceReason": "",
+      "customerName": "Victory Equipment and Services, LLC"
     }
   ],
   "ignored": [
@@ -3975,8 +3961,12 @@
     {
       "id": "MTRZ567220",
       "ignoredAt": "2026-10-06T13:16:44.448Z"
+    },
+    {
+      "id": "582203",
+      "ignoredAt": "2026-10-06T13:17:01.294Z"
     }
   ],
-  "timestamp": 1791292604450,
-  "lastModified": "2026-10-06T13:16:44.450Z"
+  "timestamp": 1791292621296,
+  "lastModified": "2026-10-06T13:17:01.296Z"
 }
