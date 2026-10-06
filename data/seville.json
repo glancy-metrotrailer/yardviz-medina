@@ -3254,34 +3254,6 @@
   ],
   "departed": [
     {
-      "id": "MTRZ569079",
-      "mtsn": "SHB7CJBL243055522",
-      "lastLat": 41.03163,
-      "lastLng": -81.86488,
-      "lastSeen": "2026-10-06T15:17:54.1120468Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "PEPSI - New River VA"
-    },
-    {
-      "id": "MTRZ314301",
-      "mtsn": "SHB8AJBL233922628",
-      "lastLat": 41.03202,
-      "lastLng": -81.86581,
-      "lastSeen": "2026-10-06T15:46:08.1430889Z",
-      "missedCycles": 1,
-      "fleetStatus": "Available",
-      "onRent": false,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": ""
-    },
-    {
       "id": "MTRZ314449",
       "mtsn": "SHB8AJBL241748992",
       "lastLat": 41.03133,
@@ -3336,6 +3308,20 @@
       "reservedCustomerName": "",
       "outOfServiceReason": "",
       "customerName": "Victory Equipment and Services, LLC"
+    },
+    {
+      "id": "MTRZ569079",
+      "mtsn": "SHB7CJBL243055522",
+      "lastLat": 41.03163,
+      "lastLng": -81.86488,
+      "lastSeen": "2026-10-06T15:17:54.1120468Z",
+      "missedCycles": 1,
+      "fleetStatus": "On_x0020_Rent",
+      "onRent": true,
+      "offRentStatus": "Available",
+      "reservedCustomerName": "",
+      "outOfServiceReason": "",
+      "customerName": "PEPSI - New River VA"
     }
   ],
   "ignored": [
@@ -3938,8 +3924,12 @@
     {
       "id": "5327073",
       "ignoredAt": "2026-10-06T13:17:32.185Z"
+    },
+    {
+      "id": "MTRZ314301",
+      "ignoredAt": "2026-10-06T18:43:05.650Z"
     }
   ],
-  "timestamp": 1791312064167,
-  "lastModified": "2026-10-06T18:41:04.167Z"
+  "timestamp": 1791312185651,
+  "lastModified": "2026-10-06T18:43:05.651Z"
 }
