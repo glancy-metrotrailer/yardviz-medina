@@ -3265,20 +3265,6 @@
   ],
   "departed": [
     {
-      "id": "580805",
-      "mtsn": "SHB7BLAG224082883",
-      "lastLat": 41.03202,
-      "lastLng": -81.86636,
-      "lastSeen": "2026-10-05T23:16:19.6244571Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "True Up Companies, LLC"
-    },
-    {
       "id": "5816530",
       "mtsn": "SHB8AJBL240339511",
       "lastLat": 41.03115,
@@ -3965,8 +3951,12 @@
     {
       "id": "582203",
       "ignoredAt": "2026-10-06T13:17:01.294Z"
+    },
+    {
+      "id": "580805",
+      "ignoredAt": "2026-10-06T13:17:01.970Z"
     }
   ],
-  "timestamp": 1791292621296,
-  "lastModified": "2026-10-06T13:17:01.296Z"
+  "timestamp": 1791292622505,
+  "lastModified": "2026-10-06T13:17:02.505Z"
 }
