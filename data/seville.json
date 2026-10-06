@@ -3265,20 +3265,6 @@
   ],
   "departed": [
     {
-      "id": "5309330",
-      "mtsn": "SHB8AJBL233923379",
-      "lastLat": 41.03197,
-      "lastLng": -81.86592,
-      "lastSeen": "2026-10-05T13:46:13.9626288Z",
-      "missedCycles": 1,
-      "fleetStatus": "Available",
-      "onRent": false,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": ""
-    },
-    {
       "id": "5822024",
       "mtsn": "SHB8AJBL234427222",
       "lastLat": 41.0314,
@@ -3503,20 +3489,6 @@
       "customerName": "UPS"
     },
     {
-      "id": "5816577",
-      "mtsn": "SHB8AJBL241047347",
-      "lastLat": 41.03136,
-      "lastLng": -81.86652,
-      "lastSeen": "2026-10-06T12:16:21.4829288Z",
-      "missedCycles": 1,
-      "fleetStatus": "Available",
-      "onRent": false,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": ""
-    },
-    {
       "id": "5327073",
       "mtsn": "SHB7BLAG223176204",
       "lastLat": 41.03072,
@@ -3529,20 +3501,6 @@
       "reservedCustomerName": "",
       "outOfServiceReason": "",
       "customerName": "Victory Equipment and Services, LLC"
-    },
-    {
-      "id": "5822050",
-      "mtsn": "SHB8AJBL234124552",
-      "lastLat": 41.03179,
-      "lastLng": -81.86656,
-      "lastSeen": "2026-10-05T16:46:24.8138287Z",
-      "missedCycles": 1,
-      "fleetStatus": "Available",
-      "onRent": false,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": ""
     },
     {
       "id": "582203",
@@ -3559,20 +3517,6 @@
       "customerName": "UPS"
     },
     {
-      "id": "5816530",
-      "mtsn": "SHB8AJBL240339511",
-      "lastLat": 41.03115,
-      "lastLng": -81.8665,
-      "lastSeen": "2026-10-05T21:46:28.9504583Z",
-      "missedCycles": 1,
-      "fleetStatus": "Available",
-      "onRent": false,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": ""
-    },
-    {
       "id": "580805",
       "mtsn": "SHB7BLAG224082883",
       "lastLat": 41.03202,
@@ -3585,6 +3529,20 @@
       "reservedCustomerName": "",
       "outOfServiceReason": "",
       "customerName": "True Up Companies, LLC"
+    },
+    {
+      "id": "5816530",
+      "mtsn": "SHB8AJBL240339511",
+      "lastLat": 41.03115,
+      "lastLng": -81.8665,
+      "lastSeen": "2026-10-05T21:46:28.9504583Z",
+      "missedCycles": 1,
+      "fleetStatus": "Available",
+      "onRent": false,
+      "offRentStatus": "Available",
+      "reservedCustomerName": "",
+      "outOfServiceReason": "",
+      "customerName": ""
     },
     {
       "id": "581713",
@@ -3620,6 +3578,48 @@
       "lastLat": 41.03142,
       "lastLng": -81.8662,
       "lastSeen": "2026-10-06T06:17:17.2511009Z",
+      "missedCycles": 1,
+      "fleetStatus": "Available",
+      "onRent": false,
+      "offRentStatus": "Available",
+      "reservedCustomerName": "",
+      "outOfServiceReason": "",
+      "customerName": ""
+    },
+    {
+      "id": "5817025",
+      "mtsn": "SHB7BLAG223576982",
+      "lastLat": 41.03141,
+      "lastLng": -81.86656,
+      "lastSeen": "2026-10-06T06:46:05.0109633Z",
+      "missedCycles": 1,
+      "fleetStatus": "Available",
+      "onRent": false,
+      "offRentStatus": "Available",
+      "reservedCustomerName": "",
+      "outOfServiceReason": "",
+      "customerName": ""
+    },
+    {
+      "id": "5816577",
+      "mtsn": "SHB8AJBL241047347",
+      "lastLat": 41.03136,
+      "lastLng": -81.86652,
+      "lastSeen": "2026-10-06T12:16:21.4829288Z",
+      "missedCycles": 1,
+      "fleetStatus": "Available",
+      "onRent": false,
+      "offRentStatus": "Available",
+      "reservedCustomerName": "",
+      "outOfServiceReason": "",
+      "customerName": ""
+    },
+    {
+      "id": "5822050",
+      "mtsn": "SHB8AJBL234124552",
+      "lastLat": 41.03179,
+      "lastLng": -81.86656,
+      "lastSeen": "2026-10-05T16:46:24.8138287Z",
       "missedCycles": 1,
       "fleetStatus": "Available",
       "onRent": false,
@@ -4147,6 +4147,6 @@
       "ignoredAt": "2026-10-06T13:09:46.292Z"
     }
   ],
-  "timestamp": 1791292258014,
-  "lastModified": "2026-10-06T13:10:58.014Z"
+  "timestamp": 1791292304148,
+  "lastModified": "2026-10-06T13:11:44.148Z"
 }
