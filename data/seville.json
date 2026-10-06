@@ -3489,20 +3489,6 @@
       "customerName": ""
     },
     {
-      "id": "5817023",
-      "mtsn": "SHB7BLAG223577017",
-      "lastLat": 41.03133,
-      "lastLng": -81.86633,
-      "lastSeen": "2026-10-06T02:01:10.8286232Z",
-      "missedCycles": 1,
-      "fleetStatus": "Available",
-      "onRent": false,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": ""
-    },
-    {
       "id": "557060",
       "mtsn": "SHB8AJBL241749805",
       "lastLat": 41.03199,
@@ -4203,6 +4189,6 @@
       "ignoredAt": "2026-10-06T13:09:46.292Z"
     }
   ],
-  "timestamp": 1791292248816,
-  "lastModified": "2026-10-06T13:10:48.816Z"
+  "timestamp": 1791292250314,
+  "lastModified": "2026-10-06T13:10:50.314Z"
 }
