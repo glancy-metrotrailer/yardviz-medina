@@ -3252,22 +3252,7 @@
     "MTRZ924160",
     "T1337"
   ],
-  "departed": [
-    {
-      "id": "MTRZ569079",
-      "mtsn": "SHB7CJBL243055522",
-      "lastLat": 41.03163,
-      "lastLng": -81.86488,
-      "lastSeen": "2026-10-06T15:17:54.1120468Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "PEPSI - New River VA"
-    }
-  ],
+  "departed": [],
   "ignored": [
     {
       "id": "5327754",
@@ -3884,8 +3869,12 @@
     {
       "id": "MTRZ587715",
       "ignoredAt": "2026-10-06T18:43:50.185Z"
+    },
+    {
+      "id": "MTRZ569079",
+      "ignoredAt": "2026-10-06T18:44:15.749Z"
     }
   ],
-  "timestamp": 1791312247484,
-  "lastModified": "2026-10-06T18:44:07.484Z"
+  "timestamp": 1791312255750,
+  "lastModified": "2026-10-06T18:44:15.750Z"
 }
