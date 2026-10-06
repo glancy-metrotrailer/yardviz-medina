@@ -3321,20 +3321,6 @@
       "customerName": "UPS"
     },
     {
-      "id": "5327831",
-      "mtsn": "SHB7BLAG222775633",
-      "lastLat": 41.03195,
-      "lastLng": -81.86573,
-      "lastSeen": "2026-10-05T16:46:24.8137685Z",
-      "missedCycles": 1,
-      "fleetStatus": "Available",
-      "onRent": false,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": ""
-    },
-    {
       "id": "5822050",
       "mtsn": "SHB8AJBL234124552",
       "lastLat": 41.03179,
@@ -4231,6 +4217,6 @@
       "ignoredAt": "2026-10-06T13:09:46.292Z"
     }
   ],
-  "timestamp": 1791292186294,
-  "lastModified": "2026-10-06T13:09:46.294Z"
+  "timestamp": 1791292211382,
+  "lastModified": "2026-10-06T13:10:11.382Z"
 }
