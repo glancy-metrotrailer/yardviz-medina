@@ -3307,20 +3307,6 @@
       "customerName": "True Up Companies, LLC"
     },
     {
-      "id": "MTRZ816528",
-      "mtsn": "SHB8AJBL241047368",
-      "lastLat": 41.03187,
-      "lastLng": -81.86648,
-      "lastSeen": "2026-10-05T14:46:13.9283218Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "UPS"
-    },
-    {
       "id": "MTRZ315253",
       "mtsn": "SHB8AJBL233923025",
       "lastLat": 41.03124,
@@ -4239,8 +4225,12 @@
     {
       "id": "MTRZ816486",
       "ignoredAt": "2026-10-06T13:09:24.099Z"
+    },
+    {
+      "id": "MTRZ816528",
+      "ignoredAt": "2026-10-06T13:09:46.292Z"
     }
   ],
-  "timestamp": 1791292164102,
-  "lastModified": "2026-10-06T13:09:24.102Z"
+  "timestamp": 1791292186294,
+  "lastModified": "2026-10-06T13:09:46.294Z"
 }
