@@ -3230,20 +3230,6 @@
   ],
   "departed": [
     {
-      "id": "MTRZ587681",
-      "mtsn": "SVE5CJBL231582227",
-      "lastLat": 41.03174,
-      "lastLng": -81.86534,
-      "lastSeen": "2026-10-07T16:01:09.5797575Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "Pepsico, Inc. PepLoc0310"
-    },
-    {
       "id": "mtrz822050",
       "mtsn": "SHB8AJBL234124552",
       "lastLat": 41.03185,
@@ -3932,8 +3918,12 @@
     {
       "id": "MTRZ581862",
       "ignoredAt": "2026-10-07T18:40:35.071Z"
+    },
+    {
+      "id": "MTRZ587681",
+      "ignoredAt": "2026-10-07T18:40:54.347Z"
     }
   ],
-  "timestamp": 1791398442819,
-  "lastModified": "2026-10-07T18:40:42.819Z"
+  "timestamp": 1791398454349,
+  "lastModified": "2026-10-07T18:40:54.349Z"
 }
