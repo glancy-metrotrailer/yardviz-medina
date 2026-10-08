@@ -3309,22 +3309,7 @@
     "MTRZ924160",
     "T1337"
   ],
-  "departed": [
-    {
-      "id": "5321732",
-      "mtsn": "SVE5CLAG221627206",
-      "lastLat": 41.03273,
-      "lastLng": -81.86446,
-      "lastSeen": "2026-10-07T21:16:13.7585637Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "Tempur Sealy"
-    }
-  ],
+  "departed": [],
   "ignored": [
     {
       "id": "5327754",
@@ -4009,8 +3994,12 @@
     {
       "id": "MTRZ281702",
       "ignoredAt": "2026-10-08T12:46:15.960Z"
+    },
+    {
+      "id": "5321732",
+      "ignoredAt": "2026-10-08T12:46:32.138Z"
     }
   ],
-  "timestamp": 1791463575961,
-  "lastModified": "2026-10-08T12:46:15.961Z"
+  "timestamp": 1791463592139,
+  "lastModified": "2026-10-08T12:46:32.139Z"
 }
