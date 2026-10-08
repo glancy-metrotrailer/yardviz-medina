@@ -3311,20 +3311,6 @@
   ],
   "departed": [
     {
-      "id": "5321732",
-      "mtsn": "SVE5CLAG221627206",
-      "lastLat": 41.03273,
-      "lastLng": -81.86446,
-      "lastSeen": "2026-10-07T21:16:13.7585637Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "Tempur Sealy"
-    },
-    {
       "id": "5327820",
       "mtsn": "SHB7BLAG222775507",
       "lastLat": 41.03163,
@@ -4045,6 +4031,6 @@
       "ignoredAt": "2026-10-08T12:45:05.100Z"
     }
   ],
-  "timestamp": 1791463519141,
-  "lastModified": "2026-10-08T12:45:19.141Z"
+  "timestamp": 1791463531025,
+  "lastModified": "2026-10-08T12:45:31.025Z"
 }
