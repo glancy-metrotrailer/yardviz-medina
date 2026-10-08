@@ -3311,20 +3311,6 @@
   ],
   "departed": [
     {
-      "id": "MTRZ551764",
-      "mtsn": "SHB7BLAG222774445",
-      "lastLat": 41.03105,
-      "lastLng": -81.86582,
-      "lastSeen": "2026-10-07T20:01:03.8494240Z",
-      "missedCycles": 1,
-      "fleetStatus": "Reserved_x0020_for_x0020_Customer",
-      "onRent": false,
-      "offRentStatus": "Reserved_x0020_for_x0020_Customer",
-      "reservedCustomerName": "Victory",
-      "outOfServiceReason": "",
-      "customerName": ""
-    },
-    {
       "id": "MTRZ313335",
       "mtsn": "SHB7BLAG222160965",
       "lastLat": 41.03088,
@@ -4077,8 +4063,12 @@
     {
       "id": "mtrz822050",
       "ignoredAt": "2026-10-07T18:41:07.152Z"
+    },
+    {
+      "id": "MTRZ551764",
+      "ignoredAt": "2026-10-08T12:44:51.800Z"
     }
   ],
-  "timestamp": 1791463466933,
-  "lastModified": "2026-10-08T12:44:26.933Z"
+  "timestamp": 1791463491801,
+  "lastModified": "2026-10-08T12:44:51.801Z"
 }
