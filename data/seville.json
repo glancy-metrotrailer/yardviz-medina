@@ -3311,20 +3311,6 @@
   ],
   "departed": [
     {
-      "id": "MTRZ281702",
-      "mtsn": "SHB7BLAG224284799",
-      "lastLat": 41.03196,
-      "lastLng": -81.87193,
-      "lastSeen": "2026-10-08T11:00:58.0816403Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "Goodwill Industries of the Southern Piedmont, Inc."
-    },
-    {
       "id": "5321732",
       "mtsn": "SVE5CLAG221627206",
       "lastLat": 41.03273,
@@ -4019,8 +4005,12 @@
     {
       "id": "MTRZ582154",
       "ignoredAt": "2026-10-08T12:46:02.468Z"
+    },
+    {
+      "id": "MTRZ281702",
+      "ignoredAt": "2026-10-08T12:46:15.960Z"
     }
   ],
-  "timestamp": 1791463562469,
-  "lastModified": "2026-10-08T12:46:02.469Z"
+  "timestamp": 1791463575961,
+  "lastModified": "2026-10-08T12:46:15.961Z"
 }
