@@ -3069,34 +3069,6 @@
   ],
   "departed": [
     {
-      "id": "5317284",
-      "mtsn": "SHB8AJBL240339573",
-      "lastLat": 41.03107,
-      "lastLng": -81.86597,
-      "lastSeen": "2026-10-08T21:16:38.4646604Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "XPO Logistics- RXO Division"
-    },
-    {
-      "id": "MTRZ564542",
-      "mtsn": "SHB7BLAG224285170",
-      "lastLat": 41.03127,
-      "lastLng": -81.86533,
-      "lastSeen": "2026-10-08T23:01:10.8170067Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "UPS"
-    },
-    {
       "id": "5327830",
       "mtsn": "SHB7BLAG222775652",
       "lastLat": 41.03122,
@@ -3165,6 +3137,20 @@
       "reservedCustomerName": "",
       "outOfServiceReason": "",
       "customerName": "Victory Equipment and Services, LLC"
+    },
+    {
+      "id": "5317284",
+      "mtsn": "SHB8AJBL240339573",
+      "lastLat": 41.03107,
+      "lastLng": -81.86597,
+      "lastSeen": "2026-10-08T21:16:38.4646604Z",
+      "missedCycles": 1,
+      "fleetStatus": "On_x0020_Rent",
+      "onRent": true,
+      "offRentStatus": "Available",
+      "reservedCustomerName": "",
+      "outOfServiceReason": "",
+      "customerName": "XPO Logistics- RXO Division"
     }
   ],
   "ignored": [
@@ -3875,8 +3861,12 @@
     {
       "id": "EE01146",
       "ignoredAt": "2026-10-09T12:53:43.695Z"
+    },
+    {
+      "id": "MTRZ564542",
+      "ignoredAt": "2026-10-09T12:54:15.953Z"
     }
   ],
-  "timestamp": 1791550423697,
-  "lastModified": "2026-10-09T12:53:43.697Z"
+  "timestamp": 1791550455954,
+  "lastModified": "2026-10-09T12:54:15.954Z"
 }
