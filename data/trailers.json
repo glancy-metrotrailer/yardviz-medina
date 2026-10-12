@@ -3252,14 +3252,6 @@
   ],
   "departed": [
     {
-      "id": "MTRZ315270",
-      "mtsn": "SHB8AJBL234428356",
-      "lastLat": 41.1486,
-      "lastLng": -81.89757,
-      "lastSeen": "2026-10-11T14:01:00.8867225Z",
-      "missedCycles": 1
-    },
-    {
       "id": "MTRZ580935",
       "mtsn": "SHB8AJBL234427173",
       "lastLat": 41.14838,
@@ -4368,8 +4360,12 @@
     {
       "id": "5315233",
       "ignoredAt": "2026-10-12T12:36:14.790Z"
+    },
+    {
+      "id": "MTRZ315270",
+      "ignoredAt": "2026-10-12T12:36:30.013Z"
     }
   ],
-  "timestamp": 1791808574792,
-  "lastModified": "2026-10-12T12:36:14.792Z"
+  "timestamp": 1791808590015,
+  "lastModified": "2026-10-12T12:36:30.015Z"
 }
