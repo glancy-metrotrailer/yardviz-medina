@@ -3327,22 +3327,7 @@
     "MTRZ951160",
     "T1337"
   ],
-  "departed": [
-    {
-      "id": "mtrz822114",
-      "mtsn": "SHB7BLAG222161205",
-      "lastLat": 41.03124,
-      "lastLng": -81.87067,
-      "lastSeen": "2026-10-12T14:46:15.0107983Z",
-      "missedCycles": 1,
-      "fleetStatus": "Available",
-      "onRent": false,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": ""
-    }
-  ],
+  "departed": [],
   "ignored": [
     {
       "id": "5327754",
@@ -4107,8 +4092,12 @@
     {
       "id": "mtrz822055",
       "ignoredAt": "2026-10-12T15:27:02.182Z"
+    },
+    {
+      "id": "mtrz822114",
+      "ignoredAt": "2026-10-12T15:27:52.466Z"
     }
   ],
-  "timestamp": 1791818822183,
-  "lastModified": "2026-10-12T15:27:02.183Z"
+  "timestamp": 1791818872468,
+  "lastModified": "2026-10-12T15:27:52.468Z"
 }
