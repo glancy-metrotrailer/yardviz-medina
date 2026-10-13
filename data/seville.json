@@ -3325,20 +3325,6 @@
   ],
   "departed": [
     {
-      "id": "5322479",
-      "mtsn": "GXL5JLAG210483467",
-      "lastLat": 41.03094,
-      "lastLng": -81.86345,
-      "lastSeen": "2026-10-13T09:01:08.5547747Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "Colibrex Inc. "
-    },
-    {
       "id": "531702",
       "mtsn": "SVE5DJBL234300118",
       "lastLat": 41.03153,
@@ -4181,8 +4167,12 @@
     {
       "id": "MTRZ581781",
       "ignoredAt": "2026-10-13T19:34:55.891Z"
+    },
+    {
+      "id": "5322479",
+      "ignoredAt": "2026-10-13T19:35:08.144Z"
     }
   ],
-  "timestamp": 1791920095891,
-  "lastModified": "2026-10-13T19:34:55.891Z"
+  "timestamp": 1791920108145,
+  "lastModified": "2026-10-13T19:35:08.145Z"
 }
