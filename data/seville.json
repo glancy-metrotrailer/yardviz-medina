@@ -3325,34 +3325,6 @@
   ],
   "departed": [
     {
-      "id": "5322479",
-      "mtsn": "GXL5JLAG210483467",
-      "lastLat": 41.03094,
-      "lastLng": -81.86345,
-      "lastSeen": "2026-10-13T09:01:08.5547747Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "Colibrex Inc. "
-    },
-    {
-      "id": "MTRZ102900",
-      "mtsn": "SHB7BLAG222161259",
-      "lastLat": 41.03184,
-      "lastLng": -81.86703,
-      "lastSeen": "2026-10-13T14:31:23.6729692Z",
-      "missedCycles": 1,
-      "fleetStatus": "",
-      "onRent": false,
-      "offRentStatus": "",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": ""
-    },
-    {
       "id": "MTRZ568085",
       "mtsn": "SVE5DJBL232386637",
       "lastLat": 41.03199,
@@ -3505,6 +3477,20 @@
       "reservedCustomerName": "",
       "outOfServiceReason": "",
       "customerName": "UPS"
+    },
+    {
+      "id": "5322479",
+      "mtsn": "GXL5JLAG210483467",
+      "lastLat": 41.03094,
+      "lastLng": -81.86345,
+      "lastSeen": "2026-10-13T09:01:08.5547747Z",
+      "missedCycles": 1,
+      "fleetStatus": "On_x0020_Rent",
+      "onRent": true,
+      "offRentStatus": "Available",
+      "reservedCustomerName": "",
+      "outOfServiceReason": "",
+      "customerName": "Colibrex Inc. "
     }
   ],
   "ignored": [
@@ -4307,8 +4293,12 @@
     {
       "id": "MTRZ816109",
       "ignoredAt": "2026-10-13T19:32:02.751Z"
+    },
+    {
+      "id": "MTRZ102900",
+      "ignoredAt": "2026-10-13T19:32:38.633Z"
     }
   ],
-  "timestamp": 1791919922753,
-  "lastModified": "2026-10-13T19:32:02.753Z"
+  "timestamp": 1791919958635,
+  "lastModified": "2026-10-13T19:32:38.635Z"
 }
