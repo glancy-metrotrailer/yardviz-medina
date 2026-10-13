@@ -3325,34 +3325,6 @@
   ],
   "departed": [
     {
-      "id": "531702",
-      "mtsn": "SVE5DJBL234300118",
-      "lastLat": 41.03153,
-      "lastLng": -81.87199,
-      "lastSeen": "2026-10-12T16:16:21.4076802Z",
-      "missedCycles": 1,
-      "fleetStatus": "Available",
-      "onRent": false,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": ""
-    },
-    {
-      "id": "MTRZ581507",
-      "mtsn": "SVE5CLAG224055199",
-      "lastLat": 41.03103,
-      "lastLng": -81.867,
-      "lastSeen": "2026-10-13T19:30:59.3885647Z",
-      "missedCycles": 1,
-      "fleetStatus": "Available",
-      "onRent": false,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": ""
-    },
-    {
       "id": "MTRZ581781",
       "mtsn": "SHB8AJBL240946329",
       "lastLat": 41.03115,
@@ -3379,6 +3351,20 @@
       "reservedCustomerName": "",
       "outOfServiceReason": "",
       "customerName": "Colibrex Inc. "
+    },
+    {
+      "id": "531702",
+      "mtsn": "SVE5DJBL234300118",
+      "lastLat": 41.03153,
+      "lastLng": -81.87199,
+      "lastSeen": "2026-10-12T16:16:21.4076802Z",
+      "missedCycles": 1,
+      "fleetStatus": "Available",
+      "onRent": false,
+      "offRentStatus": "Available",
+      "reservedCustomerName": "",
+      "outOfServiceReason": "",
+      "customerName": ""
     }
   ],
   "ignored": [
@@ -4201,8 +4187,12 @@
     {
       "id": "MTRZ814163",
       "ignoredAt": "2026-10-13T19:34:09.987Z"
+    },
+    {
+      "id": "MTRZ581507",
+      "ignoredAt": "2026-10-13T19:34:44.749Z"
     }
   ],
-  "timestamp": 1791920066535,
-  "lastModified": "2026-10-13T19:34:26.535Z"
+  "timestamp": 1791920084750,
+  "lastModified": "2026-10-13T19:34:44.750Z"
 }
