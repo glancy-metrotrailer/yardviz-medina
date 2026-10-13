@@ -3325,20 +3325,6 @@
   ],
   "departed": [
     {
-      "id": "5327740",
-      "mtsn": "SHB7BLAG222773740",
-      "lastLat": 41.03199,
-      "lastLng": -81.86883,
-      "lastSeen": "2026-10-13T15:01:09.7362843Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "KH Groups, LLC"
-    },
-    {
       "id": "MTRZ580805",
       "mtsn": "SHB7BLAG224082883",
       "lastLat": 41.03199,
@@ -4265,6 +4251,6 @@
       "ignoredAt": "2026-10-13T19:33:01.083Z"
     }
   ],
-  "timestamp": 1791919992794,
-  "lastModified": "2026-10-13T19:33:12.794Z"
+  "timestamp": 1791920007877,
+  "lastModified": "2026-10-13T19:33:27.877Z"
 }
