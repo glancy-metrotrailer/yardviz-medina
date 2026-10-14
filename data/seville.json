@@ -3165,34 +3165,6 @@
   ],
   "departed": [
     {
-      "id": "5317632",
-      "mtsn": "SHB7CJBL233113423",
-      "lastLat": 41.03189,
-      "lastLng": -81.86572,
-      "lastSeen": "2026-10-14T04:31:22.3596515Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "Pepsico, Inc. PepLoc2737"
-    },
-    {
-      "id": "54105",
-      "mtsn": "SHB7BLAG223880657",
-      "lastLat": 41.03196,
-      "lastLng": -81.86576,
-      "lastSeen": "2026-10-14T04:46:19.5903138Z",
-      "missedCycles": 1,
-      "fleetStatus": "Reserved_x0020_for_x0020_Customer",
-      "onRent": false,
-      "offRentStatus": "Reserved_x0020_for_x0020_Customer",
-      "reservedCustomerName": "Victory",
-      "outOfServiceReason": "",
-      "customerName": ""
-    },
-    {
       "id": "53903",
       "mtsn": "SHB7BLAG224285109",
       "lastLat": 41.03122,
@@ -3219,6 +3191,20 @@
       "reservedCustomerName": "",
       "outOfServiceReason": "",
       "customerName": "UPS"
+    },
+    {
+      "id": "5317632",
+      "mtsn": "SHB7CJBL233113423",
+      "lastLat": 41.03189,
+      "lastLng": -81.86572,
+      "lastSeen": "2026-10-14T04:31:22.3596515Z",
+      "missedCycles": 1,
+      "fleetStatus": "On_x0020_Rent",
+      "onRent": true,
+      "offRentStatus": "Available",
+      "reservedCustomerName": "",
+      "outOfServiceReason": "",
+      "customerName": "Pepsico, Inc. PepLoc2737"
     }
   ],
   "ignored": [
@@ -4079,6 +4065,6 @@
       "ignoredAt": "2026-10-14T13:14:04.825Z"
     }
   ],
-  "timestamp": 1791983644826,
-  "lastModified": "2026-10-14T13:14:04.826Z"
+  "timestamp": 1791983669425,
+  "lastModified": "2026-10-14T13:14:29.425Z"
 }
