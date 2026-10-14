@@ -3163,22 +3163,7 @@
     "MTRZ951160",
     "T1337"
   ],
-  "departed": [
-    {
-      "id": "5317632",
-      "mtsn": "SHB7CJBL233113423",
-      "lastLat": 41.03189,
-      "lastLng": -81.86572,
-      "lastSeen": "2026-10-14T04:31:22.3596515Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "Pepsico, Inc. PepLoc2737"
-    }
-  ],
+  "departed": [],
   "ignored": [
     {
       "id": "5327754",
@@ -4039,8 +4024,12 @@
     {
       "id": "MTRZ816303",
       "ignoredAt": "2026-10-14T13:15:08.547Z"
+    },
+    {
+      "id": "5317632",
+      "ignoredAt": "2026-10-14T13:15:26.417Z"
     }
   ],
-  "timestamp": 1791983708548,
-  "lastModified": "2026-10-14T13:15:08.548Z"
+  "timestamp": 1791983726418,
+  "lastModified": "2026-10-14T13:15:26.418Z"
 }
