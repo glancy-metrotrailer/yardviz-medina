@@ -3954,22 +3954,6 @@
       "missedCycles": 1
     },
     {
-      "id": "MTRZ551402",
-      "mtsn": "SHB7BLAG224082856",
-      "lastLat": 41.14886,
-      "lastLng": -81.89793,
-      "lastSeen": "2026-10-13T20:16:41.0141692Z",
-      "missedCycles": 1
-    },
-    {
-      "id": "MTRZ551403",
-      "mtsn": "SHB7BLAG224082841",
-      "lastLat": 41.14922,
-      "lastLng": -81.89794,
-      "lastSeen": "2026-10-13T20:16:41.0141964Z",
-      "missedCycles": 1
-    },
-    {
       "id": "MTRZ551404",
       "mtsn": "SHB7BLAG224082643",
       "lastLat": 41.14877,
@@ -5310,8 +5294,16 @@
     {
       "id": "MTRZ551215",
       "ignoredAt": "2026-10-14T13:16:07.089Z"
+    },
+    {
+      "id": "MTRZ551402",
+      "ignoredAt": "2026-10-14T13:16:07.531Z"
+    },
+    {
+      "id": "MTRZ551403",
+      "ignoredAt": "2026-10-14T13:16:08.100Z"
     }
   ],
-  "timestamp": 1791983767091,
-  "lastModified": "2026-10-14T13:16:07.091Z"
+  "timestamp": 1791983768101,
+  "lastModified": "2026-10-14T13:16:08.101Z"
 }
