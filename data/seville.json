@@ -2652,6 +2652,20 @@
   ],
   "departed": [
     {
+      "id": "MTRZ588969",
+      "mtsn": "SHB7BJBL225197288",
+      "lastLat": 41.03097,
+      "lastLng": -81.8642,
+      "lastSeen": "2026-10-15T17:01:27.6005907Z",
+      "missedCycles": 1,
+      "fleetStatus": "On_x0020_Rent",
+      "onRent": true,
+      "offRentStatus": "Available",
+      "reservedCustomerName": "",
+      "outOfServiceReason": "",
+      "customerName": "JHOC, Inc. dba Premier Transportation"
+    },
+    {
       "id": "5624966",
       "mtsn": "SVE5DJBL232891274",
       "lastLat": 41.03178,
@@ -2706,34 +2720,6 @@
       "reservedCustomerName": "",
       "outOfServiceReason": "",
       "customerName": "Pepsico, Inc. PepLoc2737"
-    },
-    {
-      "id": "581910",
-      "mtsn": "SHB8AJBL240541773",
-      "lastLat": 41.03117,
-      "lastLng": -81.87111,
-      "lastSeen": "2026-10-15T15:15:55.1670317Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "JHOC, Inc. dba Premier Transportation"
-    },
-    {
-      "id": "MTRZ588969",
-      "mtsn": "SHB7BJBL225197288",
-      "lastLat": 41.03097,
-      "lastLng": -81.8642,
-      "lastSeen": "2026-10-15T17:01:27.6005907Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "JHOC, Inc. dba Premier Transportation"
     }
   ],
   "ignored": [
@@ -3678,6 +3664,6 @@
       "ignoredAt": "2026-10-15T17:42:17.747Z"
     }
   ],
-  "timestamp": 1792086164640,
-  "lastModified": "2026-10-15T17:42:44.640Z"
+  "timestamp": 1792086224134,
+  "lastModified": "2026-10-15T17:43:44.134Z"
 }
