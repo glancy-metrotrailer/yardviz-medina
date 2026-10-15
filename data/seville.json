@@ -2753,20 +2753,6 @@
   ],
   "departed": [
     {
-      "id": "5321152",
-      "mtsn": "SHB7BLAG222468482",
-      "lastLat": 41.03107,
-      "lastLng": -81.86621,
-      "lastSeen": "2026-10-14T14:01:04.6323487Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "Sana Freight Inc. "
-    },
-    {
       "id": "5624966",
       "mtsn": "SVE5DJBL232891274",
       "lastLat": 41.03178,
@@ -4055,8 +4041,12 @@
     {
       "id": "MTRZ548037",
       "ignoredAt": "2026-10-15T14:32:35.106Z"
+    },
+    {
+      "id": "5321152",
+      "ignoredAt": "2026-10-15T14:33:48.844Z"
     }
   ],
-  "timestamp": 1792074755109,
-  "lastModified": "2026-10-15T14:32:35.109Z"
+  "timestamp": 1792074828846,
+  "lastModified": "2026-10-15T14:33:48.846Z"
 }
