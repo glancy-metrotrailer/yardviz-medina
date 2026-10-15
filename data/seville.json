@@ -2753,20 +2753,6 @@
   ],
   "departed": [
     {
-      "id": "MTRZ817023",
-      "mtsn": "SHB7BLAG223577017",
-      "lastLat": 41.03092,
-      "lastLng": -81.86635,
-      "lastSeen": "2026-10-14T14:15:57.1626578Z",
-      "missedCycles": 1,
-      "fleetStatus": "Available",
-      "onRent": false,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": ""
-    },
-    {
       "id": "5822062",
       "mtsn": "SHB8AJBL234124562",
       "lastLat": 41.03098,
@@ -3143,6 +3129,20 @@
       "reservedCustomerName": "",
       "outOfServiceReason": "",
       "customerName": "Liquidity Services, Inc."
+    },
+    {
+      "id": "5624966",
+      "mtsn": "SVE5DJBL232891274",
+      "lastLat": 41.03178,
+      "lastLng": -81.86562,
+      "lastSeen": "2026-10-14T14:01:04.6324540Z",
+      "missedCycles": 1,
+      "fleetStatus": "Available",
+      "onRent": false,
+      "offRentStatus": "Available",
+      "reservedCustomerName": "",
+      "outOfServiceReason": "",
+      "customerName": ""
     }
   ],
   "ignored": [
@@ -4017,8 +4017,12 @@
     {
       "id": "5321152",
       "ignoredAt": "2026-10-15T14:33:48.844Z"
+    },
+    {
+      "id": "MTRZ817023",
+      "ignoredAt": "2026-10-15T14:38:51.778Z"
     }
   ],
-  "timestamp": 1792075119179,
-  "lastModified": "2026-10-15T14:38:39.179Z"
+  "timestamp": 1792075131780,
+  "lastModified": "2026-10-15T14:38:51.780Z"
 }
