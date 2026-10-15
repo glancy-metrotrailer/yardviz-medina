@@ -2652,20 +2652,6 @@
   ],
   "departed": [
     {
-      "id": "569486",
-      "mtsn": "SVE5CLAG224661571",
-      "lastLat": 41.03209,
-      "lastLng": -81.86667,
-      "lastSeen": "2026-10-15T14:01:21.5343153Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "Liquidity Services, Inc."
-    },
-    {
       "id": "5624966",
       "mtsn": "SVE5DJBL232891274",
       "lastLat": 41.03178,
@@ -3692,6 +3678,6 @@
       "ignoredAt": "2026-10-15T17:42:17.747Z"
     }
   ],
-  "timestamp": 1792086150734,
-  "lastModified": "2026-10-15T17:42:30.734Z"
+  "timestamp": 1792086164640,
+  "lastModified": "2026-10-15T17:42:44.640Z"
 }
