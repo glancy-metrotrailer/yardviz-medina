@@ -2423,22 +2423,7 @@
     "MTRZ951160",
     "T1337"
   ],
-  "departed": [
-    {
-      "id": "582026",
-      "mtsn": "SHB8AJBL241047333",
-      "lastLat": 41.03174,
-      "lastLng": -81.86572,
-      "lastSeen": "2026-10-16T08:31:07.6141555Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "JHOC, Inc. dba Premier Transportation"
-    }
-  ],
+  "departed": [],
   "ignored": [
     {
       "id": "5327754",
@@ -3407,8 +3392,12 @@
     {
       "id": "MTRZ582233",
       "ignoredAt": "2026-10-16T12:15:28.462Z"
+    },
+    {
+      "id": "582026",
+      "ignoredAt": "2026-10-16T12:15:42.220Z"
     }
   ],
-  "timestamp": 1792152928463,
-  "lastModified": "2026-10-16T12:15:28.463Z"
+  "timestamp": 1792152942221,
+  "lastModified": "2026-10-16T12:15:42.221Z"
 }
