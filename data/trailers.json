@@ -3143,14 +3143,6 @@
   ],
   "departed": [
     {
-      "id": "5323661",
-      "mtsn": "SVE5CLAG222740731",
-      "lastLat": 41.14856,
-      "lastLng": -81.89854,
-      "lastSeen": "2026-10-15T22:31:22.1251615Z",
-      "missedCycles": 1
-    },
-    {
       "id": "557175",
       "mtsn": "SHB7BLAG223880630",
       "lastLat": 41.14831,
@@ -4665,6 +4657,6 @@
       "ignoredAt": "2026-10-15T17:45:08.516Z"
     }
   ],
-  "timestamp": 1792152532308,
-  "lastModified": "2026-10-16T12:08:52.308Z"
+  "timestamp": 1792152550838,
+  "lastModified": "2026-10-16T12:09:10.838Z"
 }
