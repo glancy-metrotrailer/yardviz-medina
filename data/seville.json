@@ -2274,20 +2274,6 @@
   ],
   "departed": [
     {
-      "id": "5627595",
-      "mtsn": "SHB7BLAG223981723",
-      "lastLat": 41.03183,
-      "lastLng": -81.8664,
-      "lastSeen": "2026-10-19T08:00:54.6013299Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "Uni Trans, LLC"
-    },
-    {
       "id": "MTRZ581944",
       "mtsn": "SHB8AJBL234629696",
       "lastLat": 41.03091,
@@ -3304,6 +3290,6 @@
       "ignoredAt": "2026-10-19T18:38:32.004Z"
     }
   ],
-  "timestamp": 1792435191042,
-  "lastModified": "2026-10-19T18:39:51.042Z"
+  "timestamp": 1792435197179,
+  "lastModified": "2026-10-19T18:39:57.179Z"
 }
