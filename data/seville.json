@@ -2274,20 +2274,6 @@
   ],
   "departed": [
     {
-      "id": "54816",
-      "mtsn": "SHB7CJBL232406201",
-      "lastLat": 41.03176,
-      "lastLng": -81.86555,
-      "lastSeen": "2026-10-16T18:31:01.7133255Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "Dematic Corp. "
-    },
-    {
       "id": "mtrz561356",
       "mtsn": "SVE5CLAG221625556",
       "lastLat": 41.03156,
@@ -3458,8 +3444,12 @@
     {
       "id": "MTRZ581933",
       "ignoredAt": "2026-10-19T18:37:01.024Z"
+    },
+    {
+      "id": "54816",
+      "ignoredAt": "2026-10-19T18:37:14.836Z"
     }
   ],
-  "timestamp": 1792435021027,
-  "lastModified": "2026-10-19T18:37:01.027Z"
+  "timestamp": 1792435034838,
+  "lastModified": "2026-10-19T18:37:14.838Z"
 }
