@@ -3261,16 +3261,7 @@
     "T2771",
     "T4352"
   ],
-  "departed": [
-    {
-      "id": "5317354",
-      "mtsn": "SVE5DJBL234198842",
-      "lastLat": 41.14879,
-      "lastLng": -81.89827,
-      "lastSeen": "2026-10-19T15:01:08.4207021Z",
-      "missedCycles": 1
-    }
-  ],
+  "departed": [],
   "ignored": [
     {
       "id": "",
@@ -4773,6 +4764,6 @@
       "ignoredAt": "2026-10-16T17:34:06.579Z"
     }
   ],
-  "timestamp": 1792433940112,
-  "lastModified": "2026-10-19T18:19:00.112Z"
+  "timestamp": 1792433945949,
+  "lastModified": "2026-10-19T18:19:05.949Z"
 }
