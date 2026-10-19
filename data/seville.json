@@ -2274,20 +2274,6 @@
   ],
   "departed": [
     {
-      "id": "581991",
-      "mtsn": "SHB8AJBL234629861",
-      "lastLat": 41.0312,
-      "lastLng": -81.8714,
-      "lastSeen": "2026-10-16T15:01:11.4699492Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "JHOC, Inc. dba Premier Transportation"
-    },
-    {
       "id": "MTRZ581933",
       "mtsn": "SHB8AJBL234931967",
       "lastLat": 41.03115,
@@ -3478,8 +3464,12 @@
     {
       "id": "MTRZ314505",
       "ignoredAt": "2026-10-19T18:36:31.396Z"
+    },
+    {
+      "id": "581991",
+      "ignoredAt": "2026-10-19T18:36:45.317Z"
     }
   ],
-  "timestamp": 1792434991399,
-  "lastModified": "2026-10-19T18:36:31.399Z"
+  "timestamp": 1792435005319,
+  "lastModified": "2026-10-19T18:36:45.319Z"
 }
