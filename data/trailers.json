@@ -1097,7 +1097,7 @@
       "reservedCustomerName": "",
       "outOfServiceReason": "",
       "customerName": "",
-      "skybitzGroup": "CLOUDTRUCKS",
+      "skybitzGroup": "",
       "vin": ""
     },
     {
@@ -1308,9 +1308,9 @@
       "batteryStatus": "OK",
       "arrivedAt": "2026-10-20T13:30:30.6536208Z",
       "timeOfObservation": "2026-10-20T13:32:04Z",
-      "checkedIn": false,
+      "checkedIn": true,
       "pickedUp": false,
-      "isNew": true,
+      "isNew": false,
       "fleetStatus": "Available",
       "onRent": false,
       "offRentStatus": "Available",
@@ -4704,6 +4704,6 @@
       "ignoredAt": "2026-10-20T13:48:43.915Z"
     }
   ],
-  "timestamp": 1792504283329,
-  "lastModified": "2026-10-20T13:51:23.329Z"
+  "timestamp": 1792504331770,
+  "lastModified": "2026-10-20T13:52:11.770Z"
 }
