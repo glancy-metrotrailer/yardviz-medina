@@ -2114,20 +2114,6 @@
   ],
   "departed": [
     {
-      "id": "5313275",
-      "mtsn": "SHB7CJBL233113256",
-      "lastLat": 41.03205,
-      "lastLng": -81.86409,
-      "lastSeen": "2026-10-20T14:01:16.9830083Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "Goodyear Commercial Tire and Service Center #070"
-    },
-    {
       "id": "5327227",
       "mtsn": "SHB7BLAG222569571",
       "lastLat": 41.03209,
@@ -3188,8 +3174,12 @@
     {
       "id": "MTRZ581739",
       "ignoredAt": "2026-10-20T19:31:27.987Z"
+    },
+    {
+      "id": "5313275",
+      "ignoredAt": "2026-10-20T19:31:42.088Z"
     }
   ],
-  "timestamp": 1792524697906,
-  "lastModified": "2026-10-20T19:31:37.906Z"
+  "timestamp": 1792524702089,
+  "lastModified": "2026-10-20T19:31:42.089Z"
 }
