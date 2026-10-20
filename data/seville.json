@@ -2114,20 +2114,6 @@
   ],
   "departed": [
     {
-      "id": "MTRZ581962",
-      "mtsn": "SHB8AJBL234931983",
-      "lastLat": 41.03183,
-      "lastLng": -81.8716,
-      "lastSeen": "2026-10-20T14:46:01.4908111Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "JHOC, Inc. dba Premier Transportation"
-    },
-    {
       "id": "5327227",
       "mtsn": "SHB7BLAG222569571",
       "lastLat": 41.03209,
@@ -2224,6 +2210,20 @@
       "reservedCustomerName": "",
       "outOfServiceReason": "",
       "customerName": "Victory Equipment and Services, LLC"
+    },
+    {
+      "id": "5313275",
+      "mtsn": "SHB7CJBL233113256",
+      "lastLat": 41.03205,
+      "lastLng": -81.86409,
+      "lastSeen": "2026-10-20T14:01:16.9830083Z",
+      "missedCycles": 1,
+      "fleetStatus": "On_x0020_Rent",
+      "onRent": true,
+      "offRentStatus": "Available",
+      "reservedCustomerName": "",
+      "outOfServiceReason": "",
+      "customerName": "Goodyear Commercial Tire and Service Center #070"
     }
   ],
   "ignored": [
@@ -3246,8 +3246,12 @@
     {
       "id": "MTRZ822049",
       "ignoredAt": "2026-10-20T13:46:09.798Z"
+    },
+    {
+      "id": "MTRZ581962",
+      "ignoredAt": "2026-10-20T19:29:50.264Z"
     }
   ],
-  "timestamp": 1792524581795,
-  "lastModified": "2026-10-20T19:29:41.795Z"
+  "timestamp": 1792524590265,
+  "lastModified": "2026-10-20T19:29:50.265Z"
 }
