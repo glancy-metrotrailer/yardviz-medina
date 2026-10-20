@@ -2234,18 +2234,18 @@
   ],
   "departed": [
     {
-      "id": "5309133",
-      "mtsn": "SHB8AJBL234427711",
-      "lastLat": 41.03139,
-      "lastLng": -81.86529,
-      "lastSeen": "2026-10-20T02:16:15.8518974Z",
+      "id": "281917",
+      "mtsn": "SHB81JBL232808916",
+      "lastLat": 41.03021,
+      "lastLng": -81.86686,
+      "lastSeen": "2026-10-19T21:01:03.9049900Z",
       "missedCycles": 1,
-      "fleetStatus": "Available",
-      "onRent": false,
+      "fleetStatus": "On_x0020_Rent",
+      "onRent": true,
       "offRentStatus": "Available",
       "reservedCustomerName": "",
       "outOfServiceReason": "",
-      "customerName": ""
+      "customerName": "North Gateway Tire Company, Inc. "
     }
   ],
   "ignored": [
@@ -3262,6 +3262,6 @@
       "ignoredAt": "2026-10-20T13:00:28.523Z"
     }
   ],
-  "timestamp": 1792501228526,
-  "lastModified": "2026-10-20T13:00:28.526Z"
+  "timestamp": 1792501237786,
+  "lastModified": "2026-10-20T13:00:37.786Z"
 }
