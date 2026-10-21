@@ -2232,18 +2232,18 @@
   ],
   "departed": [
     {
-      "id": "5327770",
-      "mtsn": "SHB7BLAG222775690",
-      "lastLat": 41.03108,
-      "lastLng": -81.86631,
-      "lastSeen": "2026-10-21T17:45:51.4373673Z",
+      "id": "5626794",
+      "mtsn": "SHB8AJBL240845562",
+      "lastLat": 41.03227,
+      "lastLng": -81.86331,
+      "lastSeen": "2026-10-21T15:01:06.6452017Z",
       "missedCycles": 1,
       "fleetStatus": "On_x0020_Rent",
       "onRent": true,
       "offRentStatus": "Available",
       "reservedCustomerName": "",
       "outOfServiceReason": "",
-      "customerName": "Victory Equipment and Services, LLC"
+      "customerName": "Highway Trucking, LLC"
     }
   ],
   "ignored": [
@@ -3300,6 +3300,6 @@
       "ignoredAt": "2026-10-21T13:18:41.068Z"
     }
   ],
-  "timestamp": 1792604783822,
-  "lastModified": "2026-10-21T17:46:23.822Z"
+  "timestamp": 1792604787311,
+  "lastModified": "2026-10-21T17:46:27.311Z"
 }
