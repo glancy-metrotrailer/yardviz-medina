@@ -3195,14 +3195,6 @@
   ],
   "departed": [
     {
-      "id": "5325051",
-      "mtsn": "SVE5CJBL232084948",
-      "lastLat": 41.1485,
-      "lastLng": -81.89835,
-      "lastSeen": "2026-10-21T16:46:20.1438493Z",
-      "missedCycles": 1
-    },
-    {
       "id": "5617442",
       "mtsn": "SHB81JBL233820581",
       "lastLat": 41.14845,
@@ -4761,6 +4753,6 @@
       "ignoredAt": "2026-10-21T14:35:26.771Z"
     }
   ],
-  "timestamp": 1792604093307,
-  "lastModified": "2026-10-21T17:34:53.307Z"
+  "timestamp": 1792604095390,
+  "lastModified": "2026-10-21T17:34:55.390Z"
 }
