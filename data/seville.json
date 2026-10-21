@@ -2150,22 +2150,7 @@
     "T1337",
     "T2122"
   ],
-  "departed": [
-    {
-      "id": "535191",
-      "mtsn": "SVE5DJBL234400174",
-      "lastLat": 41.03203,
-      "lastLng": -81.87173,
-      "lastSeen": "2026-10-21T10:45:52.0467600Z",
-      "missedCycles": 1,
-      "fleetStatus": "Available",
-      "onRent": false,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": ""
-    }
-  ],
+  "departed": [],
   "ignored": [
     {
       "id": "5327754",
@@ -3214,8 +3199,12 @@
     {
       "id": "MTRZ817025",
       "ignoredAt": "2026-10-21T13:18:15.240Z"
+    },
+    {
+      "id": "535191",
+      "ignoredAt": "2026-10-21T13:18:41.068Z"
     }
   ],
-  "timestamp": 1792588718146,
-  "lastModified": "2026-10-21T13:18:38.146Z"
+  "timestamp": 1792588721069,
+  "lastModified": "2026-10-21T13:18:41.069Z"
 }
