@@ -2228,22 +2228,7 @@
     "T1337",
     "T2122"
   ],
-  "departed": [
-    {
-      "id": "5308276",
-      "mtsn": "SHB7BLAG222160779",
-      "lastLat": 41.03143,
-      "lastLng": -81.86594,
-      "lastSeen": "2026-10-22T14:16:00.0745763Z",
-      "missedCycles": 1,
-      "fleetStatus": "Available",
-      "onRent": false,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": ""
-    }
-  ],
+  "departed": [],
   "ignored": [
     {
       "id": "5327754",
@@ -3310,6 +3295,6 @@
       "ignoredAt": "2026-10-23T12:27:33.128Z"
     }
   ],
-  "timestamp": 1792758460196,
-  "lastModified": "2026-10-23T12:27:40.196Z"
+  "timestamp": 1792758463958,
+  "lastModified": "2026-10-23T12:27:43.958Z"
 }
