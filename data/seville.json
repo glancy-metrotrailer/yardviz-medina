@@ -2230,20 +2230,6 @@
   ],
   "departed": [
     {
-      "id": "5327086",
-      "mtsn": "SHB7BLAG223176226",
-      "lastLat": 41.03201,
-      "lastLng": -81.87183,
-      "lastSeen": "2026-10-22T11:01:05.2426806Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "Its Logistics, LLC"
-    },
-    {
       "id": "5627592",
       "mtsn": "SHB7BLAG223879835",
       "lastLat": 41.03207,
@@ -3338,6 +3324,6 @@
       "ignoredAt": "2026-10-23T12:27:33.128Z"
     }
   ],
-  "timestamp": 1792758453129,
-  "lastModified": "2026-10-23T12:27:33.129Z"
+  "timestamp": 1792758457207,
+  "lastModified": "2026-10-23T12:27:37.207Z"
 }
