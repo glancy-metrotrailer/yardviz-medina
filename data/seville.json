@@ -2271,20 +2271,6 @@
       "reservedCustomerName": "",
       "outOfServiceReason": "",
       "customerName": "Kirk NationaLease Co - CLE"
-    },
-    {
-      "id": "69015",
-      "mtsn": "SHB7BLAG222160831",
-      "lastLat": 41.0314,
-      "lastLng": -81.86707,
-      "lastSeen": "2026-10-23T16:31:23.1947422Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "Pepsico Inc. PepLoc3738"
     }
   ],
   "ignored": [
@@ -3355,8 +3341,12 @@
     {
       "id": "38415",
       "ignoredAt": "2026-10-26T12:30:54.281Z"
+    },
+    {
+      "id": "69015",
+      "ignoredAt": "2026-10-26T12:30:54.813Z"
     }
   ],
-  "timestamp": 1793017854283,
-  "lastModified": "2026-10-26T12:30:54.283Z"
+  "timestamp": 1793017855404,
+  "lastModified": "2026-10-26T12:30:55.404Z"
 }
