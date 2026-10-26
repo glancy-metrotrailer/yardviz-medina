@@ -2257,22 +2257,7 @@
     "T1337",
     "T2122"
   ],
-  "departed": [
-    {
-      "id": "568582",
-      "mtsn": "SHB7BLAG224083059",
-      "lastLat": 41.03131,
-      "lastLng": -81.86572,
-      "lastSeen": "2026-10-26T12:15:55.7357985Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "Kirk NationaLease Co - CLE"
-    }
-  ],
+  "departed": [],
   "ignored": [
     {
       "id": "5327754",
@@ -3345,8 +3330,12 @@
     {
       "id": "69015",
       "ignoredAt": "2026-10-26T12:30:54.813Z"
+    },
+    {
+      "id": "568582",
+      "ignoredAt": "2026-10-26T12:31:05.092Z"
     }
   ],
-  "timestamp": 1793017855404,
-  "lastModified": "2026-10-26T12:30:55.404Z"
+  "timestamp": 1793017865093,
+  "lastModified": "2026-10-26T12:31:05.093Z"
 }
