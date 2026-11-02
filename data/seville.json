@@ -2753,48 +2753,6 @@
   ],
   "departed": [
     {
-      "id": "5327829",
-      "mtsn": "SHB7BLAG222775595",
-      "lastLat": 41.03162,
-      "lastLng": -81.86342,
-      "lastSeen": "2026-10-30T04:01:12.4762823Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "Highway Trucking, LLC"
-    },
-    {
-      "id": "5624195",
-      "mtsn": "SVE5DJBL232789860",
-      "lastLat": 41.03269,
-      "lastLng": -81.86431,
-      "lastSeen": "2026-10-30T12:16:16.0168409Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "Zoom Transport, LLC "
-    },
-    {
-      "id": "MTRZ822052",
-      "mtsn": "SHB8AJBL234629490",
-      "lastLat": 41.03192,
-      "lastLng": -81.86536,
-      "lastSeen": "2026-10-30T13:00:53.0900875Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "JHOC, Inc. dba Premier Transportation"
-    },
-    {
       "id": "5627593",
       "mtsn": "SHB7BLAG223879781",
       "lastLat": 41.03208,
@@ -2933,6 +2891,34 @@
       "reservedCustomerName": "",
       "outOfServiceReason": "",
       "customerName": "JHOC, Inc. dba Premier Transportation"
+    },
+    {
+      "id": "5327829",
+      "mtsn": "SHB7BLAG222775595",
+      "lastLat": 41.03162,
+      "lastLng": -81.86342,
+      "lastSeen": "2026-10-30T04:01:12.4762823Z",
+      "missedCycles": 1,
+      "fleetStatus": "On_x0020_Rent",
+      "onRent": true,
+      "offRentStatus": "Available",
+      "reservedCustomerName": "",
+      "outOfServiceReason": "",
+      "customerName": "Highway Trucking, LLC"
+    },
+    {
+      "id": "5624195",
+      "mtsn": "SVE5DJBL232789860",
+      "lastLat": 41.03269,
+      "lastLng": -81.86431,
+      "lastSeen": "2026-10-30T12:16:16.0168409Z",
+      "missedCycles": 1,
+      "fleetStatus": "On_x0020_Rent",
+      "onRent": true,
+      "offRentStatus": "Available",
+      "reservedCustomerName": "",
+      "outOfServiceReason": "",
+      "customerName": "Zoom Transport, LLC "
     }
   ],
   "ignored": [
@@ -4027,8 +4013,12 @@
     {
       "id": "MTRZ556062",
       "ignoredAt": "2026-11-02T13:32:14.668Z"
+    },
+    {
+      "id": "MTRZ822052",
+      "ignoredAt": "2026-11-02T13:33:42.112Z"
     }
   ],
-  "timestamp": 1793626367814,
-  "lastModified": "2026-11-02T13:32:47.814Z"
+  "timestamp": 1793626422115,
+  "lastModified": "2026-11-02T13:33:42.115Z"
 }
