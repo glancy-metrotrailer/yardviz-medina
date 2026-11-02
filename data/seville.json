@@ -2753,34 +2753,6 @@
   ],
   "departed": [
     {
-      "id": "565456",
-      "mtsn": "SHB7CJBL232406744",
-      "lastLat": 41.03128,
-      "lastLng": -81.8661,
-      "lastSeen": "2026-10-29T13:01:01.1215083Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "XPO Logistics- RXO Division"
-    },
-    {
-      "id": "MTRZ315679",
-      "mtsn": "SHB81JBL232808661",
-      "lastLat": 41.03138,
-      "lastLng": -81.86623,
-      "lastSeen": "2026-10-29T16:01:26.2708345Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "UPS"
-    },
-    {
       "id": "MTRZ556062",
       "mtsn": "SHB8AJBL234528674",
       "lastLat": 41.03182,
@@ -2975,6 +2947,20 @@
       "reservedCustomerName": "",
       "outOfServiceReason": "",
       "customerName": "Kirk NationaLease Co - CLE"
+    },
+    {
+      "id": "565456",
+      "mtsn": "SHB7CJBL232406744",
+      "lastLat": 41.03128,
+      "lastLng": -81.8661,
+      "lastSeen": "2026-10-29T13:01:01.1215083Z",
+      "missedCycles": 1,
+      "fleetStatus": "On_x0020_Rent",
+      "onRent": true,
+      "offRentStatus": "Available",
+      "reservedCustomerName": "",
+      "outOfServiceReason": "",
+      "customerName": "XPO Logistics- RXO Division"
     }
   ],
   "ignored": [
@@ -4061,8 +4047,12 @@
     {
       "id": "MTRZ535060",
       "ignoredAt": "2026-11-02T13:31:15.580Z"
+    },
+    {
+      "id": "MTRZ315679",
+      "ignoredAt": "2026-11-02T13:31:46.042Z"
     }
   ],
-  "timestamp": 1793626275583,
-  "lastModified": "2026-11-02T13:31:15.583Z"
+  "timestamp": 1793626306045,
+  "lastModified": "2026-11-02T13:31:46.045Z"
 }
