@@ -657,7 +657,7 @@
       "reservedCustomerName": "",
       "outOfServiceReason": "",
       "customerName": "",
-      "skybitzGroup": "FREIGHT UNITED",
+      "skybitzGroup": "",
       "vin": ""
     },
     {
@@ -3596,6 +3596,6 @@
       "ignoredAt": "2026-11-02T13:48:30.829Z"
     }
   ],
-  "timestamp": 1793627328325,
-  "lastModified": "2026-11-02T13:48:48.325Z"
+  "timestamp": 1793627381425,
+  "lastModified": "2026-11-02T13:49:41.425Z"
 }
