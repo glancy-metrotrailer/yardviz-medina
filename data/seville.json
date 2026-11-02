@@ -2753,34 +2753,6 @@
   ],
   "departed": [
     {
-      "id": "5323844",
-      "mtsn": "SHB7BLAG221958335",
-      "lastLat": 41.03163,
-      "lastLng": -81.86346,
-      "lastSeen": "2026-10-30T19:15:59.0309375Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "Load N Go, Inc."
-    },
-    {
-      "id": "MTRZ822097",
-      "mtsn": "SHB8AJBL240238569",
-      "lastLat": 41.03144,
-      "lastLng": -81.86527,
-      "lastSeen": "2026-10-30T19:15:59.0309949Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "JHOC, Inc. dba Premier Transportation"
-    },
-    {
       "id": "6386",
       "mtsn": "SHB7BLAG222161505",
       "lastLat": 41.03138,
@@ -2891,6 +2863,20 @@
       "reservedCustomerName": "",
       "outOfServiceReason": "",
       "customerName": "Zoom Transport, LLC "
+    },
+    {
+      "id": "5323844",
+      "mtsn": "SHB7BLAG221958335",
+      "lastLat": 41.03163,
+      "lastLng": -81.86346,
+      "lastSeen": "2026-10-30T19:15:59.0309375Z",
+      "missedCycles": 1,
+      "fleetStatus": "On_x0020_Rent",
+      "onRent": true,
+      "offRentStatus": "Available",
+      "reservedCustomerName": "",
+      "outOfServiceReason": "",
+      "customerName": "Load N Go, Inc."
     }
   ],
   "ignored": [
@@ -3993,8 +3979,12 @@
     {
       "id": "MTRZ581959",
       "ignoredAt": "2026-11-02T13:34:00.053Z"
+    },
+    {
+      "id": "MTRZ822097",
+      "ignoredAt": "2026-11-02T13:34:23.324Z"
     }
   ],
-  "timestamp": 1793626440056,
-  "lastModified": "2026-11-02T13:34:00.056Z"
+  "timestamp": 1793626463327,
+  "lastModified": "2026-11-02T13:34:23.327Z"
 }
