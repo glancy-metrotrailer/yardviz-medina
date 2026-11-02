@@ -2753,34 +2753,6 @@
   ],
   "departed": [
     {
-      "id": "5323844",
-      "mtsn": "SHB7BLAG221958335",
-      "lastLat": 41.03163,
-      "lastLng": -81.86346,
-      "lastSeen": "2026-10-30T19:15:59.0309375Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "Load N Go, Inc."
-    },
-    {
-      "id": "6386",
-      "mtsn": "SHB7BLAG222161505",
-      "lastLat": 41.03138,
-      "lastLng": -81.86605,
-      "lastSeen": "2026-10-31T01:46:17.6194375Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "UPS"
-    },
-    {
       "id": "551760",
       "mtsn": "SHB7BLAG222774482",
       "lastLat": 41.0307,
@@ -3939,8 +3911,16 @@
     {
       "id": "5624195",
       "ignoredAt": "2026-11-02T13:35:06.564Z"
+    },
+    {
+      "id": "5323844",
+      "ignoredAt": "2026-11-02T13:35:07.090Z"
+    },
+    {
+      "id": "6386",
+      "ignoredAt": "2026-11-02T13:35:07.972Z"
     }
   ],
-  "timestamp": 1793626506567,
-  "lastModified": "2026-11-02T13:35:06.567Z"
+  "timestamp": 1793626507974,
+  "lastModified": "2026-11-02T13:35:07.974Z"
 }
