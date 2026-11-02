@@ -2751,36 +2751,7 @@
     "T2053",
     "T2122"
   ],
-  "departed": [
-    {
-      "id": "565456",
-      "mtsn": "SHB7CJBL232406744",
-      "lastLat": 41.03128,
-      "lastLng": -81.8661,
-      "lastSeen": "2026-10-29T13:01:01.1215083Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "XPO Logistics- RXO Division"
-    },
-    {
-      "id": "5327829",
-      "mtsn": "SHB7BLAG222775595",
-      "lastLat": 41.03162,
-      "lastLng": -81.86342,
-      "lastSeen": "2026-10-30T04:01:12.4762823Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "Highway Trucking, LLC"
-    }
-  ],
+  "departed": [],
   "ignored": [
     {
       "id": "5327754",
@@ -3909,8 +3880,16 @@
     {
       "id": "551760",
       "ignoredAt": "2026-11-02T13:35:08.926Z"
+    },
+    {
+      "id": "565456",
+      "ignoredAt": "2026-11-02T13:35:09.596Z"
+    },
+    {
+      "id": "5327829",
+      "ignoredAt": "2026-11-02T13:35:10.236Z"
     }
   ],
-  "timestamp": 1793626509420,
-  "lastModified": "2026-11-02T13:35:09.420Z"
+  "timestamp": 1793626510650,
+  "lastModified": "2026-11-02T13:35:10.650Z"
 }
