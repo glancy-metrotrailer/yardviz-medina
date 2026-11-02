@@ -2753,48 +2753,6 @@
   ],
   "departed": [
     {
-      "id": "6386",
-      "mtsn": "SHB7BLAG222161505",
-      "lastLat": 41.03138,
-      "lastLng": -81.86605,
-      "lastSeen": "2026-10-31T01:46:17.6194375Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "UPS"
-    },
-    {
-      "id": "551760",
-      "mtsn": "SHB7BLAG222774482",
-      "lastLat": 41.0307,
-      "lastLng": -81.8666,
-      "lastSeen": "2026-10-31T12:00:58.5028251Z",
-      "missedCycles": 1,
-      "fleetStatus": "Available",
-      "onRent": false,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": ""
-    },
-    {
-      "id": "5317694",
-      "mtsn": "SHB7CJBL233012715",
-      "lastLat": 41.03119,
-      "lastLng": -81.86569,
-      "lastSeen": "2026-10-31T16:46:07.2853730Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "Kirk NationaLease Co - CLE"
-    },
-    {
       "id": "565456",
       "mtsn": "SHB7CJBL232406744",
       "lastLat": 41.03128,
@@ -2877,6 +2835,34 @@
       "reservedCustomerName": "",
       "outOfServiceReason": "",
       "customerName": "Load N Go, Inc."
+    },
+    {
+      "id": "6386",
+      "mtsn": "SHB7BLAG222161505",
+      "lastLat": 41.03138,
+      "lastLng": -81.86605,
+      "lastSeen": "2026-10-31T01:46:17.6194375Z",
+      "missedCycles": 1,
+      "fleetStatus": "On_x0020_Rent",
+      "onRent": true,
+      "offRentStatus": "Available",
+      "reservedCustomerName": "",
+      "outOfServiceReason": "",
+      "customerName": "UPS"
+    },
+    {
+      "id": "551760",
+      "mtsn": "SHB7BLAG222774482",
+      "lastLat": 41.0307,
+      "lastLng": -81.8666,
+      "lastSeen": "2026-10-31T12:00:58.5028251Z",
+      "missedCycles": 1,
+      "fleetStatus": "Available",
+      "onRent": false,
+      "offRentStatus": "Available",
+      "reservedCustomerName": "",
+      "outOfServiceReason": "",
+      "customerName": ""
     }
   ],
   "ignored": [
@@ -3985,6 +3971,6 @@
       "ignoredAt": "2026-11-02T13:34:23.324Z"
     }
   ],
-  "timestamp": 1793626463327,
-  "lastModified": "2026-11-02T13:34:23.327Z"
+  "timestamp": 1793626490820,
+  "lastModified": "2026-11-02T13:34:50.820Z"
 }
