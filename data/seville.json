@@ -2753,48 +2753,6 @@
   ],
   "departed": [
     {
-      "id": "566206",
-      "mtsn": "SVE5DJBL232891281",
-      "lastLat": 41.03145,
-      "lastLng": -81.86641,
-      "lastSeen": "2026-10-29T18:01:03.1284210Z",
-      "missedCycles": 1,
-      "fleetStatus": "Available",
-      "onRent": false,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": ""
-    },
-    {
-      "id": "5822003",
-      "mtsn": "SHB8AJBL234629522",
-      "lastLat": 41.03157,
-      "lastLng": -81.87201,
-      "lastSeen": "2026-10-29T21:16:02.4562958Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "JHOC, Inc. dba Premier Transportation"
-    },
-    {
-      "id": "5627594",
-      "mtsn": "SHB7BLAG223981757",
-      "lastLat": 41.03137,
-      "lastLng": -81.86565,
-      "lastSeen": "2026-10-29T21:46:10.2562458Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "Uni Trans, LLC"
-    },
-    {
       "id": "5327829",
       "mtsn": "SHB7BLAG222775595",
       "lastLat": 41.03162,
@@ -2947,6 +2905,34 @@
       "reservedCustomerName": "",
       "outOfServiceReason": "",
       "customerName": "XPO Logistics- RXO Division"
+    },
+    {
+      "id": "566206",
+      "mtsn": "SVE5DJBL232891281",
+      "lastLat": 41.03145,
+      "lastLng": -81.86641,
+      "lastSeen": "2026-10-29T18:01:03.1284210Z",
+      "missedCycles": 1,
+      "fleetStatus": "Available",
+      "onRent": false,
+      "offRentStatus": "Available",
+      "reservedCustomerName": "",
+      "outOfServiceReason": "",
+      "customerName": ""
+    },
+    {
+      "id": "5822003",
+      "mtsn": "SHB8AJBL234629522",
+      "lastLat": 41.03157,
+      "lastLng": -81.87201,
+      "lastSeen": "2026-10-29T21:16:02.4562958Z",
+      "missedCycles": 1,
+      "fleetStatus": "On_x0020_Rent",
+      "onRent": true,
+      "offRentStatus": "Available",
+      "reservedCustomerName": "",
+      "outOfServiceReason": "",
+      "customerName": "JHOC, Inc. dba Premier Transportation"
     }
   ],
   "ignored": [
@@ -4043,6 +4029,6 @@
       "ignoredAt": "2026-11-02T13:32:14.668Z"
     }
   ],
-  "timestamp": 1793626334671,
-  "lastModified": "2026-11-02T13:32:14.671Z"
+  "timestamp": 1793626367814,
+  "lastModified": "2026-11-02T13:32:47.814Z"
 }
