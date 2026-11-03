@@ -2387,22 +2387,7 @@
     "T2053",
     "T2122"
   ],
-  "departed": [
-    {
-      "id": "5327664",
-      "mtsn": "SHB7BLAG222773843",
-      "lastLat": 41.03274,
-      "lastLng": -81.86435,
-      "lastSeen": "2026-11-02T16:01:01.4606397Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "Evergreen Road, LLC"
-    }
-  ],
+  "departed": [],
   "ignored": [
     {
       "id": "5327754",
@@ -3615,8 +3600,12 @@
     {
       "id": "5626789",
       "ignoredAt": "2026-11-03T17:44:20.648Z"
+    },
+    {
+      "id": "5327664",
+      "ignoredAt": "2026-11-03T17:44:21.810Z"
     }
   ],
-  "timestamp": 1793727860651,
-  "lastModified": "2026-11-03T17:44:20.651Z"
+  "timestamp": 1793727861811,
+  "lastModified": "2026-11-03T17:44:21.811Z"
 }
