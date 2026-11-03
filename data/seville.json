@@ -2389,20 +2389,6 @@
   ],
   "departed": [
     {
-      "id": "MTRZ317601",
-      "mtsn": "SHB7BJBL225097250",
-      "lastLat": 41.03179,
-      "lastLng": -81.86638,
-      "lastSeen": "2026-11-02T16:46:04.1244035Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "XPO Logistics- RXO Division"
-    },
-    {
       "id": "5315380",
       "mtsn": "SHB7BLAG222774412",
       "lastLat": 41.03116,
@@ -3787,8 +3773,12 @@
     {
       "id": "MTRZ317454",
       "ignoredAt": "2026-11-03T17:37:56.297Z"
+    },
+    {
+      "id": "MTRZ317601",
+      "ignoredAt": "2026-11-03T17:38:33.098Z"
     }
   ],
-  "timestamp": 1793727476298,
-  "lastModified": "2026-11-03T17:37:56.298Z"
+  "timestamp": 1793727513100,
+  "lastModified": "2026-11-03T17:38:33.100Z"
 }
