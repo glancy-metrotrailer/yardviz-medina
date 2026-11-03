@@ -2389,20 +2389,6 @@
   ],
   "departed": [
     {
-      "id": "MTRZ557102",
-      "mtsn": "SVE5BLAG214407115",
-      "lastLat": 41.03136,
-      "lastLng": -81.87132,
-      "lastSeen": "2026-11-02T18:46:38.8165360Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "UPS"
-    },
-    {
       "id": "MTRZ557159",
       "mtsn": "SHB8AJBL233922560",
       "lastLat": 41.03106,
@@ -3753,8 +3739,12 @@
     {
       "id": "MTRZ317930",
       "ignoredAt": "2026-11-03T17:38:58.841Z"
+    },
+    {
+      "id": "MTRZ557102",
+      "ignoredAt": "2026-11-03T17:39:19.796Z"
     }
   ],
-  "timestamp": 1793727538844,
-  "lastModified": "2026-11-03T17:38:58.844Z"
+  "timestamp": 1793727559798,
+  "lastModified": "2026-11-03T17:39:19.798Z"
 }
