@@ -2401,20 +2401,6 @@
       "reservedCustomerName": "",
       "outOfServiceReason": "",
       "customerName": "Evergreen Road, LLC"
-    },
-    {
-      "id": "5626789",
-      "mtsn": "SHB8AJBL240845602",
-      "lastLat": 41.0323,
-      "lastLng": -81.86363,
-      "lastSeen": "2026-11-03T14:15:54.8045266Z",
-      "missedCycles": 1,
-      "fleetStatus": "",
-      "onRent": false,
-      "offRentStatus": "",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": ""
     }
   ],
   "ignored": [
@@ -3625,8 +3611,12 @@
     {
       "id": "MTRZ282337",
       "ignoredAt": "2026-11-03T17:43:58.307Z"
+    },
+    {
+      "id": "5626789",
+      "ignoredAt": "2026-11-03T17:44:20.648Z"
     }
   ],
-  "timestamp": 1793727838309,
-  "lastModified": "2026-11-03T17:43:58.309Z"
+  "timestamp": 1793727860651,
+  "lastModified": "2026-11-03T17:44:20.651Z"
 }
