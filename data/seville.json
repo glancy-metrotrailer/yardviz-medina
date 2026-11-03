@@ -2389,34 +2389,6 @@
   ],
   "departed": [
     {
-      "id": "5327664",
-      "mtsn": "SHB7BLAG222773843",
-      "lastLat": 41.03274,
-      "lastLng": -81.86435,
-      "lastSeen": "2026-11-02T16:01:01.4606397Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "Evergreen Road, LLC"
-    },
-    {
-      "id": "MTRZ317454",
-      "mtsn": "SHB7CJBL240743555",
-      "lastLat": 41.03178,
-      "lastLng": -81.86613,
-      "lastSeen": "2026-11-02T16:46:04.1242804Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "XPO Logistics- RXO Division"
-    },
-    {
       "id": "MTRZ317601",
       "mtsn": "SHB7BJBL225097250",
       "lastLat": 41.03179,
@@ -2639,6 +2611,20 @@
       "reservedCustomerName": "",
       "outOfServiceReason": "",
       "customerName": "UPS"
+    },
+    {
+      "id": "5327664",
+      "mtsn": "SHB7BLAG222773843",
+      "lastLat": 41.03274,
+      "lastLng": -81.86435,
+      "lastSeen": "2026-11-02T16:01:01.4606397Z",
+      "missedCycles": 1,
+      "fleetStatus": "On_x0020_Rent",
+      "onRent": true,
+      "offRentStatus": "Available",
+      "reservedCustomerName": "",
+      "outOfServiceReason": "",
+      "customerName": "Evergreen Road, LLC"
     }
   ],
   "ignored": [
@@ -3797,8 +3783,12 @@
     {
       "id": "MTRZ699000",
       "ignoredAt": "2026-11-03T17:37:17.952Z"
+    },
+    {
+      "id": "MTRZ317454",
+      "ignoredAt": "2026-11-03T17:37:56.297Z"
     }
   ],
-  "timestamp": 1793727437954,
-  "lastModified": "2026-11-03T17:37:17.954Z"
+  "timestamp": 1793727476298,
+  "lastModified": "2026-11-03T17:37:56.298Z"
 }
