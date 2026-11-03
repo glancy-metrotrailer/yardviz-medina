@@ -2389,20 +2389,6 @@
   ],
   "departed": [
     {
-      "id": "MTRZ277180",
-      "mtsn": "SHB7CJBL232406920",
-      "lastLat": 41.0311,
-      "lastLng": -81.86626,
-      "lastSeen": "2026-11-03T00:16:05.4849035Z",
-      "missedCycles": 1,
-      "fleetStatus": "",
-      "onRent": false,
-      "offRentStatus": "",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": ""
-    },
-    {
       "id": "5626789",
       "mtsn": "SHB8AJBL240845602",
       "lastLat": 41.0323,
@@ -3679,8 +3665,12 @@
     {
       "id": "MTRZ822088",
       "ignoredAt": "2026-11-03T17:42:10.057Z"
+    },
+    {
+      "id": "MTRZ277180",
+      "ignoredAt": "2026-11-03T17:42:41.264Z"
     }
   ],
-  "timestamp": 1793727736236,
-  "lastModified": "2026-11-03T17:42:16.236Z"
+  "timestamp": 1793727761265,
+  "lastModified": "2026-11-03T17:42:41.265Z"
 }
