@@ -1852,16 +1852,7 @@
     "T2217",
     "T4352"
   ],
-  "departed": [
-    {
-      "id": "5327832",
-      "mtsn": "SHB7BLAG222775610",
-      "lastLat": 41.14795,
-      "lastLng": -81.89841,
-      "lastSeen": "2026-11-04T03:00:59.3714627Z",
-      "missedCycles": 1
-    }
-  ],
+  "departed": [],
   "ignored": [
     {
       "id": "",
@@ -3484,6 +3475,6 @@
       "ignoredAt": "2026-11-03T17:35:21.406Z"
     }
   ],
-  "timestamp": 1793797643152,
-  "lastModified": "2026-11-04T13:07:23.153Z"
+  "timestamp": 1793797649993,
+  "lastModified": "2026-11-04T13:07:29.993Z"
 }
