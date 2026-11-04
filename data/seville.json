@@ -2337,20 +2337,6 @@
       "reservedCustomerName": "",
       "outOfServiceReason": "",
       "customerName": "Old City Express, LLC"
-    },
-    {
-      "id": "265",
-      "mtsn": "SHB7BLAG222161382",
-      "lastLat": 41.03149,
-      "lastLng": -81.87183,
-      "lastSeen": "2026-11-04T12:01:06.4205446Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "Universal Logistics Services"
     }
   ],
   "ignored": [
@@ -3583,6 +3569,6 @@
       "ignoredAt": "2026-11-04T13:11:37.305Z"
     }
   ],
-  "timestamp": 1793797897307,
-  "lastModified": "2026-11-04T13:11:37.307Z"
+  "timestamp": 1793797922337,
+  "lastModified": "2026-11-04T13:12:02.337Z"
 }
