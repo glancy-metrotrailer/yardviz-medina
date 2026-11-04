@@ -2323,22 +2323,7 @@
     "T2053",
     "T2122"
   ],
-  "departed": [
-    {
-      "id": "5626240",
-      "mtsn": "SHB8AJBL240440530",
-      "lastLat": 41.03163,
-      "lastLng": -81.86396,
-      "lastSeen": "2026-11-04T05:15:58.4573652Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "Old City Express, LLC"
-    }
-  ],
+  "departed": [],
   "ignored": [
     {
       "id": "5327754",
@@ -3567,8 +3552,12 @@
     {
       "id": "mtrz282699",
       "ignoredAt": "2026-11-04T13:11:37.305Z"
+    },
+    {
+      "id": "5626240",
+      "ignoredAt": "2026-11-04T13:12:06.430Z"
     }
   ],
-  "timestamp": 1793797922337,
-  "lastModified": "2026-11-04T13:12:02.337Z"
+  "timestamp": 1793797926432,
+  "lastModified": "2026-11-04T13:12:06.432Z"
 }
