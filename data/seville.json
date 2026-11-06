@@ -2096,34 +2096,6 @@
   ],
   "departed": [
     {
-      "id": "6387",
-      "mtsn": "SHB7BLAG222161493",
-      "lastLat": 41.03177,
-      "lastLng": -81.86616,
-      "lastSeen": "2026-11-04T20:16:23.5118023Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "Keurig- Dr. Pepper"
-    },
-    {
-      "id": "5309133",
-      "mtsn": "SHB8AJBL234427711",
-      "lastLat": 41.03133,
-      "lastLng": -81.86591,
-      "lastSeen": "2026-11-05T17:30:58.5705646Z",
-      "missedCycles": 1,
-      "fleetStatus": "Available",
-      "onRent": false,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": ""
-    },
-    {
       "id": "5434",
       "mtsn": "SHB7BLAG222160782",
       "lastLat": 41.03116,
@@ -2150,6 +2122,20 @@
       "reservedCustomerName": "",
       "outOfServiceReason": "",
       "customerName": ""
+    },
+    {
+      "id": "6387",
+      "mtsn": "SHB7BLAG222161493",
+      "lastLat": 41.03177,
+      "lastLng": -81.86616,
+      "lastSeen": "2026-11-04T20:16:23.5118023Z",
+      "missedCycles": 1,
+      "fleetStatus": "On_x0020_Rent",
+      "onRent": true,
+      "offRentStatus": "Available",
+      "reservedCustomerName": "",
+      "outOfServiceReason": "",
+      "customerName": "Keurig- Dr. Pepper"
     }
   ],
   "ignored": [
@@ -3404,8 +3390,12 @@
     {
       "id": "MTRZ311182",
       "ignoredAt": "2026-11-06T12:59:11.764Z"
+    },
+    {
+      "id": "5309133",
+      "ignoredAt": "2026-11-06T12:59:23.087Z"
     }
   ],
-  "timestamp": 1793969951767,
-  "lastModified": "2026-11-06T12:59:11.767Z"
+  "timestamp": 1793969963088,
+  "lastModified": "2026-11-06T12:59:23.088Z"
 }
