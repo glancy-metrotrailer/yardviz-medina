@@ -2117,20 +2117,6 @@
   ],
   "departed": [
     {
-      "id": "267",
-      "mtsn": "SHB7BLAG222161464",
-      "lastLat": 41.0318,
-      "lastLng": -81.8662,
-      "lastSeen": "2026-11-04T17:46:13.0797108Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "Quench USA"
-    },
-    {
       "id": "6387",
       "mtsn": "SHB7BLAG222161493",
       "lastLat": 41.03177,
@@ -3579,6 +3565,6 @@
       "ignoredAt": "2026-11-06T12:41:42.758Z"
     }
   ],
-  "timestamp": 1793968902762,
-  "lastModified": "2026-11-06T12:41:42.762Z"
+  "timestamp": 1793968911374,
+  "lastModified": "2026-11-06T12:41:51.374Z"
 }
