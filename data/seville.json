@@ -1844,34 +1844,6 @@
   ],
   "departed": [
     {
-      "id": "551724",
-      "mtsn": "SHB7BLAG224082761",
-      "lastLat": 41.03172,
-      "lastLng": -81.86619,
-      "lastSeen": "2026-11-06T13:16:25.0962380Z",
-      "missedCycles": 1,
-      "fleetStatus": "Available",
-      "onRent": false,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": ""
-    },
-    {
-      "id": "6826",
-      "mtsn": "SHB7BLAG222161413",
-      "lastLat": 41.03193,
-      "lastLng": -81.86635,
-      "lastSeen": "2026-11-06T13:16:25.0962875Z",
-      "missedCycles": 1,
-      "fleetStatus": "Sold",
-      "onRent": false,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": ""
-    },
-    {
       "id": "5316310",
       "mtsn": "SHB81JBL233720323",
       "lastLat": 41.03133,
@@ -3166,8 +3138,16 @@
     {
       "id": "4845",
       "ignoredAt": "2026-11-06T18:46:43.519Z"
+    },
+    {
+      "id": "551724",
+      "ignoredAt": "2026-11-06T18:46:44.471Z"
+    },
+    {
+      "id": "6826",
+      "ignoredAt": "2026-11-06T18:46:45.465Z"
     }
   ],
-  "timestamp": 1793990804180,
-  "lastModified": "2026-11-06T18:46:44.180Z"
+  "timestamp": 1793990805732,
+  "lastModified": "2026-11-06T18:46:45.732Z"
 }
