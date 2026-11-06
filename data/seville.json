@@ -1844,20 +1844,6 @@
   ],
   "departed": [
     {
-      "id": "4845",
-      "mtsn": "SHB7BLAG222161345",
-      "lastLat": 41.03173,
-      "lastLng": -81.86633,
-      "lastSeen": "2026-11-06T16:15:50.5142242Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "Wal Mart - Winfield # 362"
-    },
-    {
       "id": "551724",
       "mtsn": "SHB7BLAG224082761",
       "lastLat": 41.03172,
@@ -3176,8 +3162,12 @@
     {
       "id": "5056",
       "ignoredAt": "2026-11-06T18:46:42.040Z"
+    },
+    {
+      "id": "4845",
+      "ignoredAt": "2026-11-06T18:46:43.519Z"
     }
   ],
-  "timestamp": 1793990802651,
-  "lastModified": "2026-11-06T18:46:42.651Z"
+  "timestamp": 1793990804180,
+  "lastModified": "2026-11-06T18:46:44.180Z"
 }
