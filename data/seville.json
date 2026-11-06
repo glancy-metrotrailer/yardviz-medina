@@ -1844,20 +1844,6 @@
   ],
   "departed": [
     {
-      "id": "MTRZ306289",
-      "mtsn": "SHB7BLAG224082938",
-      "lastLat": 41.03135,
-      "lastLng": -81.86644,
-      "lastSeen": "2026-11-06T14:45:54.0390039Z",
-      "missedCycles": 1,
-      "fleetStatus": "Available",
-      "onRent": false,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": ""
-    },
-    {
       "id": "5056",
       "mtsn": "SHB8AJBL235136144",
       "lastLat": 41.03143,
@@ -1870,6 +1856,20 @@
       "reservedCustomerName": "",
       "outOfServiceReason": "",
       "customerName": ""
+    },
+    {
+      "id": "4845",
+      "mtsn": "SHB7BLAG222161345",
+      "lastLat": 41.03173,
+      "lastLng": -81.86633,
+      "lastSeen": "2026-11-06T16:15:50.5142242Z",
+      "missedCycles": 1,
+      "fleetStatus": "On_x0020_Rent",
+      "onRent": true,
+      "offRentStatus": "Available",
+      "reservedCustomerName": "",
+      "outOfServiceReason": "",
+      "customerName": "Wal Mart - Winfield # 362"
     },
     {
       "id": "551724",
@@ -1912,20 +1912,6 @@
       "reservedCustomerName": "",
       "outOfServiceReason": "",
       "customerName": "Kirk NationaLease Co - CLE"
-    },
-    {
-      "id": "4845",
-      "mtsn": "SHB7BLAG222161345",
-      "lastLat": 41.03173,
-      "lastLng": -81.86633,
-      "lastSeen": "2026-11-06T16:15:50.5142242Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "Wal Mart - Winfield # 362"
     }
   ],
   "ignored": [
@@ -3196,8 +3182,12 @@
     {
       "id": "6387",
       "ignoredAt": "2026-11-06T12:59:57.989Z"
+    },
+    {
+      "id": "MTRZ306289",
+      "ignoredAt": "2026-11-06T18:46:41.352Z"
     }
   ],
-  "timestamp": 1793990750785,
-  "lastModified": "2026-11-06T18:45:50.785Z"
+  "timestamp": 1793990801353,
+  "lastModified": "2026-11-06T18:46:41.353Z"
 }
