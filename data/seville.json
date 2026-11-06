@@ -2094,22 +2094,7 @@
     "T2053",
     "T2122"
   ],
-  "departed": [
-    {
-      "id": "6387",
-      "mtsn": "SHB7BLAG222161493",
-      "lastLat": 41.03177,
-      "lastLng": -81.86616,
-      "lastSeen": "2026-11-04T20:16:23.5118023Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "Keurig- Dr. Pepper"
-    }
-  ],
+  "departed": [],
   "ignored": [
     {
       "id": "5327754",
@@ -3374,8 +3359,12 @@
     {
       "id": "MTRZ587707",
       "ignoredAt": "2026-11-06T12:59:55.741Z"
+    },
+    {
+      "id": "6387",
+      "ignoredAt": "2026-11-06T12:59:57.989Z"
     }
   ],
-  "timestamp": 1793969995743,
-  "lastModified": "2026-11-06T12:59:55.743Z"
+  "timestamp": 1793969997990,
+  "lastModified": "2026-11-06T12:59:57.990Z"
 }
