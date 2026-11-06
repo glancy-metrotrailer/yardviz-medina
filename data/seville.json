@@ -1844,20 +1844,6 @@
   ],
   "departed": [
     {
-      "id": "5029",
-      "mtsn": "SHB8AJBL233923127",
-      "lastLat": 41.03194,
-      "lastLng": -81.86674,
-      "lastSeen": "2026-11-06T14:16:01.1346875Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "Discount Waste Systems, Inc"
-    },
-    {
       "id": "5309402",
       "mtsn": "SHB81JBL233619638",
       "lastLat": 41.03191,
@@ -3268,6 +3254,6 @@
       "ignoredAt": "2026-11-06T12:59:57.989Z"
     }
   ],
-  "timestamp": 1793990722854,
-  "lastModified": "2026-11-06T18:45:22.854Z"
+  "timestamp": 1793990726245,
+  "lastModified": "2026-11-06T18:45:26.245Z"
 }
