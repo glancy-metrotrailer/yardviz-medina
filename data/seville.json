@@ -1844,48 +1844,6 @@
   ],
   "departed": [
     {
-      "id": "551724",
-      "mtsn": "SHB7BLAG224082761",
-      "lastLat": 41.03172,
-      "lastLng": -81.86619,
-      "lastSeen": "2026-11-06T13:16:25.0962380Z",
-      "missedCycles": 1,
-      "fleetStatus": "Available",
-      "onRent": false,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": ""
-    },
-    {
-      "id": "6826",
-      "mtsn": "SHB7BLAG222161413",
-      "lastLat": 41.03193,
-      "lastLng": -81.86635,
-      "lastSeen": "2026-11-06T13:16:25.0962875Z",
-      "missedCycles": 1,
-      "fleetStatus": "Sold",
-      "onRent": false,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": ""
-    },
-    {
-      "id": "5306186",
-      "mtsn": "SHB8AJBL233923341",
-      "lastLat": 41.03175,
-      "lastLng": -81.87194,
-      "lastSeen": "2026-11-06T13:31:14.8158927Z",
-      "missedCycles": 1,
-      "fleetStatus": "Available",
-      "onRent": false,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": ""
-    },
-    {
       "id": "5029",
       "mtsn": "SHB8AJBL233923127",
       "lastLat": 41.03194,
@@ -2005,6 +1963,34 @@
       "lastSeen": "2026-11-06T17:46:02.3190838Z",
       "missedCycles": 1,
       "fleetStatus": "Available",
+      "onRent": false,
+      "offRentStatus": "Available",
+      "reservedCustomerName": "",
+      "outOfServiceReason": "",
+      "customerName": ""
+    },
+    {
+      "id": "551724",
+      "mtsn": "SHB7BLAG224082761",
+      "lastLat": 41.03172,
+      "lastLng": -81.86619,
+      "lastSeen": "2026-11-06T13:16:25.0962380Z",
+      "missedCycles": 1,
+      "fleetStatus": "Available",
+      "onRent": false,
+      "offRentStatus": "Available",
+      "reservedCustomerName": "",
+      "outOfServiceReason": "",
+      "customerName": ""
+    },
+    {
+      "id": "6826",
+      "mtsn": "SHB7BLAG222161413",
+      "lastLat": 41.03193,
+      "lastLng": -81.86635,
+      "lastSeen": "2026-11-06T13:16:25.0962875Z",
+      "missedCycles": 1,
+      "fleetStatus": "Sold",
       "onRent": false,
       "offRentStatus": "Available",
       "reservedCustomerName": "",
@@ -3282,6 +3268,6 @@
       "ignoredAt": "2026-11-06T12:59:57.989Z"
     }
   ],
-  "timestamp": 1793990713863,
-  "lastModified": "2026-11-06T18:45:13.863Z"
+  "timestamp": 1793990722854,
+  "lastModified": "2026-11-06T18:45:22.854Z"
 }
