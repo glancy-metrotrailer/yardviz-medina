@@ -1773,16 +1773,7 @@
     "T2217",
     "T4352"
   ],
-  "departed": [
-    {
-      "id": "532719",
-      "mtsn": "SVE5CLAG224159334",
-      "lastLat": 41.14774,
-      "lastLng": -81.89761,
-      "lastSeen": "2026-11-09T14:45:55.5416120Z",
-      "missedCycles": 1
-    }
-  ],
+  "departed": [],
   "ignored": [
     {
       "id": "",
@@ -3457,6 +3448,6 @@
       "ignoredAt": "2026-11-09T14:27:28.686Z"
     }
   ],
-  "timestamp": 1794237962621,
-  "lastModified": "2026-11-09T15:26:02.621Z"
+  "timestamp": 1794238001888,
+  "lastModified": "2026-11-09T15:26:41.888Z"
 }
