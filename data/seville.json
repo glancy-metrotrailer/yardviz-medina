@@ -1779,22 +1779,7 @@
     "T2053",
     "T2122"
   ],
-  "departed": [
-    {
-      "id": "6099",
-      "mtsn": "SHB7BLAG222161470",
-      "lastLat": 41.03104,
-      "lastLng": -81.86693,
-      "lastSeen": "2026-11-09T13:30:43.5099944Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "The Recon Group LLP"
-    }
-  ],
+  "departed": [],
   "ignored": [
     {
       "id": "5327754",
@@ -3089,6 +3074,6 @@
       "ignoredAt": "2026-11-06T18:46:46.354Z"
     }
   ],
-  "timestamp": 1794231146494,
-  "lastModified": "2026-11-09T13:32:26.494Z"
+  "timestamp": 1794231150749,
+  "lastModified": "2026-11-09T13:32:30.749Z"
 }
