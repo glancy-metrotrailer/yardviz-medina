@@ -1531,36 +1531,7 @@
     "T2053",
     "T2122"
   ],
-  "departed": [
-    {
-      "id": "5316528",
-      "mtsn": "SHB8AJBL234528940",
-      "lastLat": 41.03182,
-      "lastLng": -81.86636,
-      "lastSeen": "2026-11-09T19:45:44.7899387Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "Its Logistics, LLC"
-    },
-    {
-      "id": "6381",
-      "mtsn": "SHB7BLAG222161480",
-      "lastLat": 41.03226,
-      "lastLng": -81.86411,
-      "lastSeen": "2026-11-09T20:16:00.9086386Z",
-      "missedCycles": 1,
-      "fleetStatus": "On_x0020_Rent",
-      "onRent": true,
-      "offRentStatus": "Available",
-      "reservedCustomerName": "",
-      "outOfServiceReason": "",
-      "customerName": "Nissan Integrated Logistics Center"
-    }
-  ],
+  "departed": [],
   "ignored": [
     {
       "id": "5327754",
@@ -2885,8 +2856,16 @@
     {
       "id": "5314513",
       "ignoredAt": "2026-11-10T13:24:30.471Z"
+    },
+    {
+      "id": "5316528",
+      "ignoredAt": "2026-11-10T13:24:30.633Z"
+    },
+    {
+      "id": "6381",
+      "ignoredAt": "2026-11-10T13:24:30.813Z"
     }
   ],
-  "timestamp": 1794317070472,
-  "lastModified": "2026-11-10T13:24:30.472Z"
+  "timestamp": 1794317071663,
+  "lastModified": "2026-11-10T13:24:31.663Z"
 }
