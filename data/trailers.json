@@ -1802,7 +1802,7 @@
       "batteryStatus": "OK",
       "arrivedAt": "",
       "timeOfObservation": "2026-11-10T21:16:04Z",
-      "checkedIn": true,
+      "checkedIn": false,
       "pickedUp": false,
       "isNew": false,
       "fleetStatus": "",
@@ -1816,6 +1816,7 @@
     }
   ],
   "previousTrailerIds": [
+    "",
     "28LG09",
     "4575",
     "46115",
@@ -3659,6 +3660,6 @@
       "ignoredAt": "2026-11-11T13:54:59.323Z"
     }
   ],
-  "timestamp": 1794405300483,
-  "lastModified": "2026-11-11T13:55:00.483Z"
+  "timestamp": 1794405375310,
+  "lastModified": "2026-11-11T13:56:15.310Z"
 }
