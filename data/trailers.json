@@ -1910,38 +1910,6 @@
   ],
   "departed": [
     {
-      "id": "557118",
-      "mtsn": "SHB7BLAG223879172",
-      "lastLat": 41.14769,
-      "lastLng": -81.89788,
-      "lastSeen": "2026-11-09T23:15:56.7145326Z",
-      "missedCycles": 1
-    },
-    {
-      "id": "560709",
-      "mtsn": "SVE5DJBL233492636",
-      "lastLat": 41.14764,
-      "lastLng": -81.89778,
-      "lastSeen": "2026-11-09T23:15:56.7145499Z",
-      "missedCycles": 1
-    },
-    {
-      "id": "5307165",
-      "mtsn": "SHB7BLAG224284331",
-      "lastLat": 41.1424,
-      "lastLng": -81.8867,
-      "lastSeen": "2026-11-10T01:31:03.6707872Z",
-      "missedCycles": 1
-    },
-    {
-      "id": "5029",
-      "mtsn": "SHB8AJBL233923127",
-      "lastLat": 41.14769,
-      "lastLng": -81.89793,
-      "lastSeen": "2026-11-10T03:15:56.4031977Z",
-      "missedCycles": 1
-    },
-    {
       "id": "6099",
       "mtsn": "SHB7BLAG222161470",
       "lastLat": 41.14826,
@@ -2107,6 +2075,38 @@
       "lastLat": 41.14958,
       "lastLng": -81.89806,
       "lastSeen": "2026-11-09T21:30:54.1564497Z",
+      "missedCycles": 1
+    },
+    {
+      "id": "5306289",
+      "mtsn": "SHB7BLAG224284402",
+      "lastLat": 41.14861,
+      "lastLng": -81.89821,
+      "lastSeen": "2026-11-09T23:01:04.2982390Z",
+      "missedCycles": 1
+    },
+    {
+      "id": "557118",
+      "mtsn": "SHB7BLAG223879172",
+      "lastLat": 41.14769,
+      "lastLng": -81.89788,
+      "lastSeen": "2026-11-09T23:15:56.7145326Z",
+      "missedCycles": 1
+    },
+    {
+      "id": "560709",
+      "mtsn": "SVE5DJBL233492636",
+      "lastLat": 41.14764,
+      "lastLng": -81.89778,
+      "lastSeen": "2026-11-09T23:15:56.7145499Z",
+      "missedCycles": 1
+    },
+    {
+      "id": "5307165",
+      "mtsn": "SHB7BLAG224284331",
+      "lastLat": 41.1424,
+      "lastLng": -81.8867,
+      "lastSeen": "2026-11-10T01:31:03.6707872Z",
       "missedCycles": 1
     }
   ],
@@ -3784,6 +3784,6 @@
       "ignoredAt": "2026-11-09T14:27:28.686Z"
     }
   ],
-  "timestamp": 1794405207771,
-  "lastModified": "2026-11-11T13:53:27.771Z"
+  "timestamp": 1794405215177,
+  "lastModified": "2026-11-11T13:53:35.177Z"
 }
