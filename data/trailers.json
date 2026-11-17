@@ -1891,14 +1891,6 @@
       "lastLng": -81.89792,
       "lastSeen": "2026-11-16T20:30:48.3729431Z",
       "missedCycles": 1
-    },
-    {
-      "id": "535681",
-      "mtsn": "SHB8AJBL233922312",
-      "lastLat": 41.14754,
-      "lastLng": -81.89661,
-      "lastSeen": "2026-11-17T08:46:02.9366609Z",
-      "missedCycles": 1
     }
   ],
   "ignored": [
@@ -3687,6 +3679,6 @@
       "ignoredAt": "2026-11-17T15:13:43.225Z"
     }
   ],
-  "timestamp": 1794928430705,
-  "lastModified": "2026-11-17T15:13:50.705Z"
+  "timestamp": 1794928434100,
+  "lastModified": "2026-11-17T15:13:54.100Z"
 }
