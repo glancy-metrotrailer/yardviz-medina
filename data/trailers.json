@@ -2053,22 +2053,6 @@
   ],
   "departed": [
     {
-      "id": "5627847",
-      "mtsn": "SHB7BLAG224183946",
-      "lastLat": 41.14258,
-      "lastLng": -81.88692,
-      "lastSeen": "2026-11-18T15:46:16.3005073Z",
-      "missedCycles": 1
-    },
-    {
-      "id": "5517050",
-      "mtsn": "SHB7BLAG224284363",
-      "lastLat": 41.14837,
-      "lastLng": -81.89816,
-      "lastSeen": "2026-11-18T16:16:10.2090431Z",
-      "missedCycles": 1
-    },
-    {
       "id": "5517048",
       "mtsn": "SHB7BLAG225087889",
       "lastLat": 41.14862,
@@ -3863,6 +3847,6 @@
       "ignoredAt": "2026-11-17T15:13:43.225Z"
     }
   ],
-  "timestamp": 1795031575860,
-  "lastModified": "2026-11-18T19:52:55.860Z"
+  "timestamp": 1795031585634,
+  "lastModified": "2026-11-18T19:53:05.634Z"
 }
